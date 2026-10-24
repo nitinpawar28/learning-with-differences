@@ -1,0 +1,11 @@
+/* Project-wide tweaks on top of mkdocs-material */
+
+/* Slightly wider content column for comparison tables and side-by-side code */
+.md-grid {
+  max-width: 1280px;
+}
+
+/* Make comparative-matrix tables easier to scan */
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lightest);
+}
