@@ -496,7 +496,8 @@ def load_exam(path: Path, rel: str, lib: Library, diags: Diagnostics) -> Exam | 
     if exam.progress == "passed" and not exam.passed_on:
         diags.warn("LWD011", rel, r.line("progress"), "progress 'passed' without passed_on: renewal dates cannot be tracked", "add passed_on: YYYY-MM-DD")
     tops = [o for o in objectives if not o.parent and o.weight]
-    if tops:
+    # Only check weights expressed as percentages; some vendors publish question counts.
+    if tops and all("%" in o.weight for o in tops):
         total = 0.0
         for o in tops:
             nums = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", o.weight)]

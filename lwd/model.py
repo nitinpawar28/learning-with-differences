@@ -152,6 +152,14 @@ class Objective:
     def anchor(self) -> str:
         return "obj-" + self.id.replace(".", "-")
 
+    @property
+    def link_anchor(self) -> str:
+        """Anchor to link to: only depth 1-2 objectives render as headings
+        (Zensical registers heading ids as anchors, not list-item ids)."""
+        if self.depth <= 2:
+            return self.anchor
+        return "obj-" + "-".join(self.id.split(".")[:2])
+
 
 @dataclass
 class Exam:

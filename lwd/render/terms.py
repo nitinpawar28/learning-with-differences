@@ -150,7 +150,7 @@ def render_term(lib: Library, t: Term, ctx: dict) -> str:
         exam = lib.exams.get(c.exam)
         obj = exam.objective(c.objective) if exam else None
         if exam and obj:
-            exam_lines.append("- " + link(page, exam.page, f"{exam.code} · {obj.id} {obj.title}", obj.anchor) + (" *(partial)*" if c.depth == "partial" else ""))
+            exam_lines.append("- " + link(page, exam.page, f"{exam.code} · {obj.id} {obj.title}", obj.link_anchor) + (" *(partial)*" if c.depth == "partial" else ""))
     emit("exam-notes", "\n".join(exam_lines))
     emit("self-check")
     emit("further-reading")

@@ -119,10 +119,10 @@ def render_exam(lib: Library, e: Exam, c: derive.ExamCoverage, ctx: dict, output
         for d in c.domains:
             o = d["objective"]
             k = d["counts"]
-            body.append(f"| {link(page, page, o.id + ' ' + o.title, o.anchor)} | {inline(o.weight) or '—'} | {k['covered']} | {k['partial']} | {k['planned']} | {k['gap']} | {_pct(d['readiness'])} |\n")
+            body.append(f"| {link(page, page, o.id + ' ' + o.title, o.link_anchor)} | {inline(o.weight) or '—'} | {k['covered']} | {k['partial']} | {k['planned']} | {k['gap']} | {_pct(d['readiness'])} |\n")
         body.append("\n")
         if c.gaps:
-            items = "\n".join(f"    - {link(page, page, g.id + ' ' + g.title, g.anchor)}" for g in c.gaps[:40])
+            items = "\n".join(f"    - {link(page, page, g.id + ' ' + g.title, g.link_anchor)}" for g in c.gaps[:40])
             more = f"\n    - … and {len(c.gaps) - 40} more" if len(c.gaps) > 40 else ""
             body.append(f'??? warning "Gaps: {len(c.gaps)} objectives with no coverage yet"\n\n{items}{more}\n\n')
         body.append("## Objectives { #objectives }\n\n")
@@ -138,7 +138,7 @@ def render_exam(lib: Library, e: Exam, c: derive.ExamCoverage, ctx: dict, output
             if depth_marker:
                 body.append(f"{depth_marker}{inline(o.id)} {inline(o.title)} {{ #{o.anchor} }}\n\n{label} {pages}\n\n")
             else:
-                body.append(f"- **{inline(o.id)}** {inline(o.title)} — {label} {pages} {{ #{o.anchor} }}\n")
+                body.append(f"- **{inline(o.id)}** {inline(o.title)} — {label} {pages}\n")
         body.append("\n")
     else:
         body.append("## Objectives { #objectives }\n\n*Objectives have not been transcribed yet.*\n\n")
@@ -229,7 +229,7 @@ def render_path(lib: Library, lp, outputs: OutputSet) -> None:
             exam_slug, _, oid = st.target.lower().partition(":")
             exam = lib.exams.get(exam_slug)
             obj = exam.objective(oid) if exam else None
-            target = link(page, exam.page, f"{exam.code} · {oid} {obj.title}", obj.anchor) if exam and obj else inline(st.target)
+            target = link(page, exam.page, f"{exam.code} · {oid} {obj.title}", obj.link_anchor) if exam and obj else inline(st.target)
         status = _target_status(lib, st)
         badge = "" if status in ("complete",) or st.kind == "objective" else " " + chip("status", status, status.title())
         body.append(f"{i}. {target}{badge} · ~{_minutes(lib, st)} min{note}\n")
