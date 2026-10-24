@@ -31,9 +31,19 @@ def _norm(text: str) -> str:
     return " ".join(_singular(w) for w in words)
 
 
+_GENERIC_TAIL = {"deployment", "release", "pattern", "index", "policy", "flow", "strategy", "architecture", "model", "storage", "principle"}
+
+
 def _phrases(t: Term) -> list[tuple[str, str]]:
     """(kind, normalised phrase) for every name a term is known by."""
-    out = [("title", _norm(re.sub(r"\s*\([^)]*\)\s*$", "", t.title)))]
+    title = _norm(re.sub(r"\s*\([^)]*\)\s*$", "", t.title))
+    out = [("title", title)]
+    # "Blue-Green Deployment" also matches "blue/green traffic splitting".
+    words = title.split()
+    if len(words) >= 2 and words[-1] in _GENERIC_TAIL:
+        stem = " ".join(words[:-1])
+        if len(stem) >= 5 and stem not in _STOP:
+            out.append(("title-stem", stem))
     out += [("acronym", _norm(a)) for a in t.acronyms]
     out += [("alias", _norm(a)) for a in t.aliases]
     out += [("former", _norm(f.name)) for f in t.formerly]
