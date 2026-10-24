@@ -214,6 +214,25 @@ def cmd_coverage(args) -> int:
     return 0
 
 
+def cmd_suggest_covers(args) -> int:
+    from lwd import covers
+
+    run = pipeline.run(_root(), _today(args.today))
+    if run.lib is None:
+        _print_diags(run, "text", False)
+        return 1
+    sugg = covers.suggest(run.lib)
+    if args.terms:
+        sugg = {k: v for k, v in sugg.items() if k in set(args.terms)}
+    text = covers.format_report(run.lib, sugg)
+    if args.out:
+        Path(args.out).write_text(text, encoding="utf-8", newline="\n")
+        print(f"wrote {args.out}: {len(sugg)} terms, {sum(len(v.items) for v in sugg.values())} suggestions")
+    else:
+        sys.stdout.write(text)
+    return 0
+
+
 def cmd_export(args) -> int:
     from lwd.render.anki import cards, to_csv
     from lwd.render.glossary import explorer_data
@@ -364,6 +383,11 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("exams", nargs="*")
     sp.add_argument("--gaps", action="store_true")
     sp.set_defaults(func=cmd_coverage)
+    sp = sub.add_parser("suggest-covers", help="propose exam objectives each term could cover (review before adding)")
+    common(sp, fmt=False)
+    sp.add_argument("terms", nargs="*", help="limit to these term slugs")
+    sp.add_argument("--out")
+    sp.set_defaults(func=cmd_suggest_covers)
     sp = sub.add_parser("export", help="write the Anki CSV or glossary JSON")
     common(sp, fmt=False)
     sp.add_argument("what", choices=["anki", "json"])
