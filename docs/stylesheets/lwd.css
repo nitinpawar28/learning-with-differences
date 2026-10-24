@@ -71,3 +71,16 @@
 .lwd-explorer__via { color: var(--md-default-fg-color--light); font-style: italic; }
 .lwd-explorer__more[hidden] { display: none; }
 @media (prefers-reduced-motion: reduce) { .lwd-explorer * { transition: none !important; } }
+
+/* Page-status badges in the navigation (front-matter `status`).
+ * Zensical shows the same generic icon for every status unless each one
+ * defines its own; `complete` carries no badge. */
+:root {
+  --md-status--stub: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11Z"/></svg>');
+  --md-status--draft: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92L14.06 9m3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83a.996.996 0 0 0 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75Z"/></svg>');
+  --md-status--deprecated: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21H4V10h2v9h12v-9h2v11M3 3h18v6H3V3m2 2v2h14V5H5m4.5 6h5c.28 0 .5.22.5.5V13H9v-1.5c0-.28.22-.5.5-.5Z"/></svg>');
+}
+.md-status--stub::after { -webkit-mask-image: var(--md-status--stub); mask-image: var(--md-status--stub); }
+.md-status--draft::after { -webkit-mask-image: var(--md-status--draft); mask-image: var(--md-status--draft); }
+.md-status--deprecated::after { -webkit-mask-image: var(--md-status--deprecated); mask-image: var(--md-status--deprecated); }
+.md-status--complete { display: none; }

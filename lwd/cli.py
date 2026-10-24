@@ -83,7 +83,9 @@ def cmd_build(args) -> int:
     run = generate(root, _today(args.today), fmt, args.verbose)
     if run.outputs is None or run.lib is None:
         return 1
-    code = zensical.build(run.lib.config, strict=not args.no_strict, clean_cache=args.clean)
+    # CI always clears the cache: Zensical fingerprints auto-appended includes by
+    # whole-second mtime, so a fast rewrite could otherwise be missed.
+    code = zensical.build(run.lib.config, strict=not args.no_strict, clean_cache=args.clean or args.ci)
     if code != 0:
         print(f"zensical build failed with exit code {code}")
         return code
@@ -145,7 +147,13 @@ def cmd_serve(args) -> int:
         pass
     finally:
         if proc.poll() is None:
-            proc.terminate()
+            if os.name == "nt":
+                # The listener is a grandchild process; kill the whole tree.
+                import subprocess
+
+                subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
+            else:
+                proc.terminate()
             try:
                 proc.wait(timeout=5)
             except Exception:
@@ -282,6 +290,16 @@ def doctor(root: Path, ci: bool = False) -> list[str]:
         problems.append(f"zensical.toml cannot be read with tomllib: {exc}")
     if (root / "mkdocs.yml").exists():
         problems.append("mkdocs.yml still exists; delete it so only zensical.toml configures the site")
+    # Zensical does not flag missing extra_css/extra_javascript files, even with --strict.
+    try:
+        project = tomllib.loads((root / "zensical.toml").read_text(encoding="utf-8")).get("project", {})
+        docs_dir = root / project.get("docs_dir", "docs")
+        for item in list(project.get("extra_css") or []) + list(project.get("extra_javascript") or []):
+            rel = item.get("path") if isinstance(item, dict) else item
+            if rel and not (docs_dir / rel).is_file():
+                problems.append(f"zensical.toml references {rel}, which does not exist under {docs_dir.name}/")
+    except (OSError, tomllib.TOMLDecodeError):
+        pass
     return problems
 
 

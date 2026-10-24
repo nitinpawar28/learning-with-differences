@@ -58,5 +58,27 @@ Errors stop generation. Warnings are reported and listed on the
 
 ## Zensical compatibility notes
 
-Results of the compatibility checks run against Zensical 0.0.72 are recorded
-here. Re-run the checks before every Zensical upgrade.
+These checks were run against Zensical 0.0.72 on 2026-10-24 (Python-Markdown
+3.11.2, pymdown-extensions 12.3, Windows 11). Re-run them before every
+Zensical upgrade.
+
+| Check | Result | What it means for this site |
+|---|---|---|
+| Config precedence | `zensical.toml` always wins; a leftover `mkdocs.yml` is silently ignored | `mkdocs.yml` is deleted. `lwd` runs `zensical build -f zensical.toml` from the repository root. |
+| `exclude_docs` | Works with gitignore-style patterns; must be a multi-line string | Folders starting with `_` are published unless they are excluded, so every source folder is listed. A link from a published page into an excluded folder fails `--strict`; LWD082 catches it earlier. |
+| Navigation | No "page not in nav" check. A nav entry pointing at a missing file renders a broken link **without any warning**. | `lwd` checks both itself: LWD090 for missing nav targets, and LWD091/LWD093 for pages not in the nav or unreachable. |
+| Status badges | Badges appear in the navigation only. Unknown values show a generic icon, and stub and draft look the same unless styled. | Statuses are validated. `lwd.css` gives stub, draft and deprecated their own icons and hides the badge for complete pages. Pages outside the navigation get a status admonition in the page body instead. |
+| Cache and `--clean` | The cache is content-hashed. A failed build still deletes pages from `site/`. | CI runs `build --clean`. Deploy happens only on exit code 0. Never write into `site/`. |
+| Tooltips via `auto_append` | A missing file silently drops every tooltip unless `check_paths = true`. Snippet paths resolve against the working directory. | `check_paths = true`. The build runs from the repository root. The abbreviations file is always written, even when empty. |
+| Tooltip performance | A contiguous block of definitions costs about 0.25 s per page at 300 definitions and grows quadratically. | One definition per paragraph (linear). The suppress and allow-short lists keep the list lean. |
+| Acronyms with symbols | `C#`, `F#`, `C++` and `.NET` never match as abbreviations | LWD040 rejects them. To suppress a tooltip for a single occurrence, use inline code or an HTML entity. |
+| Tooltip text in search | Expansions inside `<abbr>` titles are not indexed | Term titles carry the expansion in visible text, e.g. "Mutual TLS (mTLS)". |
+| Asset links | `.js`, `.json` and image links are rewritten correctly but never checked for existence | `lwd` checks every link target, including generated exports. `doctor` checks the `extra_css` and `extra_javascript` files. |
+| Anchors | `--strict` checks every fragment, including links inside tabs and tables | Explicit `{ #id }` ids are lowercase. Never link to the positional `__tabbed_N_M` ids. |
+| Search controls | `search: {exclude: true}` and `{ data-search-exclude }` work; the latter covers only up to the next heading of any level | Hubs, reports and stub terms are excluded from search. |
+| Icons | Without the emoji extension, `:material-…:` shortcodes appear as raw text, and the build still passes | The emoji extension is configured. The post-build check fails on any unrendered shortcode. |
+| JavaScript | `document$` is defined before `extra_javascript` runs. Top-level code runs once per full page load. | All Explorer set-up happens in `document$.subscribe`. |
+| Dev server | Docs pages rebuild in about 0.4 s. Included files are tracked by whole-second modification time. | Generated files are written only when their content changes. On Windows, `lwd serve` stops the whole server process tree. |
+| Offline build | Works through a separate config with the offline plugin | Planned as a separate `zensical.offline.toml`, not a toggle in the main config. |
+| `betterem` | Renders correctly | Keep code identifiers such as `__init__` in backticks. |
+| Large-site build time | Not measured yet | To be measured when the library passes about 500 pages. |

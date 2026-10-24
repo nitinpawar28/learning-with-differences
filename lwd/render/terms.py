@@ -16,13 +16,16 @@ def render_term(lib: Library, t: Term, ctx: dict) -> str:
     page = t.page
     out: list[str] = []
     labels = [tax.label("tracks", x) for x in t.tracks] + [tax.label("term_domains", t.domain), tax.label("clouds", t.cloud), tax.label("levels", t.level)]
-    out.append(front_matter({
+    meta = {
         "title": t.title,
         "description": t.summary,
         "status": t.status,
         "tags": labels,
         "hide": ["tags"],
-    }, t.origin.path))
+    }
+    if t.status == "stub":
+        meta["search"] = {"exclude": True}  # placeholders should not compete in search
+    out.append(front_matter(meta, t.origin.path))
     out.append(f"# {inline(t.title)}\n\n")
     crumbs = [link(page, "glossary/index.md", "Glossary")]
     if t.tracks:

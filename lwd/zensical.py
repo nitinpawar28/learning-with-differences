@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -75,4 +76,13 @@ def assert_site(lib: Library) -> list[str]:
     explorer = _page_html(cfg, "glossary/explorer.md")
     if explorer.is_file() and "lwd-explorer__data" not in explorer.read_text(encoding="utf-8"):
         problems.append("Explorer data link was not rendered")
+    # Unrendered icon shortcodes (typos, missing emoji config) fail silently in Zensical.
+    shortcode = re.compile(r":(?:material|fontawesome|octicons|simple|lucide)-[a-z0-9-]+:")
+    for html in cfg.site.rglob("*.html"):
+        text = html.read_text(encoding="utf-8", errors="replace")
+        # Ignore code samples that show shortcodes literally.
+        text = re.sub(r"<code[^>]*>.*?</code>", "", text, flags=re.S)
+        m = shortcode.search(text)
+        if m:
+            problems.append(f"unrendered icon shortcode {m.group(0)} in {html.relative_to(cfg.site).as_posix()}")
     return problems
