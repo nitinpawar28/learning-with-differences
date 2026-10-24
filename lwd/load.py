@@ -7,6 +7,7 @@ unknown keys) happen here; cross-entity checks live in ``lwd.checks``.
 from __future__ import annotations
 
 import difflib
+import json
 import re
 from datetime import date
 from pathlib import Path
@@ -596,14 +597,20 @@ def discover(lib: Library, diags: Diagnostics) -> None:
 
 
 def load_backlog(lib: Library, diags: Diagnostics) -> None:
+    """Planning data in docs/_data/backlog/*.json (or hand-written *.yml)."""
     folder = lib.config.docs / "_data" / "backlog"
     if not folder.is_dir():
         return
-    for path in sorted(folder.glob("*.yml")):
+    for path in sorted(folder.iterdir()):
+        if path.suffix not in (".json", ".yml"):
+            continue
         rel = f"{lib.config.docs_dir}/_data/backlog/{path.name}"
         text, _ = yamlio.read_text(path.read_bytes())
         try:
-            data = yamlio.load(text)
+            data = json.loads(text) if path.suffix == ".json" else yamlio.load(text)
+        except json.JSONDecodeError as exc:
+            diags.error("LWD001", rel, exc.lineno, f"backlog: {exc.msg}")
+            continue
         except yamlio.YamlError as exc:
             diags.error("LWD001", rel, exc.line, f"backlog: {exc}")
             continue

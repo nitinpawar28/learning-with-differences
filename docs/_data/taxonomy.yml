@@ -142,7 +142,7 @@ areas:
         label: Agents
         groups:
           patterns: Agentic Patterns
-          operations: Agent Operations
+          agentops: AgentOps
           frameworks: Agent Frameworks
       protocols: Agent Protocols
       platforms:

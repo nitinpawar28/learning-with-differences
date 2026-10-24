@@ -1,0 +1,5767 @@
+{
+ "section": "eng-platform",
+ "source": "curriculum-blueprint workflow wf_adef3fd4-7ee (draft)",
+ "generated": "2026-10-24",
+ "outlines": [
+  {
+   "exam": "CKAD",
+   "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/",
+   "version": "CNCF CKAD curriculum v1.37; exam based on Kubernetes v1.37 (LF page, accessed 2026-10-24)",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Application Design and Build",
+     "weight": "20%"
+    },
+    {
+     "id": "D2",
+     "title": "Application Deployment",
+     "weight": "20%"
+    },
+    {
+     "id": "D3",
+     "title": "Application Observability and Maintenance",
+     "weight": "15%"
+    },
+    {
+     "id": "D4",
+     "title": "Application Environment, Configuration and Security",
+     "weight": "25%"
+    },
+    {
+     "id": "D5",
+     "title": "Services and Networking",
+     "weight": "20%"
+    }
+   ]
+  },
+  {
+   "exam": "CKA",
+   "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/",
+   "version": "CNCF CKA curriculum v1.37; exam based on Kubernetes v1.37",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Cluster Architecture, Installation & Configuration",
+     "weight": "25%"
+    },
+    {
+     "id": "D2",
+     "title": "Workloads & Scheduling",
+     "weight": "15%"
+    },
+    {
+     "id": "D3",
+     "title": "Services & Networking",
+     "weight": "20%"
+    },
+    {
+     "id": "D4",
+     "title": "Storage",
+     "weight": "10%"
+    },
+    {
+     "id": "D5",
+     "title": "Troubleshooting",
+     "weight": "30%"
+    }
+   ]
+  },
+  {
+   "exam": "CKS",
+   "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/",
+   "version": "CNCF CKS curriculum PDF v1.34 (modified 2025-04-08); LF page says exam based on Kubernetes v1.35",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Cluster Setup",
+     "weight": "15%"
+    },
+    {
+     "id": "D2",
+     "title": "Cluster Hardening",
+     "weight": "15%"
+    },
+    {
+     "id": "D3",
+     "title": "System Hardening",
+     "weight": "10%"
+    },
+    {
+     "id": "D4",
+     "title": "Minimize Microservice Vulnerabilities",
+     "weight": "20%"
+    },
+    {
+     "id": "D5",
+     "title": "Supply Chain Security",
+     "weight": "20%"
+    },
+    {
+     "id": "D6",
+     "title": "Monitoring, Logging and Runtime Security",
+     "weight": "20%"
+    }
+   ]
+  },
+  {
+   "exam": "KCNA",
+   "url": "https://training.linuxfoundation.org/certification/kubernetes-cloud-native-associate/",
+   "version": "Current CNCF KCNA curriculum (github.com/cncf/curriculum kcna/README.md, undated; matches LF page)",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Kubernetes Fundamentals",
+     "weight": "44%"
+    },
+    {
+     "id": "D2",
+     "title": "Container Orchestration",
+     "weight": "28%"
+    },
+    {
+     "id": "D3",
+     "title": "Cloud Native Application Delivery",
+     "weight": "16%"
+    },
+    {
+     "id": "D4",
+     "title": "Cloud Native Architecture",
+     "weight": "12%"
+    }
+   ]
+  },
+  {
+   "exam": "KCSA",
+   "url": "https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/",
+   "version": "CNCF 'KCSA Curriculum.pdf' plus LF page (undated; the GitHub README table differs, see notes)",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Overview of Cloud Native Security",
+     "weight": "14%"
+    },
+    {
+     "id": "D2",
+     "title": "Kubernetes Cluster Component Security",
+     "weight": "22%"
+    },
+    {
+     "id": "D3",
+     "title": "Kubernetes Security Fundamentals",
+     "weight": "22%"
+    },
+    {
+     "id": "D4",
+     "title": "Kubernetes Threat Model",
+     "weight": "16%"
+    },
+    {
+     "id": "D5",
+     "title": "Platform Security",
+     "weight": "16%"
+    },
+    {
+     "id": "D6",
+     "title": "Compliance and Security Frameworks",
+     "weight": "10%"
+    }
+   ]
+  },
+  {
+   "exam": "TF-A",
+   "url": "https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-review-004",
+   "version": "HashiCorp Certified: Terraform Associate (004) objectives; HashiCorp publishes no weights",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Infrastructure as Code (IaC) with Terraform",
+     "weight": "not published"
+    },
+    {
+     "id": "D2",
+     "title": "Terraform fundamentals",
+     "weight": "not published"
+    },
+    {
+     "id": "D3",
+     "title": "Core Terraform workflow",
+     "weight": "not published"
+    },
+    {
+     "id": "D4",
+     "title": "Terraform configuration",
+     "weight": "not published"
+    },
+    {
+     "id": "D5",
+     "title": "Terraform modules",
+     "weight": "not published"
+    },
+    {
+     "id": "D6",
+     "title": "Terraform state management",
+     "weight": "not published"
+    },
+    {
+     "id": "D7",
+     "title": "Maintain infrastructure with Terraform",
+     "weight": "not published"
+    },
+    {
+     "id": "D8",
+     "title": "HCP Terraform",
+     "weight": "not published"
+    }
+   ]
+  },
+  {
+   "exam": "AZ-400",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-400",
+   "version": "Skills measured as of July 27, 2026",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Design and implement processes and communications",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D2",
+     "title": "Design and implement a source control strategy",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D3",
+     "title": "Design and implement build and release pipelines",
+     "weight": "50-55%"
+    },
+    {
+     "id": "D4",
+     "title": "Develop a security and compliance plan",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D5",
+     "title": "Implement an instrumentation strategy",
+     "weight": "5-10%"
+    }
+   ]
+  },
+  {
+   "exam": "DOP-C02",
+   "url": "https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html",
+   "version": "DOP-C02 exam guide, AWS Certification docs HTML edition (no version date shown; accessed 2026-10-24)",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "SDLC Automation",
+     "weight": "22%"
+    },
+    {
+     "id": "D2",
+     "title": "Configuration Management and IaC",
+     "weight": "17%"
+    },
+    {
+     "id": "D3",
+     "title": "Resilient Cloud Solutions",
+     "weight": "15%"
+    },
+    {
+     "id": "D4",
+     "title": "Monitoring and Logging",
+     "weight": "15%"
+    },
+    {
+     "id": "D5",
+     "title": "Incident and Event Response",
+     "weight": "14%"
+    },
+    {
+     "id": "D6",
+     "title": "Security and Compliance",
+     "weight": "17%"
+    }
+   ]
+  },
+  {
+   "exam": "GH-900",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-900",
+   "version": "Skills at a glance as of January 2026",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Understand Git and GitHub basics",
+     "weight": "25-30%"
+    },
+    {
+     "id": "D2",
+     "title": "Work with GitHub repositories",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D3",
+     "title": "Collaborate using GitHub",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D4",
+     "title": "Apply modern development practices",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D5",
+     "title": "Manage projects with GitHub",
+     "weight": "5-10%"
+    },
+    {
+     "id": "D6",
+     "title": "Understand privacy, security, and administration",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D7",
+     "title": "Explore the GitHub community",
+     "weight": "5-10%"
+    }
+   ]
+  },
+  {
+   "exam": "GH-200",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-200",
+   "version": "Skills measured as of January 2026",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Author and manage workflows",
+     "weight": "20-25%"
+    },
+    {
+     "id": "D2",
+     "title": "Consume and troubleshoot workflows",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D3",
+     "title": "Author and maintain actions",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D4",
+     "title": "Manage GitHub Actions for the enterprise",
+     "weight": "20-25%"
+    },
+    {
+     "id": "D5",
+     "title": "Secure and optimize automation",
+     "weight": "10-15%"
+    }
+   ]
+  },
+  {
+   "exam": "GH-300",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300",
+   "version": "Skills measured as of August 7, 2026 (body has six domains; skills-at-a-glance repeats a features line)",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Use GitHub Copilot responsibly",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D2",
+     "title": "Use GitHub Copilot features",
+     "weight": "25-30%"
+    },
+    {
+     "id": "D3",
+     "title": "Understand GitHub Copilot data and architecture",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D4",
+     "title": "Apply prompt engineering and context crafting",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D5",
+     "title": "Improve developer productivity with GitHub Copilot",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D6",
+     "title": "Configure privacy, content exclusions, and safeguards",
+     "weight": "10-15%"
+    }
+   ]
+  },
+  {
+   "exam": "GH-500",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-500",
+   "version": "Skills measured as of July 2026",
+   "domains": [
+    {
+     "id": "D1",
+     "title": "Describe GitHub Security suites, features, and ecosystem",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D2",
+     "title": "Configure and use Secret Protection (formerly secret scanning)",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D3",
+     "title": "Configure and use supply chain security (formerly Dependabot/Dependency Review)",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D4",
+     "title": "Configure and use Code Security (formerly Code Scanning with CodeQL)",
+     "weight": "10-15%"
+    },
+    {
+     "id": "D5",
+     "title": "Security operations: best practices, prioritization, and remediation",
+     "weight": "15-20%"
+    },
+    {
+     "id": "D6",
+     "title": "GitHub Security suites administration",
+     "weight": "10-15%"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "folder": "devops",
+   "slug": "docker-containerization",
+   "title": "Docker and Containerization: Image Design, Base Images and Compose vs Kubernetes",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKAD:D1",
+    "KCNA:D1",
+    "CKS:D5",
+    "KCSA:D1"
+   ],
+   "clusters": [
+    "K",
+    "F"
+   ],
+   "scope": "Expands the stub into a full container-build guide: multi-stage builds, base-image choice (Alpine/musl vs Debian-slim/glibc vs distroless/chiseled vs Docker Hardened Images), BuildKit caching, .NET SDK container publishing and Python/uv images, named volumes vs bind mounts, bridge vs host networking. Ends with the concrete operational signals that justify moving from Docker Compose to Kubernetes.",
+   "existing_stub": "devops/docker-containerization.md",
+   "exists": true
+  },
+  {
+   "folder": "devops",
+   "slug": "oci-images-and-registries",
+   "title": "OCI Images, Digests and Registries",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKS:D5",
+    "KCSA:D1",
+    "KCNA:D1",
+    "AZ-400:D3"
+   ],
+   "clusters": [
+    "K",
+    "P"
+   ],
+   "scope": "Covers the OCI image, distribution and runtime specs: manifests, image indexes for multi-arch builds, layers, tags vs digests, and OCI 1.1 artifacts with the referrers API that attaches signatures and SBOMs. Compares registry options (Docker Hub, GHCR, Harbor; ACR and ECR linked to provider folders) on retention, pull-through caching, tag immutability and geo-replication.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops",
+   "slug": "ci-cd-pipelines",
+   "title": "CI/CD Pipeline Design: Platforms, Stages, Artifacts and Promotion",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1",
+    "GH-200:D1",
+    "GH-900:D4"
+   ],
+   "clusters": [
+    "P",
+    "D"
+   ],
+   "scope": "Expands the stub into the delivery hub. Compares GitHub Actions, Azure Pipelines, Jenkins/self-hosted and AWS CodePipeline (linked). Covers stage design, build-once-promote-everywhere, package management (GitHub Packages, Azure Artifacts feeds, views and upstreams), artifact versioning, quality and release gates, test placement, pipeline health (failure rate, duration, flaky tests) and cost/retention. Branching depth moves to ci-cd/source-control-and-branching-strategies; deployment depth moves to ci-cd/deployment-strategies.",
+   "existing_stub": "devops/ci-cd-pipelines.md",
+   "exists": true
+  },
+  {
+   "folder": "devops",
+   "slug": "bare-metal-linux-hypervisors",
+   "title": "Bare-Metal Linux, Hypervisors and the Certification Home Lab",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D1",
+    "CKS:D3"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Keeps the stub's comparisons: Type-1 vs Type-2 hypervisors (Proxmox VE, ESXi, KVM/libvirt), LXC vs VMs vs Docker-on-VM, ZFS vs ext4/XFS, VLAN segmentation. Adds a reproducible multi-node kubeadm lab for CKA/CKS practice, with lighter options (kind, k3s, Talos) and the trade-offs of each.",
+   "existing_stub": "devops/bare-metal-linux-hypervisors.md",
+   "exists": true
+  },
+  {
+   "folder": "devops",
+   "slug": "platform-engineering-and-internal-developer-platforms",
+   "title": "Platform Engineering: Internal Developer Platforms, Portals and Golden Paths",
+   "type": "concept",
+   "level": "expert",
+   "wave": 1,
+   "exams": [
+    "AZ-400:D3",
+    "KCNA:D4"
+   ],
+   "clusters": [
+    "P",
+    "E",
+    "R"
+   ],
+   "scope": "Covers platform-as-a-product, the difference between a platform and a portal, golden paths and paved roads, Team Topologies platform teams, and self-service with guardrails. Compares Backstage (catalog, scaffolder templates, TechDocs, plugins) with commercial portals, and Crossplane with Azure Deployment Environments for self-service infrastructure. Shows how to measure platform success with DORA and DevEx signals.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops",
+   "slug": "github-platform-foundations",
+   "title": "GitHub Platform Foundations: Repositories, Collaboration and Administration",
+   "type": "concept",
+   "level": "foundation",
+   "wave": 1,
+   "exams": [
+    "GH-900:D1",
+    "GH-900:D2",
+    "GH-900:D3",
+    "GH-900:D4",
+    "GH-900:D5",
+    "GH-900:D6",
+    "GH-900:D7",
+    "AZ-400:D1"
+   ],
+   "clusters": [
+    "F",
+    "P"
+   ],
+   "scope": "Covers Git vs GitHub; accounts, organizations, enterprises and Enterprise Managed Users; repository anatomy (README, LICENSE, CONTRIBUTING, CODEOWNERS, SECURITY); issues, pull requests, discussions and Projects; Codespaces/dev containers vs github.dev; Pages, Marketplace, Sponsors and InnerSource. Also roles, 2FA/passkeys, visibility and rulesets.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops",
+   "slug": "github-copilot-for-engineering-teams",
+   "title": "GitHub Copilot for Engineering Teams: Surfaces, Context, Governance",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "GH-300:D1",
+    "GH-300:D2",
+    "GH-300:D3",
+    "GH-300:D4",
+    "GH-300:D5",
+    "GH-300:D6",
+    "GH-900:D4"
+   ],
+   "clusters": [
+    "P",
+    "A"
+   ],
+   "scope": "Covers Copilot surfaces (inline suggestions, chat, agent mode, Copilot CLI, cloud coding agent, code review, Spaces) and plans (Free, Student, Pro, Pro+, Max, Business, Enterprise). Explains how prompts and context are assembled, filtered and post-processed, and covers custom instructions and prompt files, MCP tool access, content exclusions, the public-code filter, org policies, audit logs and responsible-AI validation. Links to ai/agents and ai/protocols for agent and MCP depth, and to security/ai-security for the risks.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-architecture",
+   "title": "Kubernetes Architecture: Control Plane, Nodes and the Reconciliation Loop",
+   "type": "concept",
+   "level": "foundation",
+   "wave": 4,
+   "exams": [
+    "KCNA:D1",
+    "KCNA:D2",
+    "CKA:D1",
+    "KCSA:D2"
+   ],
+   "clusters": [
+    "F",
+    "K"
+   ],
+   "scope": "Covers control plane vs worker nodes: kube-apiserver, etcd, scheduler, controller-manager, cloud-controller-manager, kubelet, kube-proxy and the container runtime. Explains the declarative API, the reconciliation loop and the CRI/CNI/CSI extension interfaces, and what managed AKS/EKS take off your hands (linked).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-workloads-and-pod-lifecycle",
+   "title": "Workloads and Pod Lifecycle: Deployment vs StatefulSet vs DaemonSet vs Job, and Probes",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKAD:D1",
+    "CKAD:D3",
+    "CKA:D2",
+    "KCNA:D1"
+   ],
+   "clusters": [
+    "K",
+    "F"
+   ],
+   "scope": "Shows when to choose Pod, ReplicaSet, Deployment, StatefulSet, DaemonSet, Job or CronJob. Contrasts init containers, native sidecars and ephemeral containers, along with multi-container patterns, pod phases, restart policies and graceful termination. Liveness vs readiness vs startup probes are shown with ASP.NET Core health checks and Python endpoints.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "configmaps-and-secrets",
+   "title": "ConfigMaps vs Secrets, and External Secret Stores",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKAD:D4",
+    "CKA:D2",
+    "CKS:D4",
+    "KCSA:D3"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Compares env vars, mounted files and projected volumes, immutable objects and update propagation. Explains why base64 is not encryption and how encryption at rest works with KMS v2. Compares External Secrets Operator, the Secrets Store CSI Driver, Sealed Secrets and SOPS, with links to Key Vault and Secrets Manager.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "scheduling-and-resource-management",
+   "title": "Scheduling and Resource Management: Requests, Limits, Affinity and Taints",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D2",
+    "CKAD:D4",
+    "KCNA:D1"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Covers requests vs limits, QoS classes, LimitRange and ResourceQuota, and in-place pod resize (stable since v1.35). Explains scheduler filtering and scoring, nodeSelector, node and pod affinity, taints and tolerations, topology spread, priority and preemption, and PodDisruptionBudgets, with a short look at DRA and gang scheduling for GPU/AI workloads.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-networking-and-cni",
+   "title": "Kubernetes Networking Model, CNI Plugins and Cluster DNS",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 4,
+   "exams": [
+    "CKA:D3",
+    "KCNA:D2",
+    "KCSA:D2"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Explains the flat pod network model and compares CNI dataplanes (Calico, Cilium/eBPF, Flannel; Azure CNI and Amazon VPC CNI linked) across overlay, routed and cloud-native IPAM. Covers kube-proxy modes (iptables, nftables, and IPVS, deprecated in v1.37) and CoreDNS service discovery, including kube-dns deprecation.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "services-ingress-and-gateway-api",
+   "title": "Services, Ingress and Gateway API",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D3",
+    "CKAD:D5",
+    "CKS:D1"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Compares ClusterIP, NodePort, LoadBalancer, ExternalName and headless Services, and explains EndpointSlices. Contrasts Ingress with Gateway API (GatewayClass, Gateway, HTTPRoute, GRPCRoute, ReferenceGrant) and its role separation. Covers TLS termination and a migration path after the Ingress NGINX retirement (maintenance ended March 2026).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "network-policies",
+   "title": "NetworkPolicies: Default Deny, Egress and CNI Enforcement",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D3",
+    "CKAD:D5",
+    "CKS:D1",
+    "KCSA:D3"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Builds default-deny, ingress and egress rules with pod/namespace selectors and ipBlocks, and covers DNS egress gotchas. Explains that enforcement depends on the CNI, how Cilium/Calico extended and cluster-scoped admin policies add to it, and how to test policies. Contrasts L3/L4 policy with L7 mesh authorization.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-storage",
+   "title": "Kubernetes Storage: Volumes, PV/PVC, StorageClasses and CSI",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D4",
+    "CKAD:D1",
+    "KCNA:D2"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Covers ephemeral vs persistent volumes, dynamic provisioning through StorageClasses and CSI drivers, access modes (RWO, ROX, RWX, RWOP), reclaim policies, expansion, snapshots and StatefulSet volumeClaimTemplates. Links to Azure Disk/Files and EBS/EFS CSI pages.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-authn-authz-rbac",
+   "title": "Authentication, Authorization and RBAC in Kubernetes",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D1",
+    "CKAD:D4",
+    "CKS:D2",
+    "KCSA:D3"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Contrasts authentication (X.509, OIDC, ServiceAccount tokens) with authorization (RBAC, Node, webhook). Covers Role vs ClusterRole and their bindings, aggregation, bound projected tokens, kubeconfig and least-privilege patterns. Links to AKS Entra integration and EKS access entries.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "admission-control-and-policy-engines",
+   "title": "Admission Control: Webhooks, CEL Policies, Kyverno and Gatekeeper",
+   "type": "comparison",
+   "level": "expert",
+   "wave": 1,
+   "exams": [
+    "CKAD:D4",
+    "CKS:D4",
+    "CKS:D5",
+    "KCSA:D5"
+   ],
+   "clusters": [
+    "K",
+    "S"
+   ],
+   "scope": "Walks the admission chain (mutating, schema validation, validating). Compares webhooks with CEL-based ValidatingAdmissionPolicy and MutatingAdmissionPolicy (stable since v1.36), and Kyverno with OPA Gatekeeper. Covers failure policies, the availability risk of webhooks, and audit-then-enforce rollout.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "pod-security-standards-and-security-context",
+   "title": "Pod Security Standards, Pod Security Admission and securityContext",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKAD:D4",
+    "CKS:D3",
+    "CKS:D4",
+    "KCSA:D3"
+   ],
+   "clusters": [
+    "K",
+    "S"
+   ],
+   "scope": "Covers the Privileged/Baseline/Restricted levels and the enforce/audit/warn namespace labels, with PodSecurityPolicy history for context. Hardens Pods field by field (runAsNonRoot, readOnlyRootFilesystem, allowPrivilegeEscalation, dropped capabilities, seccomp RuntimeDefault, AppArmor) and adds user namespaces (stable since v1.36).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "helm-vs-kustomize",
+   "title": "Helm vs Kustomize: Templating vs Patching",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKAD:D2",
+    "CKA:D1"
+   ],
+   "clusters": [
+    "K",
+    "P"
+   ],
+   "scope": "Compares Helm 4 (charts, values, releases, hooks, OCI distribution, rollback, server-side apply) with Kustomize (bases, overlays, patches, components). Shows how to combine them through post-render plugins or Kustomize helmCharts, and how Argo CD and Flux consume each.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "operators-and-crds",
+   "title": "Extending Kubernetes: CRDs, Controllers and the Operator Pattern",
+   "type": "concept",
+   "level": "expert",
+   "wave": 1,
+   "exams": [
+    "CKA:D1",
+    "CKAD:D4"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Covers CRD schemas, CEL validation rules, versioning and conversion, then controllers and the reconcile loop, operator capability levels, and installing and configuring operators. Compares building operators with Kubebuilder/Operator SDK (Go), KubeOps (.NET) and Kopf (Python).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-autoscaling",
+   "title": "Autoscaling: HPA vs VPA vs KEDA vs Cluster Autoscaler vs Karpenter",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 4,
+   "exams": [
+    "CKA:D2",
+    "DOP-C02:D3",
+    "DOP-C02:D4",
+    "KCNA:D2"
+   ],
+   "clusters": [
+    "K",
+    "P"
+   ],
+   "scope": "Contrasts workload autoscaling (HPA v2 behaviour and tolerance, HPA scale-to-zero beta in v1.37, VPA, KEDA event-driven scaling) with node autoscaling (Cluster Autoscaler node groups vs Karpenter NodePools). Covers the Metrics API pipeline and how autoscaling interacts with requests and in-place resize. Links to AKS node auto-provisioning and EKS Auto Mode.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-troubleshooting",
+   "title": "Troubleshooting Kubernetes: A Repeatable Triage Method",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D5",
+    "CKAD:D3",
+    "KCNA:D2"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Gives decision trees for Pending, CrashLoopBackOff, ImagePullBackOff, OOMKilled, failing probes, and Service, DNS or NetworkPolicy faults, using kubectl describe/logs/events/top/debug and ephemeral containers. Covers node and control-plane debugging with kubelet logs, journalctl, crictl, static Pod manifests and certificates.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "cluster-lifecycle-upgrades-and-etcd",
+   "title": "Cluster Lifecycle: kubeadm, HA Control Planes, Upgrades and etcd Backup",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 1,
+   "exams": [
+    "CKA:D1",
+    "CKAD:D3",
+    "CKS:D2"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Covers kubeadm init/join, stacked vs external etcd, version skew, the API deprecation policy and kubectl convert. Walks the upgrade sequence (cordon, drain, kubeadm upgrade), etcd snapshot backup and restore, and certificate renewal, and contrasts this with managed upgrade channels on AKS and EKS.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-security-model",
+   "title": "The Kubernetes Security Model: 4Cs, Trust Boundaries and Threats",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 4,
+   "exams": [
+    "KCSA:D1",
+    "KCSA:D2",
+    "KCSA:D4",
+    "KCSA:D6"
+   ],
+   "clusters": [
+    "K",
+    "X"
+   ],
+   "scope": "Uses the 4Cs and cluster trust boundaries and data flows to walk the KCSA threat categories: persistence, denial of service, malicious code, network attackers, sensitive-data access and privilege escalation. Covers each component's attack surface and the compliance and threat frameworks (CIS, NIST, MITRE ATT&CK for containers). Links to security/threat-modeling for STRIDE.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-cluster-and-system-hardening",
+   "title": "Cluster and System Hardening: CIS Benchmark to Host OS",
+   "type": "how-to",
+   "level": "expert",
+   "wave": 4,
+   "exams": [
+    "CKS:D1",
+    "CKS:D2",
+    "CKS:D3",
+    "KCSA:D2"
+   ],
+   "clusters": [
+    "K",
+    "S"
+   ],
+   "scope": "Covers kube-bench against the CIS Benchmark, API server exposure and authentication flags, kubelet hardening, node metadata protection, audit policy, etcd encryption, binary verification and upgrades as a security control. Adds host-OS minimization, least-privilege IAM, firewalling and AppArmor/seccomp profiles.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-supply-chain-security",
+   "title": "Supply Chain Security for Kubernetes: Scan, Sign, Verify, Admit",
+   "type": "pattern",
+   "level": "expert",
+   "wave": 4,
+   "exams": [
+    "CKS:D5",
+    "KCSA:D5",
+    "KCSA:D6",
+    "GH-500:D3"
+   ],
+   "clusters": [
+    "K",
+    "S"
+   ],
+   "scope": "Covers minimal base images, scanning (Trivy, Grype), static analysis (kubesec, KubeLinter), SBOMs (SPDX, CycloneDX), signing with Sigstore cosign vs Notation, and admission enforcement of permitted registries and signatures (Kyverno verifyImages, Gatekeeper with Ratify). Links to security/supply-chain for SLSA and SBOM theory.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubernetes-runtime-security",
+   "title": "Runtime Security: Falco, Audit Logs and Container Immutability",
+   "type": "how-to",
+   "level": "expert",
+   "wave": 4,
+   "exams": [
+    "CKS:D6",
+    "KCSA:D4"
+   ],
+   "clusters": [
+    "K",
+    "S"
+   ],
+   "scope": "Compares Falco's syscall/eBPF behavioural detection with Tetragon enforcement, and audit logs with runtime events. Covers immutability at runtime, investigating attack phases, and forwarding detections to SIEM (links to Sentinel and GuardDuty EKS protection).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "multi-tenancy-and-workload-isolation",
+   "title": "Multi-Tenancy and Workload Isolation: Namespaces to Sandboxed Runtimes",
+   "type": "pattern",
+   "level": "expert",
+   "wave": 4,
+   "exams": [
+    "CKS:D4",
+    "KCSA:D1",
+    "KCSA:D3"
+   ],
+   "clusters": [
+    "K",
+    "R"
+   ],
+   "scope": "Compares soft and hard multi-tenancy: namespace-per-team with RBAC, quotas and policies vs virtual clusters vs cluster-per-tenant. Covers node isolation with pools and taints, container runtimes (containerd, CRI-O, runc), and sandboxed runtimes via RuntimeClass (gVisor, Kata Containers) with their cost.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "service-mesh-and-pod-to-pod-encryption",
+   "title": "Service Mesh and Pod-to-Pod Encryption: Sidecar, Ambient and eBPF",
+   "type": "comparison",
+   "level": "expert",
+   "wave": 4,
+   "exams": [
+    "CKS:D4",
+    "KCSA:D5"
+   ],
+   "clusters": [
+    "K",
+    "R"
+   ],
+   "scope": "Explains why meshes exist and compares Istio sidecar vs Istio ambient (ztunnel, waypoints) vs Linkerd vs Cilium's sidecarless mesh. Covers mTLS workload identity, traffic shifting and retries, CNI-level WireGuard/IPsec vs mesh mTLS, Gateway API for mesh (GAMMA), and the operating cost.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/kubernetes",
+   "slug": "kubectl-cheatsheet",
+   "title": "kubectl Cheat Sheet for CKAD, CKA and CKS",
+   "type": "cheatsheet",
+   "level": "foundation",
+   "wave": 1,
+   "exams": [
+    "CKAD:D2",
+    "CKAD:D3",
+    "CKA:D5",
+    "CKS:D2"
+   ],
+   "clusters": [
+    "K"
+   ],
+   "scope": "Covers imperative generators with --dry-run=client -o yaml, contexts and namespaces, explain, jsonpath and custom-columns, rollout, scale, debug, auth can-i and etcdctl. Each command is mapped to the exam task it speeds up, plus terminal aliases and vim settings.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "iac-fundamentals",
+   "title": "IaC Fundamentals: Declarative vs Imperative, Provisioning vs Configuration",
+   "type": "concept",
+   "level": "foundation",
+   "wave": 6,
+   "exams": [
+    "TF-A:D1",
+    "AZ-400:D3",
+    "DOP-C02:D2"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Contrasts IaC with click-ops and scripts. Covers declarative vs imperative, provisioning vs configuration management (Ansible, DSC/Azure Machine Configuration), mutable vs immutable infrastructure, idempotency and drift. Maps the tool landscape (Terraform/OpenTofu, Bicep, CloudFormation/CDK, Pulumi, Crossplane) with links to provider folders.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "terraform-language-and-workflow",
+   "title": "Terraform Language and Core Workflow",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "TF-A:D2",
+    "TF-A:D3",
+    "TF-A:D4"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers providers and version constraints, resource vs data blocks, variables, locals and outputs, complex types, expressions and functions, dependencies, custom conditions (validation, preconditions, check blocks), and sensitive vs ephemeral values with write-only arguments. Walks init, validate, plan, apply, destroy and fmt with side-by-side azurerm and aws examples.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "terraform-state-and-backends",
+   "title": "Terraform State, Backends, Locking and Drift",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "TF-A:D2",
+    "TF-A:D6",
+    "TF-A:D7"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers what state stores and why, local vs remote backends (azurerm blob leases, s3 native lockfiles), locking, secrets in state, and drift with refresh-only plans. Compares import blocks with terraform import, covers moved/removed blocks, state CLI commands and TF_LOG verbose logging, and contrasts OpenTofu client-side state encryption.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "terraform-modules-and-environments",
+   "title": "Terraform Modules, Composition and Environment Strategies",
+   "type": "pattern",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "TF-A:D5",
+    "TF-A:D8"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers module sources and version pinning, public and private registries, variable scope and composition patterns. Compares environment strategies (separate directories vs CLI workspaces vs HCP workspaces vs Terraform Stacks) and repository layouts for multi-subscription and multi-account estates.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "terraform-vs-opentofu",
+   "title": "Terraform vs OpenTofu",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "TF-A:D1",
+    "TF-A:D8"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Compares licensing (BSL 1.1 vs MPL 2.0) and governance (HashiCorp/IBM vs Linux Foundation). Tracks feature divergence: OpenTofu state encryption, provider for_each, OCI registry distribution and early evaluation vs Terraform Stacks, actions, list blocks with terraform query, and the HCL-based Terraform policy framework. Covers registries, compatibility and decision criteria.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "hcp-terraform-and-iac-pipelines",
+   "title": "HCP Terraform and Running IaC in Pipelines",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "TF-A:D8",
+    "AZ-400:D3"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers HCP Terraform organizations, projects and workspaces; VCS-, CLI- and API-driven runs; variable sets, dynamic provider credentials (OIDC to Azure and AWS), run tasks, policy sets, agents, the private registry and Stacks. Contrasts this with running Terraform in GitHub Actions or Azure Pipelines and with Atlantis, Spacelift and env0.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/iac",
+   "slug": "policy-as-code-for-infrastructure",
+   "title": "Policy as Code for Infrastructure: OPA, Checkov, Sentinel and Terraform Policy",
+   "type": "comparison",
+   "level": "expert",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D4",
+    "TF-A:D8",
+    "DOP-C02:D6",
+    "CKS:D5"
+   ],
+   "clusters": [
+    "P",
+    "S"
+   ],
+   "scope": "Compares OPA/Rego with Conftest, Checkov, Trivy misconfiguration scanning (the tfsec lineage), Sentinel, the HCL-based Terraform policy framework, and Kyverno/Gatekeeper for manifests. Shows where to evaluate (pre-commit, PR, plan, admission, runtime) and how these relate to Azure Policy and AWS Config (linked).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "github-actions-fundamentals",
+   "title": "GitHub Actions Fundamentals: Events, Jobs, Contexts and Data Flow",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "GH-200:D1",
+    "GH-200:D2",
+    "AZ-400:D3"
+   ],
+   "clusters": [
+    "P",
+    "D"
+   ],
+   "scope": "Covers triggers (push, pull_request, schedule, workflow_dispatch inputs, repository_dispatch), jobs, steps, needs and conditions, contexts and expressions (parse-time vs runtime), matrices, service containers, caching vs artifacts, GITHUB_OUTPUT/GITHUB_ENV, job summaries and YAML anchors. Also run troubleshooting and REST-based retention, with C# and Python build/test workflows.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "github-actions-reuse-and-custom-actions",
+   "title": "Reuse in GitHub Actions: Starter vs Reusable Workflows vs Composite, JavaScript and Docker Actions",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "GH-200:D2",
+    "GH-200:D3",
+    "GH-200:D4"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Compares the reuse mechanisms: starter templates, reusable workflows called through workflow_call, and composite, JavaScript and Docker actions. Covers action.yml metadata, workflow commands, versioning and release strategy, Marketplace publishing, and organization templates and governance.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "github-actions-security-hardening",
+   "title": "Hardening GitHub Actions: Tokens, Injection, Pinning and Attestations",
+   "type": "pattern",
+   "level": "expert",
+   "wave": 6,
+   "exams": [
+    "GH-200:D5",
+    "GH-200:D4",
+    "AZ-400:D4"
+   ],
+   "clusters": [
+    "P",
+    "S"
+   ],
+   "scope": "Compares GITHUB_TOKEN least-privilege permissions with PATs and GitHub Apps. Covers script injection, pull_request_target and untrusted input, secret and variable scopes, environments with required reviewers, SHA pinning and immutable releases, allow/deny lists, and artifact attestations (SLSA provenance). Includes a case study of the March 2025 tj-actions/changed-files compromise.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "oidc-federation-from-ci-to-azure-and-aws",
+   "title": "Secretless CI: OIDC Federation from GitHub Actions and Azure Pipelines to Azure and AWS",
+   "type": "how-to",
+   "level": "expert",
+   "wave": 6,
+   "exams": [
+    "GH-200:D5",
+    "AZ-400:D4",
+    "DOP-C02:D6"
+   ],
+   "clusters": [
+    "P",
+    "C"
+   ],
+   "scope": "Explains the token exchange (id-token: write, iss, aud, sub). Configures Entra federated identity credentials on app registrations or user-assigned managed identities with azure/login, and AWS IAM OIDC providers with role trust policies and configure-aws-credentials. Covers subject-claim design, including the ID-based immutable subject for repositories created after 2026-07-15 and repo_property_ custom claims, plus Azure Pipelines workload identity federation service connections and HCP Terraform dynamic credentials. Links to security/workload-identity.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "runners-and-agents-at-scale",
+   "title": "Runners and Agents at Scale: GitHub-Hosted, Self-Hosted, ARC and Managed DevOps Pools",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "GH-200:D4",
+    "AZ-400:D3"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Compares GitHub-hosted (standard, larger, Arm, GPU), self-hosted and ephemeral runners, Actions Runner Controller on Kubernetes, runner groups, private networking and IP allow lists. Sets these against Azure Pipelines Microsoft-hosted, self-hosted, scale-set agents and Managed DevOps Pools on cost, licensing, image maintenance and isolation.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "azure-pipelines-yaml",
+   "title": "Azure Pipelines YAML: Stages, Templates, Environments and Service Connections",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D3",
+    "AZ-400:D4"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers stages, jobs and steps; triggers and PR validation; templates (includes vs extends); variables and variable groups linked to Key Vault; environments with checks and approvals; deployment jobs (runOnce, rolling, canary); service connections and secure files; GitHub repository integration; and migrating classic pipelines to YAML.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "deployment-strategies",
+   "title": "Deployment Strategies: Rolling, Blue-Green, Canary, Rings and Feature Flags",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1",
+    "CKAD:D2"
+   ],
+   "clusters": [
+    "P",
+    "K"
+   ],
+   "scope": "Compares recreate, rolling, blue-green, canary, ring and progressive delivery with feature flags, A/B tests and dark launches. Covers Kubernetes-native implementations (Deployment strategy, Argo Rollouts, Flagger), slot swaps and CodeDeploy (linked), expand-contract database changes, hotfix paths and rollback design.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "gitops-argo-cd-vs-flux",
+   "title": "GitOps: Argo CD vs Flux",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "KCNA:D3",
+    "AZ-400:D3",
+    "CKAD:D2"
+   ],
+   "clusters": [
+    "P",
+    "K"
+   ],
+   "scope": "Covers the OpenGitOps principles and pull- vs push-based delivery. Compares Argo CD (Applications, ApplicationSets, sync waves, app-of-apps, UI with SSO/RBAC) with Flux (GitRepository/OCIRepository, Kustomization, HelmRelease, image automation). Also drift reconciliation, secrets in GitOps, repository structures and multi-cluster fleets, linking to the AKS GitOps extension and EKS options.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "source-control-and-branching-strategies",
+   "title": "Source Control and Branching: Trunk-Based vs GitHub Flow vs GitFlow",
+   "type": "comparison",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D2",
+    "AZ-400:D3",
+    "GH-900:D1",
+    "GH-900:D2"
+   ],
+   "clusters": [
+    "P",
+    "F"
+   ],
+   "scope": "Takes over the stub's branching bullets: trunk-based vs GitHub Flow vs GitFlow vs release branches, PR workflow, Azure Repos branch policies vs GitHub branch protection and rulesets, CODEOWNERS and merge strategies. Also Git LFS, Scalar, monorepo vs polyrepo, recovering and purging data from history, and SemVer vs CalVer.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "github-advanced-security",
+   "title": "GitHub Advanced Security: Secret Protection, Code Security and Supply Chain",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "GH-500:D1",
+    "GH-500:D2",
+    "GH-500:D3",
+    "GH-500:D4",
+    "GH-500:D5",
+    "GH-500:D6",
+    "AZ-400:D4"
+   ],
+   "clusters": [
+    "P",
+    "S"
+   ],
+   "scope": "Covers Secret Protection (push protection, validity checks, custom patterns, delegated bypass); Code Security (CodeQL default vs advanced setup, SARIF from third-party tools, Copilot Autofix, security campaigns); and supply chain (dependency graph, Dependabot alerts and updates, dependency review, SBOM export). Also security overview and enterprise rollout via security configurations, compared with GitHub Secret Protection/Code Security for Azure DevOps and Defender for Cloud DevOps security.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/ci-cd",
+   "slug": "dora-metrics-and-delivery-performance",
+   "title": "DORA Metrics and Delivery Performance",
+   "type": "concept",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D1"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers the five DORA metrics (change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate) grouped into throughput and instability. Shows how to measure them from pipeline, GitHub and Azure Boards data alongside flow metrics (cycle time, WIP), SPACE and DevEx, and the anti-patterns of gaming them.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/observability",
+   "slug": "observability-fundamentals",
+   "title": "Observability Fundamentals: Logs vs Metrics vs Traces vs Profiles",
+   "type": "concept",
+   "level": "foundation",
+   "wave": 6,
+   "exams": [
+    "KCNA:D4",
+    "AZ-400:D5",
+    "DOP-C02:D4"
+   ],
+   "clusters": [
+    "P",
+    "F"
+   ],
+   "scope": "Contrasts monitoring with observability. Covers the telemetry signals, structured logging, cardinality, sampling, and the RED, USE and golden-signals methods, with .NET (ILogger, ActivitySource, Meter) and Python examples. Maps concepts to Azure Monitor and CloudWatch (linked).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/observability",
+   "slug": "opentelemetry-in-practice",
+   "title": "OpenTelemetry in Practice: SDKs, Collector and OTLP",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "AZ-400:D5",
+    "DOP-C02:D4",
+    "KCNA:D4"
+   ],
+   "clusters": [
+    "P",
+    "D"
+   ],
+   "scope": "Covers API vs SDK vs Collector, OTLP, semantic conventions, W3C Trace Context and baggage, and auto-instrumentation (.NET, Python, OBI eBPF). Builds Collector pipelines in agent vs gateway topologies and covers the OpenTelemetry Operator, exporting to Application Insights and CloudWatch/X-Ray (linked), and the Aspire dashboard for local work.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/observability",
+   "slug": "prometheus-and-grafana",
+   "title": "Prometheus and Grafana: Metrics, PromQL and Alerting",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "KCNA:D4",
+    "CKA:D5",
+    "AZ-400:D5"
+   ],
+   "clusters": [
+    "P",
+    "K"
+   ],
+   "scope": "Covers the pull model, exporters, service discovery, PromQL, recording and alerting rules, Alertmanager routing, native histograms, remote write and long-term storage (Thanos, Mimir), kube-prometheus-stack, and Grafana with Loki and Tempo. Links managed equivalents (Azure Monitor managed Prometheus, Amazon Managed Service for Prometheus).",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/observability",
+   "slug": "kubernetes-monitoring-and-logging",
+   "title": "Monitoring and Logging Kubernetes",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "CKA:D5",
+    "CKAD:D3",
+    "CKS:D6",
+    "KCNA:D4"
+   ],
+   "clusters": [
+    "K",
+    "P"
+   ],
+   "scope": "Covers the Metrics API and kubectl top, kube-state-metrics, container log streams and rotation, node-agent vs sidecar logging (Fluent Bit), events, and audit logs as a signal. Links to Azure Monitor Container Insights and CloudWatch Container Insights.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/sre",
+   "slug": "sre-principles-and-toil",
+   "title": "SRE Principles: Toil, Error-Budget Policy and Production Readiness",
+   "type": "concept",
+   "level": "foundation",
+   "wave": 6,
+   "exams": [
+    "DOP-C02:D3",
+    "DOP-C02:D5",
+    "AZ-400:D1"
+   ],
+   "clusters": [
+    "P",
+    "R"
+   ],
+   "scope": "Contrasts SRE with DevOps and platform engineering. Covers the toil cap, error-budget policies, production readiness reviews and SRE engagement models, and how architecture/reliability designs become operational practice.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/sre",
+   "slug": "slis-slos-and-error-budgets",
+   "title": "SLIs, SLOs, SLAs and Burn-Rate Alerting",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "DOP-C02:D3",
+    "DOP-C02:D4",
+    "AZ-400:D5"
+   ],
+   "clusters": [
+    "P",
+    "R"
+   ],
+   "scope": "Covers choosing SLIs (availability, latency, freshness, correctness), SLO targets and windows, SLA vs SLO, error budgets and multiwindow multi-burn-rate alerts. Implements them with OpenSLO, Sloth/Pyrra and Prometheus recording rules, with links to Azure Monitor and CloudWatch Application Signals SLOs.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/sre",
+   "slug": "incident-management-and-postmortems",
+   "title": "Incident Management, On-Call and Blameless Postmortems",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "DOP-C02:D5",
+    "AZ-400:D5"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers severity levels, incident commander, communications and operations roles, on-call health and escalation, and stakeholder updates. Also runbooks and automated remediation (EventBridge/Systems Manager Automation and Azure Monitor action groups, linked), blameless postmortems, contributing factors vs root cause, and following action items through.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/sre",
+   "slug": "capacity-planning-and-load-testing",
+   "title": "Capacity Planning and Load Testing",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "DOP-C02:D3",
+    "AZ-400:D3"
+   ],
+   "clusters": [
+    "P"
+   ],
+   "scope": "Covers demand forecasting, headroom and saturation, and load vs stress vs soak vs spike tests with k6, Locust (Python), NBomber (.NET) and Azure Load Testing (linked). Also where load tests belong in pipelines and how capacity ties to autoscaling and cost.",
+   "existing_stub": "",
+   "exists": false
+  },
+  {
+   "folder": "devops/sre",
+   "slug": "chaos-engineering-and-game-days",
+   "title": "Chaos Engineering and Game Days",
+   "type": "how-to",
+   "level": "practitioner",
+   "wave": 6,
+   "exams": [
+    "DOP-C02:D3"
+   ],
+   "clusters": [
+    "P",
+    "R"
+   ],
+   "scope": "Covers steady-state hypotheses, blast radius and fault types. Compares Chaos Mesh and LitmusChaos on Kubernetes with Azure Chaos Studio and AWS Fault Injection Service (linked). Also game days and DR drills that prove RTO/RPO, and safety guardrails such as stop conditions.",
+   "existing_stub": "",
+   "exists": false
+  }
+ ],
+ "terms": [
+  {
+   "slug": "container-image",
+   "term": "Container image",
+   "definition": "An immutable, layered filesystem bundle plus configuration metadata (entrypoint, environment, user) that a container runtime unpacks to start containers.",
+   "aliases": [
+    "OCI image"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "container",
+    "virtual-machine-image"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "oci-specifications",
+   "term": "OCI specifications",
+   "definition": "Open Container Initiative standards for the image format, the registry distribution API and the runtime bundle, so images built by any tool run on any compliant runtime.",
+   "aliases": [
+    "Open Container Initiative",
+    "OCI image spec",
+    "OCI distribution spec",
+    "OCI runtime spec"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "docker-engine"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKS:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "image-digest",
+   "term": "Image digest",
+   "definition": "The SHA-256 content hash of an image manifest, which immutably identifies one exact image, unlike a tag that can be moved.",
+   "aliases": [
+    "content digest",
+    "sha256 digest"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "image-tag"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D5",
+    "KCSA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "multi-stage-build",
+   "term": "Multi-stage build",
+   "definition": "A Dockerfile technique that keeps compilers and build tooling in earlier stages and copies only runtime artifacts into a small final image.",
+   "aliases": [
+    "multi-stage Dockerfile"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "single-stage-build"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1",
+    "CKS:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "distroless-image",
+   "term": "Distroless image",
+   "definition": "A base image containing only the application runtime and its libraries, with no shell or package manager, to cut size and attack surface.",
+   "aliases": [
+    "chiseled image",
+    "minimal base image",
+    "hardened base image"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "alpine-base-image",
+    "scratch-image"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "container-registry",
+   "term": "Container registry",
+   "definition": "A service implementing the OCI distribution API that stores and serves images and other OCI artifacts by repository, tag and digest.",
+   "aliases": [
+    "OCI registry"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "artifact-feed"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKS:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "container-runtime",
+   "term": "Container runtime",
+   "definition": "Software that pulls images and runs containers; high-level runtimes such as containerd or CRI-O manage images and lifecycle and delegate process creation to a low-level OCI runtime such as runc.",
+   "aliases": [
+    "containerd",
+    "CRI-O",
+    "runc"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "container-runtime-interface",
+    "docker-engine"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "linux-namespaces",
+   "term": "Linux namespaces",
+   "definition": "Kernel features that give a process its own isolated view of process IDs, network, mounts, hostname and users, forming the isolation half of a container.",
+   "aliases": [
+    "PID namespace",
+    "network namespace"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "cgroups",
+    "kubernetes-namespace"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D1",
+    "CKS:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "cgroups",
+   "term": "cgroups",
+   "definition": "A Linux kernel mechanism that limits and accounts for the CPU, memory and I/O of groups of processes, which is how container resource limits are enforced.",
+   "aliases": [
+    "control groups",
+    "cgroup v2"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "linux-namespaces"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2",
+    "KCSA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "docker-compose",
+   "term": "Docker Compose",
+   "definition": "A tool and YAML specification for defining and running multi-container applications on a single Docker host.",
+   "aliases": [
+    "Compose specification",
+    "docker compose"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "containers",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "kubernetes"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-control-plane",
+   "term": "Kubernetes control plane",
+   "definition": "The components (kube-apiserver, etcd, kube-scheduler, kube-controller-manager, cloud-controller-manager) that store desired cluster state and drive the cluster toward it.",
+   "aliases": [
+    "master components"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "worker-node",
+    "data-plane"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKA:D1",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kube-apiserver",
+   "term": "kube-apiserver",
+   "definition": "The control-plane front end that authenticates, authorizes, admits, validates and persists every API request, and the only component that talks to etcd directly.",
+   "aliases": [
+    "API server"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubelet",
+    "etcd"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "etcd",
+   "term": "etcd",
+   "definition": "A distributed, strongly consistent key-value store using the Raft protocol that holds all Kubernetes cluster state and must be backed up and protected.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kube-apiserver",
+    "persistent-volume"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-controller",
+   "term": "Kubernetes controller",
+   "definition": "A control loop that watches resources through the API server and keeps acting to make actual state match the declared desired state.",
+   "aliases": [
+    "reconciliation loop",
+    "control loop"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "operator-pattern",
+    "admission-controller"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubelet",
+   "term": "kubelet",
+   "definition": "The node agent that registers the node, keeps the containers described in its Pods running and healthy through the CRI, and reports status to the API server.",
+   "aliases": [
+    "node agent"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kube-proxy",
+    "container-runtime"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D5",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kube-proxy",
+   "term": "kube-proxy",
+   "definition": "A per-node component that implements Service virtual IPs by programming iptables or nftables rules (IPVS mode is deprecated as of v1.37), and which some eBPF CNIs replace entirely.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "container-network-interface",
+    "coredns"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D3",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "container-runtime-interface",
+   "term": "Container Runtime Interface",
+   "definition": "The gRPC API the kubelet uses to ask a container runtime such as containerd or CRI-O to manage pod sandboxes, containers and images.",
+   "aliases": [
+    "CRI"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "container-network-interface",
+    "container-runtime"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "container-network-interface",
+   "term": "Container Network Interface",
+   "definition": "A specification and plugin model that attaches Pods to the network and assigns their IPs, implemented by plugins such as Cilium, Calico, Azure CNI or Amazon VPC CNI.",
+   "aliases": [
+    "CNI",
+    "CNI plugin"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kube-proxy",
+    "service-mesh"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "CKA:D3",
+    "KCNA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "pod",
+   "term": "Pod",
+   "definition": "The smallest deployable Kubernetes unit: one or more containers sharing a network namespace, IP address and volumes, scheduled together onto one node.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "container",
+    "kubernetes-deployment"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-namespace",
+   "term": "Kubernetes namespace",
+   "definition": "A named scope for API objects that provides name isolation and an attachment point for RBAC, quotas and policies, but is not a hard security boundary on its own.",
+   "aliases": [
+    "namespace"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "linux-namespaces",
+    "kubernetes-multi-tenancy"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D1",
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-deployment",
+   "term": "Deployment",
+   "definition": "A controller that manages ReplicaSets of interchangeable stateless Pods and provides declarative rolling updates and rollbacks.",
+   "aliases": [
+    "Deployment",
+    "ReplicaSet"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "statefulset",
+    "daemonset"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D2",
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "statefulset",
+   "term": "StatefulSet",
+   "definition": "A controller for Pods that need stable network identities, ordered rollout and per-replica persistent volumes, such as databases and message brokers.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubernetes-deployment"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1",
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "daemonset",
+   "term": "DaemonSet",
+   "definition": "A controller that runs one copy of a Pod on every eligible node, typically for node agents such as log shippers, CNI or monitoring.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubernetes-deployment"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-job",
+   "term": "Job",
+   "definition": "A controller that runs Pods until a set number complete successfully, with retry and parallelism controls; a CronJob creates Jobs on a schedule.",
+   "aliases": [
+    "CronJob"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubernetes-deployment"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "init-container",
+   "term": "Init container",
+   "definition": "A container that must run to completion before a Pod's app containers start, used for setup such as migrations, waiting on dependencies or fetching config.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "native-sidecar-container"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "native-sidecar-container",
+   "term": "Native sidecar container",
+   "definition": "An init container with restartPolicy Always that starts before the app containers, keeps running beside them and stops after them.",
+   "aliases": [
+    "sidecar container",
+    "restartPolicy Always init container"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "init-container",
+    "sidecar-pattern"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "liveness-probe",
+   "term": "Liveness probe",
+   "definition": "A periodic kubelet check that restarts a container when it fails, meant to recover from deadlocks rather than to signal temporary unavailability.",
+   "aliases": [
+    "livenessProbe"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "readiness-probe",
+    "startup-probe"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D3"
+   ],
+   "wave": 1,
+   "written": true
+  },
+  {
+   "slug": "readiness-probe",
+   "term": "Readiness probe",
+   "definition": "A periodic check that, while failing, removes the Pod from Service endpoints without restarting it, so traffic only reaches instances able to serve.",
+   "aliases": [
+    "readinessProbe"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "liveness-probe"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D3"
+   ],
+   "wave": 1,
+   "written": true
+  },
+  {
+   "slug": "startup-probe",
+   "term": "Startup probe",
+   "definition": "A probe that holds off liveness and readiness checks until a slow-starting container reports it has started, preventing premature restarts.",
+   "aliases": [
+    "startupProbe"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "liveness-probe",
+    "readiness-probe"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "configmap",
+   "term": "ConfigMap",
+   "definition": "An API object holding non-confidential key-value configuration that Pods consume as environment variables, command arguments or mounted files.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "kubernetes-secret"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-secret",
+   "term": "Kubernetes Secret",
+   "definition": "An API object for small confidential values that is only base64-encoded by default, so its protection depends on RBAC, encryption at rest and external secret stores.",
+   "aliases": [
+    "Secret"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "configmap",
+    "key-vault"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "CKS:D4",
+    "KCSA:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "resource-requests-and-limits",
+   "term": "Resource requests and limits",
+   "definition": "Per-container CPU and memory settings where requests reserve capacity for scheduling and limits cap usage, with CPU overuse throttled and memory overuse OOM-killed.",
+   "aliases": [
+    "requests",
+    "limits",
+    "QoS class"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "resource-quota"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "resource-quota",
+   "term": "ResourceQuota",
+   "definition": "A namespace-level object that caps aggregate resource consumption and object counts, often paired with a LimitRange that sets per-container defaults and bounds.",
+   "aliases": [
+    "LimitRange"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "resource-requests-and-limits"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "taints-and-tolerations",
+   "term": "Taints and tolerations",
+   "definition": "A node-side repel mechanism: a taint keeps Pods off a node unless they carry a matching toleration, which permits but does not force placement there.",
+   "aliases": [
+    "taint",
+    "toleration"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "node-affinity"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "node-affinity",
+   "term": "Node affinity",
+   "definition": "Pod-side required or preferred scheduling rules that attract Pods to nodes with matching labels, a richer form of nodeSelector.",
+   "aliases": [
+    "nodeSelector",
+    "pod affinity"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "taints-and-tolerations"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-service",
+   "term": "Service",
+   "definition": "A stable virtual IP and DNS name that load-balances to a label-selected set of Pods, exposed as ClusterIP, NodePort, LoadBalancer, ExternalName or headless.",
+   "aliases": [
+    "ClusterIP",
+    "NodePort",
+    "LoadBalancer",
+    "headless Service"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "kubernetes-ingress",
+    "gateway-api"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D3",
+    "CKAD:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-ingress",
+   "term": "Ingress",
+   "definition": "A frozen Kubernetes API for host- and path-based HTTP(S) routing to Services, implemented by a separately installed controller; the community Ingress NGINX controller was retired after March 2026.",
+   "aliases": [
+    "Ingress controller",
+    "Ingress NGINX"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "gateway-api",
+    "kubernetes-service"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D3",
+    "CKAD:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "gateway-api",
+   "term": "Gateway API",
+   "definition": "The role-oriented successor to Ingress: a set of CRDs (GatewayClass, Gateway, HTTPRoute, GRPCRoute and others) that splits L4/L7 routing duties between infrastructure providers, cluster operators and app developers.",
+   "aliases": [
+    "GatewayClass",
+    "Gateway",
+    "HTTPRoute",
+    "GRPCRoute"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "kubernetes-ingress",
+    "service-mesh"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "network-policy",
+   "term": "NetworkPolicy",
+   "definition": "A namespaced L3/L4 allow-list for Pod ingress and egress selected by labels, namespaces or IP blocks, enforced only if the CNI plugin supports it.",
+   "aliases": [
+    "Kubernetes network policy"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "service-mesh",
+    "network-security-group"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D3",
+    "CKAD:D5",
+    "CKS:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "persistent-volume",
+   "term": "PersistentVolume",
+   "definition": "A cluster-scoped piece of storage, provisioned statically or dynamically through a StorageClass, with a lifecycle independent of any Pod.",
+   "aliases": [
+    "PV"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "persistent-volume-claim"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "persistent-volume-claim",
+   "term": "PersistentVolumeClaim",
+   "definition": "A namespaced request for storage of a given size, access mode and class that binds to a PersistentVolume and is mounted by Pods.",
+   "aliases": [
+    "PVC"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "persistent-volume"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D4",
+    "CKAD:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "storage-class",
+   "term": "StorageClass",
+   "definition": "A cluster object naming a CSI provisioner, its parameters, reclaim policy and volume binding mode, used to create PersistentVolumes on demand.",
+   "aliases": [
+    "CSI driver",
+    "access modes"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "persistent-volume"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-rbac",
+   "term": "Kubernetes RBAC",
+   "definition": "The authorization mode that grants verbs on resources through namespaced Roles or cluster-wide ClusterRoles bound to users, groups or ServiceAccounts.",
+   "aliases": [
+    "Role",
+    "ClusterRole",
+    "RoleBinding",
+    "ClusterRoleBinding"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "azure-rbac",
+    "aws-iam-policy"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "CKS:D2",
+    "KCSA:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-service-account",
+   "term": "ServiceAccount",
+   "definition": "A namespaced Kubernetes identity for workloads that receives short-lived, audience-bound projected tokens and can be federated to cloud identities.",
+   "aliases": [
+    "bound service account token"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubernetes-user",
+    "managed-identity"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "CKS:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "admission-controller",
+   "term": "Admission controller",
+   "definition": "Code in the API server request path, after authentication and authorization, that can mutate or reject objects before they are persisted, either built in or via webhooks and CEL policies.",
+   "aliases": [
+    "admission webhook"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kubernetes-rbac",
+    "kubernetes-controller"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "KCSA:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "validating-admission-policy",
+   "term": "ValidatingAdmissionPolicy",
+   "definition": "An in-process admission policy written as CEL expressions that validates requests without running a webhook server.",
+   "aliases": [
+    "VAP",
+    "CEL admission policy"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "admission-controller",
+    "mutating-admission-policy"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D5",
+    "CKS:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "mutating-admission-policy",
+   "term": "MutatingAdmissionPolicy",
+   "definition": "An in-process CEL-based admission policy, stable since Kubernetes v1.36, that mutates objects through apply configurations or JSON Patch without a webhook.",
+   "aliases": [
+    "MAP"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "validating-admission-policy",
+    "admission-controller"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "pod-security-standards",
+   "term": "Pod Security Standards",
+   "definition": "Three cumulative profiles, Privileged, Baseline and Restricted, that define which Pod security settings are allowed; they replaced PodSecurityPolicy.",
+   "aliases": [
+    "PSS",
+    "Privileged",
+    "Baseline",
+    "Restricted"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "pod-security-admission",
+    "security-context"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D4",
+    "KCSA:D3",
+    "CKAD:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "pod-security-admission",
+   "term": "Pod Security Admission",
+   "definition": "The built-in admission controller that applies a Pod Security Standard per namespace through enforce, audit and warn labels.",
+   "aliases": [
+    "PSA"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "pod-security-standards",
+    "kyverno"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D3",
+    "CKS:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "security-context",
+   "term": "securityContext",
+   "definition": "Pod- and container-level settings that control user and group IDs, privilege escalation, Linux capabilities, seccomp, AppArmor, SELinux and read-only root filesystems.",
+   "aliases": [
+    "Linux capabilities",
+    "runAsNonRoot",
+    "readOnlyRootFilesystem"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "pod-security-standards"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D4",
+    "CKS:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "seccomp",
+   "term": "seccomp",
+   "definition": "A Linux kernel facility that filters which system calls a process may make, applied in Kubernetes through securityContext profiles such as RuntimeDefault.",
+   "aliases": [
+    "secure computing mode",
+    "RuntimeDefault",
+    "AppArmor"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "apparmor",
+    "linux-capabilities"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-user-namespaces",
+   "term": "User namespaces (Kubernetes)",
+   "definition": "A Pod option (hostUsers: false), stable since Kubernetes v1.36, that maps container root to an unprivileged host UID range to contain breakouts.",
+   "aliases": [
+    "hostUsers: false",
+    "rootless containers"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "security-context",
+    "linux-namespaces"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D3",
+    "KCSA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "custom-resource-definition",
+   "term": "CustomResourceDefinition",
+   "definition": "An API extension that registers a new resource type with an OpenAPI schema so the API server stores and serves custom objects.",
+   "aliases": [
+    "CRD"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "operator-pattern"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "CKAD:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "operator-pattern",
+   "term": "Operator pattern",
+   "definition": "Encoding operational knowledge for an application in a custom controller that reconciles CRDs to automate install, upgrade, backup and failover.",
+   "aliases": [
+    "Kubernetes operator"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "expert",
+   "core": true,
+   "differs_from": [
+    "custom-resource-definition",
+    "helm"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1",
+    "CKAD:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "helm",
+   "term": "Helm",
+   "definition": "The Kubernetes package manager (now Helm 4) that renders templated charts with values into manifests and tracks each installation as a versioned, rollback-capable release.",
+   "aliases": [
+    "Helm chart",
+    "Helm release",
+    "Helm 4"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "kustomize",
+    "operator-pattern"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D2",
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kustomize",
+   "term": "Kustomize",
+   "definition": "A template-free tool built into kubectl that customizes plain manifests through bases, overlays, patches and components.",
+   "aliases": [
+    "kubectl apply -k"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "helm"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKAD:D2",
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "horizontal-pod-autoscaler",
+   "term": "HorizontalPodAutoscaler",
+   "definition": "A controller that changes a workload's replica count based on resource, custom or external metrics; scale-to-zero for object and external metrics is beta as of v1.37.",
+   "aliases": [
+    "HPA"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "vertical-pod-autoscaler",
+    "keda",
+    "cluster-autoscaler"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "vertical-pod-autoscaler",
+   "term": "VerticalPodAutoscaler",
+   "definition": "An add-on that recommends or applies CPU and memory requests from observed usage, resizing Pods instead of adding replicas.",
+   "aliases": [
+    "VPA",
+    "in-place pod resize"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "horizontal-pod-autoscaler"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "keda",
+   "term": "KEDA",
+   "definition": "A CNCF project that scales workloads, including to zero, on event sources such as queues and streams by feeding external metrics to the HPA.",
+   "aliases": [
+    "Kubernetes Event-driven Autoscaling",
+    "ScaledObject"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "horizontal-pod-autoscaler"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "cluster-autoscaler",
+   "term": "Cluster Autoscaler",
+   "definition": "A component that adds or removes nodes in predefined node groups when Pods are unschedulable or nodes are underused.",
+   "aliases": [
+    "CA"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "karpenter",
+    "horizontal-pod-autoscaler"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D2",
+    "DOP-C02:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "karpenter",
+   "term": "Karpenter",
+   "definition": "A Kubernetes SIG Autoscaling project that launches right-sized nodes directly from pending Pod requirements via NodePools, rather than scaling fixed node groups.",
+   "aliases": [
+    "NodePool",
+    "node auto-provisioning"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "cluster-autoscaler"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D4",
+    "CKA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubeadm",
+   "term": "kubeadm",
+   "definition": "The upstream tool that bootstraps and upgrades conformant clusters by generating certificates, static Pod manifests for the control plane, and join tokens.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "managed-kubernetes"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "etcd-snapshot",
+   "term": "etcd snapshot",
+   "definition": "A point-in-time backup of the etcd keyspace, taken with etcdctl and restored with etcdutl, which is the core of control-plane disaster recovery.",
+   "aliases": [
+    "etcdctl snapshot save",
+    "etcdutl snapshot restore"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "velero-backup"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "ephemeral-container",
+   "term": "Ephemeral container",
+   "definition": "A temporary container added to a running Pod with kubectl debug for troubleshooting, especially distroless images that lack a shell.",
+   "aliases": [
+    "kubectl debug"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "init-container",
+    "native-sidecar-container"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKA:D5",
+    "CKAD:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "runtimeclass",
+   "term": "RuntimeClass",
+   "definition": "An API object that selects a container runtime handler per Pod, used to run untrusted workloads in sandboxes such as gVisor or Kata Containers.",
+   "aliases": [
+    "gVisor",
+    "Kata Containers",
+    "sandboxed runtime"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "container-runtime"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D4"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-audit-log",
+   "term": "Kubernetes audit log",
+   "definition": "The API server's chronological record of requests, filtered by an audit policy into None, Metadata, Request or RequestResponse levels, used for forensics and detection.",
+   "aliases": [
+    "audit policy"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "falco",
+    "container-logs"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D6",
+    "KCSA:D3"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-encryption-at-rest",
+   "term": "Encryption at rest (Kubernetes)",
+   "definition": "API server configuration that encrypts chosen resources such as Secrets before they are written to etcd, ideally through a KMS v2 plugin backed by a cloud key service.",
+   "aliases": [
+    "EncryptionConfiguration",
+    "KMS v2"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "kubernetes-secret"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D4",
+    "KCSA:D2"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "cis-kubernetes-benchmark",
+   "term": "CIS Kubernetes Benchmark",
+   "definition": "Center for Internet Security hardening recommendations for control-plane, etcd, node and policy configuration, commonly checked with kube-bench.",
+   "aliases": [
+    "kube-bench"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "pod-security-standards"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D1",
+    "KCSA:D6"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "falco",
+   "term": "Falco",
+   "definition": "A CNCF runtime security engine that applies rules to kernel system calls (via eBPF) and Kubernetes audit events to detect suspicious behaviour.",
+   "aliases": [
+    "Falco rules"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "kubernetes-audit-log",
+    "tetragon"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D6"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "ebpf",
+   "term": "eBPF",
+   "definition": "A Linux kernel technology that runs verified, sandboxed programs at kernel hook points, powering high-performance networking, observability and security tools.",
+   "aliases": [
+    "extended Berkeley Packet Filter"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "kernel-module",
+    "iptables"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D6"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "service-mesh",
+   "term": "Service mesh",
+   "definition": "An infrastructure layer of proxies (sidecar, per-node or ambient) that provides workload identity, mTLS, traffic management and telemetry for service-to-service calls.",
+   "aliases": [
+    "Istio",
+    "Linkerd",
+    "ambient mesh",
+    "sidecarless mesh"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "network-policy",
+    "api-gateway",
+    "gateway-api"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D4",
+    "KCSA:D5"
+   ],
+   "wave": 1,
+   "written": true
+  },
+  {
+   "slug": "kyverno",
+   "term": "Kyverno",
+   "definition": "A CNCF graduated, Kubernetes-native policy engine whose YAML and CEL policies validate, mutate and generate resources and verify image signatures.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "opa-gatekeeper",
+    "pod-security-admission"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D5",
+    "CKS:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "opa-gatekeeper",
+   "term": "OPA Gatekeeper",
+   "definition": "An admission controller that enforces Open Policy Agent Rego policies through ConstraintTemplate and Constraint CRDs and audits existing resources.",
+   "aliases": [
+    "Gatekeeper",
+    "ConstraintTemplate"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kyverno",
+    "open-policy-agent"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "kubernetes-multi-tenancy",
+   "term": "Kubernetes multi-tenancy",
+   "definition": "Sharing clusters among teams or customers with isolation layered from namespaces, RBAC, quotas and policies (soft) up to virtual or dedicated clusters (hard).",
+   "aliases": [
+    "soft multi-tenancy",
+    "hard multi-tenancy",
+    "virtual cluster"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect",
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "kubernetes-namespace"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D4",
+    "KCSA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "four-cs-of-cloud-native-security",
+   "term": "4Cs of cloud native security",
+   "definition": "A layered model (Cloud, Cluster, Container, Code) in which each inner layer depends on the security of the layers around it.",
+   "aliases": [
+    "Cloud, Cluster, Container, Code"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "defense-in-depth"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCSA:D1"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "container-image-signing",
+   "term": "Container image signing",
+   "definition": "Attaching cryptographic signatures to image digests (for example with Sigstore cosign or Notation) so admission controllers can verify publisher and integrity before a workload runs.",
+   "aliases": [
+    "cosign",
+    "Sigstore",
+    "Notation",
+    "Notary Project"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "containers",
+   "domain_raw": "kubernetes-security",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "container-image-scanning",
+    "sbom"
+   ],
+   "equivalent": "",
+   "exams": [
+    "CKS:D5",
+    "KCSA:D5"
+   ],
+   "wave": 1,
+   "written": false
+  },
+  {
+   "slug": "infrastructure-as-code",
+   "term": "Infrastructure as code",
+   "definition": "Defining infrastructure in version-controlled, machine-readable files that tools apply repeatably, giving infrastructure changes review, diff, test and rollback like code.",
+   "aliases": [
+    "IaC"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "configuration-management",
+    "click-ops"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D1",
+    "AZ-400:D3",
+    "DOP-C02:D2"
+   ],
+   "wave": 2,
+   "written": true
+  },
+  {
+   "slug": "immutable-infrastructure",
+   "term": "Immutable infrastructure",
+   "definition": "An operating model where servers and containers are never modified after deployment; changes ship as newly built instances that replace the old ones.",
+   "aliases": [
+    "replace, don't patch"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "mutable-infrastructure",
+    "configuration-management"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D1",
+    "TF-A:D1"
+   ],
+   "wave": 2,
+   "written": true
+  },
+  {
+   "slug": "configuration-drift",
+   "term": "Configuration drift",
+   "definition": "Divergence between infrastructure's declared configuration and its actual state, usually from manual or out-of-band changes, detected by plan/refresh, drift detection or GitOps reconciliation.",
+   "aliases": [
+    "drift"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "terraform-state"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D6",
+    "DOP-C02:D6"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform",
+   "term": "Terraform",
+   "definition": "HashiCorp's (an IBM company) declarative, provider-based IaC tool that plans and applies HCL configurations against any API with a provider, tracking resources in state.",
+   "aliases": [
+    "HashiCorp Terraform",
+    "HCL"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "opentofu",
+    "bicep",
+    "aws-cloudformation"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D1",
+    "TF-A:D2"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "opentofu",
+   "term": "OpenTofu",
+   "definition": "The MPL-licensed, Linux Foundation fork of Terraform with a compatible language and provider protocol, plus its own features such as client-side state encryption and OCI registry support.",
+   "aliases": [
+    "tofu"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D1"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-provider",
+   "term": "Terraform provider",
+   "definition": "A plugin that maps Terraform resource and data types to a platform's API, versioned and installed from a registry during terraform init.",
+   "aliases": [
+    "azurerm provider",
+    "aws provider"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform-module"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D2"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-state",
+   "term": "Terraform state",
+   "definition": "The JSON record mapping configuration addresses to real resource IDs and attributes, which Terraform uses to plan changes and which can contain secrets.",
+   "aliases": [
+    "tfstate",
+    "state file"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "configuration-drift",
+    "terraform-backend"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D2",
+    "TF-A:D6"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-backend",
+   "term": "Terraform backend",
+   "definition": "The configured storage for state, such as local, azurerm, s3 or HCP Terraform, which decides where state lives and how concurrent runs are locked.",
+   "aliases": [
+    "remote state",
+    "state locking"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform-state",
+    "terraform-workspace"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D6"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-module",
+   "term": "Terraform module",
+   "definition": "A reusable, versioned directory of Terraform configuration with input variables and outputs, called from other configurations and sourced from local paths, Git or registries.",
+   "aliases": [
+    "root module",
+    "child module"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform-provider",
+    "terraform-stacks"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-workspace",
+   "term": "Terraform workspace",
+   "definition": "In the CLI, an additional named state for the same configuration; in HCP Terraform, a full unit of runs with its own state, variables, permissions and VCS settings.",
+   "aliases": [
+    "CLI workspace",
+    "HCP Terraform workspace"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform-backend",
+    "terraform-stacks"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D8"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "hcp-terraform",
+   "term": "HCP Terraform",
+   "definition": "HashiCorp's managed service for remote Terraform runs, state, private registry, policy enforcement, run tasks and team governance; Terraform Enterprise is the self-hosted edition.",
+   "aliases": [
+    "formerly: Terraform Cloud",
+    "Terraform Enterprise"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "terraform",
+    "atlantis"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D8"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-stacks",
+   "term": "Terraform Stacks",
+   "definition": "An HCP Terraform configuration layer that composes modules as components and deploys them repeatedly as isolated deployments, such as per environment or region.",
+   "aliases": [
+    "tfcomponent.hcl",
+    "tfdeploy.hcl"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "terraform-workspace",
+    "terraform-module"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D8"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "terraform-import-block",
+   "term": "Terraform import block",
+   "definition": "A configuration block that brings existing infrastructure under Terraform management during plan and apply, optionally generating configuration, replacing the imperative terraform import command.",
+   "aliases": [
+    "import block",
+    "terraform import",
+    "moved block"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "moved-block",
+    "terraform-state"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D7"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "policy-as-code",
+   "term": "Policy as code",
+   "definition": "Expressing governance and security rules as version-controlled, testable code that tools evaluate automatically against IaC plans, manifests or live resources.",
+   "aliases": [
+    "PaC"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security",
+    "architect"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "azure-policy",
+    "aws-config-rules"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D4",
+    "TF-A:D8",
+    "DOP-C02:D6"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "open-policy-agent",
+   "term": "Open Policy Agent",
+   "definition": "A CNCF graduated, general-purpose policy engine that evaluates JSON input against policies written in Rego, used for Terraform plans, Kubernetes admission, APIs and more.",
+   "aliases": [
+    "OPA",
+    "Rego",
+    "Conftest"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "sentinel",
+    "kyverno"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D8",
+    "CKS:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "sentinel",
+   "term": "Sentinel",
+   "definition": "HashiCorp's proprietary policy-as-code language enforced in HCP Terraform and Enterprise runs at advisory, soft-mandatory or hard-mandatory levels.",
+   "aliases": [
+    "HashiCorp Sentinel",
+    "Terraform policy"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "iac",
+   "domain_raw": "iac",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "open-policy-agent"
+   ],
+   "equivalent": "",
+   "exams": [
+    "TF-A:D8"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "continuous-integration",
+   "term": "Continuous integration",
+   "definition": "The practice of merging small changes to a shared mainline frequently, with every change automatically built and tested.",
+   "aliases": [
+    "CI"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "continuous-delivery"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "continuous-delivery",
+   "term": "Continuous delivery",
+   "definition": "Keeping every change in a deployable state through automated pipelines, so releasing to production is a low-risk business decision that can happen at any time.",
+   "aliases": [
+    "CD"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "continuous-deployment",
+    "continuous-integration"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "continuous-deployment",
+   "term": "Continuous deployment",
+   "definition": "Automatically releasing every change that passes the pipeline to production, with no manual approval step.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "continuous-delivery"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "trunk-based-development",
+   "term": "Trunk-based development",
+   "definition": "A branching model where developers integrate small changes into the main branch at least daily, using short-lived branches and feature flags instead of long-lived branches.",
+   "aliases": [
+    "TBD"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "gitflow",
+    "github-flow"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D2"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "gitflow",
+   "term": "GitFlow",
+   "definition": "A branching model with long-lived main and develop branches plus feature, release and hotfix branches, suited to versioned releases but slower to integrate.",
+   "aliases": [
+    "Git Flow"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "trunk-based-development",
+    "github-flow"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D2"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-flow",
+   "term": "GitHub Flow",
+   "definition": "A lightweight workflow in which work happens on short-lived branches merged to main through reviewed pull requests, with main always deployable.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "gitflow",
+    "trunk-based-development"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-900:D1",
+    "AZ-400:D1"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-actions-workflow",
+   "term": "GitHub Actions workflow",
+   "definition": "A YAML file in .github/workflows that defines event triggers and jobs of steps that GitHub runs on hosted or self-hosted runners.",
+   "aliases": [
+    "workflow file",
+    ".github/workflows"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "reusable-workflow",
+    "composite-action"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D1"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-actions-runner",
+   "term": "GitHub Actions runner",
+   "definition": "The machine or container that executes workflow jobs, either GitHub-hosted (standard or larger, freshly provisioned per job) or self-hosted (including autoscaled on Kubernetes with Actions Runner Controller).",
+   "aliases": [
+    "GitHub-hosted runner",
+    "self-hosted runner",
+    "larger runner",
+    "Actions Runner Controller"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "azure-pipelines-agent",
+    "managed-devops-pools"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "reusable-workflow",
+   "term": "Reusable workflow",
+   "definition": "A workflow triggered by workflow_call that other workflows invoke as a job, with typed inputs, secrets and outputs, centralizing versioned pipeline logic.",
+   "aliases": [
+    "workflow_call"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "composite-action",
+    "starter-workflow"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D2",
+    "GH-200:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "composite-action",
+   "term": "Composite action",
+   "definition": "An action defined in action.yml that bundles several steps to run inside the calling job, unlike JavaScript or Docker actions that run code.",
+   "aliases": [
+    "action.yml composite"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "reusable-workflow"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-token",
+   "term": "GITHUB_TOKEN",
+   "definition": "An installation access token minted automatically for each workflow job, scoped to the repository by the permissions key and expiring when the job ends.",
+   "aliases": [
+    "GITHUB_TOKEN",
+    "workflow permissions"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "personal-access-token",
+    "github-app"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D5",
+    "AZ-400:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "ci-oidc-federation",
+   "term": "OIDC federation for CI/CD",
+   "definition": "A pipeline presenting a short-lived OIDC token from its CI platform to a cloud identity provider, which checks issuer, audience and subject claims before issuing temporary credentials, so no stored cloud secrets are needed.",
+   "aliases": [
+    "workload identity federation (CI/CD)",
+    "GitHub Actions OIDC",
+    "id-token: write"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security",
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "expert",
+   "core": true,
+   "differs_from": [
+    "service-principal-secret",
+    "workload-identity"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D5",
+    "AZ-400:D4",
+    "DOP-C02:D6"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "script-injection",
+   "term": "Script injection (GitHub Actions)",
+   "definition": "An attack where attacker-controlled event data, such as a PR title or branch name, is interpolated via an expression into a run script and executed with the workflow's privileges.",
+   "aliases": [
+    "expression injection",
+    "pull_request_target risk"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "dependency-confusion"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D5"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "artifact-attestation",
+   "term": "Artifact attestation",
+   "definition": "A signed statement linking a build artifact's digest to the workflow, repository and commit that produced it, which deployments can verify before release.",
+   "aliases": [
+    "build provenance",
+    "SLSA provenance"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "container-image-signing",
+    "sbom"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-200:D5"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "blue-green-deployment",
+   "term": "Blue-green deployment",
+   "definition": "Running two production environments and switching all traffic from the current (blue) to the new (green) in one step, keeping blue ready for instant rollback.",
+   "aliases": [
+    "blue/green"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "canary-release",
+    "rolling-update"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1",
+    "CKAD:D2"
+   ],
+   "wave": 6,
+   "written": true
+  },
+  {
+   "slug": "canary-release",
+   "term": "Canary release",
+   "definition": "Shifting a small, growing percentage of traffic to a new version while comparing its health metrics with the baseline, and aborting automatically on regression.",
+   "aliases": [
+    "canary deployment"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "blue-green-deployment",
+    "feature-flag"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3",
+    "DOP-C02:D1",
+    "CKAD:D2"
+   ],
+   "wave": 6,
+   "written": true
+  },
+  {
+   "slug": "progressive-delivery",
+   "term": "Progressive delivery",
+   "definition": "Releasing to progressively larger audiences (rings, canaries, flags) with automated metric analysis gating each step and automatic rollback.",
+   "aliases": [
+    "ring deployment",
+    "Argo Rollouts",
+    "Flagger"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "continuous-deployment",
+    "blue-green-deployment"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "gitops",
+   "term": "GitOps",
+   "definition": "Operating systems from declarative desired state versioned in Git, which in-cluster agents pull and continuously reconcile, correcting drift.",
+   "aliases": [
+    "OpenGitOps"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "gitops",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "push-based-deployment",
+    "infrastructure-as-code"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D3",
+    "AZ-400:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "argo-cd",
+   "term": "Argo CD",
+   "definition": "A CNCF graduated GitOps controller and web UI that syncs Applications from Git, Helm or OCI sources into clusters, with ApplicationSets for fleet generation.",
+   "aliases": [
+    "Argo CD Application",
+    "ApplicationSet"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "gitops",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "flux"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "flux",
+   "term": "Flux",
+   "definition": "A CNCF graduated GitOps toolkit of composable controllers (source, kustomize, helm, notification, image automation) that reconcile clusters from Git or OCI artifacts.",
+   "aliases": [
+    "Flux CD",
+    "HelmRelease",
+    "Kustomization (Flux)"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "gitops",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "argo-cd"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "dora-metrics",
+   "term": "DORA metrics",
+   "definition": "DORA's software delivery metrics, now five: throughput (change lead time, deployment frequency, failed deployment recovery time) and instability (change fail rate, deployment rework rate).",
+   "aliases": [
+    "four keys",
+    "change lead time",
+    "deployment frequency",
+    "change fail rate",
+    "failed deployment recovery time (formerly: MTTR / time to restore service)",
+    "deployment rework rate"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect",
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "ci-cd",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "space-framework",
+    "service-level-objective"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D1"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-enterprise-managed-users",
+   "term": "GitHub Enterprise Managed Users",
+   "definition": "A GitHub Enterprise Cloud model where the identity provider creates and controls user accounts, which cannot act outside the enterprise.",
+   "aliases": [
+    "EMU",
+    "managed user accounts"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "github-organization",
+    "saml-sso"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-900:D6"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-advanced-security",
+   "term": "GitHub Advanced Security",
+   "definition": "GitHub's application security suite, sold since April 2025 as GitHub Secret Protection and GitHub Code Security (also available for Azure DevOps), alongside free supply-chain features.",
+   "aliases": [
+    "GHAS",
+    "GitHub Secret Protection",
+    "GitHub Code Security",
+    "GitHub Advanced Security for Azure DevOps"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "microsoft-defender-for-cloud-devops-security"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-500:D1",
+    "AZ-400:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "push-protection",
+   "term": "Push protection",
+   "definition": "A Secret Protection feature that blocks pushes containing detected secrets before they enter the repository, with audited bypass reasons or delegated bypass approval.",
+   "aliases": [
+    "secret scanning push protection",
+    "delegated bypass"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "secret-scanning-alerts"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-500:D2"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "codeql",
+   "term": "CodeQL",
+   "definition": "GitHub's semantic code analysis engine, which models code as a queryable database to find vulnerabilities through data-flow queries and reports SARIF alerts in Code Security.",
+   "aliases": [
+    "code scanning",
+    "default setup",
+    "advanced setup"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "dependabot",
+    "sast-third-party"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-500:D4",
+    "AZ-400:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "dependabot",
+   "term": "Dependabot",
+   "definition": "GitHub's dependency tooling that alerts on known-vulnerable dependencies from the dependency graph and opens pull requests for security and version updates.",
+   "aliases": [
+    "Dependabot alerts",
+    "Dependabot security updates",
+    "Dependabot version updates"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "dependency-review",
+    "codeql"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-500:D3",
+    "AZ-400:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "dependency-review",
+   "term": "Dependency review",
+   "definition": "A pull-request check that shows dependency changes and can block merges that add vulnerable or disallowed-license packages.",
+   "aliases": [
+    "dependency-review-action"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "dependabot"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-500:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "github-copilot",
+   "term": "GitHub Copilot",
+   "definition": "GitHub's AI coding assistant across IDEs, GitHub.com and the terminal, offering inline suggestions, chat, agent mode, code review and a cloud coding agent under individual and organization plans.",
+   "aliases": [
+    "Copilot agent mode",
+    "Copilot CLI",
+    "Copilot code review"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "agentic-ai",
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "copilot-coding-agent",
+    "ai-agent"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-300:D2",
+    "GH-900:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "copilot-coding-agent",
+   "term": "Copilot coding agent",
+   "definition": "An autonomous Copilot agent that works on an assigned issue or task in a GitHub Actions-powered environment and opens a pull request for human review.",
+   "aliases": [
+    "Copilot cloud agent",
+    "Agent HQ"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "agentic-ai"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "github-copilot",
+    "copilot-agent-mode"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-300:D2"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "copilot-content-exclusions",
+   "term": "Copilot content exclusions",
+   "definition": "Repository, organization or enterprise settings that stop Copilot from using specified files or paths as context, configured by Business and Enterprise admins.",
+   "aliases": [
+    "content exclusion"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "security",
+    "agentic-ai"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "public-code-filter"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-300:D6"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "copilot-custom-instructions",
+   "term": "Copilot custom instructions",
+   "definition": "Checked-in Markdown files, such as .github/copilot-instructions.md and reusable prompt files, that add standing project context and standards to Copilot requests.",
+   "aliases": [
+    "copilot-instructions.md",
+    "prompt files",
+    "AGENTS.md"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "agentic-ai"
+   ],
+   "domain": "devops",
+   "domain_raw": "github",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "copilot-content-exclusions"
+   ],
+   "equivalent": "",
+   "exams": [
+    "GH-300:D2",
+    "GH-300:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "observability",
+   "term": "Observability",
+   "definition": "The ability to explain a system's internal state, including novel failures, from its external telemetry (logs, metrics, traces and profiles).",
+   "aliases": [
+    "o11y"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "monitoring"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4",
+    "AZ-400:D5",
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "distributed-tracing",
+   "term": "Distributed tracing",
+   "definition": "Recording each request as a tree of timed spans across services, linked by propagated context, to locate latency and errors in distributed systems.",
+   "aliases": [
+    "trace",
+    "span"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "structured-logging",
+    "metrics"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D5",
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "w3c-trace-context",
+   "term": "W3C Trace Context",
+   "definition": "The W3C standard traceparent and tracestate HTTP headers that carry trace and span IDs between services so traces join across vendors.",
+   "aliases": [
+    "traceparent",
+    "tracestate",
+    "baggage"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "baggage",
+    "correlation-id"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "opentelemetry",
+   "term": "OpenTelemetry",
+   "definition": "The CNCF vendor-neutral standard of APIs, SDKs, semantic conventions, the OTLP protocol and the Collector for generating and exporting traces, metrics and logs.",
+   "aliases": [
+    "OTel"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "prometheus",
+    "application-insights-sdk"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4",
+    "AZ-400:D5",
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "otlp",
+   "term": "OTLP",
+   "definition": "OpenTelemetry's gRPC/HTTP protocol for sending traces, metrics and logs (stable for all three) from SDKs to Collectors and backends.",
+   "aliases": [
+    "OpenTelemetry Protocol"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "prometheus-remote-write"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "opentelemetry-collector",
+   "term": "OpenTelemetry Collector",
+   "definition": "A vendor-neutral telemetry pipeline that receives, processes (batching, filtering, sampling, enrichment) and exports telemetry, deployed as a per-node agent or a central gateway.",
+   "aliases": [
+    "OTel Collector",
+    "agent vs gateway"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "opentelemetry-sdk",
+    "fluent-bit"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4",
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "prometheus",
+   "term": "Prometheus",
+   "definition": "A CNCF graduated monitoring system that scrapes metrics from targets into a time-series database, queries them with PromQL and evaluates alerting rules.",
+   "aliases": [
+    "kube-prometheus-stack"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "opentelemetry",
+    "grafana"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4",
+    "CKA:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "promql",
+   "term": "PromQL",
+   "definition": "Prometheus's functional query language for selecting, aggregating and computing rates over time series, also used by managed Prometheus services.",
+   "aliases": [
+    "Prometheus Query Language"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "kql"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "alertmanager",
+   "term": "Alertmanager",
+   "definition": "The Prometheus component that deduplicates, groups, silences and routes alerts to receivers such as email, chat or paging tools.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "prometheus"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "metric-cardinality",
+   "term": "Metric cardinality",
+   "definition": "The number of unique label-value combinations for a metric, which drives storage and query cost and explodes when unbounded values like user IDs become labels.",
+   "aliases": [
+    "high cardinality",
+    "label explosion"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "sampling"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "red-method",
+   "term": "RED method",
+   "definition": "A service-monitoring heuristic tracking request Rate, Errors and Duration for every service, complementing the USE method (utilization, saturation, errors) for resources.",
+   "aliases": [
+    "Rate, Errors, Duration",
+    "USE method"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "four-golden-signals"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D5"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "four-golden-signals",
+   "term": "Four golden signals",
+   "definition": "Google SRE's recommended user-facing monitoring set: latency, traffic, errors and saturation.",
+   "aliases": [
+    "latency, traffic, errors, saturation"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "observability",
+   "domain_raw": "observability",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "red-method"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D4"
+   ],
+   "wave": 2,
+   "written": false
+  },
+  {
+   "slug": "site-reliability-engineering",
+   "term": "Site reliability engineering",
+   "definition": "A discipline that applies software engineering to operations, managing reliability through SLOs, error budgets, toil reduction and blameless learning.",
+   "aliases": [
+    "SRE"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect",
+    "cloud"
+   ],
+   "domain": "sre",
+   "domain_raw": "sre",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "devops",
+    "platform-engineering"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D3",
+    "DOP-C02:D5"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "burn-rate-alert",
+   "term": "Burn-rate alert",
+   "definition": "An SLO-based alert that fires when the error budget is being consumed faster than sustainable, checked over long and short windows to balance speed and noise.",
+   "aliases": [
+    "multiwindow multi-burn-rate alert"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "sre",
+   "domain_raw": "sre",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "threshold-alert"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D4"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "toil",
+   "term": "Toil",
+   "definition": "Manual, repetitive, automatable operational work that scales with service size and produces no lasting value, which SRE teams cap and engineer away.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "sre",
+   "domain_raw": "sre",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "overhead",
+    "project-work"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D2"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "incident-commander",
+   "term": "Incident commander",
+   "definition": "The single person who coordinates an incident response, delegating operations and communications roles and owning decisions until resolution or handoff.",
+   "aliases": [
+    "IC",
+    "incident lead"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "sre",
+   "domain_raw": "sre",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "on-call-engineer"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D5"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "blameless-postmortem",
+   "term": "Blameless postmortem",
+   "definition": "A written incident review that records timeline, impact, contributing factors and tracked actions, focused on systems and processes rather than individual blame.",
+   "aliases": [
+    "post-incident review",
+    "learning review"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "sre",
+   "domain_raw": "sre",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "root-cause-analysis"
+   ],
+   "equivalent": "",
+   "exams": [
+    "DOP-C02:D5"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "platform-engineering",
+   "term": "Platform engineering",
+   "definition": "The discipline of building and running internal platforms as products that give development teams self-service, paved paths to build, deploy and operate software.",
+   "aliases": [],
+   "cloud": "neutral",
+   "tracks": [
+    "architect",
+    "cloud"
+   ],
+   "domain": "devops",
+   "domain_raw": "platform-engineering",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "site-reliability-engineering",
+    "devops"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "internal-developer-platform",
+   "term": "Internal developer platform",
+   "definition": "The integrated set of tools, APIs, templates and infrastructure a platform team provides for self-service delivery, often surfaced through a developer portal.",
+   "aliases": [
+    "IDP",
+    "developer portal"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "platform-engineering",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "backstage",
+    "paas"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-400:D3"
+   ],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "golden-path",
+   "term": "Golden path",
+   "definition": "An opinionated, supported, end-to-end way to build and run a type of service, such as a template, pipeline and runtime, that teams can adopt instead of assembling their own.",
+   "aliases": [
+    "paved road"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "platform-engineering",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "mandate",
+    "reference-architecture"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "backstage",
+   "term": "Backstage",
+   "definition": "A CNCF incubating, open-source framework for developer portals, providing a software catalog, scaffolder templates, TechDocs and a plugin ecosystem.",
+   "aliases": [
+    "software catalog",
+    "scaffolder",
+    "TechDocs"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "platform-engineering",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "internal-developer-platform"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": 6,
+   "written": false
+  },
+  {
+   "slug": "crossplane",
+   "term": "Crossplane",
+   "definition": "A CNCF graduated Kubernetes extension that provisions and composes cloud infrastructure through CRDs and controllers, letting platform teams publish their own infrastructure APIs.",
+   "aliases": [
+    "composite resource",
+    "XRD"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "devops",
+   "domain_raw": "platform-engineering",
+   "level": "expert",
+   "core": false,
+   "differs_from": [
+    "terraform",
+    "operator-pattern"
+   ],
+   "equivalent": "",
+   "exams": [
+    "KCNA:D3"
+   ],
+   "wave": 6,
+   "written": false
+  }
+ ],
+ "pairs": [
+  {
+   "a": "Liveness probe",
+   "b": "Readiness probe",
+   "fidelity": "n/a",
+   "difference": "A failing liveness probe restarts the container; a failing readiness probe only removes the Pod from Service endpoints until it recovers."
+  },
+  {
+   "a": "Deployment",
+   "b": "StatefulSet",
+   "fidelity": "n/a",
+   "difference": "Deployment replicas are interchangeable and share storage semantics; StatefulSet replicas keep stable names, ordered rollout and their own PersistentVolumeClaims."
+  },
+  {
+   "a": "ConfigMap",
+   "b": "Secret",
+   "fidelity": "n/a",
+   "difference": "Both are consumed the same way, but Secrets get tighter RBAC, tmpfs mounts and optional encryption at rest; base64 encoding itself protects nothing."
+  },
+  {
+   "a": "Resource requests",
+   "b": "Resource limits",
+   "fidelity": "n/a",
+   "difference": "Requests drive scheduling and guaranteed share; limits cap usage, with CPU overuse throttled and memory overuse OOM-killed."
+  },
+  {
+   "a": "Taints and tolerations",
+   "b": "Node affinity",
+   "fidelity": "n/a",
+   "difference": "Taints let nodes repel Pods, while affinity lets Pods seek nodes; a toleration permits placement but never attracts a Pod."
+  },
+  {
+   "a": "Ingress",
+   "b": "Gateway API",
+   "fidelity": "n/a",
+   "difference": "Ingress is a single frozen HTTP resource extended by controller-specific annotations; Gateway API splits roles across typed CRDs and also covers gRPC, TCP/UDP and mesh traffic."
+  },
+  {
+   "a": "NetworkPolicy",
+   "b": "Service mesh authorization policy",
+   "fidelity": "n/a",
+   "difference": "NetworkPolicy filters L3/L4 traffic by labels and IPs in the CNI; mesh policies authorize L7 requests by cryptographic workload identity."
+  },
+  {
+   "a": "Role",
+   "b": "ClusterRole",
+   "fidelity": "n/a",
+   "difference": "A Role grants permissions in one namespace; a ClusterRole defines cluster-scoped or reusable permissions whose reach depends on whether a RoleBinding or ClusterRoleBinding uses it."
+  },
+  {
+   "a": "Pod Security Standards",
+   "b": "Pod Security Admission",
+   "fidelity": "n/a",
+   "difference": "PSS are the policy definitions (Privileged, Baseline, Restricted); PSA is the built-in admission controller that enforces, audits or warns on them per namespace."
+  },
+  {
+   "a": "ValidatingAdmissionPolicy",
+   "b": "Admission webhook",
+   "fidelity": "n/a",
+   "difference": "VAP runs CEL in-process with no service to operate; webhooks call external code, which is more flexible but adds latency and an availability dependency."
+  },
+  {
+   "a": "Kyverno",
+   "b": "OPA Gatekeeper",
+   "fidelity": "n/a",
+   "difference": "Kyverno policies are Kubernetes-style YAML/CEL with mutate, generate and verifyImages built in; Gatekeeper uses general-purpose Rego that is also reusable outside Kubernetes."
+  },
+  {
+   "a": "Helm",
+   "b": "Kustomize",
+   "fidelity": "n/a",
+   "difference": "Helm templates manifests and tracks versioned releases with rollback; Kustomize patches plain YAML with no templates and no release state."
+  },
+  {
+   "a": "CustomResourceDefinition",
+   "b": "Operator",
+   "fidelity": "n/a",
+   "difference": "A CRD only adds a new API type and storage; an operator is the controller that gives that type behaviour by reconciling it."
+  },
+  {
+   "a": "HorizontalPodAutoscaler",
+   "b": "VerticalPodAutoscaler",
+   "fidelity": "n/a",
+   "difference": "HPA changes the replica count, while VPA changes per-Pod CPU and memory requests; they conflict if both act on the same resource metric."
+  },
+  {
+   "a": "HorizontalPodAutoscaler",
+   "b": "KEDA",
+   "fidelity": "n/a",
+   "difference": "HPA scales on metrics already exposed through the metrics APIs; KEDA connects external event sources and handles activation from zero, then feeds the HPA."
+  },
+  {
+   "a": "Cluster Autoscaler",
+   "b": "Karpenter",
+   "fidelity": "n/a",
+   "difference": "Cluster Autoscaler resizes predefined node groups; Karpenter provisions individually right-sized nodes from pending Pod requirements and consolidates them."
+  },
+  {
+   "a": "seccomp",
+   "b": "AppArmor",
+   "fidelity": "n/a",
+   "difference": "seccomp filters which system calls a process may make; AppArmor confines which files, capabilities and network resources a program may access."
+  },
+  {
+   "a": "runc container",
+   "b": "gVisor or Kata sandbox (RuntimeClass)",
+   "fidelity": "n/a",
+   "difference": "runc containers share the host kernel directly; sandboxes put a user-space kernel or micro-VM in between, trading performance for isolation."
+  },
+  {
+   "a": "Image tag",
+   "b": "Image digest",
+   "fidelity": "n/a",
+   "difference": "Tags are mutable pointers that can be retargeted; digests are content hashes that always identify the same bytes, so deploy and sign by digest."
+  },
+  {
+   "a": "Docker Compose",
+   "b": "Kubernetes",
+   "fidelity": "n/a",
+   "difference": "Compose declares containers on one host with no cross-machine self-healing; Kubernetes reconciles desired state across a cluster, at much higher operational cost."
+  },
+  {
+   "a": "Terraform",
+   "b": "OpenTofu",
+   "fidelity": "n/a",
+   "difference": "They share HCL and the provider protocol, but Terraform is BSL-licensed by HashiCorp (IBM) with HCP-centric features like Stacks, while OpenTofu is MPL-licensed under the Linux Foundation with features such as client-side state encryption."
+  },
+  {
+   "a": "Terraform CLI workspace",
+   "b": "HCP Terraform workspace",
+   "fidelity": "n/a",
+   "difference": "A CLI workspace is just another state file for the same configuration; an HCP workspace is a full unit with its own variables, permissions, run history and VCS connection."
+  },
+  {
+   "a": "Sentinel",
+   "b": "Open Policy Agent",
+   "fidelity": "n/a",
+   "difference": "Sentinel is HashiCorp's proprietary language embedded in HCP Terraform and Enterprise; OPA/Rego is a CNCF general-purpose engine used across Terraform, Kubernetes and APIs."
+  },
+  {
+   "a": "Bicep",
+   "b": "AWS CloudFormation",
+   "fidelity": "close",
+   "difference": "Both are provider-native declarative IaC with service-side deployment, but Bicep compiles to ARM JSON and keeps no stack object, whereas CloudFormation manages stacks with built-in rollback and drift detection."
+  },
+  {
+   "a": "Continuous delivery",
+   "b": "Continuous deployment",
+   "fidelity": "n/a",
+   "difference": "Continuous delivery keeps every change releasable but leaves a human release decision; continuous deployment ships every passing change automatically."
+  },
+  {
+   "a": "Blue-green deployment",
+   "b": "Canary release",
+   "fidelity": "n/a",
+   "difference": "Blue-green switches all traffic at once between two full environments; canary moves a small, growing share of traffic while comparing metrics."
+  },
+  {
+   "a": "Reusable workflow",
+   "b": "Composite action",
+   "fidelity": "n/a",
+   "difference": "Reusable workflows are whole jobs invoked with workflow_call, with their own runners, secrets and environments; composite actions bundle steps that run inside the caller's job."
+  },
+  {
+   "a": "GITHUB_TOKEN",
+   "b": "Personal access token",
+   "fidelity": "n/a",
+   "difference": "GITHUB_TOKEN is minted per job, scoped to the repository and expires with the job; PATs are long-lived user credentials and a frequent leak source."
+  },
+  {
+   "a": "GitHub Actions",
+   "b": "Azure Pipelines",
+   "fidelity": "n/a",
+   "difference": "Both run YAML CI/CD; Actions is event-driven around marketplace actions inside GitHub, while Azure Pipelines adds stages, environments with checks, extends templates and Azure DevOps Boards/Artifacts integration."
+  },
+  {
+   "a": "Azure Pipelines",
+   "b": "AWS CodePipeline",
+   "fidelity": "partial",
+   "difference": "Azure Pipelines is a full YAML build-and-release engine; CodePipeline only orchestrates stages and delegates build to CodeBuild and deployment to CodeDeploy or CloudFormation."
+  },
+  {
+   "a": "Microsoft Entra workload identity federation (federated credential)",
+   "b": "AWS IAM OIDC identity provider with role trust policy",
+   "fidelity": "close",
+   "difference": "Both trust GitHub's OIDC issuer and match subject claims; Azure binds a federated credential to an app registration or managed identity, while AWS evaluates conditions in a role trust policy via AssumeRoleWithWebIdentity."
+  },
+  {
+   "a": "GitHub-hosted larger runners",
+   "b": "Azure Managed DevOps Pools",
+   "fidelity": "partial",
+   "difference": "Both are vendor-managed, scalable build compute, but Managed DevOps Pools serves Azure DevOps agents with custom images and Azure networking billed through your Azure subscription, while larger runners serve GitHub Actions jobs."
+  },
+  {
+   "a": "Argo CD",
+   "b": "Flux",
+   "fidelity": "n/a",
+   "difference": "Argo CD is an application-centric GitOps server with UI, SSO and ApplicationSets; Flux is a set of composable controllers with no built-in UI that favours Kubernetes-native CRDs."
+  },
+  {
+   "a": "Push-based CD",
+   "b": "Pull-based GitOps",
+   "fidelity": "n/a",
+   "difference": "Push pipelines hold cluster credentials and apply changes once; GitOps agents inside the cluster pull desired state and keep correcting drift."
+  },
+  {
+   "a": "Trunk-based development",
+   "b": "GitFlow",
+   "fidelity": "n/a",
+   "difference": "Trunk-based development integrates small changes into main at least daily behind flags; GitFlow keeps long-lived develop and release branches that delay integration."
+  },
+  {
+   "a": "GitHub Secret Protection",
+   "b": "GitHub Code Security",
+   "fidelity": "n/a",
+   "difference": "Secret Protection detects and blocks leaked credentials (push protection, validity checks); Code Security finds vulnerable code and dependencies (CodeQL, dependency review, Autofix, campaigns)."
+  },
+  {
+   "a": "Dependabot alerts",
+   "b": "Dependency review",
+   "fidelity": "n/a",
+   "difference": "Dependabot alerts flag vulnerable dependencies already on a branch; dependency review stops a pull request from introducing them before merge."
+  },
+  {
+   "a": "SLO",
+   "b": "SLA",
+   "fidelity": "n/a",
+   "difference": "An SLO is an internal reliability target that sets the error budget; an SLA is a contractual promise with penalties, deliberately looser than the SLO."
+  },
+  {
+   "a": "Azure Monitor managed service for Prometheus",
+   "b": "Amazon Managed Service for Prometheus",
+   "fidelity": "close",
+   "difference": "Both are managed, PromQL-compatible metric stores; Azure's lives in Azure Monitor workspaces with tight AKS and Managed Grafana integration, while AWS's is a standalone workspace fed by remote write or managed collectors."
+  },
+  {
+   "a": "Azure Chaos Studio",
+   "b": "AWS Fault Injection Service",
+   "fidelity": "close",
+   "difference": "Both run managed fault experiments with targets and guardrails; FIS uses CloudWatch alarms as stop conditions, while Chaos Studio combines service-direct and agent-based faults governed by Azure RBAC."
+  },
+  {
+   "a": "AKS Workload Identity",
+   "b": "EKS Pod Identity",
+   "fidelity": "close",
+   "difference": "Both map a Kubernetes ServiceAccount to a cloud identity without secrets; AKS federates the projected token to an Entra managed identity via OIDC, while EKS Pod Identity uses a node agent and IAM role associations (IRSA is AWS's older OIDC variant)."
+  },
+  {
+   "a": "Sigstore cosign",
+   "b": "Notation (Notary Project)",
+   "fidelity": "n/a",
+   "difference": "cosign favours keyless signing with OIDC identities and a public transparency log; Notation uses X.509 PKI and trust policies, common with registry and key-vault integrations."
+  }
+ ],
+ "notes": "ASSUMPTIONS: (1) The three stubs keep their root slugs and become hubs: docker-containerization absorbs 'Compose vs Kubernetes'; ci-cd-pipelines absorbs package management, artifact versioning and testing/quality gates, and its branching bullets move to ci-cd/source-control-and-branching-strategies; bare-metal-linux-hypervisors gains the kubeadm exam lab. (2) GitHub platform, Copilot and platform engineering sit in devops/ root, since no dedicated folder exists. (3) Azure Pipelines and Azure DevOps are owned here as a DevOps platform, like GitHub; AWS CodePipeline, CodeBuild, CodeDeploy, CodeArtifact and Azure Deployment Environments stay in the provider iac-devops folders and are linked. (4) The blueprint has 57 articles, slightly above the 45-55 target, and 153 terms (43 core, about 28%), chosen for completeness. (5) The old glossary entries in my scope (IaC, immutable infrastructure, blue-green, canary, liveness vs readiness) become term pages here. Sidecar pattern and horizontal vs vertical scaling are left to architecture/. (6) CNCF does not number domains; D-numbers follow the curriculum README/LF order.\nOUTLINE CAVEATS: The CKS weights come from the LF page and the CNCF PDF v1.34 (15/15/10/20/20/20); the CNCF GitHub README table still shows 10/15/15 and is stale. The LF page says CKS is based on K8s v1.35; CKA and CKAD are on v1.37. For KCSA, the LF page and PDF give the classic six domains, but the GitHub README table lists a different set (Cloud Native Fundamentals 16, K8s Security Fundamentals 20, Container Security Fundamentals 20, Secure Software Supply Chain 16, Monitoring/Logging/Runtime 12, General Security Knowledge 16). That may be an upcoming revision; recheck before booking. TF-A 004 publishes no weights. The GH-300 skills-at-a-glance repeats a 'GitHub Copilot features (25-30%)' line; the six body domains were used. The DOP-C02 HTML guide shows no version date.\nVERIFIED PRODUCT FACTS (primary docs, as of 2026-10-24): Kubernetes 1.37.1 is latest (1.34 EOL 2026-10-27). In v1.37, IPVS is deprecated (off by default by v1.40, removal targeted v1.43), kube-dns is deprecated, and Metrics API, KYAML, Pod Certificates and ClusterTrustBundles are stable; HPA scale-to-zero is beta. Since v1.35 the kubelet fails on cgroup v1 by default. User namespaces and MutatingAdmissionPolicy are stable since v1.36; in-place resize stable since v1.35. Ingress NGINX maintenance ended March 2026. Gateway API v1.6.3 (v1.7.0-rc). Helm 4 (docs 4.2.3). Terraform 1.17.0 (2026-10-21) makes -policies GA in the CLI, but the HCP Terraform policy docs still say beta. Terraform Stacks GA. CDKTF sunset 2025-12-10. OpenTofu 1.13.2. Argo CD 3.5. Flux 2.9. Prometheus 3.15.1 (LTS 3.13.5). Kyverno graduated (March 2026), Crossplane graduated (Nov 2025), Backstage incubating. Docker Hardened Images free under Apache 2.0. GHAS split into Secret Protection and Code Security (also for Azure DevOps). GitHub OIDC uses an ID-based immutable subject for repos created after 2026-07-15 and supports repo_property_ claims. Copilot plans: Free, Student, Pro, Pro+, Max, Business, Enterprise, metered in GitHub AI Credits. Copilot CLI GA (Feb 2026). Managed DevOps Pools GA. Aspire (formerly .NET Aspire) 13.6. DORA has five metrics. OBI v0.15.x.\nNOT VERIFIED (web search budget ran out; from memory, recheck before publishing): native sidecars stable in v1.33; ValidatingAdmissionPolicy stable in v1.30; S3 backend native locking with DynamoDB locking deprecated; KEDA, Falco, Argo and Flux graduation dates; Karpenter governance; EKS Pod Identity and Auto Mode details; CodeBuild reserved-capacity fleets as the Managed DevOps Pools analogue; Gateway API per-resource channel status (BackendTLSPolicy, ListenerSet); OBI maturity; current AWS CodeCommit status; GitHub immutable actions/releases enforcement details.\nCROSS-SECTION DEPENDENCIES: security/supply-chain (SLSA, SBOM, Sigstore theory) for kubernetes-supply-chain-security, github-actions-security-hardening and github-advanced-security; security/workload-identity (existing) for the OIDC federation article; security/threat-modeling (STRIDE) for kubernetes-security-model; security/ai-security for Copilot risks; ai/agents and ai/protocols (MCP, moving from messaging/) for Copilot agent mode and the coding agent; cloud/azure/containers and cloud/aws/containers (AKS, EKS, ACR, ECR, workload identity, node auto-provisioning, EKS Auto Mode); cloud/azure/iac-devops and cloud/aws/iac-devops (Bicep/ARM, CloudFormation/CDK, AWS developer tools, Azure Deployment Environments, Azure Load Testing); cloud/*/observability (Azure Monitor, Application Insights, managed Prometheus/Grafana, CloudWatch, X-Ray, Application Signals); cloud/*/security-services (Defender for Cloud DevOps security, GuardDuty EKS protection); cloud/compare for article-level Rosetta pairs (Azure Pipelines vs CodePipeline, AKS vs EKS, Chaos Studio vs FIS); architecture/reliability (HA/DR, RTO/RPO) and architecture/patterns (sidecar); decisions/ for ADRs (Compose-to-Kubernetes trigger, Terraform vs OpenTofu); practice/labs and katas for the kubeadm, CKAD and CKS drills.\nOPTIONAL EXTRA EXAMS SEEN IN THE CNCF CURRICULUM REPO (not in the authoritative list): CNPA/CNPE (platform engineering), PCA (Prometheus), OTCA (OpenTelemetry), CGOA (GitOps), CCA (Cilium), ICA (Istio), CBA (Backstage). This section's content already covers most of them."
+}

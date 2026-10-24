@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from datetime import date
 from pathlib import Path
@@ -16,10 +17,20 @@ class ScaffoldError(Exception):
     pass
 
 
-def _backlog_article(root: Path, page: str) -> dict | None:
+def _backlogs(root: Path):
     folder = root / "docs" / "_data" / "backlog"
-    for path in sorted(folder.glob("*.yml")):
-        data = yamlio.load(yamlio.read_text(path.read_bytes())[0]) or {}
+    if not folder.is_dir():
+        return
+    for path in sorted(folder.iterdir()):
+        text = yamlio.read_text(path.read_bytes())[0]
+        if path.suffix == ".json":
+            yield json.loads(text)
+        elif path.suffix == ".yml":
+            yield yamlio.load(text) or {}
+
+
+def _backlog_article(root: Path, page: str) -> dict | None:
+    for data in _backlogs(root):
         for a in data.get("articles") or []:
             if f"{str(a.get('folder', '')).strip('/')}/{a.get('slug', '')}.md" == page:
                 return dict(a)
@@ -27,9 +38,7 @@ def _backlog_article(root: Path, page: str) -> dict | None:
 
 
 def _backlog_term(root: Path, slug: str) -> dict | None:
-    folder = root / "docs" / "_data" / "backlog"
-    for path in sorted(folder.glob("*.yml")):
-        data = yamlio.load(yamlio.read_text(path.read_bytes())[0]) or {}
+    for data in _backlogs(root):
         for t in data.get("terms") or []:
             if str(t.get("slug", "")) == slug:
                 return dict(t)
