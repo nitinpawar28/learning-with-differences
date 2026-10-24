@@ -51,7 +51,7 @@ def _spec(text: str | None) -> pathspec.PathSpec | None:
     if not text:
         return None
     lines = [ln.strip() for ln in text.splitlines() if ln.strip() and not ln.strip().startswith("#")]
-    return pathspec.PathSpec.from_lines("gitwildmatch", lines) if lines else None
+    return pathspec.PathSpec.from_lines("gitignore", lines) if lines else None
 
 
 def _flatten_nav(items: list, out: list[str], titles: dict[str, str]) -> None:

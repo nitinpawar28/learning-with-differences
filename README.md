@@ -1,100 +1,98 @@
-# learning-with-differences
+# Learning with Differences
 
-Trade-off comparisons, architectural patterns, and deep-dive learning notes
-across our production stack — .NET 9, Angular 20, Redis Streams, TimescaleDB,
-Docker Compose, and MCP — built with [MkDocs](https://www.mkdocs.org/) +
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+A personal, exam-grade library for **architecture, agentic AI, security, Azure
+and AWS**, in which every concept is taught by its differences: what it is,
+what it is easily confused with, and how it maps to its counterpart on the
+other cloud.
+
+Published at **https://nitinpawar28.github.io/learning-with-differences/**.
+It is built with [Zensical](https://zensical.org/) and `lwd`, a small
+generator in this repository that compiles the glossary, the exam hub and the
+learning paths.
 
 ## Quickstart
 
 ### Windows (PowerShell)
 
 ```powershell
-# 1. Create and activate a virtual environment
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-
-# 2. Install dependencies
-pip install --upgrade pip
 pip install -r requirements.txt
 
-# 3. Run the local dev server (live-reloads on file save)
-mkdocs serve
-# -> open http://127.0.0.1:8000
+python -m lwd serve          # generate, then live preview at http://localhost:8000
 ```
 
-### macOS / Linux (bash/zsh)
+### macOS / Linux
 
 ```bash
-# 1. Create and activate a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
-
-# 2. Install dependencies
-pip install --upgrade pip
 pip install -r requirements.txt
 
-# 3. Run the local dev server (live-reloads on file save)
-mkdocs serve
-# -> open http://127.0.0.1:8000
+python -m lwd serve
 ```
 
-### Other useful commands
+## Everyday commands
 
-```bash
-# Build the static site into ./site
-mkdocs build
+| Command | What it does |
+|---|---|
+| `python -m lwd validate` | Check every source; writes nothing |
+| `python -m lwd gen` | Validate, then write the generated pages (only files that changed) |
+| `python -m lwd serve` | Generate, start the dev server, regenerate on every source change |
+| `python -m lwd build` | Generate, `zensical build --strict`, then check the built site |
+| `python -m lwd new term <slug>` | Scaffold a glossary term (`exam <code>`, `path <slug>`, `article <path>` too) |
+| `python -m lwd coverage az-104 --gaps` | Show an exam's objective coverage and gaps |
+| `python -m lwd stale` | List content overdue for re-verification |
+| `python -m lwd export anki --exam az-104 --out az-104.csv` | Write an Anki deck |
+| `python -m lwd doctor` | Check the Python version, the Zensical pin and the config |
+| `python -m unittest discover -s tests` | Run the generator's tests |
 
-# Validate config + fail on broken internal links
-mkdocs build --strict
-
-# Deactivate the virtual environment when done
-deactivate
-```
-
-## Adding a new topic page
-
-1. Copy [`docs/_templates/tech-guide-template.md`](docs/_templates/tech-guide-template.md)
-   into the relevant domain folder under `docs/` (or start from one of the
-   existing stub pages already in place).
-2. Fill in each section — the template is structured to force a trade-off
-   comparison, not just a description of one option.
-3. Add the page to the `nav:` section of [`mkdocs.yml`](mkdocs.yml) so it
-   shows up in the sidebar/tabs.
-
-## Project structure
+## How the repository is organised
 
 ```text
-learning-with-differences/
-├── mkdocs.yml                  # Site config, theme, nav, extensions
-├── requirements.txt             # mkdocs / mkdocs-material / pymdown-extensions
-├── docs/
-│   ├── index.md                 # Homepage
-│   ├── glossary.md              # Master glossary — every recurring term, defined once
-│   ├── stylesheets/extra.css    # Small style overrides
-│   ├── _templates/
-│   │   └── tech-guide-template.md
-│   ├── messaging/                # Backend & async messaging: .NET, SignalR, Redis Streams, MCP, outbox
-│   ├── data/                     # Relational DBs, TimescaleDB hypertables, indexing, columnar storage
-│   ├── frontend/                 # Angular, TypeScript, RxJS, real-time UI
-│   ├── devops/                   # Docker Compose, CI/CD, bare-metal/hypervisors
-│   └── security/                 # mTLS, workload identity, capability-based authz, Wasm sandboxing
-└── .gitignore
+zensical.toml            Site configuration and navigation (TOML 1.0)
+requirements.txt         zensical==0.0.72 — the only dependency
+lwd/                     The generator: load → validate → render → write
+tests/                   Generator tests (fixture library, negative cases)
+docs/
+  index.md, about/       Home page, how the library works, templates, engine notes
+  architecture/ cloud/ ai/ security/      The four tracks (rendered as-is)
+  messaging/ data/ frontend/ devops/      Engineering pages for the real stack
+  practice/              Labs, katas, threat models, tabletops, capstones
+  _terms/<slug>.md       Glossary term sources            ┐
+  _study/exams/<code>.md Exam sources with objectives     │ compiled by lwd,
+  _study/paths/<slug>.md Learning-path sources            │ excluded from the
+  _glossary/, _study/    Optional intro frames for hubs   │ Zensical build
+  _data/                 taxonomy.yml, abbreviations.yml, backlog/
+  terms/ glossary/ study/                Generated output (gitignored)
+generated/               Generated tooltips file, manifest (gitignored)
 ```
 
-> **Naming note:** `_templates/`, not `templates/`. MkDocs has a hard-coded
-> default that silently excludes any top-level `docs/templates/` folder from
-> the build (it's reserved to avoid colliding with theme templates). Keep the
-> leading underscore.
+Rendered pages live at `docs/<area>/<domain>[/<group>]/<page>.md`. The areas,
+domains and groups are listed in `docs/_data/taxonomy.yml`.
 
-## Publishing (optional)
+## Writing content
 
-To publish via GitHub Pages once this is pushed to GitHub:
+1. **Terms:** `python -m lwd new term managed-identity`, then fill in the front
+   matter (summary, aliases, former names, tracks, domain, cloud, level,
+   equivalents with fidelity, differs_from, covers, sources) and the sections
+   (Explanation, How it differs, Examples, Misconceptions, Exam notes,
+   Self-check, Further reading).
+2. **Articles:** `python -m lwd new article cloud/azure/identity/managed-identities.md`
+   (add `--from-backlog` to pre-fill from `docs/_data/backlog/`), then add the
+   page to `nav` in `zensical.toml`.
+3. Mark a page `status: complete` only when every claim about cloud
+   behaviour, limits, defaults or availability links a primary source, and set
+   `last_verified`.
+4. `python -m lwd validate` reports problems with a code and file:line, and a
+   suggestion where it can. The codes are explained in `docs/about/engine.md`.
 
-```bash
-pip install mkdocs mkdocs-material
-mkdocs gh-deploy --force
-```
+Never edit `docs/terms/`, `docs/glossary/`, `docs/study/` or `generated/`.
+They are rebuilt on every run.
 
-This builds the site and pushes it to a `gh-pages` branch. Set the repo's
-GitHub Pages source to that branch afterward.
+## Publishing
+
+Pushing to `main` runs `.github/workflows/publish.yml`. It runs the tests,
+`python -m lwd build --ci` (which includes a strict Zensical build), and then
+deploys to GitHub Pages. A weekly scheduled run keeps the freshness and
+coverage reports current.
