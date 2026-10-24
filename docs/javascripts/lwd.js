@@ -310,14 +310,23 @@
       more.hidden = visible.length <= shown;
       status.textContent = visible.length + " of " + data.terms.length + " terms";
       if (!visible.length && tokens.length) {
+        // Compare each query word with each word of the names; keep each term once.
         var pool = [];
         data.terms.forEach(function (t) {
-          [t.title].concat(t.acronyms || []).forEach(function (name) {
-            var d = editDistance(norm(name), whole, 2);
-            if (d <= 2) pool.push({ name: name, t: t, d: d });
+          var best = 99;
+          [t.title].concat(t.acronyms || [], t.aliases || []).forEach(function (name) {
+            var nameWords = words(name);
+            var total = 0;
+            for (var q = 0; q < tokens.length; q++) {
+              var m = 99;
+              for (var w = 0; w < nameWords.length; w++) m = Math.min(m, editDistance(nameWords[w], tokens[q], 2));
+              total += m;
+            }
+            if (total < best) best = total;
           });
+          if (best <= 2 * tokens.length && best <= 3) pool.push({ name: t.title, t: t, d: best });
         });
-        pool.sort(function (a, b) { return a.d - b.d; });
+        pool.sort(function (a, b) { return a.d - b.d || a.name.localeCompare(b.name); });
         if (pool.length) {
           var p = el("p", { class: "lwd-explorer__suggest" }, ["Did you mean "]);
           pool.slice(0, 5).forEach(function (s, i) {
