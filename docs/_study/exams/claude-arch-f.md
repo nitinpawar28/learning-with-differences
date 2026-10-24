@@ -300,9 +300,9 @@ objectives:
 ---
 ## About this code
 
-**CLAUDE-ARCH-F is this library's own code.** Anthropic's exam guide gives the exam code **CCAR-F**, but this library uses CLAUDE-ARCH-F (and CLAUDE-ARCH-P for the Professional level) so the provider is obvious in lists. Claude Certified Architect – Foundations was Anthropic's first technical certification, launched with the Claude Partner Network on [March 12, 2026](https://www.anthropic.com/news/claude-partner-network). In July 2026 it became part of a family of four role-based credentials: Associate – Foundations, Developer – Foundations, Architect – Foundations and Architect – Professional ([announcement](https://www.claude.com/blog/four-role-based-claude-certifications)).
+**CLAUDE-ARCH-F is this library's own code.** Anthropic's exam guide gives the exam code **CCAR-F**, but this library uses CLAUDE-ARCH-F (and CLAUDE-ARCH-P for the Professional level) so the provider is obvious in lists. Claude Certified Architect – Foundations was Anthropic's first technical certification, launched with the Claude Partner Network on [March 12, 2026](https://www.anthropic.com/news/claude-partner-network). In July 2026 it became part of a family of four role-based credentials: Associate – Foundations, Developer – Foundations, Architect – Foundations and Architect – Professional ([announcement](https://claude.com/resources/articles/four-role-based-claude-certifications), July 23, 2026).
 
-**Who can take it:** only people who work at organisations in the **Claude Partner Network**. Membership is free for firms that deliver Claude for clients ([apply at claude.com/partners](https://claude.com/partners)). You register with a company email on a domain listed in your organisation's partner record, and a personal address will not work ([eligibility page](https://anthropic-partners.skilljar.com/page/certification-eligibility)). If your employer is not a partner, the public Claude Academy courses give a certificate of completion, which is not a proctored certification.
+**Who can take it:** only people who work at organisations in the **Claude Partner Network**. Any organisation bringing Claude to market can apply, and membership is free ([announcement](https://www.anthropic.com/news/claude-partner-network); [apply at claude.com/partners](https://claude.com/partners)). You register with a company email on a domain listed in your organisation's partner record, and a personal address will not work ([eligibility page](https://anthropic-partners.skilljar.com/page/certification-eligibility)). If your employer is not a partner, you cannot register; the eligibility page points you to the free Claude Academy courses instead, which end in a quiz and are not a proctored certification.
 
 ### How the objectives above were built
 
@@ -318,11 +318,11 @@ Facts are as of 2026-10-24, from the exam guide and the [certification page](htt
 - **Duration:** 120 minutes.
 - **Passing score:** a scaled score of 720 on a 100–1,000 scale (criterion-referenced). The score report shows percent correct by domain.
 - **Price:** USD 125. The checkout price reflects any partner-tier discount.
-- **Language:** the guide and pages are in English, and no other languages are listed.
+- **Language:** English or Japanese. The Partner Academy says all exams and prep courses are now available in Japanese, a Japanese edition of the exam guide is published, and one registration covers both: you choose the exam language when you schedule.
 - **Delivery:** Pearson VUE, either online proctored or at a test centre. Identity is verified. You may cancel or reschedule up to 24 hours before, and later changes forfeit the fee.
 - **Retakes:** waiting periods of 14, then 30, then 90 days after successive failures, with at most four attempts in a rolling 12 months. Every attempt costs the full fee.
 - **Validity and renewal:** **12 months**. On-time renewal is a **free, non-proctored assessment** on the Anthropic Partner Academy covering what has changed. If the credential lapses, you must retake the full exam at full price.
-- **Badge:** Credly by Pearson.
+- **Badge:** a Credly digital badge, offered by email after you pass (certification page).
 
 ## What the exam really tests
 

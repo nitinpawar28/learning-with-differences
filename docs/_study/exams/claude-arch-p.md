@@ -31,7 +31,7 @@ objectives:
   - { id: "1.6", title: "Align solutions to business value pillars (efficiency, transformation, productivity, cost, performance SLAs)" }
   - { id: "2", title: "Claude Models, Prompting & Context Engineering", weight: "13%" }
   - { id: "2.1", title: "Select appropriate Claude models based on trade-offs" }
-  - { id: "2.2", title: "Design system prompts, templates and guardrails" }
+  - { id: "2.2", title: "Design system prompts, templates, and guardrails" }
   - { id: "2.3", title: "Apply prompt engineering techniques (zero-shot, few-shot, chain-of-thought)" }
   - { id: "2.4", title: "Optimize context windows and manage token usage" }
   - { id: "2.5", title: "Implement prompt reuse strategies (caching, modular prompts, Skills)" }
@@ -42,18 +42,18 @@ objectives:
   - { id: "3.4", title: "Analyze observability challenges and select monitoring strategies at scale" }
   - { id: "3.5", title: "Design a RAG pipeline with appropriate chunking and indexing strategies" }
   - { id: "3.6", title: "Apply retrieval strategies matched to data shape and query pattern" }
-  - { id: "3.7", title: "Evaluate connection protocols and select the integration mechanism (MCP, API/CLI, agent-to-agent)" }
+  - { id: "3.7", title: "Evaluate connection protocols and select the appropriate integration mechanism (MCP, API/CLI, agent-to-agent)" }
   - { id: "3.8", title: "Evaluate progressive discovery vs. monolithic context strategy" }
   - { id: "4", title: "Evaluation, Testing & Optimization", weight: "16%" }
   - { id: "4.1", title: "Define evaluation metrics (accuracy, latency, cost, safety, security)" }
   - { id: "4.2", title: "Design evaluation datasets and test frameworks using mixed methodologies" }
   - { id: "4.3", title: "Conduct A/B testing and iterative improvements" }
   - { id: "4.4", title: "Diagnose system issues (prompt failure, hallucinations, model mismatch)" }
-  - { id: "4.5", title: "Optimize token usage, latency and cost-performance trade-offs" }
+  - { id: "4.5", title: "Optimize token usage, latency, and cost-performance trade-offs" }
   - { id: "4.6", title: "Monitor system performance using logging and observability tools" }
   - { id: "5", title: "Governance, Safety & Risk Management", weight: "14%" }
   - { id: "5.1", title: "Implement guardrails and safety controls" }
-  - { id: "5.2", title: "Identify risks, limitations and failure modes of LLM systems" }
+  - { id: "5.2", title: "Identify risks, limitations, and failure modes of LLM systems" }
   - { id: "5.3", title: "Apply human-in-the-loop validation strategies" }
   - { id: "5.4", title: "Ensure compliance with regulations (e.g., GDPR, HIPAA, FedRAMP)" }
   - { id: "5.5", title: "Address ethical AI considerations (bias, fairness, transparency)" }
@@ -70,9 +70,9 @@ objectives:
 ---
 ## About this code
 
-**CLAUDE-ARCH-P is this library's own code.** Anthropic's exam guide gives the exam code **CCAR-P**. Claude Certified Architect – Professional was announced in July 2026 as the advanced credential in Anthropic's four role-based certifications, covering "integration architecture, governance, and evaluation, built for large enterprises" ([announcement](https://www.claude.com/blog/four-role-based-claude-certifications)). The other three are Associate – Foundations, Developer – Foundations and Architect – Foundations.
+**CLAUDE-ARCH-P is this library's own code.** Anthropic's exam guide gives the exam code **CCAR-P**. Claude Certified Architect – Professional was announced in July 2026 as the advanced credential in Anthropic's four role-based certifications, covering "integration architecture, governance, and evaluation, built for the scale of large enterprises" ([announcement](https://claude.com/resources/articles/four-role-based-claude-certifications), July 23, 2026). The other three are Associate – Foundations, Developer – Foundations and Architect – Foundations.
 
-**Who can take it:** only people at organisations in the **Claude Partner Network**. Membership is free and open to firms that deliver Claude for clients ([claude.com/partners](https://claude.com/partners), [eligibility](https://anthropic-partners.skilljar.com/page/certification-eligibility)). You register with a company email on a domain in your organisation's partner record.
+**Who can take it:** only people at organisations in the **Claude Partner Network**. Any organisation bringing Claude to market can apply, and membership is free ([claude.com/partners](https://claude.com/partners), [eligibility](https://anthropic-partners.skilljar.com/page/certification-eligibility)). People whose organisation is not a partner cannot register. You register with a company email on a domain in your organisation's partner record.
 
 ### How the objectives above were built
 
@@ -87,8 +87,9 @@ Facts are as of 2026-10-24, from the exam guide and the [partner certifications 
 - **Duration:** 120 minutes.
 - **Passing score:** a scaled score of 720 on a 100–1,000 scale (criterion-referenced, set by a standard-setting study against a "minimally qualified candidate"). The report shows percent correct by domain.
 - **Price:** USD 175. The checkout price reflects any partner-tier discount.
-- **Language:** English (no other languages are listed).
-- **Delivery:** Pearson VUE, online proctored or at a test centre, with identity verification. Cancel or reschedule at least 24 hours before, or you forfeit the fee.
+- **Language:** English or Japanese. The Partner Academy says all exams and prep courses are now available in Japanese, a Japanese edition of the exam guide is published, and you choose the exam language when you schedule.
+- **Delivery:** Pearson VUE, online proctored or at a test centre. Bring valid, unexpired, government-issued photo ID whose name matches your registration exactly. Cancel or reschedule at least 24 hours before, or you forfeit the fee.
+- **Badge:** a Credly digital badge, offered by email after you pass (certification page).
 - **Retakes:** waits of 14, 30 and then 90 days after successive failures, with at most four attempts in a rolling 12 months. The full fee applies each time.
 - **Validity and renewal:** **12 months**. On time, renewal is a free, non-proctored assessment on the Anthropic Partner Academy. After a lapse, you retake the full exam at full price. If content changes significantly, Anthropic may require the full exam instead of the renewal assessment.
 
@@ -108,7 +109,7 @@ The guide's "minimally qualified candidate" is an experienced practitioner who t
 ## Study strategy
 
 1. **Do Foundations first** (CLAUDE-ARCH-F) or at least work through its guide. Its detailed knowledge bullets on agent loops, MCP, Claude Code and structured output are the base the Professional exam builds on.
-2. **Take the official prep course** in the Anthropic Partner Academy ([Architect – Professional path](https://anthropic-partners.skilljar.com/path/claude-certified-architect-professional)). Its courses include Claude Platform Solution Design, Developer Productivity Enablement, and Stakeholder Engagement, Lifecycle & GTM. Use the official Claude documentation (models, prompt engineering, context and prompt caching, Skills, MCP) as reference, as the guide recommends.
+2. **Take the official prep course** in the Anthropic Partner Academy ([Architect – Professional path](https://anthropic-partners.skilljar.com/path/claude-certified-architect-professional)). The path's courses are Claude Platform & Solution Design; Team Enablement & Operational Productivity; and Stakeholder Engagement, Lifecycle & GTM. The guide itself says no single course is required and recommends the official Anthropic documentation for the Claude API, models, prompt engineering, MCP and Skills.
 3. **Build and run one solution end to end,** as the guide also recommends: a RAG-backed agent with tools, an evaluation set, A/B testing of a prompt or model change, and logging and tracing. Write an architecture decision record for model choice, integration protocol and the main security trade-off.
 4. **Practise explaining trade-offs.** For each blueprint bullet, prepare a two-sentence argument a client executive would accept. The Domain 6 items reward this.
 5. **Map regulation to controls.** For GDPR, HIPAA and FedRAMP, list what changes in data flow, hosting choice, logging and human review.

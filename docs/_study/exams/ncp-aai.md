@@ -28,25 +28,25 @@ objectives:
   - { id: "1.3", title: "Configure agent-to-agent communication protocols for collaboration" }
   - { id: "1.4", title: "Manage short-term and long-term memory for context retention" }
   - { id: "1.5", title: "Orchestrate multi-agent workflows and coordination" }
-  - { id: "1.6", title: "Apply logic trees, prompt chains and stateful orchestration for multi-step reasoning" }
+  - { id: "1.6", title: "Apply logic trees, prompt chains, and stateful orchestration for multi-step reasoning" }
   - { id: "1.7", title: "Integrate knowledge graphs to enable relational reasoning" }
   - { id: "1.8", title: "Ensure adaptability and scalability of the agent's architecture" }
   - { id: "2", title: "Agent Development", weight: "15%" }
   - { id: "2.1", title: "Engineer prompts and dynamic prompt chains for reliable performance" }
   - { id: "2.2", title: "Integrate generative and multimodal models (text, vision, audio)" }
-  - { id: "2.3", title: "Build and connect custom tools, APIs and functions for external system interaction" }
+  - { id: "2.3", title: "Build and connect custom tools, APIs, and functions for external system interaction" }
   - { id: "2.4", title: "Implement error handling (retry logic, graceful failure recovery)" }
-  - { id: "2.5", title: "Develop dynamic conversation flows with real-time streaming and feedback" }
+  - { id: "2.5", title: "Develop dynamic conversation flows with real-time streaming and feedback mechanisms" }
   - { id: "2.6", title: "Evaluate and refine agent decision-making strategies" }
   - { id: "3", title: "Evaluation and Tuning", weight: "13%" }
   - { id: "3.1", title: "Implement evaluation pipelines and task benchmarks to measure performance" }
   - { id: "3.2", title: "Compare agent performance across tasks and datasets" }
   - { id: "3.3", title: "Collect and integrate structured user feedback for iterative improvements" }
-  - { id: "3.4", title: "Tune model parameters (e.g., accuracy vs. latency-efficiency trade-offs)" }
+  - { id: "3.4", title: "Tune model parameters (e.g., accuracy, latency-efficiency trade-offs)" }
   - { id: "3.5", title: "Analyze evaluation results to guide targeted optimization" }
   - { id: "4", title: "Deployment and Scaling", weight: "13%" }
   - { id: "4.1", title: "Deploy and orchestrate multi-agent systems at production scale" }
-  - { id: "4.2", title: "Apply MLOps practices for CI/CD workflows, monitoring and governance" }
+  - { id: "4.2", title: "Apply MLOps practices for continuous integration and continuous delivery (CI/CD) workflows, monitoring, and governance" }
   - { id: "4.3", title: "Profile performance and reliability under distributed system loads" }
   - { id: "4.4", title: "Scale deployments using containerization (Docker, Kubernetes) with load balancing" }
   - { id: "4.5", title: "Optimize deployment costs while ensuring high availability" }
@@ -59,21 +59,21 @@ objectives:
   - { id: "6", title: "Knowledge Integration and Data Handling", weight: "10%" }
   - { id: "6.1", title: "Implement retrieval pipelines (RAG, embedded search, hybrid approaches)" }
   - { id: "6.2", title: "Configure and optimize vector databases for fast retrieval" }
-  - { id: "6.3", title: "Build ETL pipelines to integrate enterprise or client data sources" }
-  - { id: "6.4", title: "Conduct data quality checks, augmentation and preprocessing" }
+  - { id: "6.3", title: "Build extract, transform, and load (ETL) pipelines to integrate enterprise or client data sources" }
+  - { id: "6.4", title: "Conduct data quality checks, augmentation, and preprocessing" }
   - { id: "6.5", title: "Enable real-time access and reasoning over structured and unstructured knowledge" }
   - { id: "7", title: "NVIDIA Platform Implementation", weight: "7%" }
   - { id: "7.1", title: "Integrate NVIDIA NeMo Guardrails for compliance and safety enforcement" }
   - { id: "7.2", title: "Deploy NVIDIA NIM microservices for high-performance inference" }
   - { id: "7.3", title: "Optimize workflows with the NVIDIA NeMo Agent Toolkit" }
-  - { id: "7.4", title: "Use NVIDIA TensorRT-LLM and Triton Inference Server for latency reduction" }
+  - { id: "7.4", title: "Leverage NVIDIA TensorRT-LLM and Triton Inference Server for latency reduction" }
   - { id: "7.5", title: "Manage and optimize multimodal input pipelines on NVIDIA hardware" }
   - { id: "8", title: "Run, Monitor, and Maintain", weight: "5%" }
   - { id: "8.1", title: "Define monitoring dashboards and reliability metrics" }
-  - { id: "8.2", title: "Track logs, errors and anomalies for root cause diagnosis" }
+  - { id: "8.2", title: "Track logs, errors, and anomalies for root cause diagnosis" }
   - { id: "8.3", title: "Continuously benchmark deployed agents against prior versions" }
-  - { id: "8.4", title: "Implement automated tuning, retraining and versioning in production" }
-  - { id: "8.5", title: "Ensure continuous uptime, transparency and trust in live deployments" }
+  - { id: "8.4", title: "Implement automated tuning, retraining, and versioning in production" }
+  - { id: "8.5", title: "Ensure continuous uptime, transparency, and trust in live deployments" }
   - { id: "9", title: "Safety, Ethics, and Compliance", weight: "5%" }
   - { id: "9.1", title: "Design and enforce system security and audit trails" }
   - { id: "9.2", title: "Integrate compliance guardrails (privacy, enterprise policy)" }
@@ -93,20 +93,22 @@ objectives:
 ### How the objectives above were built
 
 - **Domains and weights** come from the "Exam Blueprint" table on the certification page as of 2026-10-24. That table's weights add up to **98%**, and NVIDIA does not explain the missing 2%.
-- **Task statements (x.1, x.2 …)** come from the official **[exam study guide](https://dam-cdn.nvd.orangelogic.com/AssetLink/64tei188l3tt132l265u1ipjoexdl1p5.pdf)** (dated Sep25), which numbers them 1.1–10.4 in the same domain order used here.
+- **Task statements (x.1, x.2 …)** are quoted from the official **[exam study guide](https://dam-cdn.nvd.orangelogic.com/AssetLink/64tei188l3tt132l265u1ipjoexdl1p5.pdf)** (marked Sep25 and linked from the certification page), which numbers them 1.1–10.4 in the same domain order used here.
 - **Known discrepancy:** the study guide gives *Deployment and Scaling 5%* and *Run, Monitor, and Maintain 7%*, while the current certification page gives *13%* and *5%*. This library follows the page because it is the newer source. Recheck both when registration opens.
 
 ## Exam format
 
 Facts are as of 2026-10-24, from the [certification page](https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/) and the [NVIDIA certification FAQ](https://www.nvidia.com/en-us/learn/certification/#faq). Confirm them before booking, especially since the exam is listed as coming soon.
 
-- **Question type:** multiple choice (the page gives an item count and no other formats).
+- **Question type:** not stated. The page gives only the number of questions, and NVIDIA publishes no sample items for this exam.
 - **Number of questions:** 60–70.
 - **Duration:** 120 minutes.
-- **Passing score:** not published on the page.
+- **Passing score:** not published. The certification FAQ says NVIDIA exams are pass/fail and you do not receive a score.
 - **Price:** USD 200.
 - **Language:** English.
 - **Delivery:** online, remotely proctored, through **Certiverse**. You need a Certiverse account. [Registration link](https://www.certiverse.com/#/checkout/nvidia/store-exam/NCP-AAI).
+- **Retakes:** after a failed attempt you buy the exam again and wait 14 days before retaking it (FAQ).
+- **Cancellation:** up to 24 hours before the session; inside 24 hours exams cannot be cancelled or refunded (FAQ).
 - **Validity and renewal:** **two years** from issue. Recertify by retaking the exam.
 - **Credential:** a digital badge and an optional certificate.
 
@@ -153,7 +155,7 @@ The exam is **mostly vendor-neutral agent engineering** with a smaller NVIDIA-sp
 ## Exam-day notes
 
 - **Pace:** 60–70 questions in 120 minutes is about 1 min 45 s to 2 min each.
-- **Remote proctoring on Certiverse:** set up and test your Certiverse account, webcam and connection well before the day. Use a clean desk and a single monitor.
+- **Remote proctoring on Certiverse:** set up and test your Certiverse account, webcam and connection well before the day. The FAQ says breaks are not allowed in remotely proctored exams, your ID must match your NVIDIA account details, and no watches, phones or other devices may be in the testing area.
 - **Product-mapping questions:** when an option names an NVIDIA product, check it does that job (serving, optimisation, guardrails, agent profiling). Wrong-product distractors are likely.
 - **Prefer resilient designs:** retries with backoff, circuit breakers, graceful degradation, human escalation and continuous evaluation reflect the study guide's emphasis.
 - **Recheck the blueprint** the week you book. The page and study guide disagree on two weights, and the exam was not yet open for registration on 2026-10-24.
