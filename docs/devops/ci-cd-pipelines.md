@@ -4,12 +4,15 @@ description: Pipeline structure, deployment strategy, and tooling choices.
 tags:
   - devops
   - ci-cd
+status: stub
+level: practitioner
+tracks: [architect, cloud]
 ---
 
 # CI/CD Pipelines
 
 !!! note "Status"
-    Draft stub — expand using the [article template](../_templates/tech-guide-template.md).
+    Draft stub — expand using the [article template](../about/article-template.md).
 
 ## Scope
 

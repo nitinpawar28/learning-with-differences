@@ -1,5 +1,12 @@
-# MkDocs build output
+# Zensical output and cache
 site/
+.cache/
+
+# lwd outputs: regenerate with `python -m lwd gen`
+/generated/
+/docs/terms/
+/docs/glossary/
+/docs/study/
 
 # Python virtual environment
 .venv/

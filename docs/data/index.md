@@ -1,3 +1,8 @@
+---
+title: "Data and Storage"
+description: "Relational modelling, time-series storage, columnar layouts, indexing and caching trade-offs."
+---
+
 # Data & Storage Systems
 
 *Data Engineering, Storage & Analytics*
@@ -12,7 +17,7 @@ but slow at 100x the write volume is, in practice, wrong.
 
 The current stack centers on TimescaleDB: PostgreSQL's relational guarantees
 (transactions, joins, MVCC, a mature ecosystem) combined with
-[hypertables](../glossary.md#hypertable) that give it purpose-built
+[hypertables](../terms/hypertable.md) that give it purpose-built
 time-series behavior — automatic chunking, retention policies, and
 continuous aggregates — without adopting a separate, narrower time-series
 database. This category exists to keep that decision honest: know exactly
@@ -21,21 +26,21 @@ general-purpose relational store costs you at scale.
 
 ## Key Terminology & Concepts
 
-Full definitions in the [Master Glossary](../glossary.md); the ones specific
+Full definitions in the [Master Glossary](../glossary/index.md); the ones specific
 to this category:
 
-- [Hypertable](../glossary.md#hypertable) — TimescaleDB's auto-partitioned
+- [Hypertable](../terms/hypertable.md) — TimescaleDB's auto-partitioned
   table abstraction over Postgres
-- [Row vs. Columnar Storage](../glossary.md#row-vs-columnar-storage) — why
+- [Row vs. Columnar Storage](../terms/columnar-storage.md) — why
   the same query is fast or slow purely based on disk layout
-- [MVCC](../glossary.md#mvcc-multi-version-concurrency-control) — how
+- [MVCC](../terms/mvcc.md) — how
   Postgres gives readers a consistent snapshot without blocking writers
-- [Partition Pruning](../glossary.md#partition-pruning) / [BRIN
-  Index](../glossary.md#brin-index) — how the planner and the index both
+- [Partition Pruning](../terms/partition-pruning.md) / [BRIN
+  Index](../terms/brin-index.md) — how the planner and the index both
   exploit time-ordered, append-mostly data
-- [Continuous Aggregate](../glossary.md#continuous-aggregate) — incrementally
+- [Continuous Aggregate](../terms/continuous-aggregate.md) — incrementally
   materialized rollups instead of scan-and-recompute
-- [Retention Policy / Data Tiering](../glossary.md#retention-policy-data-tiering) —
+- [Retention Policy / Data Tiering](../terms/data-retention-policy.md) —
   what happens to a chunk as it ages out of "hot"
 
 ## Intended Knowledge Summary
@@ -62,7 +67,7 @@ able to:
 
 | Topic | Current Stack | Candidate / Alternative | Key Trade-off | Article |
 |---|---|---|---|---|
-| Relational modeling & concurrency | PostgreSQL (MVCC, isolation levels) | SQL Server | Locking/MVCC model & tooling differences | [Relational Databases](relational-databases.md) |
-| Time-series schema | TimescaleDB hypertables (OHLCV + raw ticks) | Purpose-built stores (InfluxDB, kdb+) | Relational flexibility vs. purpose-built time-series performance | [Time-Series / Financial Schemas](time-series-financial-schemas.md) |
-| Storage layout | Row-oriented (Postgres heap) | Columnar (columnstore extensions) | OLTP point-lookup speed vs. OLAP scan/compression efficiency | [Row vs. Columnar Storage](row-vs-columnar-storage.md) |
-| Indexing & partitioning | Hypertable chunking + BRIN indexes | Manual range/hash partitioning + B-tree | Write-friendly, prune-friendly design vs. general-purpose flexibility | [High-Frequency Indexing & Partitioning](high-frequency-indexing-partitioning.md) |
+| Relational modeling & concurrency | PostgreSQL (MVCC, isolation levels) | SQL Server | Locking/MVCC model & tooling differences | [Relational Databases](relational/relational-databases.md) |
+| Time-series schema | TimescaleDB hypertables (OHLCV + raw ticks) | Purpose-built stores (InfluxDB, kdb+) | Relational flexibility vs. purpose-built time-series performance | [Time-Series / Financial Schemas](time-series/time-series-financial-schemas.md) |
+| Storage layout | Row-oriented (Postgres heap) | Columnar (columnstore extensions) | OLTP point-lookup speed vs. OLAP scan/compression efficiency | [Row vs. Columnar Storage](time-series/row-vs-columnar-storage.md) |
+| Indexing & partitioning | Hypertable chunking + BRIN indexes | Manual range/hash partitioning + B-tree | Write-friendly, prune-friendly design vs. general-purpose flexibility | [High-Frequency Indexing & Partitioning](time-series/high-frequency-indexing-partitioning.md) |

@@ -1,71 +1,90 @@
+---
+title: "Learning with Differences"
+description: "A personal, exam-grade library for architecture, agentic AI, security, Azure and AWS, in which every concept is taught by its differences."
+hide:
+  - navigation
+---
+
 # Learning with Differences
 
-A knowledge base built around one question, asked over and over against our
-own production stack: **"what's actually different between these two
-options, and when does that difference matter?"**
+A reference library built around one question, asked of every concept:
+**what is this, what is it easily confused with, and what actually separates
+them?** You understand a service, a pattern or a protocol properly once you
+can say how it differs from its nearest neighbours, and how it maps to its
+counterpart on the other cloud.
 
-This is Phase 1 of the repository — the foundational framework. It
-establishes the [glossary](glossary.md), the directory structure, and a
-per-domain knowledge summary for each category, ahead of the individual
-deep-dive comparison articles that will fill in underneath them.
+The library serves four roles, studied side by side:
 
-## Platform context
+<div class="grid cards" markdown>
 
-Every comparison in this repo is written against a specific, current stack —
-not in the abstract. Where an article says "current" vs. "candidate," it
-means:
+- :material-sitemap: **[Architecture](architecture/index.md)**
+
+    Architecture practice, patterns, distributed systems, data architecture,
+    reliability, cost and enterprise architecture.
+
+- :material-microsoft-azure: **[Cloud: Azure and AWS](cloud/index.md)**
+
+    Twelve capabilities covered on both clouds, with the Azure-vs-AWS
+    differences spelled out for each.
+
+- :material-robot-outline: **[Agentic AI](ai/index.md)**
+
+    LLM foundations, applied generative AI, agents, the MCP and A2A protocols,
+    and the Microsoft Foundry and Amazon Bedrock platforms.
+
+- :material-shield-lock: **[Security](security/index.md)**
+
+    Identity, threat modeling, application and supply-chain security, cloud
+    security, detection and response, GRC and AI security.
+
+</div>
+
+## Where to start
+
+<div class="grid cards" markdown>
+
+- :material-certificate: **[Study](study/index.md)**
+
+    The certification roadmap and one page per exam. Each exam page shows the
+    official objectives, which pages cover each one, and the gaps that remain.
+
+- :material-book-alphabet: **[Glossary](glossary/index.md)**
+
+    Every term on its own page. Search by name, acronym or former product name
+    in the [Explorer](glossary/explorer.md), or compare clouds in the
+    [Rosetta](glossary/rosetta.md).
+
+- :material-hammer-wrench: **[Practice](practice/index.md)**
+
+    Paired Azure and AWS labs, design katas, threat models, incident
+    tabletops and two capstones.
+
+- :material-information-outline: **[How this library works](about/index.md)**
+
+    Page types, levels, statuses, freshness, and how to read the tabs and
+    tooltips.
+
+</div>
+
+## Grounded in a real system
+
+Most comparisons are anchored to a real production stack, so every
+"current vs. candidate" decision has a concrete context:
 
 | Layer | Current stack |
 |---|---|
 | Backend runtime | .NET 9 / C# |
 | Frontend framework | Angular 20 |
-| Messaging / streaming | Redis Streams |
-| Storage / time-series | TimescaleDB (PostgreSQL) |
+| Messaging and streaming | Redis Streams |
+| Storage and time-series | TimescaleDB (PostgreSQL) |
 | Local orchestration | Docker Compose |
 | AI tool orchestration | MCP (Model Context Protocol) |
 
-Articles compare this stack against credible alternatives (Kafka, Kubernetes,
-NgRx, InfluxDB, and so on) — the goal isn't to justify the current stack, it's
-to know precisely where its edges are.
+The [Engineering](messaging/index.md) section holds those stack-specific
+comparisons. The other sections are vendor-neutral or cover both clouds.
 
-## How the repository is organized
-
-<div class="grid cards" markdown>
-
-- :material-swap-horizontal: **[Messaging & Eventing](messaging/index.md)**
-  Backend & asynchronous messaging — .NET services, SignalR, Redis Streams,
-  the outbox pattern, delivery semantics, and MCP tool orchestration
-
-- :material-database: **[Data & Storage Systems](data/index.md)**
-  Relational modeling, TimescaleDB hypertables, row vs. columnar storage,
-  and high-frequency indexing & partitioning
-
-- :material-angular: **[Frontend & Real-Time UI](frontend/index.md)**
-  Angular, TypeScript, RxJS & state management, and rendering high-frequency
-  push-based data
-
-- :material-docker: **[DevOps & Cloud-Native](devops/index.md)**
-  Docker Compose & containerization, CI/CD pipelines, and bare-metal Linux
-  home-server infrastructure
-
-- :material-shield-lock: **[Security, Identity & Protocols](security/index.md)**
-  mTLS, workload identity, capability-based authorization, and Wasm
-  sandboxing for untrusted tool execution
-
-</div>
-
-## Reference
-
-- **[Master Glossary](glossary.md)** — every recurring term, defined once,
-  linked from wherever it's used
-- **[Article Template](_templates/tech-guide-template.md)** — the structure
-  every deep-dive comparison follows: overview → key differences →
-  comparative matrix → when to use / not → code across the stack →
-  performance considerations
-
-!!! note "Status: Phase 1"
-    The five category pages above are populated with domain overviews,
-    terminology, and a **planned topic matrix** — a roadmap of the
-    comparisons to come. Individual topic pages exist as scoped stubs
-    (see each page's "Status" note) and get expanded to full articles in
-    Phase 2, using the [article template](_templates/tech-guide-template.md).
+!!! note "Library status"
+    The library is being written in waves that follow the
+    [exam roadmap](study/exams.md). The [content roadmap](study/reports/roadmap.md)
+    shows what is planned, drafted and complete. The
+    [coverage report](study/reports/coverage.md) shows how ready each exam is.

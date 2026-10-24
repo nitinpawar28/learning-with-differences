@@ -1,3 +1,8 @@
+---
+title: "Frontend"
+description: "Angular, TypeScript, RxJS state and rendering high-frequency real-time data."
+---
+
 # Frontend & Real-Time UI
 
 *Frontend Architecture & Real-Time UI*
@@ -8,7 +13,7 @@ The frontend is where every backend decision either pays off or gets
 exposed. A backend that streams ticks at high frequency is only as useful as
 the UI's ability to render them without dropping frames, leaking
 subscriptions, or falling behind the producer — this is the layer where
-[backpressure](../glossary.md#backpressure) stops being a backend concern
+[backpressure](../terms/backpressure.md) stops being a backend concern
 and becomes a rendering one.
 
 Angular 20 is the current stack: standalone components by default, and a
@@ -21,20 +26,20 @@ that shows up as jank exactly when the data rate is highest.
 
 ## Key Terminology & Concepts
 
-Full definitions in the [Master Glossary](../glossary.md); the ones specific
+Full definitions in the [Master Glossary](../glossary/index.md); the ones specific
 to this category:
 
-- [Change Detection (Zone.js vs. Signals)](../glossary.md#change-detection-zonejs-vs-signals) —
+- [Change Detection (Zone.js vs. Signals)](../terms/angular-change-detection.md) —
   how Angular decides a view is stale
-- [Backpressure](../glossary.md#backpressure) — handling a producer that
+- [Backpressure](../terms/backpressure.md) — handling a producer that
   outpaces the consumer's render loop
-- [Cold vs. Hot Observable](../glossary.md#cold-vs-hot-observable) — whether
+- [Cold vs. Hot Observable](../terms/cold-observable.md) — whether
   subscribing late means missing data
-- [Virtual Scrolling / Windowing](../glossary.md#virtual-scrolling-windowing) —
+- [Virtual Scrolling / Windowing](../terms/virtual-scrolling.md) —
   keeping DOM node count bounded under a large, fast-changing list
-- [Optimistic UI Update](../glossary.md#optimistic-ui-update) — updating
+- [Optimistic UI Update](../terms/optimistic-ui-update.md) — updating
   before the server confirms, and what "undo" means when it's wrong
-- [Hydration](../glossary.md#hydration) — attaching interactivity to
+- [Hydration](../terms/hydration.md) — attaching interactivity to
   already-rendered HTML
 
 ## Intended Knowledge Summary
@@ -60,7 +65,7 @@ able to:
 
 | Topic | Current Stack | Candidate / Alternative | Key Trade-off | Article |
 |---|---|---|---|---|
-| Component architecture | Standalone components | NgModules | Simpler composition vs. established module boundaries | [Angular](angular-fundamentals.md) |
-| Change detection & state | Signals | Zone.js + NgRx | Fine-grained reactivity vs. mature, battle-tested store ecosystem | [RxJS & State Management](rxjs-state-management.md) |
-| Type system usage | Strict TypeScript, discriminated unions | Loosely-typed / `any`-heavy | Compile-time safety vs. short-term velocity | [TypeScript](typescript.md) |
-| High-frequency rendering | Throttled streams + virtual scrolling + `OnPush` | Naive direct binding to a raw stream | Sustained responsiveness vs. simplicity of implementation | [Real-Time UI Streaming](real-time-ui-streaming.md) |
+| Component architecture | Standalone components | NgModules | Simpler composition vs. established module boundaries | [Angular](angular/angular-fundamentals.md) |
+| Change detection & state | Signals | Zone.js + NgRx | Fine-grained reactivity vs. mature, battle-tested store ecosystem | [RxJS & State Management](angular/rxjs-state-management.md) |
+| Type system usage | Strict TypeScript, discriminated unions | Loosely-typed / `any`-heavy | Compile-time safety vs. short-term velocity | [TypeScript](typescript/typescript.md) |
+| High-frequency rendering | Throttled streams + virtual scrolling + `OnPush` | Naive direct binding to a raw stream | Sustained responsiveness vs. simplicity of implementation | [Real-Time UI Streaming](realtime/real-time-ui-streaming.md) |

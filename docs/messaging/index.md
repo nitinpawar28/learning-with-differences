@@ -1,3 +1,8 @@
+---
+title: "Messaging and APIs"
+description: "Backend runtime, APIs, real-time transport, eventing and service decomposition, compared option by option."
+---
+
 # Messaging & Eventing
 
 *Backend & Asynchronous Messaging*
@@ -23,27 +28,27 @@ At the throughput and latency targets this stack is built for, the cost of
 getting a messaging decision wrong isn't cosmetic — it shows up as duplicate
 trades, out-of-order market data, or a service that silently stops
 processing under load. This is the layer where [at-least-once vs.
-exactly-once](../glossary.md#at-least-once-vs-exactly-once) stops being a
+exactly-once](../terms/at-least-once-delivery.md) stops being a
 theoretical distinction and starts being a design decision with a dollar
 value.
 
 ## Key Terminology & Concepts
 
-The full definitions live in the [Master Glossary](../glossary.md); the ones
+The full definitions live in the [Master Glossary](../glossary/index.md); the ones
 load-bearing for this category:
 
-- [At-Least-Once vs. Exactly-Once](../glossary.md#at-least-once-vs-exactly-once) —
+- [At-Least-Once vs. Exactly-Once](../terms/at-least-once-delivery.md) —
   the delivery guarantee a messaging system actually offers
-- [Log Compaction](../glossary.md#log-compaction) / [MAXLEN Trim](../glossary.md#maxlen-trim) —
+- [Log Compaction](../terms/log-compaction.md) / [MAXLEN Trim](../terms/maxlen-trim.md) —
   how Kafka and Redis Streams each bound retention, and what falls out of
   each approach
-- [Outbox Pattern](../glossary.md#outbox-pattern) — atomically pairing a
+- [Outbox Pattern](../terms/transactional-outbox.md) — atomically pairing a
   state change with the event that announces it
-- [Idempotency Key](../glossary.md#idempotency-key) — turning at-least-once
+- [Idempotency Key](../terms/idempotency-key.md) — turning at-least-once
   delivery into effectively-once processing
-- [Consumer Group](../glossary.md#consumer-group) — sharing stream/topic
+- [Consumer Group](../terms/consumer-group.md) — sharing stream/topic
   consumption across instances without losing per-partition ordering
-- [Choreography vs. Orchestration](../glossary.md#choreography-vs-orchestration) —
+- [Choreography vs. Orchestration](../terms/choreography.md) —
   implicit event reactions vs. an explicit workflow coordinator
 
 ## Intended Knowledge Summary
@@ -70,14 +75,14 @@ able to:
 
 | Topic | Current Stack | Candidate / Alternative | Key Trade-off | Article |
 |---|---|---|---|---|
-| Streaming backbone | Redis Streams | Kafka | Log compaction & tiered durability vs. operational simplicity | [Redis Streams vs. Kafka](redis-streams-vs-kafka.md) |
-| Delivery guarantees | At-least-once + idempotent consumers | Transactional exactly-once | Throughput/coordination cost vs. correctness guarantee | [Delivery Semantics](delivery-semantics.md) |
-| State + event consistency | Outbox pattern | Dual-write (DB then publish) | Atomicity vs. implementation simplicity | [Outbox Pattern](outbox-pattern.md) |
-| Real-time push transport | SignalR (auto fallback) | Raw WebSockets | Operational convenience vs. protocol control | [SignalR & WebSockets](signalr-websockets.md) |
-| Synchronous API protocol | REST/JSON | gRPC/Protobuf | Ecosystem ubiquity vs. throughput & streaming support | [REST vs. gRPC APIs](rest-vs-grpc-apis.md) |
-| Service coordination | Event-driven (async) | Request-response (sync) | Loose coupling & resilience vs. simplicity & immediate consistency | [Event-Driven vs. Request-Response](event-driven-vs-request-response.md) |
-| AI tool orchestration | MCP servers | Bespoke REST/function-calling per tool | Standardized discovery & sandboxing vs. custom integration effort | [MCP Tool Orchestration](mcp-tool-orchestration.md) |
-| External integrations | Broker/exchange REST + WebSocket feeds | FIX protocol | Implementation simplicity vs. institutional-grade guarantees | [Broker & Exchange API Integrations](broker-exchange-api-integrations.md) |
-| Service decomposition | Modular monolith | Microservices | Operational simplicity vs. independent deployability | [Microservices vs. Modular Monoliths](microservices-vs-modular-monoliths.md) |
-| Concurrency model | `async`/`await` + Task Parallel Library | Raw thread/thread-pool management | Developer ergonomics vs. low-level control | [Async & Threading](async-threading.md) |
-| Runtime & language | .NET 9 / C# | — (runtime/language baseline) | Framework and language-version trade-offs underpinning every service | [.NET Core / C#](dotnet-core-csharp.md) |
+| Streaming backbone | Redis Streams | Kafka | Log compaction & tiered durability vs. operational simplicity | [Redis Streams vs. Kafka](eventing/redis-streams-vs-kafka.md) |
+| Delivery guarantees | At-least-once + idempotent consumers | Transactional exactly-once | Throughput/coordination cost vs. correctness guarantee | [Delivery Semantics](eventing/delivery-semantics.md) |
+| State + event consistency | Outbox pattern | Dual-write (DB then publish) | Atomicity vs. implementation simplicity | [Outbox Pattern](eventing/outbox-pattern.md) |
+| Real-time push transport | SignalR (auto fallback) | Raw WebSockets | Operational convenience vs. protocol control | [SignalR & WebSockets](realtime/signalr-websockets.md) |
+| Synchronous API protocol | REST/JSON | gRPC/Protobuf | Ecosystem ubiquity vs. throughput & streaming support | [REST vs. gRPC APIs](apis/rest-vs-grpc-apis.md) |
+| Service coordination | Event-driven (async) | Request-response (sync) | Loose coupling & resilience vs. simplicity & immediate consistency | [Event-Driven vs. Request-Response](eventing/event-driven-vs-request-response.md) |
+| AI tool orchestration | MCP servers | Bespoke REST/function-calling per tool | Standardized discovery & sandboxing vs. custom integration effort | [MCP Tool Orchestration](../ai/protocols/mcp-tool-orchestration.md) |
+| External integrations | Broker/exchange REST + WebSocket feeds | FIX protocol | Implementation simplicity vs. institutional-grade guarantees | [Broker & Exchange API Integrations](integration/broker-exchange-api-integrations.md) |
+| Service decomposition | Modular monolith | Microservices | Operational simplicity vs. independent deployability | [Microservices vs. Modular Monoliths](integration/microservices-vs-modular-monoliths.md) |
+| Concurrency model | `async`/`await` + Task Parallel Library | Raw thread/thread-pool management | Developer ergonomics vs. low-level control | [Async & Threading](runtime/async-threading.md) |
+| Runtime & language | .NET 9 / C# | — (runtime/language baseline) | Framework and language-version trade-offs underpinning every service | [.NET Core / C#](runtime/dotnet-core-csharp.md) |

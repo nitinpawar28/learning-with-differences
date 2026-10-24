@@ -1,0 +1,28 @@
+# Site-wide acronym tooltips. Acronyms declared on term pages are added
+# automatically; this file adds ones with no term page and tunes the noise.
+
+# Acronyms that have no term page yet (acronym: expansion — short gloss).
+extra:
+  RFC: Request for Comments — an IETF standards document
+  NIST: National Institute of Standards and Technology
+  OWASP: Open Worldwide Application Security Project
+  CNCF: Cloud Native Computing Foundation
+  YAML: YAML Ain't Markup Language — a data serialisation format
+  OLTP: Online transaction processing
+  OLAP: Online analytical processing
+  OHLCV: Open, high, low, close, volume — a price bar
+  FIX: Financial Information eXchange protocol
+  gRPC: gRPC Remote Procedure Calls — HTTP/2 RPC with Protobuf
+  CDC: Change data capture
+  DFD: Data-flow diagram
+  SDK: Software development kit
+  CLI: Command-line interface
+
+# Never tooltip these: too common, or ambiguous in everyday text.
+suppress: [AWS, API, APIs, URL, URLs, HTTP, HTTPS, JSON, HTML, CSS, IT, ID, IDs, UI, OS, CPU, RAM, PDF, FAQ, TCP, UDP, IP, DNS, SQL, CI, CD]
+
+# Two-letter acronyms are skipped unless listed here.
+allow_short: [AI, ML, VM, AZ, DR, HA, AD]
+
+# Preferred order of senses for acronyms with more than one meaning.
+order: {}

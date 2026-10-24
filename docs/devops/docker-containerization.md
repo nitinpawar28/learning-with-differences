@@ -4,12 +4,15 @@ description: Image design, orchestration, and runtime choices for containerized 
 tags:
   - devops
   - docker
+status: stub
+level: practitioner
+tracks: [architect, cloud]
 ---
 
 # Docker & Containerization
 
 !!! note "Status"
-    Draft stub — expand using the [article template](../_templates/tech-guide-template.md).
+    Draft stub — expand using the [article template](../about/article-template.md).
 
 ## Scope
 

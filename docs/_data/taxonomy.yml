@@ -1,0 +1,283 @@
+# Controlled vocabularies for lwd. Order is display order.
+# Every value used in front matter must appear here; `python -m lwd validate`
+# suggests the closest match when one does not.
+
+tracks:
+  - { id: architect, label: Architect }
+  - { id: agentic-ai, label: Agentic AI }
+  - { id: security, label: Security }
+  - { id: cloud, label: Cloud }
+
+clouds:
+  - { id: azure, label: Azure }
+  - { id: aws, label: AWS }
+  - { id: neutral, label: Vendor-neutral }
+
+levels:
+  - { id: foundation, label: Foundation, meaning: "Fundamentals-exam depth: what it is, why it exists, where it fits." }
+  - { id: practitioner, label: Practitioner, meaning: "Associate/specialty depth: how to configure, operate and troubleshoot it." }
+  - { id: expert, label: Expert, meaning: "Professional/expert depth: how to design with it and defend the trade-offs." }
+
+fidelity:
+  - { id: exact, label: Exact, rank: 3, meaning: "Functionally equivalent; knowledge transfers directly." }
+  - { id: close, label: Close, rank: 2, meaning: "Same job; notable differences in model, limits or features." }
+  - { id: partial, label: Partial, rank: 1, meaning: "Covers part of the scope; you need to combine services to match." }
+  - { id: none, label: None, rank: 0, meaning: "No counterpart on the other cloud." }
+
+volatility:
+  - { id: ai, days: 90 }
+  - { id: cloud, days: 180 }
+  - { id: fundamentals, days: 730 }
+
+# Facet vocabulary for glossary terms (the `domain` field of a term).
+term_domains:
+  - { id: architecture-practice, label: Architecture Practice }
+  - { id: patterns, label: Patterns and Styles }
+  - { id: distributed-systems, label: Distributed Systems }
+  - { id: data-architecture, label: Data Architecture }
+  - { id: reliability, label: Reliability and Resilience }
+  - { id: finops, label: Cost and FinOps }
+  - { id: enterprise-architecture, label: Enterprise Architecture }
+  - { id: migration, label: Cloud Adoption and Migration }
+  - { id: cloud-foundations, label: Cloud Foundations }
+  - { id: identity, label: Identity and Access }
+  - { id: governance, label: Governance and Landing Zones }
+  - { id: networking, label: Networking }
+  - { id: compute, label: Compute }
+  - { id: containers, label: Containers and Kubernetes }
+  - { id: serverless, label: Serverless and Integration }
+  - { id: messaging, label: Messaging and Eventing }
+  - { id: storage, label: Storage }
+  - { id: databases, label: Databases and Caching }
+  - { id: time-series, label: Time-Series Data }
+  - { id: observability, label: Observability }
+  - { id: iac, label: Infrastructure as Code }
+  - { id: devops, label: DevOps and Delivery }
+  - { id: sre, label: SRE and Operations }
+  - { id: security-foundations, label: Security Foundations }
+  - { id: threat-modeling, label: Threat Modeling }
+  - { id: appsec, label: Application Security }
+  - { id: supply-chain, label: Software Supply Chain }
+  - { id: cryptography, label: Cryptography and PKI }
+  - { id: cloud-security, label: Cloud Security }
+  - { id: detection-response, label: Detection and Response }
+  - { id: network-security, label: Network Security }
+  - { id: data-protection, label: Data Protection }
+  - { id: grc, label: Governance, Risk and Compliance }
+  - { id: ai-security, label: AI Security and Governance, volatility: ai }
+  - { id: ai-foundations, label: AI and ML Foundations, volatility: ai }
+  - { id: genai, label: Generative AI Applications, volatility: ai }
+  - { id: ai-evaluation, label: AI Evaluation and Operations, volatility: ai }
+  - { id: agents, label: Agents and Agentic Patterns, volatility: ai }
+  - { id: agent-protocols, label: Agent Protocols, volatility: ai }
+  - { id: ai-platforms, label: AI Platforms, volatility: ai }
+  - { id: backend, label: Backend Runtime and APIs }
+  - { id: realtime, label: Real-Time and Streaming }
+  - { id: frontend, label: Frontend }
+
+# Folder layout for rendered pages: <area>/<domain>[/<group>]/<slug>.md
+areas:
+  architecture:
+    label: Architecture
+    tracks: [architect]
+    domains:
+      practice: Architecture Practice
+      well-architected: Well-Architected
+      migration: Cloud Adoption and Migration
+      cost: Cost and FinOps
+      enterprise: Enterprise Architecture
+      patterns: Patterns and Styles
+      distributed-systems: Distributed Systems
+      data-architecture: Data Architecture
+      reliability: Reliability
+  cloud:
+    label: Cloud
+    tracks: [cloud]
+    domains:
+      foundations: Cloud Foundations
+      azure:
+        label: Azure
+        groups: &capabilities
+          identity: Identity
+          governance: Governance
+          networking: Networking
+          compute: Compute
+          containers: Containers
+          serverless-integration: Serverless and Integration
+          storage-data: Storage and Data
+          observability: Observability
+          security-services: Security Services
+          iac-devops: IaC and DevOps
+          cost: Cost Management
+          ai-services-overview: AI Services
+      aws:
+        label: AWS
+        groups: *capabilities
+      compare:
+        label: Azure vs AWS
+        groups:
+          global-infrastructure: Global Infrastructure
+          identity: Identity
+          governance: Governance
+          networking: Networking
+          compute: Compute
+          containers: Containers
+          serverless-integration: Serverless and Integration
+          messaging: Messaging
+          storage-data: Storage and Data
+          observability: Observability
+          security-services: Security Services
+          iac-devops: IaC and DevOps
+          cost: Cost
+          resilience-migration: Resilience and Migration
+          ai-platforms: AI Platforms
+  ai:
+    label: AI
+    tracks: [agentic-ai]
+    domains:
+      foundations: AI Foundations
+      applied: Applied Generative AI
+      evaluation-ops: Evaluation and Operations
+      agents:
+        label: Agents
+        groups:
+          patterns: Agentic Patterns
+          operations: Agent Operations
+          frameworks: Agent Frameworks
+      protocols: Agent Protocols
+      platforms:
+        label: AI Platforms
+        groups:
+          microsoft: Microsoft
+          aws: AWS
+  security:
+    label: Security
+    tracks: [security]
+    domains:
+      foundations: Security Foundations
+      iam: Identity and Access
+      threat-modeling: Threat Modeling
+      appsec: Application Security
+      supply-chain: Software Supply Chain
+      cryptography: Cryptography and PKI
+      cloud-security: Cloud Security
+      detection-response: Detection and Response
+      network-security: Network Security
+      data-protection: Data Protection
+      grc: Governance, Risk and Compliance
+      ai-security: AI Security
+  messaging:
+    label: Messaging and APIs
+    tracks: [architect]
+    domains:
+      runtime: Runtime and Concurrency
+      apis: APIs
+      realtime: Real-Time Transport
+      eventing: Eventing
+      integration: Integration and Decomposition
+  data:
+    label: Data and Storage
+    tracks: [architect]
+    domains:
+      relational: Relational
+      time-series: Time-Series
+      specialized-stores: Specialized Stores
+  frontend:
+    label: Frontend
+    tracks: [architect]
+    domains:
+      angular: Angular
+      typescript: TypeScript
+      realtime: Real-Time UI
+  devops:
+    label: DevOps and Platform
+    tracks: [architect, cloud]
+    root_pages: true
+    domains:
+      kubernetes: Kubernetes
+      iac: Infrastructure as Code
+      ci-cd: CI/CD
+      observability: Observability
+      sre: SRE
+  practice:
+    label: Practice
+    tracks: []
+    domains:
+      labs: Labs
+      katas: Design Katas
+      threat-models: Threat Models
+      tabletops: Incident Tabletops
+      capstones: Capstones
+  decisions:
+    label: Decisions
+    tracks: [architect]
+    root_pages: true
+    domains: {}
+  reference:
+    label: Reference
+    tracks: []
+    root_pages: true
+    domains: {}
+
+providers:
+  - { id: microsoft, label: Microsoft, validity_months: 12, renewal: "Free, unproctored renewal assessment on Microsoft Learn in the 6 months before expiry; fundamentals never expire." }
+  - { id: github, label: GitHub, validity_months: 24, renewal: "Moving to Microsoft's renewal process; GH-900 needs no renewal." }
+  - { id: aws, label: AWS, validity_months: 36, renewal: "Pass the current version of the exam or a higher-level one before expiry." }
+  - { id: linux-foundation, label: Linux Foundation / CNCF, validity_months: 24, renewal: "Retake the current exam before expiry." }
+  - { id: hashicorp, label: HashiCorp, validity_months: 24, renewal: "Retake the current exam before expiry." }
+  - { id: isc2, label: ISC2, validity_months: 36, renewal: "Earn CPEs (CISSP: 120 per 3 years) and pay the annual maintenance fee." }
+  - { id: isaca, label: ISACA, validity_months: 36, renewal: "Earn CPEs each year and pay the annual maintenance fee." }
+  - { id: comptia, label: CompTIA, validity_months: 36, renewal: "Continuing education (CE) units within the 3-year cycle." }
+  - { id: csa, label: Cloud Security Alliance, validity_months: 0, renewal: "CCSK does not expire." }
+  - { id: iapp, label: IAPP, validity_months: 24, renewal: "20 CPEs and a renewal fee every 2 years (or IAPP membership)." }
+  - { id: open-group, label: The Open Group, validity_months: 0, renewal: "No expiry stated in the TOGAF portfolio." }
+  - { id: isaqb, label: iSAQB, validity_months: 0, renewal: "Valid for life." }
+  - { id: finops, label: FinOps Foundation, validity_months: 24, renewal: "Renew through the FinOps Foundation before expiry." }
+  - { id: offsec, label: OffSec, validity_months: 36, renewal: "Recertification exam or CPEs; the base certification does not expire." }
+  - { id: pecb, label: PECB, validity_months: 36, renewal: "CPD hours and an annual fee." }
+  - { id: anthropic, label: Anthropic, validity_months: 12, renewal: "Free on-time renewal." }
+  - { id: nvidia, label: NVIDIA, validity_months: 24, renewal: "Retake the exam." }
+  - { id: google, label: Google Cloud, validity_months: 24, renewal: "Retake the exam (validity varies by certification)." }
+
+exam_levels: [fundamentals, foundational, associate, intermediate, professional, specialty, expert, advanced, foundation, practitioner, beginner, business]
+
+settings:
+  rosetta: { left: azure, right: aws }
+  due_soon_days: 30
+  az_split_threshold: 1500
+  abbr_soft_limit: 800
+  vendor_prefixes: [Azure, AWS, Amazon, Microsoft]
+  primary_source_hosts:
+    - learn.microsoft.com
+    - docs.aws.amazon.com
+    - aws.amazon.com
+    - docs.github.com
+    - kubernetes.io
+    - developer.hashicorp.com
+    - modelcontextprotocol.io
+    - csrc.nist.gov
+    - nvlpubs.nist.gov
+    - owasp.org
+    - genai.owasp.org
+    - datatracker.ietf.org
+    - www.rfc-editor.org
+    - www.cisecurity.org
+    - opentelemetry.io
+    - www.postgresql.org
+    - docs.timescale.com
+    - redis.io
+    - kafka.apache.org
+    - angular.dev
+    - www.typescriptlang.org
+    - rxjs.dev
+    - developer.mozilla.org
+    - html.spec.whatwg.org
+    - www.w3.org
+    - webassembly.org
+    - spiffe.io
+    - oauth.net
+    - openid.net
+    - martinfowler.com
+    - dotnet.microsoft.com
+    - www.postgresql.org
+  anki: { deck: LearnWithDifferences, min_status: draft }

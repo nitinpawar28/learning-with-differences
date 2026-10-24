@@ -1,3 +1,8 @@
+---
+title: "DevOps and Platform"
+description: "Containers, Kubernetes, infrastructure as code, CI/CD, observability and SRE."
+---
+
 # DevOps & Cloud-Native
 
 *DevOps, Infrastructure & Cloud-Native*
@@ -21,21 +26,21 @@ it stops fitting.
 
 ## Key Terminology & Concepts
 
-Full definitions in the [Master Glossary](../glossary.md); the ones specific
+Full definitions in the [Master Glossary](../glossary/index.md); the ones specific
 to this category:
 
-- [Immutable Infrastructure](../glossary.md#immutable-infrastructure) —
+- [Immutable Infrastructure](../terms/immutable-infrastructure.md) —
   replacing instances instead of patching them in place
-- [Blue-Green Deployment](../glossary.md#blue-green-deployment) / [Canary
-  Release](../glossary.md#canary-release) — two different ways to trade
+- [Blue-Green Deployment](../terms/blue-green-deployment.md) / [Canary
+  Release](../terms/canary-release.md) — two different ways to trade
   deployment speed for blast-radius control
-- [Health Check (Liveness vs. Readiness)](../glossary.md#health-check-liveness-vs-readiness) —
+- [Health Check (Liveness vs. Readiness)](../terms/health-check.md) —
   two different questions an orchestrator asks a container
-- [Sidecar Pattern](../glossary.md#sidecar-pattern) — attaching cross-cutting
+- [Sidecar Pattern](../terms/sidecar-pattern.md) — attaching cross-cutting
   concerns (mTLS, metrics) without touching application code
-- [Infrastructure as Code (IaC)](../glossary.md#infrastructure-as-code-iac) —
+- [Infrastructure as Code (IaC)](../terms/infrastructure-as-code.md) —
   giving infrastructure changes the same review/diff/rollback story as code
-- [Horizontal vs. Vertical Scaling](../glossary.md#horizontal-vs-vertical-scaling) —
+- [Horizontal vs. Vertical Scaling](../terms/horizontal-scaling.md) —
   more instances vs. a bigger box
 
 ## Intended Knowledge Summary

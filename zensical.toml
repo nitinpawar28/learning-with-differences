@@ -1,0 +1,212 @@
+# Learning with Differences — Zensical configuration.
+# Keep this file TOML 1.0 (no trailing commas inside { } tables): lwd reads it with tomllib.
+# Generated pages (terms/, glossary/, study/) come from `python -m lwd gen`; never edit them.
+
+[project]
+site_name = "Learning with Differences"
+site_description = "A personal, exam-grade library for architecture, agentic AI, security, Azure and AWS — every concept taught by its differences."
+site_author = "Nitin Pawar"
+site_url = "https://nitinpawar28.github.io/learning-with-differences/"
+repo_url = "https://github.com/nitinpawar28/learning-with-differences"
+repo_name = "learning-with-differences"
+copyright = "Copyright &copy; 2026 Nitin Pawar"
+docs_dir = "docs"
+site_dir = "site"
+use_directory_urls = true
+
+# Sources compiled by lwd; never rendered directly.
+exclude_docs = """
+/_data/
+/_glossary/
+/_study/
+/_terms/
+"""
+
+# Generated entity pages are reached through the hub pages, not the sidebar.
+not_in_nav = """
+/terms/
+/glossary/browse/
+/study/exams/
+/study/paths/
+"""
+
+# The abbreviations file lives outside docs/ and is appended to every page.
+watch = ["generated/includes"]
+
+extra_css = ["stylesheets/extra.css", "stylesheets/lwd.css"]
+extra_javascript = ["javascripts/lwd.js"]
+
+nav = [
+  { "Home" = [
+    "index.md",
+    { "How this library works" = "about/index.md" },
+    { "Templates and conventions" = "about/article-template.md" },
+    { "Engine notes" = "about/engine.md" }
+  ] },
+  { "Study" = [
+    "study/index.md",
+    { "Exams" = "study/exams.md" },
+    { "Learning paths" = "study/paths.md" },
+    { "Renewals" = "study/renewals.md" },
+    { "Reports" = [
+      { "Coverage" = "study/reports/coverage.md" },
+      { "Freshness" = "study/reports/freshness.md" },
+      { "Integrity" = "study/reports/integrity.md" },
+      { "Content roadmap" = "study/reports/roadmap.md" }
+    ] }
+  ] },
+  { "Glossary" = [
+    "glossary/index.md",
+    { "Explorer" = "glossary/explorer.md" },
+    { "A–Z" = "glossary/a-z.md" },
+    { "Azure ↔ AWS Rosetta" = "glossary/rosetta.md" },
+    { "Contrasts" = "glossary/contrasts.md" },
+    { "Browse by facet" = "glossary/browse.md" },
+    { "Legend" = "glossary/legend.md" }
+  ] },
+  { "Architecture" = [
+    "architecture/index.md"
+  ] },
+  { "Cloud" = [
+    "cloud/index.md"
+  ] },
+  { "AI" = [
+    "ai/index.md",
+    { "Agent Protocols" = [
+      "ai/protocols/mcp-tool-orchestration.md"
+    ] }
+  ] },
+  { "Security" = [
+    "security/index.md",
+    { "Identity and Access" = [
+      "security/iam/mtls-vs-api-keys.md",
+      "security/iam/workload-identity.md",
+      "security/iam/capability-based-authz.md"
+    ] },
+    { "Application Security" = [
+      "security/appsec/wasm-sandboxing.md"
+    ] }
+  ] },
+  { "Engineering" = [
+    { "Messaging and APIs" = [
+      "messaging/index.md",
+      "messaging/runtime/dotnet-core-csharp.md",
+      "messaging/runtime/async-threading.md",
+      "messaging/apis/rest-vs-grpc-apis.md",
+      "messaging/realtime/signalr-websockets.md",
+      "messaging/eventing/event-driven-vs-request-response.md",
+      "messaging/eventing/redis-streams-vs-kafka.md",
+      "messaging/eventing/outbox-pattern.md",
+      "messaging/eventing/delivery-semantics.md",
+      "messaging/integration/broker-exchange-api-integrations.md",
+      "messaging/integration/microservices-vs-modular-monoliths.md"
+    ] },
+    { "Data and Storage" = [
+      "data/index.md",
+      "data/relational/relational-databases.md",
+      "data/time-series/time-series-financial-schemas.md",
+      "data/time-series/row-vs-columnar-storage.md",
+      "data/time-series/high-frequency-indexing-partitioning.md"
+    ] },
+    { "Frontend" = [
+      "frontend/index.md",
+      "frontend/angular/angular-fundamentals.md",
+      "frontend/angular/rxjs-state-management.md",
+      "frontend/typescript/typescript.md",
+      "frontend/realtime/real-time-ui-streaming.md"
+    ] },
+    { "DevOps and Platform" = [
+      "devops/index.md",
+      "devops/docker-containerization.md",
+      "devops/ci-cd-pipelines.md",
+      "devops/bare-metal-linux-hypervisors.md"
+    ] }
+  ] },
+  { "Practice" = [
+    "practice/index.md"
+  ] }
+]
+
+[project.validation]
+invalid_links = true
+invalid_link_anchors = true
+
+[project.theme]
+variant = "classic"
+language = "en"
+features = [
+  "content.code.annotate",
+  "content.code.copy",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.progress",
+  "navigation.path",
+  "navigation.prune",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+toggle = { icon = "material/weather-night", name = "Switch to dark mode" }
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "indigo"
+accent = "indigo"
+toggle = { icon = "material/weather-sunny", name = "Switch to light mode" }
+
+[project.theme.font]
+text = "Roboto"
+code = "Roboto Mono"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+# Page lifecycle, shown as badges in the navigation.
+[project.extra.status]
+stub = "Stub: scope only"
+draft = "Draft: in progress"
+complete = "Complete"
+deprecated = "Deprecated"
+
+[project.plugins.search]
+separator = '[\s\-,:!=\[\]()"/]+'
+
+[project.plugins.tags]
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+toc = { permalink = true, title = "On this page" }
+pymdownx.betterem = { smart_enable = "all" }
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji = { emoji_index = "zensical.extensions.emoji.twemoji", emoji_generator = "zensical.extensions.emoji.to_svg" }
+pymdownx.highlight = { anchor_linenums = true, line_spans = "__span", pygments_lang_class = true }
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.mark = {}
+pymdownx.snippets = { auto_append = ["generated/includes/abbreviations.md"], check_paths = true }
+pymdownx.superfences = { custom_fences = [{ name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }] }
+pymdownx.tabbed = { alternate_style = true }
+pymdownx.tasklist = { custom_checkbox = true }
+pymdownx.tilde = {}

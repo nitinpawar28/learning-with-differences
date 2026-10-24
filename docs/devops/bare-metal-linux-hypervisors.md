@@ -5,12 +5,15 @@ tags:
   - devops
   - homelab
   - virtualization
+status: stub
+level: practitioner
+tracks: [architect, cloud]
 ---
 
 # Bare-Metal Linux Home Servers & Hypervisors
 
 !!! note "Status"
-    Draft stub — expand using the [article template](../_templates/tech-guide-template.md).
+    Draft stub — expand using the [article template](../about/article-template.md).
 
 ## Scope
 
