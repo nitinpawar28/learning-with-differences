@@ -16,7 +16,7 @@ differs_from:
   - { term: brin-index, note: "A BRIN index skips block ranges inside one table using stored min/max summaries; partition pruning skips whole tables using declared bounds, and needs no index at all." }
   - { term: b-tree-index, note: "A B-tree finds matching rows inside a partition after pruning has chosen the partitions; pruning never consults indexes, and an index never removes a partition from the plan." }
 related: [data-retention-policy, columnar-storage, continuous-aggregate]
-covers: []
+covers: [{ ref: "dea-c01:2.4.5", depth: partial }, { ref: "dea-c01:2.2.4", depth: partial }]
 sources:
   - { title: "Table Partitioning: Partition Pruning (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/ddl-partitioning.html", publisher: PostgreSQL Global Development Group }
   - { title: "Query Planning configuration: enable_partition_pruning, constraint_exclusion", url: "https://www.postgresql.org/docs/current/runtime-config-query.html", publisher: PostgreSQL Global Development Group }

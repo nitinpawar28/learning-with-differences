@@ -16,7 +16,7 @@ differs_from:
   - { term: materialized-view, note: "A materialized view is derived data refreshed inside one database; CDC is the feed that lets derived data live outside the database and stay current incrementally." }
   - { term: log-compaction, note: "Log compaction keeps only the newest record per key in a topic; a CDC stream is the full change history, and a compacted topic is one way to store it so a new consumer can rebuild current state without replaying everything." }
 related: [log-compaction, at-least-once-delivery, idempotency-key, hypertable, table-partitioning]
-covers: []
+covers: [{ ref: "ai-200:2.1.4", depth: partial }, { ref: "dp-420:1.4.1", depth: partial }, { ref: "dp-420:1.4.4", depth: partial }, { ref: "az-305:2.3.1", depth: partial }, { ref: "dea-c01:1.1.1", depth: partial }, { ref: "sap-c03:4.2.5", depth: partial }, { ref: "dva-c03:1.1.10", depth: partial }]
 sources:
   - { title: "Logical Decoding Concepts (PostgreSQL documentation)", url: "https://www.postgresql.org/docs/current/logicaldecoding-explanation.html", publisher: "PostgreSQL Global Development Group" }
   - { title: "Debezium connector for PostgreSQL", url: "https://debezium.io/documentation/reference/stable/connectors/postgresql.html", publisher: "Debezium" }

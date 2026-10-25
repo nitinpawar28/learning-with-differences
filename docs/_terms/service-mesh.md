@@ -16,7 +16,7 @@ differs_from:
   - { term: workload-identity, note: "The mesh is a consumer of workload identity: it mints X.509 certificates from the Kubernetes service account and authorizes on that principal, but the identity scheme exists independently of any mesh." }
   - { term: zero-trust, note: "Zero trust is the strategy of authenticating and authorizing every connection; a mesh is one tool that applies it to east-west traffic inside a cluster, not to users, data or the control plane." }
 related: [container-isolation, readiness-probe, least-privilege, rbac]
-covers: []
+covers: [kcsa:5.4, { ref: "cks:4.4", depth: partial }, { ref: "dva-c03:2.1.8", depth: partial }, { ref: "cissp:4.1.8", depth: partial }]
 sources:
   - { title: "Ambient mode overview", url: "https://istio.io/latest/docs/ambient/overview/", publisher: Istio }
   - { title: "Istio security concepts", url: "https://istio.io/latest/docs/concepts/security/", publisher: Istio }

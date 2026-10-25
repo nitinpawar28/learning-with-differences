@@ -16,7 +16,7 @@ differs_from:
   - { term: rolling-deployment, note: "A rolling update counts a new Pod as available only when it is Ready for minReadySeconds, so readiness is the gate that turns a bad image into a stalled rollout instead of an outage." }
   - { term: sidecar-pattern, note: "A native sidecar's readiness probe is folded into the Pod's Ready condition, so a helper container with a broken check can hold a healthy application out of the Service." }
 related: [backpressure, horizontal-scaling, canary-release, blue-green-deployment]
-covers: []
+covers: [{ ref: "ckad:3.2", depth: partial }, { ref: "ckad:2.2", depth: partial }, { ref: "cka:2.4", depth: partial }, { ref: "cka:2.1", depth: partial }, { ref: "cka:5.5", depth: partial }, { ref: "dva-c03:4.2.8", depth: partial }]
 sources:
   - { title: "Liveness, Readiness, and Startup Probes", url: "https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/", publisher: Kubernetes }
   - { title: "EndpointSlices (conditions)", url: "https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/", publisher: Kubernetes }

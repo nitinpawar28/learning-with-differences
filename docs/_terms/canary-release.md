@@ -15,7 +15,7 @@ differs_from:
   - { term: rolling-deployment, note: "A rolling deployment replaces instances on a fixed schedule gated by health checks; a canary holds exposure at a deliberate percentage and advances only when metrics say the new version is at least as good as the old." }
   - { term: health-check, note: "A health check is a binary signal from one instance; canary analysis is a statistical comparison of SLIs between the canary population and the control. A canary can pass every health check and still be failing its users." }
 related: [readiness-probe, immutable-infrastructure, service-mesh]
-covers: []
+covers: [{ ref: "az-400:3.4.1", depth: partial }, { ref: "ckad:2.1", depth: partial }, { ref: "sap-c03:3.1.4", depth: partial }, { ref: "sap-c03:2.1.6", depth: partial }, { ref: "dop-c02:1.4.8", depth: partial }, { ref: "dop-c02:1.1.7", depth: partial }, { ref: "soa-c03:3.1.5", depth: partial }, { ref: "dva-c03:3.4.11", depth: partial }, { ref: "ai-500:4.3.1", depth: partial }, { ref: "aip-c01:5.1.2", depth: partial }]
 sources:
   - { title: "CanaryRelease", url: "https://martinfowler.com/bliki/CanaryRelease.html", publisher: "Danilo Sato, martinfowler.com" }
   - { title: "Canarying Releases (The Site Reliability Workbook)", url: "https://sre.google/workbook/canarying-releases/", publisher: "Google" }

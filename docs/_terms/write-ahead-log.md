@@ -16,7 +16,7 @@ differs_from:
   - { term: transactional-outbox, note: "The outbox is an application table written in the same transaction as the business data and polled later; the WAL is the engine's own log, and reading it with logical decoding is the alternative that makes an outbox table unnecessary." }
   - { term: log-compaction, note: "A compacted Kafka topic keeps the latest record per key and is the data itself; a WAL keeps every change in order and is recycled once a checkpoint makes the data files self-sufficient." }
 related: [at-least-once-delivery, idempotency-key, row-oriented-storage]
-covers: []
+covers: [{ ref: "soa-c03:2.3.2", depth: partial }, { ref: "az-305:3.1.3", depth: partial }, { ref: "sap-c03:2.2.7", depth: partial }, { ref: "sap-c03:3.4.2", depth: partial }, { ref: "saa-c03:3.3.7", depth: partial }, { ref: "dop-c02:3.1.3", depth: partial }, { ref: "dea-c01:1.1.1", depth: partial }]
 sources:
   - { title: "Reliability and the Write-Ahead Log (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/wal-intro.html", publisher: PostgreSQL Global Development Group }
   - { title: "WAL Internals (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/wal-internals.html", publisher: PostgreSQL Global Development Group }

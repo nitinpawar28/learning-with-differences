@@ -15,7 +15,7 @@ differs_from:
   - { term: container-isolation, note: "Isolation keeps containers apart; a sidecar deliberately shares the application's network namespace and volumes while keeping its own image, filesystem and process tree." }
   - { term: readiness-probe, note: "A sidecar carries its own probes: a native sidecar's readiness feeds the Pod's Ready condition, and its startup probe gates the containers declared after it." }
 related: [liveness-probe, health-check, mtls, workload-identity]
-covers: []
+covers: [{ ref: "ckad:1.3", depth: partial }]
 sources:
   - { title: "Sidecar Containers", url: "https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/", publisher: Kubernetes }
   - { title: "Sidecar pattern", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar", publisher: Microsoft Learn }

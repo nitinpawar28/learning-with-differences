@@ -18,7 +18,7 @@ differs_from:
   - { term: data-retention-policy, note: "A retention policy is a scheduled job that drops old chunks; it relies on the hypertable's chunking but is a lifecycle rule, not the table structure." }
   - { term: brin-index, note: "A hypertable already skips chunks on the time column through chunk exclusion; BRIN is what you add for a second column that happens to be correlated with time, or on a plain table that has no chunks." }
 related: [b-tree-index, brin-index, materialized-view]
-covers: []
+covers: [{ ref: "saa-c03:4.3.13", depth: partial }, { ref: "dea-c01:2.4.5", depth: partial }]
 sources:
   - { title: "Hypertables (Tiger Data documentation)", url: "https://www.tigerdata.com/docs/use-timescale/latest/hypertables", publisher: Tiger Data }
   - { title: "CREATE TABLE (hypertable options)", url: "https://www.tigerdata.com/docs/reference/timescaledb/hypertables/create_table", publisher: Tiger Data }

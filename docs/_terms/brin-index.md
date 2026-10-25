@@ -16,7 +16,7 @@ differs_from:
   - { term: columnar-storage, note: "A column store ships per-segment min/max metadata that works like a built-in BRIN, but it also changes layout, compression and update cost; BRIN only adds a summary over an unchanged row-oriented heap." }
   - { term: hypertable, note: "A hypertable already skips chunks on the time column through chunk exclusion; BRIN is what you add for a second column that happens to be correlated with time, or on a plain table that has no chunks." }
 related: [table-partitioning, row-oriented-storage, mvcc]
-covers: []
+covers: [{ ref: "dea-c01:2.4.5", depth: partial }, { ref: "ai-200:2.2.2", depth: partial }]
 sources:
   - { title: "PostgreSQL 18 Documentation: BRIN Indexes", url: "https://www.postgresql.org/docs/current/brin.html", publisher: "PostgreSQL Global Development Group" }
   - { title: "PostgreSQL 18 Documentation: Index Types", url: "https://www.postgresql.org/docs/current/indexes-types.html", publisher: "PostgreSQL Global Development Group" }

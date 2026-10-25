@@ -17,7 +17,7 @@ differs_from:
   - { term: transactional-outbox, note: "The outbox makes publishing atomic with the database write but still publishes at-least-once; exactly-once is about what happens when that message is consumed." }
   - { term: orchestration, note: "A workflow engine can drive each step once from its own point of view; the side effects inside a step sit outside that guarantee and still need idempotency or a transactional boundary of their own." }
 related: [consumer-group, dead-letter-queue, change-data-capture]
-covers: []
+covers: [{ ref: "az-305:4.2.1", depth: partial }, { ref: "saa-c03:2.1.11", depth: partial }, { ref: "sap-c03:2.4.5", depth: partial }, { ref: "dva-c03:1.1.8", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "KIP-98: Exactly Once Delivery and Transactional Messaging", url: "https://cwiki.apache.org/confluence/display/KAFKA/KIP-98+-+Exactly+Once+Delivery+and+Transactional+Messaging", publisher: "Apache Kafka" }
   - { title: "Kafka Streams Core Concepts: Processing Guarantees", url: "https://kafka.apache.org/43/streams/core-concepts/", publisher: "Apache Software Foundation" }

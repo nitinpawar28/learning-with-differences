@@ -16,7 +16,22 @@ differs_from:
   - { term: workload-identity, note: "Workload identity establishes which service is calling; RBAC decides what an authenticated principal may do, and both are needed." }
   - { term: api-key, note: "An API key authenticates a client and is usually mapped to one fixed entitlement; RBAC separates the principal from a reusable, reviewable bundle of permissions." }
 related: [zero-trust, oauth-client-credentials-flow, oauth-authorization-code-flow, secrets-rotation, container-isolation]
-covers: []
+covers:
+  - "az-900:2.4.5"
+  - { ref: "az-104:1.2.2", depth: partial }
+  - "cissp:5.4.1"
+  - { ref: "cka:1.1", depth: partial }
+  - { ref: "cks:2.1", depth: partial }
+  - { ref: "saa-c03:1.1.8", depth: partial }
+  - { ref: "sc-500:1.3.7", depth: partial }
+  - { ref: "sc-900:2.3.2", depth: partial }
+  - { ref: "sc-300:1.1.1", depth: partial }
+  - { ref: "scs-c03:4.2.2", depth: partial }
+  - { ref: "sy0-801:4.5.8", depth: partial }
+  - { ref: "csslp:5.1.14", depth: partial }
+  - { ref: "kcsa:3.4", depth: partial }
+  - { ref: "issap:4.3.6", depth: partial }
+  - { ref: "ai-300:3.1.2", depth: partial }
 sources:
   - { title: "Role-Based Access Controls (Ferraiolo and Kuhn, 15th National Computer Security Conference, 1992)", url: "https://csrc.nist.gov/pubs/conference/1992/10/13/rolebased-access-controls/final", publisher: "NIST" }
   - { title: "Role Based Access Control project and FAQ", url: "https://csrc.nist.gov/projects/role-based-access-control", publisher: "NIST" }

@@ -20,7 +20,7 @@ differs_from:
   - { term: vertical-scaling, note: "Scaling up raises the load at which a component collapses; backpressure keeps the component below whatever its ceiling is. A scale-up without backpressure only moves the point of collapse." }
   - { term: virtual-scrolling, note: "Backpressure slows or thins the producer so the consumer is not flooded; virtual scrolling accepts the whole data set in memory and limits only what is rendered." }
 related: [websocket, dead-letter-queue, at-least-once-delivery]
-covers: []
+covers: [{ ref: "saa-c03:3.2.7", depth: partial }, { ref: "saa-c03:4.4.13", depth: partial }, { ref: "sap-c03:2.5.7", depth: partial }, { ref: "dea-c01:1.1.9", depth: partial }]
 sources:
   - { title: "Reactive Streams Specification for the JVM 1.0.4", url: "https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.4/README.md", publisher: Reactive Streams }
   - { title: "System.Threading.Channels library (.NET)", url: "https://learn.microsoft.com/en-us/dotnet/core/extensions/channels", publisher: Microsoft }

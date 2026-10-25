@@ -14,7 +14,20 @@ differs_from:
   - { term: oauth-client-credentials-flow, note: "Client credentials authenticates an application with no user and no redirect; authorization code delegates a signed-in user's access through the browser and can add OpenID Connect sign-in." }
   - { term: api-key, note: "An API key is a static secret shared out of band that represents the application; authorization code issues per-user, consented, short-lived tokens without the app ever holding the user's password." }
 related: [least-privilege, capability-based-authorization, zero-trust]
-covers: []
+covers:
+  - { ref: "ai-500:4.1.2", depth: partial }
+  - { ref: "paa:5.1.1", depth: partial }
+  - { ref: "sc-300:3.3.3", depth: partial }
+  - { ref: "sc-300:3.3.4", depth: partial }
+  - { ref: "sc-300:3.2.6", depth: partial }
+  - { ref: "sc-300:3.4.6", depth: partial }
+  - { ref: "sc-500:1.1.5", depth: partial }
+  - { ref: "sc-100:2.2.5", depth: partial }
+  - { ref: "sy0-801:4.5.5", depth: partial }
+  - { ref: "issap:4.2.2", depth: partial }
+  - { ref: "dva-c03:2.1.1", depth: partial }
+  - { ref: "mcpa:4.2", depth: partial }
+  - { ref: "scs-c03:4.1.1", depth: partial }
 sources:
   - { title: "RFC 6749: The OAuth 2.0 Authorization Framework", url: "https://www.rfc-editor.org/rfc/rfc6749", publisher: IETF }
   - { title: "RFC 7636: Proof Key for Code Exchange by OAuth Public Clients", url: "https://www.rfc-editor.org/rfc/rfc7636", publisher: IETF }

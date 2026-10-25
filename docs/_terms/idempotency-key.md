@@ -18,7 +18,7 @@ differs_from:
   - { term: optimistic-ui-update, note: "An optimistic update decides what the user sees while a mutation is in flight; the idempotency key is what makes the retry of that timed-out mutation safe, so a resilient client pairs the two." }
   - { term: orchestration, note: "An idempotency key makes a retried call safe; an orchestrator decides when to retry and what to compensate, and relies on idempotent activities to do so correctly." }
 related: [dead-letter-queue, consumer-group, change-data-capture]
-covers: []
+covers: [{ ref: "dva-c03:1.1.13", depth: partial }, { ref: "dva-c03:1.1.8", depth: partial }, { ref: "az-305:4.2.1", depth: partial }, { ref: "saa-c03:2.1.11", depth: partial }, { ref: "ai-200:3.1.1", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "The Idempotency-Key HTTP Header Field (draft-ietf-httpapi-idempotency-key-header)", url: "https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/", publisher: "IETF HTTPAPI Working Group" }
   - { title: "RFC 9110: HTTP Semantics, section 9.2.2 Idempotent Methods", url: "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2", publisher: "IETF" }

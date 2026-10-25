@@ -15,7 +15,7 @@ differs_from:
   - { term: transactional-outbox, note: "The outbox is a publishing mechanism that makes a state change and its event atomic; choreography is the coordination style that consumes those events, and it needs the outbox to be reliable." }
   - { term: dead-letter-queue, note: "A dead-letter queue parks an event that could not be processed; it is not a coordination strategy, and a choreographed flow still needs explicit compensating events that a DLQ never produces." }
 related: [consumer-group, idempotency-key, at-least-once-delivery]
-covers: []
+covers: [{ ref: "dva-c03:1.1.1", depth: partial }, { ref: "dva-c03:1.1.12", depth: partial }, { ref: "saa-c03:2.1.5", depth: partial }, { ref: "saa-c03:2.1.17", depth: partial }, { ref: "sap-c03:2.4.9", depth: partial }, { ref: "az-305:4.2.2", depth: partial }, { ref: "dop-c02:5.1.2", depth: partial }, { ref: "ai-200:3.1.2", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "Choreography pattern (Azure Architecture Center)", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/choreography", publisher: Microsoft }
   - { title: "Saga design pattern (Azure Architecture Center)", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga", publisher: Microsoft }

@@ -17,7 +17,22 @@ differs_from:
   - { term: wasm-sandboxing, note: "A Wasm sandbox enforces least privilege on one module's imports at run time; the principle also governs people, roles and cloud identities that no sandbox ever sees." }
   - { term: container-isolation, note: "Container isolation is a kernel boundary around a process; least privilege decides what the process inside it, and the identity it runs as, may do, and a container with default capabilities and a cloud role still violates it." }
 related: [workload-identity, secrets-rotation, api-key, container-isolation, oauth-client-credentials-flow]
-covers: []
+covers:
+  - "cissp:3.1.2"
+  - { ref: "cissp:7.4.1", depth: partial }
+  - { ref: "cissp:5.2.8", depth: partial }
+  - { ref: "cks:3.2", depth: partial }
+  - { ref: "cks:2.2", depth: partial }
+  - { ref: "scs-c03:4.2.3", depth: partial }
+  - "csslp:1.2.1"
+  - "csslp:7.5.2"
+  - { ref: "issap:4.3.1", depth: partial }
+  - { ref: "sy0-801:1.1.1", depth: partial }
+  - { ref: "sy0-801:3.2.4", depth: partial }
+  - { ref: "sc-500:1.3.7", depth: partial }
+  - "clf-c02:2.3.3"
+  - "sap-c03:3.2.4"
+  - { ref: "saa-c03:1.1.4", depth: partial }
 sources:
   - { title: "The Protection of Information in Computer Systems", url: "http://web.mit.edu/Saltzer/www/publications/protection/", publisher: "Saltzer and Schroeder, Proceedings of the IEEE 63(9), 1975" }
   - { title: "NIST Computer Security Resource Center glossary: least privilege", url: "https://csrc.nist.gov/glossary/term/least_privilege", publisher: "NIST" }

@@ -17,7 +17,7 @@ differs_from:
   - { term: choreography, note: "Choreography is the coordination style in which services react to one another's events; the outbox is the publishing mechanism that makes those events reliable, so a choreographed flow depends on it but is not it." }
   - { term: write-ahead-log, note: "The WAL is the database engine's own recovery log; an outbox is an application table written in the same transaction as the business data, and tailing the WAL is one way to relay it or to skip the table with plain CDC." }
 related: [at-least-once-delivery, dead-letter-queue, choreography, orchestration, write-ahead-log]
-covers: []
+covers: [{ ref: "az-305:4.2.1", depth: partial }, { ref: "az-305:4.2.2", depth: partial }, { ref: "sap-c03:2.4.8", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "Pattern: Transactional outbox", url: "https://microservices.io/patterns/data/transactional-outbox.html", publisher: "Chris Richardson, microservices.io" }
   - { title: "Reliable Microservices Data Exchange With the Outbox Pattern", url: "https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern/", publisher: "Gunnar Morling, Debezium" }

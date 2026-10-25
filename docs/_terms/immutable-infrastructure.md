@@ -17,7 +17,7 @@ differs_from:
   - { term: container-isolation, note: "Isolation limits what a running container can touch; immutability limits what can change inside it. A container can be strongly isolated yet mutated through an exec session, or immutable yet running as root." }
   - { term: secrets-rotation, note: "An immutable image must never contain a secret, because rotating a baked-in value would mean rebuilding and redeploying every consumer; secrets are injected at start-up and rotated on their own schedule." }
 related: [canary-release, health-check, workload-identity]
-covers: []
+covers: [saa-c03:2.2.7, dop-c02:1.4.3, { ref: "dop-c02:1.3.6", depth: partial }, { ref: "soa-c03:3.1.1", depth: partial }, { ref: "ccsp:1.3.7", depth: partial }, { ref: "cks:6.4", depth: partial }]
 sources:
   - { title: "ImmutableServer", url: "https://martinfowler.com/bliki/ImmutableServer.html", publisher: "Kief Morris, martinfowler.com" }
   - { title: "PhoenixServer", url: "https://martinfowler.com/bliki/PhoenixServer.html", publisher: "Martin Fowler" }

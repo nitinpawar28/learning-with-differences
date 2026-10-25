@@ -16,7 +16,21 @@ differs_from:
   - { term: service-mesh, note: "A service mesh is one way to put a policy enforcement point beside every workload; zero trust also covers users, devices and data, and needs the policy engine the mesh does not provide." }
   - { term: workload-identity, note: "Workload identity supplies the non-person subject a zero trust policy engine evaluates; without the engine and enforcement points it is only a better credential." }
 related: [rbac, capability-based-authorization, api-key, oauth-authorization-code-flow, sidecar-pattern, health-check]
-covers: []
+covers:
+  - "cissp:3.1.8"
+  - { ref: "cissp:4.1.11", depth: partial }
+  - { ref: "cissp:5.4.7", depth: partial }
+  - "sc-900:1.1.3"
+  - { ref: "sc-900:1.2.1", depth: partial }
+  - { ref: "sc-100:1.2.4", depth: partial }
+  - { ref: "sc-100:2.2.5", depth: partial }
+  - { ref: "sc-100:2.2.6", depth: partial }
+  - "cas-005:2.6"
+  - { ref: "sy0-801:1.1.1", depth: partial }
+  - "sy0-801:3.2.2"
+  - "az-900:2.4.6"
+  - { ref: "cs0-004:1.1.5", depth: partial }
+  - { ref: "ai-500:1.2.2", depth: partial }
 sources:
   - { title: "NIST SP 800-207: Zero Trust Architecture", url: "https://csrc.nist.gov/pubs/sp/800/207/final", publisher: "NIST" }
   - { title: "NIST SP 1800-35: Implementing a Zero Trust Architecture", url: "https://csrc.nist.gov/pubs/sp/1800/35/final", publisher: "NIST NCCoE" }

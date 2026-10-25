@@ -17,7 +17,7 @@ differs_from:
   - { term: readiness-probe, note: "The readiness probe is the signal that lets a rolling update proceed to the next batch; the rolling update is the process consuming that signal. A probe that only checks the process is up turns a safe roll into a fast outage." }
   - { term: health-check, note: "A health check is the generic endpoint that load balancers and orchestrators poll; rolling is the process that uses its verdict to decide when a batch is done. Passing health checks means an instance answers, not that the release is good." }
 related: [health-check, horizontal-scaling, service-mesh]
-covers: []
+covers: [{ ref: "cka:2.1", depth: partial }, { ref: "ckad:2.2", depth: partial }, { ref: "az-400:3.4.3", depth: partial }, { ref: "sap-c03:3.1.4", depth: partial }, { ref: "dop-c02:1.4.8", depth: partial }, { ref: "dop-c02:1.1.7", depth: partial }, { ref: "soa-c03:3.1.5", depth: partial }, { ref: "dva-c03:3.4.11", depth: partial }]
 sources:
   - { title: "Deployments (Kubernetes documentation)", url: "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/", publisher: "The Kubernetes Authors" }
   - { title: "Configure rolling upgrades on Virtual Machine Scale Sets", url: "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-configure-rolling-upgrades", publisher: "Microsoft Learn" }

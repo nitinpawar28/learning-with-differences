@@ -17,7 +17,7 @@ differs_from:
   - { term: materialized-view, note: "A materialized view is a stored, explicitly refreshed copy of a query result; an MVCC snapshot is a per-statement or per-transaction visibility rule that stores nothing and refreshes itself at the next statement or transaction." }
   - { term: optimistic-ui-update, note: "Both assume conflicts are rare, but MVCC is optimism inside the engine, where snapshots are exact and conflicts are detected at update or commit time, while an optimistic UI update is optimism in the presentation layer that must be reconciled against whatever the server later says." }
 related: [transactional-outbox, columnar-storage, table-partitioning]
-covers: []
+covers: [{ ref: "dea-c01:2.1.6", depth: partial }, { ref: "soa-c03:1.3.5", depth: partial }]
 sources:
   - { title: "Concurrency Control: Introduction (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/mvcc-intro.html", publisher: PostgreSQL Global Development Group }
   - { title: "Transaction Isolation (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/transaction-iso.html", publisher: PostgreSQL Global Development Group }

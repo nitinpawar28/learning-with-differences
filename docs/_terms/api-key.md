@@ -21,7 +21,16 @@ differs_from:
   - { term: rbac, note: "An API key authenticates a client and is usually mapped to one fixed entitlement; RBAC separates the principal from a reusable, reviewable bundle of permissions." }
   - { term: websocket, note: "An API key authenticates each request; a WebSocket is authenticated once at the handshake and then trusted for the life of the connection, so revoking access means closing the socket." }
 related: [least-privilege, rbac, zero-trust, capability-based-authorization]
-covers: []
+covers:
+  - { ref: "ai-500:4.1.2", depth: partial }
+  - { ref: "mla-c02:4.3.8", depth: partial }
+  - { ref: "saa-c03:2.1.1", depth: partial }
+  - { ref: "dva-c03:2.1.2", depth: partial }
+  - { ref: "sc-100:4.2.7", depth: partial }
+  - { ref: "ccsp:4.5.1", depth: partial }
+  - { ref: "cissp:8.5.2", depth: partial }
+  - { ref: "sy0-801:2.4.7", depth: partial }
+  - { ref: "sy0-801:4.1.14", depth: partial }
 sources:
   - { title: "RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage", url: "https://www.rfc-editor.org/rfc/rfc6750", publisher: IETF }
   - { title: "Usage plans and API keys for REST APIs in API Gateway", url: "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html", publisher: "AWS Documentation" }

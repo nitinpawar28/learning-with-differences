@@ -16,7 +16,7 @@ differs_from:
   - { term: mvcc, note: "MVCC is a concurrency rule about which row version a transaction may see; in PostgreSQL those versions are plain tuples inside the row-oriented heap pages, so the layout hosts MVCC but is not MVCC." }
   - { term: table-partitioning, note: "Partitioning splits one row store into several smaller row stores by key; inside every partition the per-row page layout is unchanged." }
 related: [write-ahead-log, hypertable, brin-index]
-covers: []
+covers: [{ ref: "saa-c03:3.3.3", depth: partial }, { ref: "saa-c03:4.3.13", depth: partial }, { ref: "dea-c01:2.1.2", depth: partial }]
 sources:
   - { title: "Database Page Layout (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/storage-page-layout.html", publisher: PostgreSQL Global Development Group }
   - { title: "TOAST (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/storage-toast.html", publisher: PostgreSQL Global Development Group }

@@ -17,7 +17,7 @@ differs_from:
   - { term: blue-green-deployment, note: "Blue-green is the cutover; the health check is the per-instance gate that permits it. Green passing its checks proves it can answer, not that the version is correct, which needs smoke tests or a canary phase." }
   - { term: canary-release, note: "A health check is a binary signal from one instance; canary analysis compares SLIs between the canary population and a control, so a canary can pass every health check and still fail its users." }
 related: [sidecar-pattern, horizontal-scaling]
-covers: []
+covers: [ckad:3.2, { ref: "cka:2.4", depth: partial }, { ref: "az-700:3.2.5", depth: partial }, { ref: "az-104:4.3.2", depth: partial }, { ref: "dop-c02:4.3.4", depth: partial }, { ref: "dop-c02:4.3.11", depth: partial }, { ref: "dop-c02:3.3.6", depth: partial }, { ref: "soa-c03:2.2.1", depth: partial }, { ref: "dva-c03:4.2.8", depth: partial }, { ref: "scs-c03:1.1.2", depth: partial }, { ref: "gh-200:1.2.4", depth: partial }]
 sources:
   - { title: "Liveness, Readiness, and Startup Probes", url: "https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/", publisher: Kubernetes }
   - { title: "Health checks in ASP.NET Core", url: "https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-9.0", publisher: Microsoft Learn }

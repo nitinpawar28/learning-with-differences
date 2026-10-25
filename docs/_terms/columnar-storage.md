@@ -17,7 +17,7 @@ differs_from:
   - { term: continuous-aggregate, note: "A continuous aggregate precomputes the answer to one fixed query; columnar storage speeds up any scan-heavy query without deciding the aggregation in advance." }
   - { term: b-tree-index, note: "A B-tree locates individual rows inside a row-oriented heap; a column store answers scans by reading whole compressed columns and skipping segments, so it usually carries no row-level index at all." }
 related: [materialized-view, data-retention-policy, table-partitioning]
-covers: []
+covers: [{ ref: "saa-c03:4.3.13", depth: partial }, { ref: "saa-c03:3.5.14", depth: partial }, { ref: "dea-c01:1.2.6", depth: partial }, { ref: "dea-c01:2.4.5", depth: partial }, { ref: "az-305:2.3.2", depth: partial }, { ref: "sap-c03:2.5.4", depth: partial }, { ref: "mla-c02:1.1.5", depth: partial }]
 sources:
   - { title: "C-Store: A Column-oriented DBMS (VLDB 2005)", url: "https://www.vldb.org/archives/website/2005/program/paper/thu/p553-stonebraker.pdf", publisher: VLDB Endowment }
   - { title: "Hypercore: hybrid row-columnar storage", url: "https://www.tigerdata.com/docs/use-timescale/latest/hypercore", publisher: Tiger Data }

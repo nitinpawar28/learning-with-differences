@@ -17,7 +17,7 @@ differs_from:
   - { term: dead-letter-queue, note: "At-least-once will redeliver a failing message forever; the dead-letter queue is where that loop ends once the retry budget is spent." }
   - { term: consumer-group, note: "A consumer group is the mechanism (pending list, claims, offsets) through which a stream implements at-least-once for a set of cooperating consumers." }
 related: [transactional-outbox, change-data-capture, backpressure]
-covers: []
+covers: [{ ref: "az-305:4.2.1", depth: partial }, { ref: "saa-c03:2.1.11", depth: partial }, { ref: "sap-c03:2.4.5", depth: partial }, { ref: "dva-c03:1.1.8", depth: partial }, { ref: "ai-200:3.1.1", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "Apache Kafka Design: Message Delivery Semantics", url: "https://kafka.apache.org/43/design/design/", publisher: "Apache Software Foundation" }
   - { title: "XREADGROUP (Redis Streams consumer groups)", url: "https://redis.io/docs/latest/commands/xreadgroup/", publisher: "Redis" }

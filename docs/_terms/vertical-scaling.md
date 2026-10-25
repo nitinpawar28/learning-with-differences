@@ -15,7 +15,7 @@ differs_from:
   - { term: table-partitioning, note: "A bigger box does the same amount of work faster; partitioning makes each query do less work by touching fewer rows. They compose, and partitioning often postpones the next scale-up." }
   - { term: backpressure, note: "Scaling up raises the load at which a component collapses; backpressure keeps the component below whatever its ceiling is. A scale-up without backpressure only moves the point of collapse." }
 related: [hypertable, consumer-group, rolling-deployment]
-covers: []
+covers: [{ ref: "saa-c03:2.1.6", depth: partial }, { ref: "saa-c03:4.2.11", depth: partial }, { ref: "saa-c03:4.2.15", depth: partial }, { ref: "sap-c03:1.3.6", depth: partial }, { ref: "sap-c03:2.5.9", depth: partial }, { ref: "az-104:3.2.4", depth: partial }, { ref: "az-104:3.4.2", depth: partial }, { ref: "az-104:3.3.4", depth: partial }, { ref: "az-305:2.1.2", depth: partial }, { ref: "soa-c03:2.1.3", depth: partial }, { ref: "az-900:1.2.1", depth: partial }]
 sources:
   - { title: "Autoscaling guidance", url: "https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling", publisher: "Azure Architecture Center" }
   - { title: "Resize a virtual machine", url: "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm", publisher: "Microsoft Learn" }

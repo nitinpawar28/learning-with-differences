@@ -17,7 +17,7 @@ differs_from:
   - { term: horizontal-scaling, note: "Adding consumers is horizontal scaling, but a group's parallelism is capped by partitions or shards; beyond that count new members sit idle, unlike stateless web replicas." }
   - { term: maxlen-trim, note: "Trimming caps a stream by discarding old entries without consulting any group, so a lagging group can lose entries it never saw and a pending entry can vanish from under its owner, unless you trim with the Redis 8.2 ACKED mode." }
 related: [maxlen-trim, log-compaction, at-most-once-delivery, exactly-once-delivery, idempotency-key]
-covers: []
+covers: [{ ref: "az-305:4.2.2", depth: partial }, { ref: "az-305:4.2.1", depth: partial }, { ref: "saa-c03:3.5.7", depth: partial }, { ref: "dva-c03:1.1.10", depth: partial }, { ref: "dea-c01:1.1.10", depth: partial }]
 sources:
   - { title: "XREADGROUP (Redis Streams consumer groups)", url: "https://redis.io/docs/latest/commands/xreadgroup/", publisher: "Redis" }
   - { title: "KIP-848: The Next Generation of the Consumer Rebalance Protocol", url: "https://cwiki.apache.org/confluence/display/KAFKA/KIP-848%3A+The+Next+Generation+of+the+Consumer+Rebalance+Protocol", publisher: "Apache Kafka" }

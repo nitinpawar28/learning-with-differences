@@ -16,7 +16,7 @@ differs_from:
   - { term: immutable-infrastructure, note: "Immutability is a property of the artifacts being switched between; blue-green is the switch. An immutable green environment is the easy case, but Fowler's original pattern predates containers and works with mutable environments too." }
   - { term: health-check, note: "A health check is the per-instance signal that gates the cutover; blue-green is the cutover itself. Green passing its health checks proves it can serve, not that it serves correctly under production traffic." }
 related: [readiness-probe, infrastructure-as-code, horizontal-scaling]
-covers: []
+covers: [{ ref: "az-400:3.4.1", depth: partial }, { ref: "az-400:3.4.3", depth: partial }, { ref: "az-104:3.4.8", depth: partial }, { ref: "ckad:2.1", depth: partial }, { ref: "sap-c03:3.1.4", depth: partial }, { ref: "sap-c03:2.1.6", depth: partial }, { ref: "dop-c02:1.4.8", depth: partial }, { ref: "dop-c02:1.1.7", depth: partial }, { ref: "soa-c03:3.1.5", depth: partial }, { ref: "dva-c03:3.4.11", depth: partial }, { ref: "dva-c03:3.4.8", depth: partial }, { ref: "ai-500:4.3.1", depth: partial }]
 sources:
   - { title: "BlueGreenDeployment", url: "https://martinfowler.com/bliki/BlueGreenDeployment.html", publisher: "Martin Fowler" }
   - { title: "Set up staging environments in Azure App Service", url: "https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots", publisher: "Microsoft Learn" }

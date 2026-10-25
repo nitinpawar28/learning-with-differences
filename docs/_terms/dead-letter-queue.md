@@ -16,7 +16,7 @@ differs_from:
   - { term: maxlen-trim, note: "Trimming drops the oldest entries silently to cap memory; dead-lettering moves specific failed entries somewhere visible so a human or a redrive can act on them." }
   - { term: choreography, note: "In a choreographed flow a dead-lettered event is a business process stalled halfway with no coordinator to notice; the DLQ makes the failure visible but never produces the compensating event the flow needs." }
 related: [idempotency-key, transactional-outbox, data-retention-policy, backpressure]
-covers: []
+covers: [{ ref: "ai-200:3.1.1", depth: partial }, { ref: "ai-200:3.1.2", depth: partial }, { ref: "dva-c03:1.2.3", depth: partial }, { ref: "dva-c03:1.1.8", depth: partial }, { ref: "az-305:4.2.1", depth: partial }, { ref: "saa-c03:2.1.11", depth: partial }, { ref: "sap-c03:2.4.5", depth: partial }]
 sources:
   - { title: "Service Bus dead-letter queues", url: "https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues", publisher: "Microsoft Learn" }
   - { title: "Using dead-letter queues in Amazon SQS", url: "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html", publisher: "AWS" }

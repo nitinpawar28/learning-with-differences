@@ -18,7 +18,19 @@ differs_from:
   - { term: immutable-infrastructure, note: "An immutable image must never contain a secret, because rotating a baked-in value would mean rebuilding and redeploying every consumer; secrets are injected at start-up and rotated on their own schedule." }
   - { term: infrastructure-as-code, note: "IaC should reference secrets by identity (a Key Vault or Secrets Manager reference), never by value; rotation then happens on the secret's own lifecycle without a template change or a redeploy." }
 related: [least-privilege, zero-trust, infrastructure-as-code, immutable-infrastructure]
-covers: []
+covers:
+  - { ref: "ai-500:4.1.3", depth: partial }
+  - "dop-c02:6.1.7"
+  - { ref: "dva-c03:2.2.7", depth: partial }
+  - { ref: "scs-c03:5.3.1", depth: partial }
+  - "saa-c03:1.3.11"
+  - { ref: "az-305:1.2.5", depth: partial }
+  - { ref: "sc-100:2.2.8", depth: partial }
+  - { ref: "sc-500:1.2.5", depth: partial }
+  - { ref: "ai-200:4.1.1", depth: partial }
+  - { ref: "sap-c03:3.2.8", depth: partial }
+  - { ref: "cissp:3.6.4", depth: partial }
+  - { ref: "ccsp:4.7.6", depth: partial }
 sources:
   - { title: "NIST SP 800-57 Part 1 Rev. 5: Recommendation for Key Management, Part 1 - General", url: "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final", publisher: NIST }
   - { title: "NIST SP 800-63B-4: Digital Identity Guidelines, Authentication and Authenticator Management", url: "https://pages.nist.gov/800-63-4/sp800-63b.html", publisher: NIST }

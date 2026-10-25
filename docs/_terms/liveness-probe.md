@@ -15,7 +15,7 @@ differs_from:
   - { term: health-check, note: "Health check is the umbrella: the same endpoint can serve many askers, but the liveness asker attaches the most expensive consequence (a restart) and so deserves the narrowest question." }
   - { term: backpressure, note: "Overload is not a hang: an HTTP liveness probe that times out under load restarts healthy replicas and amplifies the incident, whereas backpressure and a failing readiness probe shed load without losing capacity." }
 related: [sidecar-pattern, rolling-deployment, horizontal-scaling]
-covers: []
+covers: [{ ref: "ckad:3.2", depth: partial }, { ref: "cka:2.4", depth: partial }, { ref: "dva-c03:4.2.8", depth: partial }]
 sources:
   - { title: "Liveness, Readiness, and Startup Probes", url: "https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/", publisher: Kubernetes }
   - { title: "Configure Liveness, Readiness and Startup Probes", url: "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/", publisher: Kubernetes }

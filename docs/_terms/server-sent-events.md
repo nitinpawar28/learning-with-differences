@@ -15,7 +15,7 @@ differs_from:
   - { term: backpressure, note: "SSE pushes as fast as the server writes and the TCP window allows; it has no demand signal, so backpressure must be added in the application on both ends." }
   - { term: hot-observable, note: "An SSE stream behaves like a hot source because events happen whether or not anyone listens, but it is a transport with reconnection and event ids, not an Rx construct." }
 related: [cold-observable, angular-signals]
-covers: []
+covers: [{ ref: "aip-c01:2.4.2", depth: partial }, { ref: "aip-c01:2.5.1", depth: partial }, { ref: "aip-c01:4.2.1", depth: partial }]
 sources:
   - { title: "HTML Living Standard: Server-sent events", url: "https://html.spec.whatwg.org/multipage/server-sent-events.html", publisher: WHATWG }
   - { title: "RFC 6202: Known Issues and Best Practices for the Use of Long Polling and Streaming in Bidirectional HTTP", url: "https://www.rfc-editor.org/rfc/rfc6202", publisher: IETF }

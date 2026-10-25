@@ -17,7 +17,7 @@ differs_from:
   - { term: backpressure, note: "Scaling out buys more capacity after a delay; backpressure slows the producer immediately so the system survives until that capacity exists. Autoscaling without backpressure overloads during the lag, and backpressure without scaling merely caps throughput." }
   - { term: infrastructure-as-code, note: "IaC declares the desired instance count once; an autoscaler changes it continuously. The template must cede that attribute to the autoscaler or every apply resets capacity." }
 related: [readiness-probe, health-check, hypertable, rolling-deployment]
-covers: []
+covers: [{ ref: "saa-c03:2.1.6", depth: partial }, { ref: "saa-c03:4.2.11", depth: partial }, { ref: "saa-c03:3.2.4", depth: partial }, { ref: "saa-c03:3.2.8", depth: partial }, { ref: "sap-c03:1.3.6", depth: partial }, { ref: "sap-c03:3.4.3", depth: partial }, { ref: "az-104:3.2.7", depth: partial }, { ref: "az-104:3.4.2", depth: partial }, { ref: "az-104:3.3.4", depth: partial }, { ref: "soa-c03:2.1.1", depth: partial }, { ref: "dop-c02:3.2.6", depth: partial }, { ref: "cka:2.3", depth: partial }, { ref: "ai-200:1.2.2", depth: partial }, { ref: "clf-c02:3.3.5", depth: partial }, { ref: "az-900:1.2.1", depth: partial }]
 sources:
   - { title: "Architecture strategies for optimizing scaling and partitioning (PE:05)", url: "https://learn.microsoft.com/en-us/azure/well-architected/performance-efficiency/scale-partition", publisher: "Microsoft Azure Well-Architected Framework" }
   - { title: "Autoscaling guidance", url: "https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling", publisher: "Azure Architecture Center" }

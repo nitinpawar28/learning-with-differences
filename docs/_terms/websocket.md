@@ -16,7 +16,7 @@ differs_from:
   - { term: api-key, note: "An API key authenticates each request; a WebSocket is authenticated once at the handshake and then trusted for the life of the connection, so revoking access means closing the socket." }
   - { term: hot-observable, note: "A WebSocket is the transport whose messages arrive whether or not application code is listening; a hot observable is the in-process abstraction that adds sharing, operators and teardown on top of it." }
 related: [hot-observable, mtls]
-covers: []
+covers: [{ ref: "aip-c01:2.4.2", depth: partial }, { ref: "saa-c03:2.1.1", depth: partial }, { ref: "az-305:4.2.1", depth: partial }]
 sources:
   - { title: "RFC 6455: The WebSocket Protocol", url: "https://www.rfc-editor.org/rfc/rfc6455", publisher: IETF }
   - { title: "RFC 8441: Bootstrapping WebSockets with HTTP/2", url: "https://www.rfc-editor.org/rfc/rfc8441", publisher: IETF }

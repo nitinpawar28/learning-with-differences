@@ -15,7 +15,7 @@ differs_from:
   - { term: exactly-once-delivery, note: "An orchestrator such as Step Functions Standard can guarantee each workflow step is executed once by the engine; that says nothing about the side effects inside the step, which still need idempotency." }
   - { term: idempotency-key, note: "An idempotency key makes a retried call safe; an orchestrator decides when to retry and what to compensate, and relies on idempotent activities to do so correctly." }
 related: [transactional-outbox, dead-letter-queue, at-least-once-delivery]
-covers: []
+covers: [{ ref: "dva-c03:1.1.1", depth: partial }, saa-c03:2.1.16, { ref: "sap-c03:2.4.5", depth: partial }, { ref: "sap-c03:4.4.5", depth: partial }, { ref: "dop-c02:5.1.4", depth: partial }, { ref: "dea-c01:1.3.1", depth: partial }, { ref: "az-305:4.2.2", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "Saga design pattern (Azure Architecture Center)", url: "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga", publisher: Microsoft }
   - { title: "Pattern: Saga (microservices.io)", url: "https://microservices.io/patterns/data/saga.html", publisher: Chris Richardson }

@@ -16,7 +16,20 @@ differs_from:
   - { term: least-privilege, note: "Least privilege is the principle; running as non-root, dropping capabilities, a read-only root filesystem and a seccomp profile are how a container applies it to one process." }
   - { term: immutable-infrastructure, note: "Immutability limits what may change inside a running container (replace, never patch); isolation limits what it may touch. A read-only root filesystem serves both, but an exec session that edits a file defeats immutability without crossing any isolation boundary." }
 related: [zero-trust, workload-identity, service-mesh]
-covers: []
+covers:
+  - { ref: "cks:4.3", depth: partial }
+  - { ref: "cks:3.4", depth: partial }
+  - { ref: "cks:4.1", depth: partial }
+  - { ref: "kcsa:1.4", depth: partial }
+  - { ref: "kcsa:2.5", depth: partial }
+  - { ref: "kcsa:3.1", depth: partial }
+  - { ref: "kcsa:3.6", depth: partial }
+  - { ref: "kcsa:4.4", depth: partial }
+  - { ref: "ckad:4.8", depth: partial }
+  - { ref: "cissp:3.5.10", depth: partial }
+  - { ref: "ccsp:1.3.5", depth: partial }
+  - { ref: "csslp:5.1.12", depth: partial }
+  - { ref: "sc-100:3.3.4", depth: partial }
 sources:
   - { title: "namespaces(7) Linux manual page", url: "https://man7.org/linux/man-pages/man7/namespaces.7.html", publisher: "man7.org" }
   - { title: "capabilities(7) Linux manual page", url: "https://man7.org/linux/man-pages/man7/capabilities.7.html", publisher: "man7.org" }

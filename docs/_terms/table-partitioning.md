@@ -19,7 +19,7 @@ differs_from:
   - { term: b-tree-index, note: "A B-tree narrows a search inside one relation; partitioning splits the relation so each partition carries its own smaller index and whole partitions can be pruned or dropped without touching an index entry." }
   - { term: vertical-scaling, note: "A bigger box does the same amount of work faster; partitioning makes each query do less work by touching fewer rows. They compose, and partitioning often postpones the next scale-up." }
 related: [b-tree-index, brin-index, columnar-storage, materialized-view]
-covers: []
+covers: [{ ref: "dea-c01:2.4.5", depth: partial }, { ref: "dea-c01:2.2.4", depth: partial }]
 sources:
   - { title: "Table Partitioning (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/ddl-partitioning.html", publisher: PostgreSQL Global Development Group }
   - { title: "CREATE TABLE (PostgreSQL 18 documentation)", url: "https://www.postgresql.org/docs/current/sql-createtable.html", publisher: PostgreSQL Global Development Group }

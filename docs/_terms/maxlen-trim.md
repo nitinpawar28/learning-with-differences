@@ -17,7 +17,7 @@ differs_from:
   - { term: consumer-group, note: "A consumer group tracks who has read what; trimming ignores that bookkeeping unless you use the Redis 8.2 ACKED mode, so a lagging group can lose entries it never saw." }
   - { term: dead-letter-queue, note: "Trimming drops the oldest entries silently to cap memory; dead-lettering moves specific failed entries somewhere visible so a human or a redrive can act on them." }
 related: [at-least-once-delivery, dead-letter-queue]
-covers: []
+covers: [{ ref: "ai-200:2.3.1", depth: partial }]
 sources:
   - { title: "Redis command reference: XADD", url: "https://redis.io/docs/latest/commands/xadd/", publisher: Redis }
   - { title: "Redis command reference: XTRIM", url: "https://redis.io/docs/latest/commands/xtrim/", publisher: Redis }

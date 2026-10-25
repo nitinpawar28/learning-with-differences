@@ -16,7 +16,7 @@ differs_from:
   - { term: data-retention-policy, note: "Retention deletes raw chunks by age; a continuous aggregate is how you keep a summary after the raw data is gone, provided its refresh window never reaches back into the dropped range." }
   - { term: columnar-storage, note: "The columnstore shrinks raw rows by compressing them column by column while keeping every row; a continuous aggregate shrinks the data by summarising rows into buckets, and its own materialization hypertable can be compressed into the columnstore as well." }
 related: [columnar-storage, table-partitioning, partition-pruning]
-covers: []
+covers: [{ ref: "dea-c01:2.1.5", depth: partial }, { ref: "dea-c01:3.2.6", depth: partial }]
 sources:
   - { title: "About continuous aggregates", url: "https://www.tigerdata.com/docs/learn/continuous-aggregates", publisher: "Tiger Data (TimescaleDB)" }
   - { title: "CREATE MATERIALIZED VIEW (continuous aggregate)", url: "https://www.tigerdata.com/docs/reference/timescaledb/continuous-aggregates/create_materialized_view", publisher: "Tiger Data (TimescaleDB)" }

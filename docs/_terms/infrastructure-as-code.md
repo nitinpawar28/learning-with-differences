@@ -15,7 +15,7 @@ differs_from:
   - { term: horizontal-scaling, note: "IaC declares a desired instance count once; an autoscaler changes that count continuously at runtime. Unless the template is told to ignore the count, every apply fights the autoscaler and resets capacity." }
   - { term: secrets-rotation, note: "IaC should reference secrets by identity (a Key Vault or Secrets Manager reference), never by value; rotation then happens on the secret's own lifecycle without a template change or a redeploy." }
 related: [workload-identity, blue-green-deployment, rolling-deployment, container-isolation]
-covers: []
+covers: [az-900:3.3.4, ta-004:1.1, ta-004:1.2, sap-c03:2.1.1, dop-c02:2.1.1, az-400:3.5.3, { ref: "az-104:3.1", depth: partial }, { ref: "dop-c02:2.1.4", depth: partial }, { ref: "dop-c02:2.1.7", depth: partial }, { ref: "soa-c03:3.1.2", depth: partial }, { ref: "soa-c03:3.1.6", depth: partial }, { ref: "dva-c03:3.3.4", depth: partial }, { ref: "ta-004:6.4", depth: partial }, { ref: "clf-c02:3.1.4", depth: partial }, { ref: "scs-c03:6.2.1", depth: partial }, { ref: "ai-500:4.3.4", depth: partial }, { ref: "sy0-801:3.1.1", depth: partial }]
 sources:
   - { title: "Architecture strategies for using infrastructure as code (OE:05)", url: "https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/infrastructure-as-code-design", publisher: "Microsoft Azure Well-Architected Framework" }
   - { title: "What is Bicep?", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview", publisher: "Microsoft Learn" }

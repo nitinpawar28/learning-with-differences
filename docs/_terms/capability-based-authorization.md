@@ -17,7 +17,13 @@ differs_from:
   - { term: least-privilege, note: "Least privilege is the goal; capabilities are a mechanism whose attenuation property makes the goal cheap to reach for every single request." }
   - { term: wasm-sandboxing, note: "WASI applies the same capability discipline to a module's imports at the runtime boundary; this term is about authorization tokens exchanged between services." }
 related: [zero-trust, mtls, oauth-client-credentials-flow, secrets-rotation, container-isolation]
-covers: []
+covers:
+  - { ref: "issap:4.3.1", depth: partial }
+  - { ref: "issap:4.3.6", depth: partial }
+  - { ref: "cas-005:2.4", depth: partial }
+  - { ref: "csslp:1.1.5", depth: partial }
+  - { ref: "ai-500:1.1.4", depth: partial }
+  - { ref: "mcpa:4.2", depth: partial }
 sources:
   - { title: "The Confused Deputy (or why capabilities might have been invented)", url: "https://dl.acm.org/doi/10.1145/54289.871709", publisher: "ACM SIGOPS Operating Systems Review" }
   - { title: "Programming Semantics for Multiprogrammed Computations", url: "https://dl.acm.org/doi/10.1145/365230.365252", publisher: "Communications of the ACM" }

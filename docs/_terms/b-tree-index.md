@@ -18,7 +18,7 @@ differs_from:
   - { term: partition-pruning, note: "A B-tree narrows the search inside whatever relation the planner decided to scan; pruning happens before that, removing whole partitions from the plan from their declared bounds, so it cuts the number of indexes consulted rather than the depth of any one search." }
   - { term: row-oriented-storage, note: "A B-tree is a separate, sorted structure that points into the row store; it finds rows, it does not decide how their bytes are laid out, and in PostgreSQL the heap stays unordered no matter how many indexes exist." }
 related: [partition-pruning, hypertable, row-oriented-storage]
-covers: []
+covers: [{ ref: "dea-c01:2.4.5", depth: partial }, { ref: "ai-200:2.2.2", depth: partial }]
 sources:
   - { title: "PostgreSQL 18 Documentation: Index Types", url: "https://www.postgresql.org/docs/current/indexes-types.html", publisher: "PostgreSQL Global Development Group" }
   - { title: "PostgreSQL 18 Documentation: B-Tree Indexes", url: "https://www.postgresql.org/docs/current/btree.html", publisher: "PostgreSQL Global Development Group" }

@@ -15,7 +15,11 @@ differs_from:
   - { term: capability-based-authorization, note: "WASI applies the capability discipline to a module's imports, such as one directory handle; capability-based authorization applies it to tokens exchanged between services." }
   - { term: least-privilege, note: "The sandbox enforces least privilege for code by construction, but only inside the module boundary; the host process's own identity and permissions still need the principle applied." }
 related: [zero-trust, sidecar-pattern, immutable-infrastructure, workload-identity, api-key]
-covers: []
+covers:
+  - { ref: "ccsp:4.6.3", depth: partial }
+  - { ref: "cissp:7.7.5", depth: partial }
+  - { ref: "sy0-801:4.1.4", depth: partial }
+  - { ref: "csslp:5.1.12", depth: partial }
 sources:
   - { title: "WebAssembly specifications", url: "https://webassembly.org/specs/", publisher: "W3C WebAssembly Community Group" }
   - { title: "WebAssembly security", url: "https://webassembly.org/docs/security/", publisher: "WebAssembly.org" }

@@ -14,7 +14,7 @@ differs_from:
   - { term: at-least-once-delivery, note: "At-least-once acknowledges after processing and redelivers on doubt, trading duplicates for safety; at-most-once settles before processing and trades loss for simplicity." }
   - { term: exactly-once-delivery, note: "Exactly-once removes both loss and duplicates inside a transactional boundary at real cost; at-most-once removes only duplicates and pays with occasional loss." }
 related: [idempotency-key, server-sent-events, websocket, backpressure, maxlen-trim]
-covers: []
+covers: [{ ref: "az-305:4.2.1", depth: partial }, { ref: "ai-200:3.1.1", depth: partial }, { ref: "cpsa-f:3.12", depth: partial }]
 sources:
   - { title: "Redis Pub/Sub: delivery semantics", url: "https://redis.io/docs/latest/develop/pubsub/", publisher: "Redis" }
   - { title: "XREADGROUP (the NOACK option)", url: "https://redis.io/docs/latest/commands/xreadgroup/", publisher: "Redis" }

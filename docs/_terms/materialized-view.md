@@ -16,7 +16,7 @@ differs_from:
   - { term: log-compaction, note: "A compacted topic keeps the latest record per key and so materialises current state as a replayable log; a materialized view keeps the result of an arbitrary query, including joins and aggregates, as a queryable relation." }
   - { term: mvcc, note: "MVCC gives each transaction a consistent snapshot assembled from row versions at read time and discarded afterwards; a materialized view is a snapshot written to disk that stays frozen until someone refreshes it." }
 related: [hypertable, transactional-outbox, b-tree-index]
-covers: []
+covers: [{ ref: "dea-c01:2.1.5", depth: partial }, { ref: "dea-c01:3.2.3", depth: partial }]
 sources:
   - { title: "PostgreSQL 18 Documentation: REFRESH MATERIALIZED VIEW", url: "https://www.postgresql.org/docs/current/sql-refreshmaterializedview.html", publisher: "PostgreSQL Global Development Group" }
   - { title: "PostgreSQL 18 Documentation: CREATE MATERIALIZED VIEW", url: "https://www.postgresql.org/docs/current/sql-creatematerializedview.html", publisher: "PostgreSQL Global Development Group" }

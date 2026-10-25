@@ -20,7 +20,22 @@ differs_from:
   - { term: service-mesh, note: "The mesh is a consumer of workload identity: it mints X.509 certificates from the Kubernetes service account and authorizes on that principal, but the identity scheme exists independently of any mesh." }
   - { term: zero-trust, note: "Workload identity supplies the non-person subject a zero trust policy engine evaluates; without the engine and enforcement points it is only a better credential." }
 related: [least-privilege, zero-trust, rbac, container-isolation, service-mesh]
-covers: []
+covers:
+  - { ref: "sc-900:2.1.2", depth: partial }
+  - "sc-300:3.1.1"
+  - { ref: "sc-300:2.3.5", depth: partial }
+  - "sc-100:4.2.6"
+  - { ref: "sc-500:1.1.6", depth: partial }
+  - { ref: "az-400:4.1.1", depth: partial }
+  - { ref: "az-400:4.2.2", depth: partial }
+  - { ref: "az-401:4.1.1", depth: partial }
+  - "az-401:4.1.3"
+  - "gh-200:5.1.5"
+  - { ref: "ai-103:1.3.4", depth: partial }
+  - { ref: "scs-c03:3.2.2", depth: partial }
+  - { ref: "cks:2.2", depth: partial }
+  - { ref: "ckad:4.7", depth: partial }
+  - { ref: "cissp:5.5.3", depth: partial }
 sources:
   - { title: "SPIFFE concepts", url: "https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/", publisher: "SPIFFE (CNCF)" }
   - { title: "Configure Service Accounts for Pods", url: "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/", publisher: Kubernetes }

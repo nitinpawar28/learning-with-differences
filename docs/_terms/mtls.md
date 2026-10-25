@@ -18,7 +18,20 @@ differs_from:
   - { term: service-mesh, note: "A service mesh is one way to get mTLS between pods automatically through sidecars; mTLS is the protocol, which you can equally terminate in Kestrel, a gateway or a load balancer." }
   - { term: zero-trust, note: "mTLS proves which workload is on the other end of a connection; zero trust is the surrounding architecture that decides, per session, whether that proven identity may do what it asks." }
 related: [zero-trust, sidecar-pattern, least-privilege, container-isolation]
-covers: []
+covers:
+  - { ref: "cks:4.4", depth: partial }
+  - { ref: "kcsa:5.4", depth: partial }
+  - { ref: "kcsa:5.5", depth: partial }
+  - { ref: "az-104:3.4.4", depth: partial }
+  - { ref: "az-700:3.3.5", depth: partial }
+  - { ref: "sc-300:2.1.2", depth: partial }
+  - { ref: "sc-100:4.3.3", depth: partial }
+  - { ref: "scs-c03:5.3.5", depth: partial }
+  - { ref: "dva-c03:2.2.2", depth: partial }
+  - { ref: "dva-c03:2.1.8", depth: partial }
+  - { ref: "sy0-801:1.3.2", depth: partial }
+  - { ref: "cissp:3.6.5", depth: partial }
+  - { ref: "cissp:4.1.3", depth: partial }
 sources:
   - { title: "RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3", url: "https://www.rfc-editor.org/rfc/rfc8446", publisher: IETF }
   - { title: "RFC 8705: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens", url: "https://www.rfc-editor.org/rfc/rfc8705", publisher: IETF }

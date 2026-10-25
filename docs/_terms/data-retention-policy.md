@@ -17,7 +17,7 @@ differs_from:
   - { term: table-partitioning, note: "Partitioning is the mechanism that turns age-based deletion into a cheap metadata drop instead of a row-by-row DELETE; the retention policy is the rule that decides which partition goes and when." }
   - { term: hypertable, note: "A hypertable is the chunked table that retention acts on; the policy is the rule layered over it, and the hypertable's chunk interval sets the finest granularity at which that rule can ever delete." }
 related: [hypertable, columnar-storage, partition-pruning]
-covers: []
+covers: [ccsp:2.7.1, { ref: "ccsp:2.7.3", depth: partial }, { ref: "ccsp:2.7.4", depth: partial }, cissp:2.4.5, csslp:3.4.4, saa-c03:4.3.4, { ref: "saa-c03:1.3.3", depth: partial }, { ref: "saa-c03:4.3.10", depth: partial }, { ref: "sap-c03:3.2.1", depth: partial }, { ref: "scs-c03:5.2.3", depth: partial }, { ref: "dea-c01:2.3.3", depth: partial }, { ref: "dea-c01:2.3.5", depth: partial }, { ref: "sy0-801:5.4.5", depth: partial }, { ref: "sc-200:1.2.2", depth: partial }, { ref: "sc-900:4.3.6", depth: partial }]
 sources:
   - { title: "Data retention (TimescaleDB)", url: "https://www.tigerdata.com/docs/learn/data-lifecycle/data-retention/about-data-retention", publisher: "Tiger Data (TimescaleDB)" }
   - { title: "add_retention_policy()", url: "https://www.tigerdata.com/docs/reference/timescaledb/data-retention/add_retention_policy", publisher: "Tiger Data (TimescaleDB)" }

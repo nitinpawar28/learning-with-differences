@@ -17,7 +17,7 @@ differs_from:
   - { term: materialized-view, note: "A materialized view is a precomputed, queryable result inside a database; a compacted topic is an append-only log that each consumer must replay to build its own view." }
   - { term: write-ahead-log, note: "A compacted Kafka topic keeps the latest record per key and is the data itself; a WAL keeps every change in order and is recycled once a checkpoint makes the data files self-sufficient." }
 related: [consumer-group, write-ahead-log, transactional-outbox]
-covers: []
+covers: [{ ref: "az-305:4.2.2", depth: partial }, { ref: "dea-c01:1.1.11", depth: partial }, { ref: "saa-c03:3.5.7", depth: partial }]
 sources:
   - { title: "Apache Kafka documentation: Design (Log Compaction, Push vs. pull)", url: "https://kafka.apache.org/43/design/design/", publisher: Apache Software Foundation }
   - { title: "Apache Kafka documentation: Topic-level configs", url: "https://kafka.apache.org/43/configuration/topic-configs/", publisher: Apache Software Foundation }

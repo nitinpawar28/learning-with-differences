@@ -17,7 +17,18 @@ differs_from:
   - { term: mtls, note: "mTLS authenticates the TLS connection; client credentials authenticates an OAuth client and issues a token, and RFC 8705 lets the two combine into certificate-bound tokens." }
   - { term: secrets-rotation, note: "Rotation governs the client secret or certificate behind the grant; the access tokens the grant issues expire on their own and are never rotated." }
 related: [least-privilege, capability-based-authorization, rbac, zero-trust]
-covers: []
+covers:
+  - { ref: "ai-500:4.1.2", depth: partial }
+  - { ref: "paa:5.1.1", depth: partial }
+  - { ref: "sc-300:3.3.3", depth: partial }
+  - { ref: "sc-300:3.3.4", depth: partial }
+  - { ref: "sc-100:4.2.6", depth: partial }
+  - { ref: "az-400:4.1.1", depth: partial }
+  - { ref: "sy0-801:4.5.5", depth: partial }
+  - { ref: "issap:4.2.2", depth: partial }
+  - { ref: "dva-c03:2.1.2", depth: partial }
+  - { ref: "dva-c03:2.1.8", depth: partial }
+  - { ref: "scs-c03:4.1.1", depth: partial }
 sources:
   - { title: "RFC 6749: The OAuth 2.0 Authorization Framework", url: "https://www.rfc-editor.org/rfc/rfc6749", publisher: IETF }
   - { title: "RFC 7523: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants", url: "https://www.rfc-editor.org/rfc/rfc7523", publisher: IETF }
