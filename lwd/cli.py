@@ -11,7 +11,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 from lwd import __version__, derive, output, paths, pipeline
-from lwd.diag import ERROR, WARNING, report
+from lwd.diag import ERROR, WARNING, Diagnostics, report
 
 
 def _today(value: str | None) -> date:
@@ -322,6 +322,26 @@ def doctor(root: Path, ci: bool = False) -> list[str]:
     return problems
 
 
+def cmd_nav(args) -> int:
+    from lwd import navsync
+
+    diags = Diagnostics()
+    lib = pipeline.build_library(_root(), _today(args.today), diags)
+    if lib is None:
+        print(report(diags, "text", False))
+        return 1
+    try:
+        changed = navsync.sync(lib, check=args.check)
+    except navsync.NavError as exc:
+        print(f"error: {exc}")
+        return 1
+    if args.check:
+        print("nav is out of date: run python -m lwd nav" if changed else "nav is up to date")
+        return 1 if changed else 0
+    print("nav updated" if changed else "nav already up to date")
+    return 0
+
+
 def cmd_doctor(args) -> int:
     problems = doctor(_root(), ci=args.ci)
     for p in problems:
@@ -407,6 +427,10 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--apply", action="store_true", help="perform the changes (default: print the plan)")
     sp.add_argument("--plan-file")
     sp.set_defaults(func=cmd_migrate)
+    sp = sub.add_parser("nav", help="regenerate the area tabs of the nav from the taxonomy and backlog order")
+    common(sp, fmt=False)
+    sp.add_argument("--check", action="store_true", help="exit 1 if the nav is out of date; write nothing")
+    sp.set_defaults(func=cmd_nav)
     sp = sub.add_parser("doctor", help="check the environment and config")
     sp.add_argument("--ci", action="store_true")
     sp.set_defaults(func=cmd_doctor)

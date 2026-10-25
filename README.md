@@ -44,6 +44,7 @@ python -m lwd serve
 | `python -m lwd coverage az-104 --gaps` | Show an exam's objective coverage and gaps |
 | `python -m lwd stale` | List content overdue for re-verification |
 | `python -m lwd export anki --exam az-104 --out az-104.csv` | Write an Anki deck |
+| `python -m lwd nav` | Regenerate the area tabs of the navigation from the taxonomy (`--check` only reports) |
 | `python -m lwd doctor` | Check the Python version, the Zensical pin and the config |
 | `python -m unittest discover -s tests` | Run the generator's tests |
 
@@ -79,8 +80,8 @@ domains and groups are listed in `docs/_data/taxonomy.yml`.
    (Explanation, How it differs, Examples, Misconceptions, Exam notes,
    Self-check, Further reading).
 2. **Articles:** `python -m lwd new article cloud/azure/identity/managed-identities.md`
-   (add `--from-backlog` to pre-fill from `docs/_data/backlog/`), then add the
-   page to `nav` in `zensical.toml`.
+   (add `--from-backlog` to pre-fill from `docs/_data/backlog/`), then run
+   `python -m lwd nav` to add it to the navigation.
 3. Mark a page `status: complete` only when every claim about cloud
    behaviour, limits, defaults or availability links a primary source, and set
    `last_verified`.

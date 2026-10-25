@@ -249,6 +249,29 @@ class ScanTests(unittest.TestCase):
         self.assertEqual(qs[0].line, 10)
 
 
+class NavTests(FixtureCase):
+    def test_sync_generates_area_tabs_idempotently(self) -> None:
+        import tomllib
+
+        from lwd import navsync
+        from lwd.diag import Diagnostics
+
+        cfg = self.tmp / "zensical.toml"
+        # Swap the hand-written Cloud tab for the generated block, which must close the nav (no trailing comma).
+        text = cfg.read_text(encoding="utf-8").replace('  { "Cloud" = ["cloud/azure/identity/managed-identities.md"] },\n', "")
+        text = text.replace('"study/reports/roadmap.md"] }\n]', f'"study/reports/roadmap.md"] }},\n{navsync.BEGIN}\n{navsync.END}\n]')
+        cfg.write_text(text, encoding="utf-8")
+        lib = pipeline.build_library(self.tmp, TODAY, Diagnostics())
+        self.assertTrue(navsync.sync(lib))
+        nav = tomllib.loads(cfg.read_text(encoding="utf-8"))["project"]["nav"]
+        cloud = next(item["Cloud"] for item in nav if isinstance(item, dict) and "Cloud" in item)
+        identity = cloud[0]["Azure"][0]["Identity"]
+        self.assertEqual(list(identity[0].values()), ["cloud/azure/identity/managed-identities.md"])
+        lib = pipeline.build_library(self.tmp, TODAY, Diagnostics())
+        self.assertFalse(navsync.sync(lib))
+        self.assertEqual(self.codes(self.run_pipeline()), set())
+
+
 class RoadmapTests(unittest.TestCase):
     def test_wave_labels_sort_by_number_then_suffix(self) -> None:
         from lwd.render.study import _wave_key

@@ -274,7 +274,7 @@ def check_output(lib: Library, outputs: dict[str, str], diags: Diagnostics) -> N
             folder = posixpath.dirname(p)
             sibling = next((n for n in cfg.nav_pages if posixpath.dirname(n) == folder), None)
             where = f"next to '{sibling}'" if sibling else f"in the '{p.split('/')[0]}' section"
-            diags.error("LWD091", a.origin.path, 0, "page is neither in the nav nor matched by not_in_nav", f"add \"{p}\" to the nav {where}")
+            diags.error("LWD091", a.origin.path, 0, "page is neither in the nav nor matched by not_in_nav", f"run python -m lwd nav (or add \"{p}\" to the nav {where})")
 
     # Every generated page must be reachable from the nav.
     graph: dict[str, set[str]] = {}
