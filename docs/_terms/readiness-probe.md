@@ -44,7 +44,7 @@ Two subtleties around the edges. **Termination does not need readiness.** When a
 
 The main design risk is a readiness check that is too eager. If every replica's readiness depends on one database, a database blip empties the Service, and unlike an Application Load Balancer (which fails open when all targets are unhealthy) Kubernetes simply has no endpoints to send to. Check a dependency in readiness only when the service cannot do anything useful without it, keep the check cheap and bounded, and prefer the application degrading gracefully over the Service disappearing.
 
-Azure Container Apps implements readiness with the same semantics over HTTP or TCP: a replica failing readiness is excluded, a revision is reported unhealthy if any replica fails, and in multiple-revision mode traffic shifts to a new revision only after its readiness probes pass. Amazon ECS has no readiness probe; the load balancer's target health plays that role, with `healthCheckGracePeriodSeconds` on the service protecting slow-starting tasks.
+Azure Container Apps implements readiness over HTTP or TCP: a revision is reported unhealthy if any of its replicas fails readiness; in single-revision mode traffic shifts to a new revision automatically once its readiness probe succeeds, while in multiple-revision mode you shift traffic yourself and should wait for readiness to pass first. Amazon ECS has no readiness probe; the load balancer's target health plays that role, with `healthCheckGracePeriodSeconds` on the service protecting slow-starting tasks.
 
 ## How it differs
 
@@ -177,8 +177,8 @@ Azure Container Apps implements readiness with the same semantics over HTTP or T
 === "Azure"
 
     ```yaml
-    # Azure Container Apps: a replica failing readiness is excluded; the revision shows unhealthy
-    # if any replica fails; with multiple revisions, traffic moves only after readiness passes.
+    # Azure Container Apps: the revision shows unhealthy if any replica fails readiness; in single-revision
+    # mode traffic moves once readiness passes, in multiple-revision mode you shift it after readiness passes.
     probes:
       - type: Readiness
         httpGet:
@@ -223,7 +223,7 @@ Azure Container Apps implements readiness with the same semantics over HTTP or T
 
 CKAD treats readiness as a core skill: write the probe, know the defaults, explain why a Service shows no endpoints (`kubectl get endpointslices`), and recognise that `successThreshold` may exceed 1 only for readiness. CKA adds the rollout angle: `kubectl rollout status` waits on readiness, `minReadySeconds` and `progressDeadlineSeconds` shape it, and a stalled Deployment keeps the old ReplicaSet serving. CKS occasionally probes the interaction with a mesh: the kubelet's HTTP probe arrives through the sidecar proxy, so `STRICT` mTLS needs the mesh's probe rewriting (Istio does this by default) or the probe fails.
 
-AZ-204 covers Container Apps readiness, revision health and traffic splitting between revisions, which waits for readiness in multiple-revision mode. AZ-305 pairs readiness with deployment strategies (blue-green, canary, rolling) and expects you to know that App Service's Health check removes an instance after repeated failures but needs two or more instances to reroute.
+AZ-204 covers Container Apps readiness, revision health and traffic splitting between revisions: single-revision mode cuts over automatically once readiness passes, multiple-revision mode leaves the traffic shift to you. AZ-305 pairs readiness with deployment strategies (blue-green, canary, rolling) and expects you to know that App Service's Health check removes an instance after repeated failures but needs two or more instances to reroute.
 
 DVA-C02 and SAA-C03 ask the equivalent ALB questions: healthy and unhealthy thresholds, the matcher, deregistration delay, the ECS service health check grace period, and the fail-open behaviour when every target is unhealthy. SAP-C03 scenarios combine a slow-starting container, an aggressive ALB health check and ECS replacing tasks before they are ready; the fix is the grace period or a longer start period, not a looser matcher.
 

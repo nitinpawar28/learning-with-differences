@@ -86,26 +86,31 @@ A market-data gateway reads a firehose, hands ticks to a WebSocket writer throug
         FullMode = BoundedChannelFullMode.Wait,   // lossless: the producer awaits when the channel is full
     });
 
-    async Task ProduceAsync(IAsyncEnumerable<Tick> feed, CancellationToken ct)
-    {
-        await foreach (var tick in feed.WithCancellation(ct))
-            await channel.Writer.WriteAsync(tick, ct);   // completes only when there is room: this is the backpressure
-        channel.Writer.Complete();
-    }
-
-    async Task ConsumeAsync(WebSocket socket, CancellationToken ct)
-    {
-        await foreach (var tick in channel.Reader.ReadAllAsync(ct))
-            await socket.SendAsync(JsonSerializer.SerializeToUtf8Bytes(tick), WebSocketMessageType.Text, true, ct);
-    }
-
     // Latest-value subscribers: shed instead of wait, but count what was shed.
     var dropped = 0;
     var latest = Channel.CreateBounded<Tick>(
         new BoundedChannelOptions(capacity: 1) { FullMode = BoundedChannelFullMode.DropOldest },
         itemDropped: _ => Interlocked.Increment(ref dropped));
 
+    // Wire-up: await Task.WhenAll(TickPipeline.ProduceAsync(feed, channel.Writer, ct), TickPipeline.ConsumeAsync(channel.Reader, socket, ct));
+
     record Tick(string Symbol, decimal Bid, decimal Ask);
+
+    static class TickPipeline
+    {
+        public static async Task ProduceAsync(IAsyncEnumerable<Tick> feed, ChannelWriter<Tick> writer, CancellationToken ct)
+        {
+            await foreach (var tick in feed.WithCancellation(ct))
+                await writer.WriteAsync(tick, ct);   // completes only when there is room: this is the backpressure
+            writer.Complete();
+        }
+
+        public static async Task ConsumeAsync(ChannelReader<Tick> reader, WebSocket socket, CancellationToken ct)
+        {
+            await foreach (var tick in reader.ReadAllAsync(ct))   // awaiting each send lets a slow socket slow the reader
+                await socket.SendAsync(JsonSerializer.SerializeToUtf8Bytes(tick), WebSocketMessageType.Text, true, ct);
+        }
+    }
     ```
 
 === "Python"
@@ -142,9 +147,10 @@ A market-data gateway reads a firehose, hands ticks to a WebSocket writer throug
 === "TypeScript"
 
     ```typescript
-    import { auditTime, bufferTime, throttleTime } from 'rxjs';
+    import { Observable, auditTime, bufferTime, throttleTime } from 'rxjs';
 
-    // ticks$ is a hot stream of WebSocket or SSE messages; RxJS has no demand signal, so choose a policy per subscriber.
+    // A hot stream of WebSocket or SSE messages; RxJS has no demand signal, so choose a policy per subscriber.
+    declare const ticks$: Observable<{ symbol: string; bid: number; ask: number }>;
     const latestPerFrame$ = ticks$.pipe(auditTime(16));       // at most ~60 updates/s, always the newest value (lossy)
     const firstPerSecond$ = ticks$.pipe(throttleTime(1000));  // emits the first value, ignores the rest for 1 s (lossy)
     const batches$ = ticks$.pipe(bufferTime(250));            // arrays of everything seen in 250 ms (lossless, bounded by time)

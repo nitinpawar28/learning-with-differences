@@ -47,7 +47,7 @@ sequenceDiagram
 
 The "router" is whatever decides where a request goes: a load balancer listener rule, an App Service slot's routing table, a DNS record, a Kubernetes Service selector, a Lambda alias. The more atomic the switch, the better the pattern works. DNS-based switches (Elastic Beanstalk's CNAME swap, Traffic Manager) are the weakest because resolvers cache records and some clients keep hitting blue after the flip; a listener rule or slot swap moves new connections at once.
 
-What makes blue-green hard is state, and Fowler's 2015 update is mostly about the database. Both colours usually share one database, so green's schema changes must be applied before the switch in a form blue still understands, the expand phase of the [parallel change](https://martinfowler.com/bliki/ParallelChange.html) pattern; the contract phase that drops old columns waits until blue is retired. Alternatives are a read-only mode across the cut-over, or feeding writes to both environments. The same compatibility rule applies to message formats on Redis Streams, cache entries, and anything else that outlives a request.
+What makes blue-green hard is state, and the paragraph Fowler added in a 2015 update is about exactly that: the database. Both colours usually share one database, so green's schema changes must be applied before the switch in a form blue still understands, the expand phase of the [parallel change](https://martinfowler.com/bliki/ParallelChange.html) pattern; the contract phase that drops old columns waits until blue is retired. Alternatives are a read-only mode across the cut-over, or feeding writes to both environments. The same compatibility rule applies to message formats on Redis Streams, cache entries, and anything else that outlives a request.
 
 The platforms use different vocabulary:
 
@@ -83,15 +83,22 @@ For the reader's stack the practical details are the usual ones: EF Core migrati
 === "C#"
 
     ```csharp
-    // Program.cs (.NET 9, EF Core). App Service warm-up: WEBSITE_SWAP_WARMUP_PING_PATH=/ready,
-    // WEBSITE_SWAP_WARMUP_PING_STATUSES=200 so a failing readiness check aborts the swap.
+    // Program.cs (.NET 9, EF Core, Npgsql.EntityFrameworkCore.PostgreSQL). App Service warm-up:
+    // WEBSITE_SWAP_WARMUP_PING_PATH=/ready, WEBSITE_SWAP_WARMUP_PING_STATUSES=200, so a failing
+    // readiness check stops the swap.
+    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
+
     var builder = WebApplication.CreateBuilder(args);
-    builder.Services.AddDbContext<OrdersDbContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:Orders"]));
+    builder.Services.AddDbContext<OrdersDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Orders")));
     builder.Services.AddHealthChecks()
         .AddCheck<SchemaCompatibilityCheck>("schema", tags: ["ready"]);
 
     var app = builder.Build();
-    var colour = builder.Configuration["DEPLOYMENT_COLOUR"] ?? "unknown";   // a slot-sticky setting
+    // A normal (non-sticky) app setting: it travels with the code on a swap, so after the flip
+    // the production hostname answers "green". A slot-sticky setting would always say "blue".
+    var colour = app.Configuration["DEPLOYMENT_COLOUR"] ?? "unknown";
     app.Use(async (ctx, next) =>
     {
         ctx.Response.Headers["X-Deployment-Colour"] = colour;
@@ -155,12 +162,13 @@ For the reader's stack the practical details are the usual ones: EF Core migrati
     # App Service deployment slots: production is always the target of the swap.
     az webapp deployment slot create --resource-group rg-app --name orders-api --slot staging
 
-    # Slot-sticky settings stay with their slot across a swap; everything else travels with the code.
+    # --slot-settings KEY=VALUE pins a setting to its slot; --settings travel with the code on a swap.
+    # Production's sticky values are applied to the staging instances during phase one of the swap.
     az webapp config appsettings set --resource-group rg-app --name orders-api \
-      --settings DEPLOYMENT_COLOUR=blue WEBSITE_SWAP_WARMUP_PING_PATH=/ready WEBSITE_SWAP_WARMUP_PING_STATUSES=200 \
-      --slot-settings DEPLOYMENT_COLOUR
+      --slot-settings ASPNETCORE_ENVIRONMENT=Production
     az webapp config appsettings set --resource-group rg-app --name orders-api --slot staging \
-      --settings DEPLOYMENT_COLOUR=green --slot-settings DEPLOYMENT_COLOUR
+      --slot-settings ASPNETCORE_ENVIRONMENT=Staging \
+      --settings DEPLOYMENT_COLOUR=green WEBSITE_SWAP_WARMUP_PING_PATH=/ready WEBSITE_SWAP_WARMUP_PING_STATUSES=200
 
     # Deploy green, then swap with preview: phase one applies production settings to staging and pauses.
     az webapp deploy --resource-group rg-app --name orders-api --slot staging --type zip --src-path ./orders-api.zip
@@ -210,7 +218,7 @@ For the reader's stack the practical details are the usual ones: EF Core migrati
 
 ## Exam notes
 
-AZ-204 and AZ-104 test the mechanics of App Service deployment slots: which tiers support them, what a swap does, which settings are swapped and which are slot-sticky, swap with preview, auto swap (not available on Linux apps), warm-up settings, and the fact that rollback is another swap. AZ-400 asks you to pick blue-green against canary, rolling, rings and feature flags for a given scenario, and expects slots and Container Apps revisions as the Azure implementations; AZ-305 frames it as a zero-downtime and recovery design choice. On AWS, DVA-C02/C03 cover CodeDeploy deployment types, Elastic Beanstalk environment URL swaps and Lambda alias switching; DOP-C02 goes deep on CodeDeploy's EC2 blue/green options (replacement fleet provisioning, wait time, blue instance termination), ECS blue/green with test listeners, and CloudFormation-driven ECS blue/green; SAA-C03 and SAP-C03 reach for Route 53 weighted or failover records and Beanstalk swaps. CKAD may ask how to implement the pattern with two Deployments and a Service selector change.
+AZ-104 (objective "Configure deployment slots for an App Service") tests the mechanics: which tiers support slots, what a swap does, which settings are swapped and which are slot-sticky, swap with preview, auto swap (not available on Linux apps or Web App for Containers), warm-up settings, and the fact that rollback is another swap. AZ-400 and its successor AZ-401 name blue-green, canary, ring, progressive exposure, feature flags and A/B testing in the same objective and ask you to pick one for a scenario, with slot swaps and rolling deployments listed under minimising downtime; AZ-305 frames it as a zero-downtime and recovery design choice. On AWS, DVA-C02/C03 cover CodeDeploy deployment types, Elastic Beanstalk environment URL swaps and Lambda alias switching; DOP-C02 goes deep on CodeDeploy's EC2 blue/green options (replacement fleet provisioning, wait time, blue instance termination), ECS blue/green with test listeners, and CloudFormation-driven ECS blue/green; SAA-C03 and SAP-C03 reach for Route 53 weighted or failover records and Beanstalk swaps. CKAD names blue/green explicitly ("use Kubernetes primitives for common deployment strategies"), so expect to implement it with two Deployments and a Service selector change.
 
 Traps that recur: Lambda and ECS deployments in CodeDeploy are always blue/green, while EC2 can be in-place or blue/green and on-premises instances cannot do blue/green at all; a blue/green EC2 deployment requires a load balancer; swap with preview is unavailable when App Service authentication is enabled on a slot; scale settings, custom domains, managed identities and VNet integration never swap; and the Beanstalk CNAME swap is DNS-based, so it is the slow kind of switch.
 

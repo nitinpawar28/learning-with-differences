@@ -30,7 +30,7 @@ sources:
 
 OAuth 2.0 (RFC 6749) separates the *client* that wants access from the *authorization server* that issues tokens and the *resource server* that accepts them. Most grants exist to let a user delegate access to a client. The client credentials grant (section 4.4) is the one grant with no user at all: the client requests a token for resources it owns or has been granted directly, by authenticating as itself. A nightly settlement job, a Redis Streams consumer calling an orders API, an MCP server calling an upstream API as its own OAuth client: these are client credentials.
 
-Mechanically it is a single back-channel request. The client sends `POST /token` with `grant_type=client_credentials` and an optional `scope`, and authenticates per section 3.2.1. RFC 6749 obliges the server to support HTTP Basic with the client ID and secret, calls putting them in the request body "NOT RECOMMENDED" and forbids them in the URL; the OAuth 2.1 draft drops that reluctance and requires servers to accept body credentials. The response is an access token with `token_type` and `expires_in`. A refresh token "SHOULD NOT be included", and Microsoft Entra never issues one here: when the token expires, the client simply authenticates again. The grant "MUST only be used by confidential clients": code that can keep a credential private, such as a server or daemon, never a browser or mobile app.
+Mechanically it is a single back-channel request. The client sends `POST /token` with `grant_type=client_credentials` and an optional `scope`, and authenticates per section 3.2.1. RFC 6749 obliges the server to support HTTP Basic with the client ID and secret, calls putting them in the request body "NOT RECOMMENDED" and forbids them in the URL; the OAuth 2.1 draft reverses the preference: servers MUST accept credentials in the body and MAY support HTTP Basic. The response is an access token with `token_type` and `expires_in`. A refresh token "SHOULD NOT be included", and Microsoft Entra never issues one here: when the token expires, the client simply authenticates again. The grant "MUST only be used by confidential clients": code that can keep a credential private, such as a server or daemon, never a browser or mobile app.
 
 ```mermaid
 sequenceDiagram
@@ -47,9 +47,9 @@ sequenceDiagram
 
 How the client authenticates is the real design decision. A shared **client secret** is an [API key](api-key.md) by another name, except that it is only ever sent to the token endpoint and the resulting token is short-lived. A **client assertion** per RFC 7523 is better: the client signs a JWT whose `iss` and `sub` are its client ID, whose `aud` is the token endpoint, with an `exp` a few minutes out and a `jti` so the server may reject replays, and sends it as `client_assertion` with `client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. OpenID Connect calls this `private_key_jwt`. The private key never leaves the client. **Mutual TLS** per RFC 8705 goes further by authenticating the connection and binding the token to the certificate. And **workload identity federation** removes the stored credential entirely: the `client_assertion` is a token minted by Kubernetes, GitHub Actions or SPIRE (see [Workload identity](workload-identity.md)).
 
-The token *means* something different too: there is no consent and no delegated permission; authorization is granted to the application by an administrator. In Entra you request `scope=<resource>/.default`, an admin consents to application permissions (app roles), and the token carries a `roles` claim; an API may also keep an access control list keyed on the token's `appid` and `iss`. In Amazon Cognito the app client must have a secret, may support *only* this grant, and receives custom scopes defined on a resource server.
+The token *means* something different too: there is no consent and no delegated permission; authorization is granted to the application by an administrator. In Entra you request `scope=<resource>/.default`, an admin consents to application permissions (app roles), and the token carries a `roles` claim; an API may also keep an access control list keyed on the token's `appid` and `iss`. In Amazon Cognito the app client must have a secret, must support *only* this grant, and receives custom scopes defined on a resource server.
 
-The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, September 2026) remains an Internet-Draft due at the IESG in December 2026; it keeps this grant unchanged while dropping the implicit and password grants, requiring PKCE for authorization code, and forbidding bearer tokens in query strings. RFC 9700, the OAuth security best current practice, recommends sender-constraining access tokens with mTLS or DPoP, which matters most for long-running service clients. The MCP authorization specification builds on OAuth 2.1 too: an MCP server must validate that a token was issued for it and must never pass a client's token upstream, so when it calls another API it does so as its own client, usually with this grant.
+The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, September 2026) remains an Internet-Draft, with a working-group milestone to send it to the IESG in December 2026; it keeps this grant (still for confidential clients only) while dropping the implicit and password grants, requiring PKCE for authorization code, and forbidding bearer tokens in query strings. RFC 9700, the OAuth security best current practice, recommends sender-constraining access tokens with mTLS or DPoP, which matters most for long-running service clients. The MCP authorization specification builds on OAuth 2.1 too: an MCP server must validate that a token was issued for it and must never pass a client's token upstream, so when it calls another API it does so as its own client, usually with this grant.
 
 ## How it differs
 
@@ -82,6 +82,7 @@ The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, Septembe
     using System.Net.Http.Headers;
     using System.Net.Http.Json;
     using System.Security.Cryptography.X509Certificates;
+    using System.Text.Json.Serialization;
     using Microsoft.IdentityModel.JsonWebTokens;
     using Microsoft.IdentityModel.Tokens;
 
@@ -112,14 +113,17 @@ The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, Septembe
     response.EnsureSuccessStatusCode();
     var token = await response.Content.ReadFromJsonAsync<TokenResponse>();
 
-    http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.access_token);
+    http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.AccessToken);
     var orders = await http.GetStringAsync("https://orders.example.com/orders");
-    // Cache the token until expires_in elapses; a new request per call is the classic mistake.
+    // Cache the token until shortly before ExpiresIn elapses; a new token request per call is the classic mistake.
 
-    record TokenResponse(string access_token, string token_type, int expires_in);
+    record TokenResponse(
+        [property: JsonPropertyName("access_token")] string AccessToken,
+        [property: JsonPropertyName("token_type")] string TokenType,
+        [property: JsonPropertyName("expires_in")] int ExpiresIn);
     ```
 
-    For Entra, MSAL does the assertion for you: `ConfidentialClientApplicationBuilder.Create(clientId).WithCertificate(cert).WithAuthority(AzureCloudInstance.AzurePublic, tenantId).Build()` and then `AcquireTokenForClient(["https://graph.microsoft.com/.default"])`, which also caches the token.
+    For Entra, MSAL does the assertion for you: `var app = ConfidentialClientApplicationBuilder.Create(clientId).WithCertificate(cert).WithAuthority(AzureCloudInstance.AzurePublic, tenantId).Build()` and then `await app.AcquireTokenForClient(["https://graph.microsoft.com/.default"]).ExecuteAsync()`, which also caches the token in memory.
 
 === "Python"
 
@@ -127,12 +131,14 @@ The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, Septembe
     # Python 3.12: same flow with PyJWT (cryptography extra) and requests.
     import time
     import uuid
+    from pathlib import Path
+
     import jwt
     import requests
 
     TOKEN_ENDPOINT = "https://auth.example.com/oauth2/token"
     CLIENT_ID = "orders-worker"
-    private_key = open("/run/secrets/orders-worker.key").read()
+    private_key = Path("/run/secrets/orders-worker.key").read_text()
 
     now = int(time.time())
     assertion = jwt.encode(
@@ -175,7 +181,7 @@ The standard is stable but moving. OAuth 2.1 (draft-ietf-oauth-v2-1-16, Septembe
 
     ```bash
     # Cognito user pool: a resource server defines custom scopes; the app client must have a secret
-    # and may support only the client credentials grant (it cannot share an app client with user grants).
+    # and must support only the client credentials grant (it cannot share an app client with user grants).
     aws cognito-idp create-resource-server --user-pool-id "$POOL" \
       --identifier orders --name "Orders API" \
       --scopes ScopeName=read,ScopeDescription="Read orders"
@@ -219,4 +225,4 @@ On AWS, DVA-C03 and SCS-C03 test Cognito grant selection and bearer-token securi
 - [Capability-based AuthZ vs. RBAC](../security/iam/capability-based-authz.md) for what a scoped token should and should not grant.
 - Terms: [OAuth 2.0 authorization code flow](oauth-authorization-code-flow.md), [Workload identity](workload-identity.md), [Mutual TLS](mtls.md), [API key](api-key.md), [Secrets rotation](secrets-rotation.md), [Capability-based authorization](capability-based-authorization.md).
 - [RFC 6749, section 4.4](https://www.rfc-editor.org/rfc/rfc6749#section-4.4), [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523), [RFC 8705](https://www.rfc-editor.org/rfc/rfc8705) and [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700).
-- [Microsoft identity platform certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/certificate-credentials) for the exact assertion format, and the [MCP authorization specification](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization).
+- [Microsoft identity platform certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/certificate-credentials) for the exact assertion format, and the [MCP authorization specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization).

@@ -54,7 +54,7 @@ flowchart LR
     end
 ```
 
-Managed services follow the Kafka shape. An **Event Hubs** consumer group is an independent view of the hub with client-stored checkpoints (typically in Blob Storage); one epoch reader owns a partition per group (five non-epoch readers may share one), so partitions cap parallelism and the tier caps groups (Basic 1, Standard 20, Premium 100, Dedicated 1,000 per hub). **Kinesis** has no group noun: a Kinesis Client Library application is one, with a DynamoDB lease table mapping each shard to a worker and holding its checkpoint; shared readers split 2 MB/s per shard, while each enhanced fan-out consumer gets a dedicated 2 MB/s per shard (20 per stream). **Service Bus** expresses it structurally: a queue is one group of competing receivers; each topic subscription is a group with its own copy of every message.
+Managed services follow the Kafka shape. An **Event Hubs** consumer group is an independent view of the hub with client-stored checkpoints (typically in Blob Storage); one epoch reader owns a partition per group (five non-epoch readers may share one), so partitions cap parallelism and the tier caps groups (Basic 1, Standard 20, Premium 100, Dedicated 1,000 per hub). **Kinesis** has no group noun: a Kinesis Client Library application is one, with a DynamoDB lease table mapping each shard to a worker and holding its checkpoint; shared readers split 2 MB/s per shard, while each enhanced fan-out consumer gets a dedicated 2 MB/s per shard (up to 20 per stream, or 50 in On-demand Advantage mode). **Service Bus** expresses it structurally: a queue is one group of competing receivers; each topic subscription is a group with its own copy of every message.
 
 Operationally, consumer names must be stable and unique, or a crashed worker's pending entries wait for a sweep; acknowledgements and offset commits must follow the work, or the group quietly becomes [at-most-once](at-most-once-delivery.md); rebalances and claims deliver entries twice, so handlers stay idempotent; and lag is the metric to alert on. In the .NET 9 worker that means a pod-derived consumer name, a startup pass over its own pending history before switching to `>`, a periodic `XAUTOCLAIM` sweep, and a [dead-letter](dead-letter-queue.md) stream for entries whose delivery counter keeps climbing.
 
@@ -125,7 +125,11 @@ Operationally, consumer names must be stable and unique, or a crashed worker's p
         AutoOffsetReset = AutoOffsetReset.Earliest,
     };
     using var consumer = new ConsumerBuilder<string, string>(config)
-        .SetPartitionsRevokedHandler((c, revoked) => c.Commit())   // commit before giving partitions away
+        .SetPartitionsRevokedHandler((c, revoked) =>
+        {
+            try { c.Commit(); }                                   // commit before giving partitions away
+            catch (KafkaException ex) when (ex.Error.Code == ErrorCode.Local_NoOffset) { /* nothing consumed yet */ }
+        })
         .Build();
     consumer.Subscribe("orders");
     ```
@@ -188,7 +192,7 @@ Operationally, consumer names must be stable and unique, or a crashed worker's p
 
 ## Exam notes
 
-AZ-204 and AZ-305 test Event Hubs consumer groups as independent views, the recommendation of one active reader per partition per group, checkpointing in Blob Storage, the `$Default` group and the per-tier group and partition quotas, plus Service Bus topics and subscriptions as the way to give several readers their own copy. SAA-C03, DEA-C01 and SAP-C03 test the Kinesis numbers: shared throughput of 2 MB/s per shard across readers versus dedicated 2 MB/s per enhanced fan-out consumer, the 20-consumer registration limit, and the KCL lease table in DynamoDB; DVA-C02 and DVA-C03 add Lambda's per-shard processing and `ParallelizationFactor`. The traps: thinking groups copy data, adding consumers past the partition count, forgetting that a rebalance or lease takeover reprocesses records, and picking a queue when several applications each need every message.
+AZ-204 and AZ-305 test Event Hubs consumer groups as independent views, the recommendation of one active reader per partition per group, checkpointing in Blob Storage, the `$Default` group and the per-tier group and partition quotas, plus Service Bus topics and subscriptions as the way to give several readers their own copy. SAA-C03, DEA-C01 and SAP-C03 test the Kinesis numbers: shared throughput of 2 MB/s per shard across readers versus dedicated 2 MB/s per enhanced fan-out consumer, the 20-consumer registration limit (50 in On-demand Advantage mode), and the KCL lease table in DynamoDB; DVA-C02 and DVA-C03 add Lambda's per-shard processing and `ParallelizationFactor`. The traps: thinking groups copy data, adding consumers past the partition count, forgetting that a rebalance or lease takeover reprocesses records, and picking a queue when several applications each need every message.
 
 ## Self-check
 

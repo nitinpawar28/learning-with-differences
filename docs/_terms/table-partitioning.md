@@ -37,7 +37,7 @@ Indexes declared on the parent are *partitioned indexes*: a virtual definition w
 
 The documentation lists the reasons to bother: queries that touch one or a few partitions can run dramatically faster; bulk loads and deletes become `ATTACH PARTITION` and `DETACH PARTITION` or `DROP TABLE`, metadata operations instead of row-by-row work that bloats the heap and the [write-ahead log](write-ahead-log.md); and cold partitions can sit on cheaper tablespaces. Its rule of thumb for *when* is blunt: partition once the table would otherwise exceed physical memory. The rule for *how many* is to prune most of them: the planner copes with a few thousand partitions when typical queries exclude all but a handful, but each partition a session touches loads metadata into that session, and too many tiny partitions cost more than they save. Attaching a partition normally scans it to validate the bounds; a matching `CHECK` constraint added beforehand avoids the scan, and `DETACH PARTITION ... CONCURRENTLY` holds only a `SHARE UPDATE EXCLUSIVE` lock on the parent.
 
-Before declarative partitioning, PostgreSQL used table inheritance plus `CHECK` constraints, trigger-based routing and the `constraint_exclusion` setting (default `partition`); it still works, but routes through slower triggers and nothing verifies that the constraints are disjoint. Nobody hand-creates monthly partitions for long: `pg_partman`, available on Azure Database for PostgreSQL and on Amazon RDS and Aurora, pre-creates partitions on a schedule and detaches or drops old ones, which is what a TimescaleDB [hypertable](hypertable.md) does natively (its chunks are extension-managed child tables, not declarative partitions). PostgreSQL 18 made `VACUUM` and `ANALYZE` of a partitioned table process its children by default, with an `ONLY` option to skip them.
+Before declarative partitioning, PostgreSQL used table inheritance plus `CHECK` constraints, trigger-based routing and the `constraint_exclusion` setting (default `partition`); it still works, but routes through slower triggers and nothing verifies that the constraints are disjoint. Nobody hand-creates monthly partitions for long: `pg_partman`, available on Azure Database for PostgreSQL and on Amazon RDS and Aurora, pre-creates partitions on a schedule and detaches or drops old ones, which is what a TimescaleDB [hypertable](hypertable.md) does natively (its chunks are extension-managed child tables, not declarative partitions). `VACUUM` and `ANALYZE` on a partitioned table recurse into its partitions; PostgreSQL 18 added an `ONLY` option to process just the parent, which matters because autovacuum never analyzes the partitioned parent itself, only its leaves.
 
 In the reader's stack the candidates are the append-only, time-keyed tables that are not hypertables: audit logs, the [transactional outbox](transactional-outbox.md), event archives. Partition by month, index per partition, and let retention become `DETACH` followed by `DROP`.
 
@@ -93,13 +93,18 @@ flowchart TB
     -- One definition, one physical index per partition.
     CREATE INDEX orders_customer_idx ON orders (customer, ordered_at);
 
-    -- Attach a pre-loaded month without the validation scan.
+    -- Bulk-load a month into a standalone table, then attach it without the
+    -- validation scan: the matching CHECK constraint proves the bounds already.
+    CREATE TABLE orders_2026_09 (LIKE orders INCLUDING DEFAULTS);
+    -- ... COPY orders_2026_09 FROM ... ;
     ALTER TABLE orders_2026_09 ADD CONSTRAINT bounds
         CHECK (ordered_at >= '2026-09-01' AND ordered_at < '2026-10-01');
     ALTER TABLE orders ATTACH PARTITION orders_2026_09
         FOR VALUES FROM ('2026-09-01') TO ('2026-10-01');
+    ALTER TABLE orders_2026_09 DROP CONSTRAINT bounds;   -- now redundant
 
     -- Retention as metadata: detach without blocking, then drop or archive.
+    -- CONCURRENTLY cannot run inside a transaction block.
     ALTER TABLE orders DETACH PARTITION orders_2026_09 CONCURRENTLY;
     DROP TABLE orders_2026_09;
 
@@ -174,7 +179,7 @@ flowchart TB
 
 === "Azure"
 
-    - **Azure Database for PostgreSQL flexible server**: native declarative partitioning plus the `pg_partman` extension (5.4.3 on PostgreSQL 16 to 18 at the time of writing) and its `pg_partman_bgw` background worker; the documentation warns to run partition maintenance under a dedicated non-admin role rather than `azure_pg_admin`.
+    - **Azure Database for PostgreSQL flexible server**: native declarative partitioning plus the `pg_partman` extension (5.4.3 on PostgreSQL 16 to 18 at the time of writing) and its `pg_partman_bgw` background worker (or `pg_cron`) to run `run_maintenance()`; no superuser is needed, and the documentation recommends a dedicated role that owns the partition sets and the schemas where new partitions are created.
     - **Azure SQL Database, Managed Instance and SQL Server** partition tables and indexes through a *partition function* (the boundary values) and a *partition scheme* (which filegroups receive them); loading and ageing data uses partition switching, the SQL Server counterpart of `ATTACH` and `DETACH`.
     - **Azure Cosmos DB** "partition keys" are a different sense of the word: they decide which physical partition (shard) stores an item, so that is [horizontal scaling](horizontal-scaling.md), not table partitioning.
 

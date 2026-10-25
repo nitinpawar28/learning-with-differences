@@ -43,7 +43,7 @@ Mechanically a canary needs four things. A **routing layer** that can split traf
 
 The SRE Workbook's advice on canary design is worth internalising. Pick a canary population and duration large enough to see a signal: a 1 percent canary of a low-traffic service at 3 a.m. proves nothing, and performance regressions often appear only under peak load. Run one canary at a time so that effects are attributable. Choose a dozen or fewer metrics that reflect what users feel, tied to SLIs; HTTP status codes and latency are strong signals, CPU is noisy. Compare canary against control concurrently rather than against yesterday, because time of day is itself a cause of metric change. The Azure Well-Architected Framework's safe deployment practices (OE:11) say the same in release-ring vocabulary: progressive exposure, health models that gate each ring, and bake times measured in hours or days rather than minutes.
 
-Where it shows up: Lambda weighted aliases and CodeDeploy's `LambdaCanary10Percent5Minutes` family; ECS blue/green deployments with `ECSCanary10Percent5Minutes`; Elastic Beanstalk traffic-splitting deployments; API Gateway stage canaries; App Service slot traffic routing (which pins a client to its slot with the `x-ms-routing-name` cookie for an hour, so a user's experience stays consistent); Container Apps revision weights; the canary strategy in Azure Pipelines deployment jobs for Kubernetes; and Argo Rollouts or a [service mesh](service-mesh.md) on AKS or EKS. In the reader's stack, an ASP.NET Core API tags its metrics with the deployment colour so a Prometheus or Azure Monitor query can compare the two populations; an Angular front end is canaried by routing a slice of users to the new static build; a new version of a Redis Streams worker joins the same consumer group as the old one and therefore takes a proportional share of messages, which is a canary for free as long as you watch per-version failures; a new MCP tool server gets a small share of agent sessions behind the gateway before it replaces the old one.
+Where it shows up: Lambda weighted aliases and CodeDeploy's `LambdaCanary10Percent5Minutes` family; CodeDeploy-managed ECS blue/green deployments with `CodeDeployDefault.ECSCanary10Percent5Minutes`, and since October 2025 the canary and linear strategies built into ECS itself; Elastic Beanstalk traffic-splitting deployments; API Gateway stage canaries; App Service slot traffic routing (which pins a client to its slot with the `x-ms-routing-name` cookie for an hour, so a user's experience stays consistent); Container Apps revision weights; the canary strategy in Azure Pipelines deployment jobs for Kubernetes; and Argo Rollouts or a [service mesh](service-mesh.md) on AKS or EKS. In the reader's stack, an ASP.NET Core API tags its metrics with the deployment colour so a Prometheus or Azure Monitor query can compare the two populations; an Angular front end is canaried by routing a slice of users to the new static build; a new version of a Redis Streams worker joins the same consumer group as the old one and therefore takes a proportional share of messages, which is a canary for free as long as you watch per-version failures; a new MCP tool server gets a small share of agent sessions behind the gateway before it replaces the old one.
 
 ## How it differs
 
@@ -71,7 +71,8 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
 
     ```csharp
     // Program.cs (.NET 9). Packages: OpenTelemetry.Extensions.Hosting, OpenTelemetry.Exporter.OpenTelemetryProtocol
-    using System.Diagnostics.Metrics;
+    using System.Diagnostics;            // TagList
+    using System.Diagnostics.Metrics;    // Meter, Counter, Histogram
 
     var builder = WebApplication.CreateBuilder(args);
     var colour = builder.Configuration["DEPLOYMENT_COLOUR"] ?? "control";   // set per slot, revision or task set
@@ -123,7 +124,7 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
     async def observe(request: Request, call_next):
         started = time.perf_counter()
         response = await call_next(request)
-        route = request.scope.get("route").path if request.scope.get("route") else "unmatched"
+        route = getattr(request.scope.get("route"), "path", "unmatched")   # template, not raw URL
         REQUESTS.labels(COLOUR, route, response.status_code).inc()
         LATENCY.labels(COLOUR, route).observe(time.perf_counter() - started)
         return response
@@ -167,7 +168,11 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
             on:
               failure:
                 steps:
-                  - script: echo "analysis failed; the strategy rejects the canary"
+                  - task: KubernetesManifest@1          # remove the canary and baseline workloads
+                    inputs:
+                      action: reject
+                      strategy: $(strategy.name)
+                      manifests: manifests/orders-api.yaml
     ```
 
 === "AWS"
@@ -180,7 +185,7 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
         Type: AWS::Serverless::Function
         Properties:
           Handler: Orders::Orders.Function::Handler
-          Runtime: dotnet8
+          Runtime: dotnet10
           AutoPublishAlias: live
           DeploymentPreference:
             Type: Canary10Percent10Minutes
@@ -193,10 +198,11 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
     aws lambda update-alias --function-name orders --name live \
       --function-version 41 --routing-config AdditionalVersionWeights={"42"=0.10}
 
-    # ECS through CodeDeploy: a predefined canary configuration for the traffic shift.
+    # ECS through CodeDeploy: a predefined canary configuration for the traffic shift
+    # (10 percent, then the remaining 90 percent five minutes later). The AppSpec lives in S3.
     aws deploy create-deployment --application-name orders-api --deployment-group-name orders-api-ecs \
       --deployment-config-name CodeDeployDefault.ECSCanary10Percent5Minutes \
-      --revision revisionType=AppSpecContent,appSpecContent={content="$(cat appspec.yaml)"}
+      --revision '{"revisionType":"S3","s3Location":{"bucket":"releases","key":"orders-api/appspec.yaml","bundleType":"YAML"}}'
 
     # API Gateway (REST): a canary on the stage with its own CloudWatch log group under /Canary.
     aws apigateway create-deployment --rest-api-id a1b2c3 --stage-name prod \
@@ -213,9 +219,9 @@ Canaries are also not **A/B tests**, although both split traffic. An A/B test co
 
 ## Exam notes
 
-AZ-400 is the exam that most directly tests canaries: it expects you to distinguish canary, blue-green, rolling, ring-based (progressive exposure) and feature-flag approaches, to know the canary strategy in Azure Pipelines deployment jobs, and to connect bake time and health monitoring to safe deployment practices. AZ-204 asks about App Service slot traffic routing percentages and the opt-in query parameter; AZ-305 frames canaries as a risk-reduction design choice. On AWS, DVA-C02/C03 cover Lambda weighted aliases (two versions, no `$LATEST`), the CodeDeploy canary versus linear versus all-at-once configurations, API Gateway canary stages and Elastic Beanstalk traffic splitting; DOP-C02 goes deeper into custom deployment configurations, alarms-driven rollback and CloudWatch-based verification; SAA-C03 and SAP-C03 use Route 53 weighted routing for the cross-region version. CKAD and KCNA may ask how to approximate a canary with two Deployments sharing a Service and differing replica counts, and why that gives only coarse percentages.
+AZ-400, and its successor AZ-401 (AZ-400 retires on 2027-02-01), test canaries most directly: the shared objective lists blue-green, canary, ring, progressive exposure, feature flags and A/B testing, and you are expected to know the canary strategy in Azure Pipelines deployment jobs and to connect bake time and health monitoring to safe deployment practices. AZ-104's deployment-slot objective covers slot traffic routing percentages and the opt-in query parameter; AZ-305 frames canaries as a risk-reduction design choice. On AWS, DVA-C03 names canary, blue/green and rolling in its deployment-strategy objective, and DVA-C02/C03 cover Lambda weighted aliases (two versions, no `$LATEST`), the CodeDeploy canary versus linear versus all-at-once configurations, API Gateway canary stages and Elastic Beanstalk traffic splitting; DOP-C02 goes deeper into custom deployment configurations, alarms-driven rollback and CloudWatch-based verification; SAA-C03 and SAP-C03 use Route 53 weighted routing for the cross-region version. CKAD names canary explicitly among the deployment strategies to build from Kubernetes primitives: two Deployments sharing a Service with differing replica counts, which gives only coarse percentages; KCNA asks the conceptual version.
 
-Traps: CodeDeploy's "canary" configurations shift traffic in exactly two steps (for example 10 percent, then the remaining 90 after the wait), while "linear" shifts equal increments on a fixed interval; a Network Load Balancer with ECS supports only the all-at-once configuration; App Service routes by percentage only, not by user attribute, and pins clients by cookie; Traffic Manager weights are applied per DNS query, so client and resolver caching skews small-population canaries.
+Traps: CodeDeploy's "canary" configurations shift traffic in exactly two steps (for example 10 percent, then the remaining 90 after the wait), while "linear" shifts equal increments on a fixed interval; a CodeDeploy-managed ECS deployment behind a Network Load Balancer supports only `CodeDeployDefault.ECSAllAtOnce` (ECS's own canary and linear strategies have supported NLB since February 2026); App Service's automatic routing is a random percentage, not a user attribute (opting in is only through the `x-ms-routing-name` query parameter), and it pins clients by cookie for an hour; Traffic Manager weights are applied per DNS query, so client and resolver caching skews small-population canaries.
 
 ## Self-check
 

@@ -57,7 +57,7 @@ flowchart TB
 
 **[Columnar storage](columnar-storage.md)** is the opposite layout: one column of many records together. The decisive difference is which query shape pays. A row store answers entity-at-a-time questions with one page; a column store answers column-at-a-time questions by reading only the segments involved and compressing them several times better. Choose rows when the workload is reads by key and single-row writes (OLTP, online transaction processing), columns when it is scans and aggregates over many rows (OLAP, online analytical processing), and a hybrid such as TimescaleDB hypercore or a SQL Server nonclustered columnstore index when it is both.
 
-**[B-tree index](b-tree-index.md)** is frequently mistaken for a storage layout because SQL Server's clustered index really does dictate row order. The index is still a separate sorted structure whose leaf entries lead to rows; the rows themselves remain row-oriented. In PostgreSQL the distinction is sharper: the heap is never ordered by an index, every index is secondary, and an index-only scan is possible only when the visibility map says the heap page needs no visit. Think of the layout as *where bytes live* and the index as *how to find them*.
+**[B-tree index](b-tree-index.md)** is frequently mistaken for a storage layout because SQL Server's clustered index really does dictate row order. The index is still a separate sorted structure whose leaf entries lead to rows; the rows themselves remain row-oriented. In PostgreSQL the distinction is sharper: the heap is never ordered by an index, every index is secondary, and even an index-only scan must visit the heap for any page the visibility map does not mark all-visible. Think of the layout as *where bytes live* and the index as *how to find them*.
 
 **[MVCC](mvcc.md)** is a concurrency protocol that happens to be implemented inside heap tuples in PostgreSQL (`t_xmin`, `t_xmax`), which makes people say "the heap is MVCC". Other engines implement MVCC elsewhere (SQL Server keeps row versions in a version store when row-versioning isolation is on) while using the same row-oriented pages. The storage layout determines I/O cost; MVCC determines visibility and bloat. You tune the first with page size, fill factor and TOAST strategy, the second with vacuum and transaction length.
 
@@ -107,14 +107,12 @@ flowchart TB
         "SELECT id, status, total FROM orders WHERE id = $1", conn);
     cmd.Parameters.Add(new NpgsqlParameter { Value = 42L });
 
-    await using var reader = await cmd.ExecuteReaderAsync();
-    if (await reader.ReadAsync())
+    Order? order = null;
+    await using (var reader = await cmd.ExecuteReaderAsync())
     {
-        var order = new Order(
-            reader.GetInt64(0),
-            reader.GetString(1),
-            reader.GetDecimal(2));
-    }
+        if (await reader.ReadAsync())
+            order = new Order(reader.GetInt64(0), reader.GetString(1), reader.GetDecimal(2));
+    }   // close the reader: one Npgsql connection runs one command at a time
 
     // Ask the planner what it will touch; a row store answers in pages (buffers).
     await using var explain = new NpgsqlCommand(
@@ -131,11 +129,12 @@ flowchart TB
     import psycopg
 
     with psycopg.connect(conninfo) as conn:
-        for ctid, xmin, xmax, oid in conn.execute(
+        for ctid, xmin, xmax, order_id in conn.execute(
             "SELECT ctid::text, xmin::text, xmax::text, id FROM orders ORDER BY ctid"
         ):
-            # ctid prints as '(page,item)': the physical address of this row version
-            print(f"order {oid}: at {ctid}, inserted by xid {xmin}, deleted by xid {xmax}")
+            # ctid prints as '(page,item)': the physical address of this row version;
+            # xmax 0 means no transaction has deleted or locked this version
+            print(f"order {order_id}: at {ctid}, inserted by xid {xmin}, xmax {xmax}")
 
         # Buffer counts are the honest cost of a row-store query.
         for (line,) in conn.execute(
@@ -158,11 +157,11 @@ flowchart TB
 
 ## Misconceptions
 
-- **"Rows are stored in primary-key order."** In PostgreSQL the heap is unordered; a row lands wherever a page has room and moves only on update or `VACUUM FULL`. Only SQL Server-style clustered indexes (and InnoDB's clustered primary key) keep rows in key order.
+- **"Rows are stored in primary-key order."** In PostgreSQL the heap is unordered; a row lands wherever a page has room and moves only when it is updated or the table is rewritten (`VACUUM FULL`, `CLUSTER`). Only SQL Server-style clustered indexes (and InnoDB's clustered primary key) keep rows in key order.
 - **"A wide table with a hundred columns costs nothing if I only select two."** In a row store every page read carries all hundred columns through memory. Column selectivity is exactly what columnar storage adds; in a row store it is a free lunch only when an index-only scan can answer from the index.
 - **"The `ctid` is a stable row identifier."** It is a physical address that changes whenever the row is updated (a new version is written) or the table is rewritten. Use the primary key for identity; use `ctid` only for diagnostics or self-join deduplication within one statement.
-- **"Updates happen in place."** PostgreSQL never overwrites a visible tuple; an `UPDATE` writes a new version and leaves the old one for `VACUUM`. SQL Server does update in place but, under row-versioning isolation, copies the old version elsewhere first. Either way, update-heavy row stores need space management.
-- **"Page size does not matter to the application."** It fixes the I/O granularity, the row-size ceiling (TOAST or row-overflow beyond it) and the amount of data a single lock or a single full-page WAL image covers. Wide rows that straddle the limit are a design smell in a row store.
+- **"Updates happen in place."** PostgreSQL never overwrites a visible tuple; an `UPDATE` writes a new version and leaves the old one for `VACUUM`. SQL Server usually updates in place (a key change or a row that no longer fits becomes a delete plus insert) and, under row-versioning isolation, copies the old version to the version store first. Either way, update-heavy row stores need space management.
+- **"Page size does not matter to the application."** It fixes the I/O granularity, the row-size ceiling (TOAST or row-overflow beyond it), the size of a full-page WAL image and, in SQL Server, the amount of data a page lock covers. Wide rows that straddle the limit are a design smell in a row store.
 
 ## Exam notes
 

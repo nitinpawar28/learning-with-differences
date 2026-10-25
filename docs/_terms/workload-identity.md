@@ -46,7 +46,7 @@ flowchart LR
     C -. refreshed before expiry .-> C
 ```
 
-Each cloud productises the same idea. On Azure, a VM, App Service or Container App gets a **managed identity** (system-assigned, dying with the resource, or user-assigned and shareable) whose credential is never accessible to you. On AKS, **Microsoft Entra Workload ID** uses token projection and federation: a service account annotated with `azure.workload.identity/client-id`, a pod labelled `azure.workload.identity/use: "true"`, a webhook that injects a token file named by `AZURE_FEDERATED_TOKEN_FILE`, and a **federated identity credential** on a user-assigned managed identity or app registration whose issuer, subject (`system:serviceaccount:<ns>:<sa>`) and audience (`api://AzureADTokenExchange`) must match the token case-sensitively. The same federation accepts GitHub Actions, Google Cloud, AWS and SPIFFE tokens, never Entra-issued ones, with at most 20 federated credentials per identity. On AWS, **EKS Pod Identity** maps a service account to an IAM role through an association, injects `AWS_CONTAINER_CREDENTIALS_FULL_URI` and `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE`, and has a node agent on `169.254.170.23` call `AssumeRoleForPodIdentity`; the role trusts the `pods.eks.amazonaws.com` principal. Its predecessor, **IAM roles for service accounts (IRSA)**, registers each cluster's OIDC issuer with IAM and has the SDK call `AssumeRoleWithWebIdentity` with the projected token named by `AWS_WEB_IDENTITY_TOKEN_FILE`. GitHub Actions does the same for pipelines: a job with `id-token: write` permission requests a JWT from `token.actions.githubusercontent.com` whose `sub` claim (`repo:org/repo:ref:refs/heads/main`) the cloud checks before issuing short-lived credentials.
+Each cloud productises the same idea. On Azure, a VM, App Service or Container App gets a **managed identity** (system-assigned, dying with the resource, or user-assigned and shareable) whose credential is never accessible to you. On AKS, **Microsoft Entra Workload ID** uses token projection and federation: a service account annotated with `azure.workload.identity/client-id`, a pod labelled `azure.workload.identity/use: "true"`, a webhook that injects a token file named by `AZURE_FEDERATED_TOKEN_FILE`, and a **federated identity credential** on a user-assigned managed identity or app registration whose issuer, subject (`system:serviceaccount:<ns>:<sa>`) and audience (`api://AzureADTokenExchange`) must match the token case-sensitively. The same federation accepts GitHub Actions, Google Cloud, AWS and SPIFFE tokens, never Entra-issued ones, with at most 20 federated credentials per identity. On AWS, **EKS Pod Identity** maps a service account to an IAM role through an association, injects `AWS_CONTAINER_CREDENTIALS_FULL_URI` and `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE`, and has a node agent on `169.254.170.23` call `AssumeRoleForPodIdentity`; the role trusts the `pods.eks.amazonaws.com` principal. The older mechanism, **IAM roles for service accounts (IRSA)**, still required on Fargate and Windows nodes, registers each cluster's OIDC issuer with IAM and has the SDK call `AssumeRoleWithWebIdentity` with the projected token named by `AWS_WEB_IDENTITY_TOKEN_FILE`. GitHub Actions does the same for pipelines: a job with `id-token: write` permission requests a JWT from `token.actions.githubusercontent.com` whose `sub` claim (`repo:org/repo:ref:refs/heads/main`) the cloud checks before issuing short-lived credentials.
 
 Without a platform to attest you, as in a Docker Compose home lab, the fallback is SPIRE with its Unix workload attestor, or a vault that mints short-lived credentials from one guarded bootstrap secret: the "secret zero" that workload identity otherwise eliminates.
 
@@ -74,18 +74,22 @@ Without a platform to attest you, as in a Docker Compose home lab, the fallback 
 
     ```csharp
     // Azure (AKS with Entra Workload ID): no secret anywhere. The webhook injected AZURE_CLIENT_ID,
-    // AZURE_TENANT_ID and AZURE_FEDERATED_TOKEN_FILE; WorkloadIdentityCredential re-reads the projected
-    // token on every exchange, so Kubernetes rotation is picked up for free. Azure.Identity >= 1.9.0.
+    // AZURE_TENANT_ID and AZURE_FEDERATED_TOKEN_FILE; WorkloadIdentityCredential reads the projected
+    // token file again whenever it needs a new assertion instead of caching it for the life of the
+    // process, so Kubernetes rotation is picked up for free. Azure.Identity >= 1.9.0.
+    using Azure.Core;
     using Azure.Identity;
     using Azure.Security.KeyVault.Secrets;
 
-    var credential = new DefaultAzureCredential();           // resolves to WorkloadIdentityCredential in-cluster
+    // Name the credential explicitly in production; DefaultAzureCredential would also resolve to it,
+    // but only after probing the environment.
+    var credential = new WorkloadIdentityCredential();
     var secrets = new SecretClient(new Uri("https://orders-kv.vault.azure.net/"), credential);
     KeyVaultSecret dbPassword = await secrets.GetSecretAsync("timescale-password");
 
     // Request scopes in v2 form: "<resource>/.default", never a bare resource URI.
-    var token = await credential.GetTokenAsync(
-        new Azure.Core.TokenRequestContext(["https://management.azure.com/.default"]));
+    AccessToken token = await credential.GetTokenAsync(
+        new TokenRequestContext(["https://management.azure.com/.default"]));
     ```
 
     ```csharp
@@ -101,20 +105,23 @@ Without a platform to attest you, as in a Docker Compose home lab, the fallback 
 === "Python"
 
     ```python
-    # Azure: identical shape. azure-identity >= 1.13.0 understands the injected environment.
-    from azure.identity import DefaultAzureCredential
+    # Azure: identical shape. azure-identity >= 1.13.0 ships WorkloadIdentityCredential.
+    import os
+    from pathlib import Path
+
+    import boto3
+    from azure.identity import WorkloadIdentityCredential
     from azure.keyvault.secrets import SecretClient
 
-    cred = DefaultAzureCredential()                      # WorkloadIdentityCredential inside AKS
+    cred = WorkloadIdentityCredential()                  # reads the injected AZURE_* variables
     kv = SecretClient(vault_url="https://orders-kv.vault.azure.net/", credential=cred)
     db_password = kv.get_secret("timescale-password").value
 
     # If you build a custom client assertion yourself, read the token file every time:
-    import os
-    assertion = open(os.environ["AZURE_FEDERATED_TOKEN_FILE"]).read()   # kubelet rotates it in place
+    def federated_assertion() -> str:
+        return Path(os.environ["AZURE_FEDERATED_TOKEN_FILE"]).read_text()   # kubelet rotates it in place
 
     # AWS: boto3's default chain picks up Pod Identity or IRSA from the environment.
-    import boto3
     s3 = boto3.client("s3")
     export = s3.get_object(Bucket="orders-exports", Key="2026-10-24.parquet")
     ```
@@ -204,7 +211,7 @@ Kubernetes exams approach it from the cluster side: CKS warns about service acco
 ## Self-check
 
 ??? question "Your .NET 9 reporting job runs as a Kubernetes CronJob on AKS and reads a TimescaleDB password from Key Vault. A reviewer asks why the job has a client secret in a Secret object at all. What do you change, and what remains a secret?"
-    Enable the OIDC issuer and workload identity on the cluster, create a user-assigned managed identity with a Key Vault RBAC role, add a federated identity credential whose subject is `system:serviceaccount:reporting:reporting-sa` and audience `api://AzureADTokenExchange`, annotate the service account with the identity's client ID and label the pod template with `azure.workload.identity/use: "true"`. The job then authenticates with `DefaultAzureCredential` and the Secret object is deleted. What remains is the database password itself, fetched at run time, until you move TimescaleDB to certificate or token authentication; and the cluster's token-signing key, which Azure manages.
+    Enable the OIDC issuer and workload identity on the cluster, create a user-assigned managed identity with a Key Vault RBAC role, add a federated identity credential whose subject is `system:serviceaccount:reporting:reporting-sa` and audience `api://AzureADTokenExchange`, annotate the service account with the identity's client ID and label the pod template with `azure.workload.identity/use: "true"`. The job then authenticates with `WorkloadIdentityCredential` (or `DefaultAzureCredential`, which resolves to it in the pod) and the Secret object is deleted. What remains is the database password itself, fetched at run time, until you move TimescaleDB to certificate or token authentication; and the cluster's token-signing key, which Azure manages.
 
 ??? question "A GitHub Actions workflow deploys to both Azure and AWS. The team stores a service principal secret and an IAM access key as repository secrets and rotates them quarterly. How do you remove both without a cutover outage?"
     Give the job `id-token: write` permission and let it request a JWT from `token.actions.githubusercontent.com`. On Azure, add a federated identity credential to a managed identity or app registration whose subject matches the repository and environment (for example `repo:org/repo:environment:prod`) and switch the login step to federation. On AWS, create an IAM OIDC identity provider for GitHub and a role trusting `sts:AssumeRoleWithWebIdentity` with a condition on the same subject. Run both paths in parallel for one release, then delete the repository secrets and revoke the old credentials: federation is additive, so there is no moment where the pipeline has no valid identity.

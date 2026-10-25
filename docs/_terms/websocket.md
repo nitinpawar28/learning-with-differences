@@ -125,11 +125,17 @@ A market-data endpoint: the client sends one subscription message, then the serv
     ```python
     import asyncio
     import json
+    from collections.abc import AsyncIterator
+
     from websockets.asyncio.server import serve
+
+    async def feed(symbols: list[str]) -> AsyncIterator[dict]:
+        for symbol in symbols:                                  # stand-in for the real market-data source
+            yield {"symbol": symbol, "bid": 1.08412, "ask": 1.08419}
 
     async def ticks(websocket):
         symbols = (await websocket.recv()).split(",")           # client speaks first
-        async for tick in feed(symbols):                        # your async generator of dicts
+        async for tick in feed(symbols):
             await websocket.send(json.dumps(tick))              # str becomes a text frame (0x1); bytes a binary frame (0x2)
         await websocket.close(1000, "feed ended")
 
@@ -152,6 +158,8 @@ A market-data endpoint: the client sends one subscription message, then the serv
 
     ```typescript
     import * as signalR from '@microsoft/signalr';
+
+    declare function render(tick: unknown): void;   // your UI update
 
     // SignalR: negotiate, then try WebSockets, then Server-Sent Events, then Long Polling. Restrict when you know the network.
     const hub = new signalR.HubConnectionBuilder()
@@ -184,7 +192,7 @@ A market-data endpoint: the client sends one subscription message, then the serv
 - **"A WebSocket is just HTTP kept open."** Only the handshake is HTTP. After `101` (or the HTTP/2 `CONNECT`), there are no methods, status codes, caching or request headers; intermediaries that do not understand Upgrade or Extended CONNECT drop it, which is why SignalR and friends fall back to SSE and long polling.
 - **"Masking makes client frames secure."** Masking defeats cache poisoning in intermediaries; it is not encryption. Confidentiality comes from `wss://` (TLS), and server-to-client frames are not masked at all.
 - **"The server is told when a client disconnects."** Only if the client sends a close frame. A dropped network leaves a half-open socket until a ping goes unanswered or a timeout fires, which is what `KeepAliveInterval`, `KeepAliveTimeout` and the Python `ping_timeout` exist for.
-- **"SignalR is WebSockets."** SignalR is a hub protocol with RPC, groups, reconnect and scale-out that *prefers* WebSockets and falls back to SSE and long polling; the Java client supports WebSockets only. Raw sockets give you none of the hub features.
+- **"SignalR is WebSockets."** SignalR is a hub protocol with RPC, groups, reconnect and scale-out that *prefers* WebSockets and falls back to SSE and long polling; not every client has every piece (the Java client offers WebSockets and long polling but no SSE transport and no automatic reconnect). Raw sockets give you none of the hub features.
 - **"Browsers can send custom headers on a WebSocket."** The browser API takes a URL and a subprotocol list. Authentication rides on cookies, a token in the URL, or a first message after connect; server-side clients such as `ClientWebSocket` can set headers.
 
 ## Exam notes

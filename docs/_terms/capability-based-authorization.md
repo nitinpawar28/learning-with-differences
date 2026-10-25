@@ -35,7 +35,7 @@ Mechanically, a capability token has three parts: an identifier that tells the i
 - **Attenuation.** Anyone holding a capability can derive a narrower one ("this token, but read-only, for tenant acme, expiring in five minutes") without contacting the issuer, because adding a constraint only extends the signature chain. Nobody can remove a constraint, because that would require a signature they never had.
 - **Delegation.** Handing the attenuated token to another party transfers exactly that authority and nothing else.
 
-Verification walks the chain. A macaroon verifier recomputes `HMAC(rootKey, id)`, then `HMAC(previousSignature, caveat)` for each caveat, checks every caveat predicate against the request context and compares the result with the presented signature; third-party caveats additionally require a *discharge* macaroon from another service (an identity provider, an audit service). Biscuit replaces the symmetric chain with Ed25519 signatures (each block commits to the key that must sign the next, so the verifier needs only the root public key) and evaluates Datalog checks, then ordered allow/deny policies. UCAN 1.0 identifies issuer and audience with decentralized identifiers (DIDs), chains delegations by content hash, requires each link to restate or narrow what it received, and separates the *invocation* that exercises the authority.
+Verification walks the chain. A macaroon verifier recomputes `HMAC(rootKey, id)`, then `HMAC(previousSignature, caveat)` for each caveat, checks every caveat predicate against the request context and compares the result with the presented signature; third-party caveats additionally require a *discharge* macaroon from another service (an identity provider, an audit service). Biscuit replaces the symmetric chain with Ed25519 signatures (each block carries the public key whose private half signs the next block, so the verifier needs only the root public key) and evaluates Datalog checks, then ordered allow/deny policies. UCAN 1.0 identifies issuer and audience with decentralized identifiers (DIDs), chains delegations by content hash, requires each link to restate or narrow what it received, and separates the *invocation* that exercises the authority.
 
 Why the model exists: the **confused deputy**. Hardy (1988) described a compiler on a commercial timesharing system that wrote usage statistics into the system directory and therefore held write permission there. A user named the billing file in that directory as the compiler's debugging-output location; the compiler, acting on its own *ambient authority* rather than the user's, overwrote the bill. Identity-based checks cannot fix this, because the compiler *was* allowed to write there. Capabilities fix it by construction: the user hands over a capability for the output file, and the compiler never holds one for the bill. The same bug appears today when an MCP server forwards a user's token upstream, which is why the MCP authorization specification requires audience-bound tokens (RFC 8707 resource indicators) and forbids token passthrough.
 
@@ -138,20 +138,20 @@ A minimal macaroon-style capability shows the mechanics: a root key known only t
 
     @dataclass(frozen=True)
     class Capability:
-        id: str
+        key_id: str
         caveats: tuple[str, ...]
         signature: bytes
 
         @staticmethod
-        def mint(root_key: bytes, id: str) -> "Capability":
-            return Capability(id, (), hmac.new(root_key, id.encode(), hashlib.sha256).digest())
+        def mint(root_key: bytes, key_id: str) -> "Capability":
+            return Capability(key_id, (), hmac.new(root_key, key_id.encode(), hashlib.sha256).digest())
 
         def attenuate(self, caveat: str) -> "Capability":      # narrow only, never widen
             sig = hmac.new(self.signature, caveat.encode(), hashlib.sha256).digest()
-            return Capability(self.id, (*self.caveats, caveat), sig)
+            return Capability(self.key_id, (*self.caveats, caveat), sig)
 
     def verify(root_key: bytes, cap: Capability, caveat_holds: Callable[[str], bool]) -> bool:
-        sig = hmac.new(root_key, cap.id.encode(), hashlib.sha256).digest()
+        sig = hmac.new(root_key, cap.key_id.encode(), hashlib.sha256).digest()
         for caveat in cap.caveats:
             if not caveat_holds(caveat):
                 return False
@@ -212,7 +212,7 @@ For agent tooling, the same pattern applies at the protocol level. The current M
 
 ## Misconceptions
 
-- **"Capabilities cannot be revoked."** They can: through short expiries, revocation identifiers (Biscuit derives one per block from its signature), stored access policies (Azure service SAS), or invalidating the signing credential (an AWS presigned URL dies with the credentials that signed it). What capabilities avoid is a *lookup on every request*; revocation is a separate, usually coarser, channel.
+- **"Capabilities cannot be revoked."** They can: through short expiries, revocation identifiers (Biscuit uses each block's signature as its revocation ID, so a verifier can deny-list one token or one delegation step), stored access policies (Azure service SAS), or invalidating the signing credential (an AWS presigned URL dies with the credentials that signed it). What capabilities avoid is a *lookup on every request*; revocation is a separate, usually coarser, channel.
 - **"Any bearer token is a capability."** A bearer token is a capability only if it designates a specific resource and rights and can be narrowed by its holder. A long-lived API key that unlocks a whole account is a bearer credential for ambient authority, which is the opposite design.
 - **"Capabilities replace authentication."** You still need to know which workload to issue to, which to log, and which identity to revoke in bulk. Workload identity and capabilities answer different questions and are layered, not substituted.
 - **"OAuth scopes are already capabilities."** Scopes are coarse strings interpreted by the resource server and are not attenuable by the client without a round trip to the authorization server; token exchange (RFC 8693) and resource indicators (RFC 8707) move OAuth closer, but the token still identifies a subject whose entitlements the server may consult.

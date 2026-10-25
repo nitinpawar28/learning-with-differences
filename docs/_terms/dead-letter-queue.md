@@ -100,7 +100,11 @@ The design decisions that matter are about *when* to dead-letter and *what to do
             await args.AbandonMessageAsync(args.Message);
         }
     };
-    processor.ProcessErrorAsync += args => Task.CompletedTask;
+    processor.ProcessErrorAsync += args =>
+    {
+        logger.LogError(args.Exception, "Service Bus error from {Source}", args.ErrorSource);
+        return Task.CompletedTask;
+    };
     await processor.StartProcessingAsync();
 
     // Redis Streams: promote entries that keep failing into a dead-letter stream.
@@ -137,12 +141,13 @@ The design decisions that matter are about *when* to dead-letter and *what to do
                 pass   # not deleted: visible again after the visibility timeout; 5th receive -> DLQ
 
     # Redis Streams: same promotion loop with redis-py.
-    for msg_id, consumer, idle_ms, deliveries in r.xpending_range("orders", "billing", "-", "+", 50):
-        if deliveries >= 5:
-            entry = r.xrange("orders", msg_id, msg_id)
-            if entry:
+    for p in r.xpending_range("orders", "billing", min="-", max="+", count=50):   # list of dicts
+        if p["times_delivered"] >= 5:
+            msg_id = p["message_id"]
+            entry = r.xrange("orders", min=msg_id, max=msg_id)
+            if entry:                                   # empty if the entry was trimmed away
                 fields = dict(entry[0][1])
-                fields.update({"source_id": msg_id, "deliveries": deliveries})
+                fields.update({"source_id": msg_id, "deliveries": p["times_delivered"]})
                 r.xadd("orders:dlq", fields)
             r.xack("orders", "billing", msg_id)
     ```

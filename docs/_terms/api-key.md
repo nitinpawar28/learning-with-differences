@@ -99,7 +99,7 @@ In the reader's stack, keys show up as Redis `AUTH` strings and TimescaleDB pass
        .AddEndpointFilter(async (ctx, next) =>
        {
            var presented = ctx.HttpContext.Request.Headers["X-API-Key"].ToString();
-           if (presented.Length < 16) return Results.Unauthorized();
+           if (presented.Length < 16) return Challenge(ctx.HttpContext);
 
            var store = ctx.HttpContext.RequestServices.GetRequiredService<IApiKeyStore>();
            var record = await store.FindByPrefixAsync(presented[..16]);
@@ -107,11 +107,17 @@ In the reader's stack, keys show up as Redis `AUTH` strings and TimescaleDB pass
            var valid = record is { Revoked: false }
                     && record.ExpiresAt > DateTimeOffset.UtcNow
                     && CryptographicOperations.FixedTimeEquals(record.Hash, hash);
-           if (!valid) return Results.Unauthorized();
+           if (!valid) return Challenge(ctx.HttpContext);
            if (!record!.Scopes.Contains("orders:read")) return Results.StatusCode(StatusCodes.Status403Forbidden);
            return await next(ctx);
        });
     app.Run();
+
+    static IResult Challenge(HttpContext http)
+    {
+        http.Response.Headers.WWWAuthenticate = "ApiKey";                     // 401 must name a scheme
+        return Results.Unauthorized();
+    }
 
     public interface IApiKeyStore { Task<ApiKeyRecord?> FindByPrefixAsync(string prefix); }
     public record ApiKeyRecord(byte[] Hash, string[] Scopes, DateTimeOffset ExpiresAt, bool Revoked);

@@ -41,9 +41,9 @@ flowchart LR
 
 How the tool knows the current state separates the main families:
 
-- **Terraform** (HashiCorp) and its community fork **OpenTofu** (a Linux Foundation project created after Terraform moved to the Business Source License in August 2023) describe resources in HCL and talk to any platform through providers. They keep a *state file* mapping each declared resource to the real one; `terraform plan` diffs configuration against state and the live API, `terraform apply` executes the plan in dependency order. Teams keep state in a remote backend with locking so that two applies cannot collide.
+- **Terraform** (HashiCorp) and its open-source fork **OpenTofu** (created under the Linux Foundation after Terraform moved to the Business Source License in August 2023, and a CNCF sandbox project since April 2025) describe resources in HCL and talk to any platform through providers. They keep a *state file* mapping each declared resource to the real one; `terraform plan` diffs configuration against state and the live API, `terraform apply` executes the plan in dependency order. Teams keep state in a remote backend with locking so that two applies cannot collide.
 - **Bicep** and ARM templates are Azure-native and declarative. Bicep is a domain-specific language that the CLI transpiles into an ARM JSON template; Azure Resource Manager then orchestrates ordering and parallelism. There is no state file: Azure's own record of the resource group is the state, `what-if` previews the diff, and deployment stacks add lifecycle management so that removing a resource from the file can delete it (`--action-on-unmanage deleteAll`) and deny settings can block out-of-band edits.
-- **CloudFormation** is the AWS equivalent: JSON or YAML templates create *stacks*, change sets preview an update before execution, failed updates roll back, and drift detection reports resources that were edited outside the stack (it reports, it does not correct).
+- **CloudFormation** is the AWS equivalent: JSON or YAML templates create *stacks*, change sets preview an update before execution, failed updates roll back, and drift detection reports resources that were edited outside the stack. Detection on its own corrects nothing; since November 2025 a drift-aware change set (`--deployment-mode REVERT_DRIFT`) can put drifted properties back to the template's values as part of an update.
 - **AWS CDK** and **Pulumi** let you write infrastructure in a general-purpose language. The CDK supports TypeScript, JavaScript, Python, Java, C#/.NET and Go, and `cdk synth` turns constructs into a CloudFormation template that CloudFormation then applies. The program is imperative; the model it emits and the reconciliation that follows are declarative.
 - **Ansible**, Chef and Puppet sit one layer down as configuration management: they shape what runs *inside* a machine. **Kubernetes manifests**, Helm charts and GitOps controllers such as Flux and Argo CD apply the same reconcile-to-desired-state idea to clusters, and a **Docker Compose** file is IaC for a developer's laptop.
 
@@ -53,7 +53,7 @@ For the reader's stack, IaC shows up as the Compose file that starts the API, Re
 
 **[Immutable infrastructure](immutable-infrastructure.md)** decides *how* a change reaches a running system; IaC decides *what* the system should look like. A Terraform-defined VM that a nightly playbook patches in place is IaC without immutability; a golden AMI baked by hand is immutability without IaC. They compose: IaC produces the image definition and the fleet definition, immutability makes the fleet match the code because nobody edits it afterwards.
 
-**[Horizontal scaling](horizontal-scaling.md)** is the classic case where IaC and runtime disagree. A template declares a desired instance count; an autoscaler changes that number every few minutes. If the template keeps asserting its number, every apply snaps capacity back, usually at the worst moment. The fix is to let the autoscaler own the attribute: a Terraform `lifecycle { ignore_changes = [desired_capacity] }` on the Auto Scaling group, or declaring the autoscale settings resource instead of a fixed VMSS capacity in Bicep.
+**[Horizontal scaling](horizontal-scaling.md)** is the classic case where IaC and runtime disagree. A template declares a desired instance count; an autoscaler changes that number every few minutes. If the template keeps asserting its number, every apply snaps capacity back, usually at the worst moment. The fix is to let the autoscaler own the attribute: a Terraform `lifecycle { ignore_changes = [desired_capacity] }` on the Auto Scaling group, or, in Bicep, declaring a `Microsoft.Insights/autoscaleSettings` resource that owns the count and keeping the scale set's `sku.capacity` out of routine redeployments (ARM has no ignore-changes equivalent, so a template that sends a capacity resets it until autoscale reacts).
 
 **[Secrets rotation](secrets-rotation.md)** is a runtime lifecycle, and IaC must stay out of its way. The template creates the vault, the secret *object* and the access policy, and the application setting holds a reference such as a Key Vault reference or a CloudFormation dynamic reference to Secrets Manager. The secret's value changes on rotation without a plan, an apply or a redeploy. Putting values in the file would also leak them into Git history and, for Terraform, into the state file, which stores attribute values in plain text and must be protected accordingly.
 
@@ -135,7 +135,7 @@ The same intent, "a private, versioned object store for application logs", in ea
     }
 
     provider "azurerm" {
-      features {}
+      features {}   # azurerm 4.x also needs subscription_id here or in ARM_SUBSCRIPTION_ID
     }
 
     variable "environment" { type = string }
@@ -147,6 +147,7 @@ The same intent, "a private, versioned object store for application logs", in ea
       account_tier             = "Standard"
       account_replication_type = "LRS"
       min_tls_version          = "TLS1_2"
+      allow_nested_items_to_be_public = false   # the azurerm default is true
 
       blob_properties {
         versioning_enabled = true
@@ -224,9 +225,9 @@ cdk diff LogsStack
 
 ## Exam notes
 
-Fundamentals exams (AZ-900, CLF-C02) ask what IaC is for: consistency, repeatability, version control, and the native tools (ARM/Bicep, CloudFormation). AZ-104 and AZ-204 expect hands-on ARM and Bicep knowledge: parameters, outputs, modules, what-if, and the difference between incremental and complete deployment modes. AZ-305 and AZ-400 add tool selection (Bicep versus Terraform), layering pipelines, policy as code, and treating IaC with the same quality gates as application code. On AWS, SAA-C03 and SAP-C03 test CloudFormation concepts such as stacks, nested stacks, StackSets for multi-account rollout, and change sets; DVA-C02/C03 add SAM and the CDK; DOP-C02 goes deepest, covering change sets, drift detection, stack policies, rollback behaviour, and CDK bootstrapping and pipelines. The HashiCorp Terraform Associate (TA-004) is entirely about the Terraform workflow: providers, the purpose of state, remote backends and locking, workspaces, modules, and reading a plan correctly. The Kubernetes exams (CKA, CKAD) reward the declarative habit of `kubectl apply` over imperative `kubectl create` and `edit`.
+Fundamentals exams (AZ-900, CLF-C02) ask what IaC is for: consistency, repeatability, version control, and the native tools (ARM/Bicep, CloudFormation). AZ-104 expects hands-on ARM and Bicep knowledge: interpreting and modifying a file, parameters, outputs, modules, what-if, exporting a deployment, and the difference between incremental and complete deployment modes. AZ-305 and AZ-400 (and its successor AZ-401) add tool selection (Bicep versus Terraform), desired state configuration, layering pipelines, policy as code, and treating IaC with the same quality gates as application code. On AWS, SAA-C03 and SAP-C03 test CloudFormation concepts such as stacks, nested stacks, StackSets for multi-account rollout, and change sets; SOA-C03 names CloudFormation, the CDK, StackSets and even Terraform in its objectives; DVA-C02/C03 add SAM and the CDK; DOP-C02 goes deepest, covering change sets, drift detection, stack policies, rollback behaviour, and CDK bootstrapping and pipelines. The HashiCorp Terraform Associate (TA-004) is entirely about the Terraform workflow: providers, the purpose of state, remote backends and locking, workspaces, modules, and reading a plan correctly. The Kubernetes exams (CKA, CKAD) reward the declarative habit of `kubectl apply` over imperative `kubectl create` and `edit`.
 
-Common traps: an ARM incremental deployment never deletes resources that are missing from the template; a CloudFormation change set does not guarantee a successful update; drift detection does not fix drift; Terraform state can contain secrets and must be stored and access-controlled like one; and scaling attributes managed by an autoscaler must be excluded from the template or they will be reset on every apply.
+Common traps: an ARM incremental deployment never deletes resources that are missing from the template; a CloudFormation change set does not guarantee a successful update; drift detection by itself does not fix drift (a drift-aware change set or a fresh apply does); Terraform state can contain secrets and must be stored and access-controlled like one; and scaling attributes managed by an autoscaler must be excluded from the template or they will be reset on every apply.
 
 ## Self-check
 

@@ -32,7 +32,7 @@ The pattern exists because a cross-cutting concern such as log shipping, metrics
 
 Typical sidecars are an OpenTelemetry Collector receiving OTLP on `localhost:4317`, a Fluent Bit log router tailing a shared volume, a [service mesh](service-mesh.md) proxy terminating [mTLS](mtls.md), the Dapr runtime `daprd` exposing its building blocks over local HTTP or gRPC, a connection pooler in front of TimescaleDB, or an MCP server packaged next to an agent so its tools are reachable only over the loopback interface.
 
-The Kubernetes mechanics matter because they changed. For years a sidecar was simply a second entry in `containers`, which had three defects that Istio documented: the application could start before the proxy was ready and lose its first connections, the proxy could exit before the application during shutdown, and a Job never completed because the sidecar kept running after the main container finished. Native sidecar containers fix all three. A sidecar is declared as an entry in `initContainers` with `restartPolicy: Always`. The feature appeared in v1.28, has been on by default since v1.29 and is stable (and locked on) since v1.33. The kubelet starts it in order with the other init containers and moves to the next one as soon as the sidecar's `started` state is true, which means a process is running when no startup probe is defined, or the startup probe succeeded. The sidecar then runs for the Pod's lifetime and restarts regardless of the Pod's `restartPolicy`; a readiness probe on it feeds the Pod's `Ready` condition; at termination the kubelet waits until the main containers have fully stopped and then stops sidecars in reverse declaration order; and a Job completes when its main container completes. Istio injects its proxy this way by default since Istio 1.27, and Linkerd since 2.20.
+The Kubernetes mechanics matter because they changed. For years a sidecar was simply a second entry in `containers`, which had three defects that Istio documented: the application could start before the proxy was ready and lose its first connections, the proxy could exit before the application during shutdown, and a Job never completed because the sidecar kept running after the main container finished. Native sidecar containers fix all three. A sidecar is declared as an entry in `initContainers` with `restartPolicy: Always`. The feature appeared in v1.28, has been on by default since v1.29 and is stable (and locked on) since v1.33. The kubelet starts it in order with the other init containers and moves to the next one as soon as the sidecar's `started` state is true, which means a process is running when no startup probe is defined, or the startup probe succeeded. The sidecar then runs for the Pod's lifetime and restarts regardless of the Pod's `restartPolicy`; a readiness probe on it feeds the Pod's `Ready` condition; at termination the kubelet waits until the main containers have fully stopped and then stops sidecars in reverse declaration order; and a Job completes when its main container completes. Istio injects its proxy this way by default since Istio 1.27 (on Kubernetes 1.29 or later), and Linkerd since 2.20 (June 2026).
 
 ```mermaid
 flowchart LR
@@ -111,7 +111,10 @@ The Architecture Center's own list of when not to use a sidecar is the practical
     ```csharp
     // The application does not know a sidecar exists. It emits OTLP to the
     // default endpoint (http://localhost:4317), which the Collector sidecar owns.
-    using OpenTelemetry;
+    using OpenTelemetry;           // UseOtlpExporter (package OpenTelemetry.Exporter.OpenTelemetryProtocol)
+    using OpenTelemetry.Metrics;
+    using OpenTelemetry.Resources;
+    using OpenTelemetry.Trace;
 
     var builder = WebApplication.CreateBuilder(args);
 
@@ -170,7 +173,7 @@ The Architecture Center's own list of when not to use a sidecar is the practical
 
 === "Azure"
 
-    Azure Container Apps runs sidecars as additional entries in the `containers` array of the app template; they share disk, network and lifecycle with the main container, and the portal adds default probes only to the main container, never to sidecars. On AKS the Istio-based service mesh add-on injects `istio-proxy` as a native sidecar by default on clusters at Kubernetes 1.33 with revision `asm-1-29` or later; `kubectl get pods -o custom-columns=INIT:.spec.initContainers[*].name` shows `istio-init,istio-proxy` under INIT when it is active.
+    Azure Container Apps runs sidecars as additional entries in the `containers` array of the app template; they share disk, network and lifecycle with the main container, and the portal adds default probes only to the main container, never to sidecars. On AKS 1.33 or later the Istio-based service mesh add-on injects `istio-proxy` as a native sidecar by default for new installs from revision `asm-1-27` and for all clusters, upgraded ones included, from `asm-1-29`; `kubectl get pods -o custom-columns=INIT:.spec.initContainers[*].name` shows `istio-init,istio-proxy` under INIT when it is active.
 
     ```yaml
     # Container Apps template excerpt: main container plus a log-shipping sidecar on a shared volume
@@ -202,24 +205,32 @@ The Architecture Center's own list of when not to use a sidecar is the practical
           "image": "123456789012.dkr.ecr.eu-west-1.amazonaws.com/market-api:2.3.0",
           "essential": true,
           "portMappings": [{ "containerPort": 8080, "protocol": "tcp" }],
-          "logConfiguration": { "logDriver": "awsfirelens" },
+          "logConfiguration": {
+            "logDriver": "awsfirelens",
+            "options": { "Name": "cloudwatch_logs", "region": "eu-west-1", "log_group_name": "market-api",
+                         "auto_create_group": "true", "log_stream_prefix": "api-" }
+          },
           "dependsOn": [{ "containerName": "log_router", "condition": "HEALTHY" }]
         },
         {
           "name": "log_router",
           "image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable",
           "essential": true,
-          "firelensConfiguration": { "type": "fluentbit" },
+          "firelensConfiguration": {
+            "type": "fluentbit",
+            "options": { "config-file-type": "file",
+                         "config-file-value": "/fluent-bit/configs/output-metrics-healthcheck.conf" }
+          },
           "healthCheck": {
-            "command": ["CMD-SHELL", "curl -sf http://localhost:2020/api/v1/health || exit 1"],
-            "interval": 5, "timeout": 2, "retries": 3, "startPeriod": 10
+            "command": ["CMD-SHELL", "curl -f http://127.0.0.1:2020/api/v1/uptime || exit 1"],
+            "interval": 10, "timeout": 5, "retries": 2, "startPeriod": 30
           }
         }
       ]
     }
     ```
 
-    The `HEALTHY` condition is only honoured at task startup and requires the dependency to define a health check; at shutdown ECS stops containers in the reverse dependency order. For service-to-service traffic ECS Service Connect adds its own managed Envoy-based proxy container to each task.
+    Fluent Bit's monitoring server is off unless a config turns it on: the built-in `output-metrics-healthcheck.conf` (aws-for-fluent-bit 2.29.1 and later) enables it on port 2020, and AWS's FireLens examples use this shallow `/api/v1/uptime` check. The `HEALTHY` condition is only honoured at task startup and requires the dependency to define a health check; at shutdown ECS stops containers in the reverse dependency order. For service-to-service traffic ECS Service Connect adds its own managed Envoy-based proxy container to each task.
 
 ## Misconceptions
 
@@ -231,9 +242,9 @@ The Architecture Center's own list of when not to use a sidecar is the practical
 
 ## Exam notes
 
-CKAD and CKA test the mechanics directly: multi-container Pods, `kubectl logs <pod> -c <container>`, init containers versus sidecars, and since the native sidecar feature went stable, the `initContainers` plus `restartPolicy: Always` syntax. Expect a scenario where a Job never finishes or an app fails on startup because its proxy is not ready; the fix is to make the helper a native sidecar. CKS approaches the same Pod from the other side: a sidecar that needs `NET_ADMIN` and `NET_RAW` violates the restricted Pod Security Standard, which is why Istio offers a CNI node agent instead of `istio-init`.
+CKAD and CKA test the mechanics directly: multi-container Pods, `kubectl logs <pod> -c <container>`, init containers versus sidecars, and since the native sidecar feature went stable, the `initContainers` plus `restartPolicy: Always` syntax. Expect a scenario where a Job never finishes or an app fails on startup because its proxy is not ready; the fix is to make the helper a native sidecar. CKS approaches the same Pod from the other side: a sidecar that adds `NET_ADMIN` violates both the baseline and the restricted Pod Security Standards, which is why Istio offers a CNI node agent instead of `istio-init`.
 
-AZ-305 and AZ-204 draw on the Architecture Center's cloud design patterns, where the trap is distinguishing sidecar from the ambassador and gateway patterns: an ambassador is a sidecar that proxies outbound calls on the app's behalf, a gateway sits in front of many services. Container Apps questions ask which containers share a replica's lifecycle and which get default probes.
+AZ-305 draws on the Architecture Center's cloud design patterns, where the trap is distinguishing sidecar from the ambassador and gateway patterns: an ambassador is a sidecar that proxies outbound calls on the app's behalf, a gateway sits in front of many services. Container Apps questions ask which containers share a replica's lifecycle and which get default probes.
 
 AWS DVA-C02 and SAA-C03 cover ECS task definitions: `essential`, `dependsOn` conditions (and that `COMPLETE`/`SUCCESS` cannot apply to essential containers), FireLens as the log-router sidecar, and the fact that Fargate containers in one task share the network namespace and can talk over `localhost`. SAP-C03 adds ECS Service Connect, whose proxy is a managed sidecar.
 

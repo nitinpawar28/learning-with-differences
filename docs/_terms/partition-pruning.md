@@ -30,17 +30,17 @@ Partition pruning is the optimisation that makes [table partitioning](table-part
 
 The subtlety is *when* the proof can be made, because the planner knows only constants at planning time. PostgreSQL prunes at three moments.
 
-1. **During planning**, for comparisons with constants and immutable expressions such as `WHERE ordered_at >= DATE '2026-10-01'`. Pruned partitions never enter the plan; `EXPLAIN` shows only the survivors.
-2. **At executor initialisation**, for values known only when the plan starts: parameters of a prepared statement running with a generic plan, and stable functions such as `now()` or `current_date`, fixed per statement but not per plan. These partitions are absent from `EXPLAIN` and `EXPLAIN ANALYZE` output, counted as `Subplans Removed: N` on the `Append` node, and were still locked at the start of execution.
+1. **During planning**, for comparisons with constants and immutable expressions through an immutable operator, such as `WHERE ordered_at >= TIMESTAMPTZ '2026-10-01 00:00+00'` on a `timestamptz` key. Pruned partitions never enter the plan; `EXPLAIN` shows only the survivors. A cross-type comparison that depends on the session time zone, such as a `timestamptz` key against a `date` constant, uses a stable operator and is pruned only at executor startup.
+2. **At executor initialisation**, for values known only when the plan starts: parameters of a prepared statement running with a generic plan, and stable functions such as `now()` or `current_date`, fixed per statement but not per plan. This step runs even under plain `EXPLAIN` (only `EXPLAIN (GENERIC_PLAN)` skips it), so these partitions are absent from both `EXPLAIN` and `EXPLAIN ANALYZE` output and counted as `Subplans Removed: N` on the `Append` node; they were still locked at the start of execution.
 3. **During execution**, for values the running plan produces: subquery results and the parameters of a parameterized nested-loop join, where the inner partitioned scan is pruned afresh for each outer row. `EXPLAIN ANALYZE` shows partitions never needed as `(never executed)`.
 
 Two things defeat pruning. Wrapping the key in a function, `date_trunc('day', ordered_at) = ...` or `ordered_at::date = ...`, hides the column from the bound comparison; rewrite as a half-open range on the bare column. And a predicate that never mentions the key, or a join without an equality the planner can use, leaves every partition in the plan, where each adds planning time and per-session metadata. The older mechanism for inheritance-based partitioning, `constraint_exclusion` (default `partition`), examines `CHECK` constraints at planning time only.
 
 Pruning has relatives: *partitionwise join* and *partitionwise aggregate* process matching partitions separately but default to off because of memory and planning cost, and PostgreSQL 18 reduced the planning cost of queries touching many partitions.
 
-TimescaleDB implements the same idea for [hypertable](hypertable.md) chunks as *chunk exclusion*, at the same three moments. The planner excludes chunks for constant predicates (`timescaledb.enable_constraint_exclusion`); the custom `ChunkAppend` node (`timescaledb.enable_chunk_append`) performs *startup exclusion* for stable expressions and *runtime exclusion* (`timescaledb.enable_runtime_exclusion`) for join parameters, reporting `Chunks excluded during startup: N` or `Chunks excluded during runtime: N` in `EXPLAIN`. Because dashboards filter with `now() - interval`, TimescaleDB 2.7 added `timescaledb.enable_now_constify`, which rewrites such predicates into constants at planning time so chunks disappear before the plan is built; on hypertables with thousands of chunks the documented planning speed-up ran into the hundreds of times. *Chunk skipping* (`enable_chunk_skipping('ticks', 'order_id')`, a tech-preview feature whose GUC defaults to off) adds min/max statistics for a non-partitioning column per columnstore chunk so filters on that column can exclude chunks too, as the [columnstore](columnar-storage.md) does per segment with its sparse min/max indexes.
+TimescaleDB implements the same idea for [hypertable](hypertable.md) chunks as *chunk exclusion*, at the same three moments. The planner excludes chunks for constant predicates (`timescaledb.enable_constraint_exclusion`); the custom `ChunkAppend` node (`timescaledb.enable_chunk_append`) performs *startup exclusion* for stable expressions and *runtime exclusion* (`timescaledb.enable_runtime_exclusion`) for join parameters, reporting `Chunks excluded during startup: N` or `Chunks excluded during runtime: N` in `EXPLAIN`. Because dashboards filter with `now() - interval`, TimescaleDB 2.7 added `timescaledb.enable_now_constify`, which rewrites such predicates into constants at planning time so chunks disappear before the plan is built; on a 20,000-chunk hypertable Tiger Data measured such queries up to 401 times faster. *Chunk skipping* (`enable_chunk_skipping('ticks', 'trade_id')` for an integer, date or timestamp column, a tech-preview feature whose `timescaledb.enable_chunk_skipping` GUC defaults to off) records min/max ranges for a non-partitioning column per chunk when the chunk is converted to the columnstore so filters on that column can exclude chunks too, as the [columnstore](columnar-storage.md) does per segment with its sparse min/max indexes.
 
-In the reader's stack the rules are short: filter on the partitioning column with a half-open range, pass times as `timestamptz` parameters rather than strings or `date` values that force a cast on the column, and read `EXPLAIN (ANALYZE)` for `Subplans Removed`, `never executed` or `Chunks excluded` before believing that partitioning helped.
+In the reader's stack the rules are short: filter on the partitioning column with a half-open range, pass times as `timestamptz` values rather than `date` values (whose cross-type comparison is only stable and postpones pruning to executor startup), never cast the column, and read `EXPLAIN (ANALYZE)` for `Subplans Removed`, `never executed` or `Chunks excluded` before believing that partitioning helped.
 
 ```mermaid
 flowchart LR
@@ -72,17 +72,22 @@ flowchart LR
 === "SQL"
 
     ```sql
-    -- Plan-time pruning: the constant predicate leaves one partition in the plan.
-    EXPLAIN SELECT count(*) FROM orders
-    WHERE ordered_at >= DATE '2026-10-01' AND ordered_at < DATE '2026-11-01';
+    -- Plan-time pruning: timestamptz constants on a timestamptz key (immutable
+    -- operator) leave one partition in the plan. Session TimeZone is UTC here.
+    EXPLAIN (COSTS OFF) SELECT count(*) FROM orders
+    WHERE ordered_at >= TIMESTAMPTZ '2026-10-01 00:00+00'
+      AND ordered_at <  TIMESTAMPTZ '2026-11-01 00:00+00';
     --  Aggregate
     --    ->  Seq Scan on orders_2026_10 orders
-    --          Filter: ((ordered_at >= '2026-10-01'::date) AND (ordered_at < '2026-11-01'::date))
+    --          Filter: ((ordered_at >= '2026-10-01 00:00:00+00'::timestamp with time zone) AND ...)
+    -- With DATE '2026-10-01' instead, the timestamptz-vs-date operator is only stable:
+    -- the plan keeps an Append and prunes at executor startup ("Subplans Removed").
 
-    -- Executor-startup pruning: a generic plan cannot know $1 until it runs.
-    PREPARE recent(timestamptz) AS SELECT count(*) FROM orders WHERE ordered_at >= $1;
+    -- Executor-startup pruning: a generic plan cannot know $1 and $2 until it runs.
+    PREPARE recent(timestamptz, timestamptz) AS
+        SELECT count(*) FROM orders WHERE ordered_at >= $1 AND ordered_at < $2;
     SET plan_cache_mode = force_generic_plan;
-    EXPLAIN (ANALYZE, COSTS OFF) EXECUTE recent(now() - interval '1 day');
+    EXPLAIN (ANALYZE, COSTS OFF) EXECUTE recent(now() - interval '1 day', now());
     --  Aggregate (actual ...)
     --    ->  Append (actual ...)
     --          Subplans Removed: 11
@@ -123,19 +128,27 @@ flowchart LR
 === "Python"
 
     ```python
-    # Python 3.12 + psycopg 3. psycopg prepares a statement server-side after it has
-    # run prepare_threshold times (default 5); from then on PostgreSQL may use a
-    # generic plan and prune at executor startup instead of at planning time.
+    # Python 3.12 + psycopg 3. psycopg prepares a query server-side once it has been
+    # executed prepare_threshold times (default 5), or at once with prepare=True.
+    # A prepared statement may then run a generic plan, which prunes at executor
+    # startup instead of at planning time. Tz-aware datetimes bind as timestamptz.
+    import datetime as dt
     import psycopg
 
+    lo = dt.datetime(2026, 10, 1, tzinfo=dt.UTC)
+    hi = dt.datetime(2026, 11, 1, tzinfo=dt.UTC)
     query = "SELECT count(*) FROM orders WHERE ordered_at >= %s AND ordered_at < %s"
-    with psycopg.connect(conninfo) as conn:
-        for _ in range(6):
-            conn.execute(query, (lo, hi))
 
-        plan = conn.execute("EXPLAIN (ANALYZE, COSTS OFF) " + query, (lo, hi)).fetchall()
-        print("\n".join(line for (line,) in plan))
-        # Look for a single partition scan, or for 'Subplans Removed: N' under Append.
+    with psycopg.connect(conninfo) as conn:
+        conn.execute("SET plan_cache_mode = force_generic_plan")   # make it visible at once
+        for _ in range(3):
+            conn.execute(query, (lo, hi), prepare=True)
+
+        # PostgreSQL 14+: how often each prepared statement used a generic plan.
+        for stmt, generic, custom in conn.execute(
+            "SELECT statement, generic_plans, custom_plans FROM pg_prepared_statements"
+        ):
+            print(generic, custom, stmt)
     ```
 
 === "Azure"
@@ -153,7 +166,7 @@ flowchart LR
 ## Misconceptions
 
 - **"Pruning uses the indexes."** It uses only the declared partition bounds. A partitioned table with no indexes at all still prunes; a heavily indexed one with a function on the key does not.
-- **"If `EXPLAIN` lists every partition, pruning failed."** Plain `EXPLAIN` of a parameterised or `now()`-based query cannot prune yet. Run `EXPLAIN (ANALYZE)` and look for `Subplans Removed` and `(never executed)`, or for `Chunks excluded during startup` on a hypertable.
+- **"If `EXPLAIN` lists every partition, pruning failed."** Partitions that can only be ruled out during execution (by a subquery result or a nested-loop parameter) stay in the plan and are skipped at run time, which only `EXPLAIN (ANALYZE)` reveals as `(never executed)`; `EXPLAIN (GENERIC_PLAN)` also lists every partition because it has no parameter values. Check with `EXPLAIN (ANALYZE)` for `Subplans Removed` and `(never executed)`, or for `Chunks excluded during startup` and `during runtime` on a hypertable.
 - **"`now()` prevents pruning."** `now()` is stable, so core PostgreSQL prunes it at executor startup rather than at planning time, which is still pruning. TimescaleDB goes further and constifies `now()` expressions at planning time.
 - **"Pruned partitions cost nothing."** Partitions removed at executor initialisation are still locked, every partition contributes to planning time and session metadata, and a prepared statement's generic plan still contains them all. Fewer, well-chosen partitions beat many small ones.
 - **"Partition pruning and constraint exclusion are the same setting."** `constraint_exclusion` serves inheritance-based partitioning and `UNION ALL` at planning time only; `enable_partition_pruning` serves declarative partitioning at planning and execution time.
@@ -167,11 +180,11 @@ DP-300 tests partition elimination as part of SQL Server partitioning: expect a 
 ??? question "A table is partitioned by day on `event_time`, yet `SELECT count(*) FROM events WHERE event_time::date = current_date` scans every partition. Why, and how do you fix it?"
     The cast turns the predicate into a comparison on an expression, not on the partition key, so the planner cannot compare it with the partition bounds. Rewrite it as a half-open range on the bare column: `event_time >= current_date AND event_time < current_date + 1`. `current_date` is stable, so pruning happens at executor startup, which is fine.
 
-??? question "After enabling prepared statements in Npgsql, `EXPLAIN` of a date-range query lists all 36 monthly partitions, but the query is still fast. What is going on?"
-    With a generic plan the parameter values are unknown at planning time, so the plan contains every partition. At executor initialisation PostgreSQL prunes with the actual values; `EXPLAIN (ANALYZE)` shows `Subplans Removed: 35` and only one partition is scanned. Nothing is wrong, though the plan still carries every partition's metadata, which is why thousands of partitions become a planning-cost problem.
+??? question "After enabling prepared statements in Npgsql, `EXPLAIN (GENERIC_PLAN)` of the parameterised date-range query lists all 36 monthly partitions, but the query is still fast. What is going on?"
+    With a generic plan the parameter values are unknown at planning time, so the plan contains every partition, and `GENERIC_PLAN` skips executor-startup pruning because it has no values to prune with. At run time PostgreSQL prunes at executor initialisation with the actual values; `EXPLAIN (ANALYZE) EXECUTE` of the prepared statement shows `Subplans Removed: 35` and only one partition is scanned. Nothing is wrong, though the plan still carries every partition's metadata, which is why thousands of partitions become a planning-cost problem.
 
 ??? question "A TimescaleDB dashboard query `WHERE time > now() - interval '15 minutes'` on a hypertable with 20,000 chunks took seconds to plan on an old version and milliseconds on a current one, with identical data. What changed?"
-    On older versions `now()` was only excluded at executor startup, so the planner built a plan containing all 20,000 chunks before ChunkAppend discarded them. TimescaleDB 2.7 added `timescaledb.enable_now_constify`, which rewrites `now()`-relative predicates into constants at planning time so the chunks are excluded before the plan is built; the blog post that introduced it reported speed-ups in the hundreds of times.
+    On older versions `now()` was only excluded at executor startup, so the planner built a plan containing all 20,000 chunks before ChunkAppend discarded them. TimescaleDB 2.7 added `timescaledb.enable_now_constify`, which rewrites `now()`-relative predicates into constants at planning time so the chunks are excluded before the plan is built; the engineering post that introduced it measured such queries up to 401 times faster on 20,000 chunks.
 
 ## Further reading
 

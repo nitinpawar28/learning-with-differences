@@ -114,7 +114,10 @@ The cost is real: coordinator round trips and a commit interval (Kafka Streams d
         }
         catch (KafkaException ex) when (!ex.Error.IsFatal)
         {
-            producer.AbortTransaction();           // replay resumes from the last committed offset
+            producer.AbortTransaction();           // output discarded, offsets not advanced
+            // The in-memory position has moved on: rewind to the committed offsets so the input is re-read.
+            foreach (var committed in consumer.Committed(consumer.Assignment, TimeSpan.FromSeconds(10)))
+                if (committed.Offset != Offset.Unset) consumer.Seek(committed);
         }
     }
 

@@ -43,7 +43,7 @@ flowchart LR
 
 Two knobs shape every rolling implementation: the **surge**, how many extra instances may exist above the desired count while a batch is added, and the **unavailable** allowance, how many may be missing below it. Kubernetes exposes them as `maxSurge` and `maxUnavailable`, both defaulting to 25 percent (surge rounds up, unavailable rounds down, and they cannot both be zero), so a Deployment is guaranteed at least 75 percent and at most 125 percent of its replicas during a roll. Virtual Machine Scale Sets express the same idea as a batch size (20 percent by default), a maximum unhealthy percentage before the roll stops, and an optional MaxSurge mode that creates new VMs before deleting old ones. Amazon ECS uses `minimumHealthyPercent` and `maximumPercent`, defaulting to 100 and 200 for replica services, so it starts a full set of new tasks before stopping any old ones. Docker Swarm uses `update_config.parallelism`, `delay` and `order` (`stop-first` by default, `start-first` for surge). Elastic Beanstalk distinguishes plain Rolling, which reduces capacity by one batch, from Rolling with additional batch, which launches a batch first. CodeDeploy's in-place EC2 deployments are rolling too (`OneAtATime` by default, `HalfAtATime` or `AllAtOnce`), and an Auto Scaling group instance refresh rolls a new launch template across the group while keeping 90 percent healthy by default, optionally pausing at checkpoints.
 
-The signal that advances the roll is readiness. Kubernetes counts a pod as available only once its readiness probe passes and `minReadySeconds` has elapsed, and declares the rollout failed after `progressDeadlineSeconds` (600 by default) without progress. A VMSS rolling upgrade requires an Application Health extension or a load balancer health probe and halts when too many instances are unhealthy. ECS can stop a deployment through its deployment circuit breaker when tasks repeatedly fail to start, or through CloudWatch alarms, and roll back to the previous service revision. The dual of readiness is graceful shutdown: an instance leaving the fleet should finish in-flight work. Kubernetes marks a terminating pod's endpoints not ready, runs the `preStop` hook, sends SIGTERM, and sends SIGKILL after `terminationGracePeriodSeconds` (30 seconds by default); a .NET host answers SIGTERM by raising `ApplicationStopping`, refusing new connections and draining existing requests within `HostOptions.ShutdownTimeout`, also 30 seconds by default.
+The signal that advances the roll is readiness. Kubernetes counts a pod as available only once its readiness probe passes and `minReadySeconds` has elapsed, and declares the rollout failed after `progressDeadlineSeconds` (600 by default) without progress. A VMSS rolling upgrade requires the Application Health extension (Flexible orchestration) or either that extension or a load balancer health probe (Uniform orchestration), and stops when too many instances are unhealthy. ECS can stop a deployment through its deployment circuit breaker when tasks repeatedly fail to start, or through CloudWatch alarms, and roll back to the previous service revision. The dual of readiness is graceful shutdown: an instance leaving the fleet should finish in-flight work. Kubernetes marks a terminating pod's endpoints not ready, runs the `preStop` hook, sends SIGTERM, and sends SIGKILL after `terminationGracePeriodSeconds` (30 seconds by default); a .NET host answers SIGTERM by raising `ApplicationStopping`, refusing new connections and draining existing requests within `HostOptions.ShutdownTimeout`, also 30 seconds by default.
 
 The price of rolling is coexistence. For minutes or hours, version N and N+1 both read the database, consume the same Redis Stream and serve the same Angular users, so every contract between them (API shapes, message fields, cache entry formats, schema) must work for both: the expand-contract discipline of parallel change. Static assets are a classic trap: a browser that loaded version N's `index.html` may request a chunk file only version N's instances have, so hashed assets are best served from storage or a CDN that keeps both builds. Docker Compose, finally, does not roll at all: `docker compose up` stops and recreates a changed service's containers, and `deploy.update_config` is honoured by Swarm, not Compose.
 
@@ -107,7 +107,7 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
                 periodSeconds: 10
               lifecycle:
                 preStop:
-                  exec: { command: ["sleep", "5"] }
+                  sleep: { seconds: 5 }   # kubelet-run sleep action (stable since 1.34); no shell needed in the image
     ```
 
     ```bash
@@ -121,6 +121,9 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
     ```csharp
     // Program.cs (.NET 9). Two things a rolling deployment needs from the application:
     // readiness that reflects real dependencies, and a graceful exit when SIGTERM arrives.
+    using Microsoft.AspNetCore.Diagnostics.HealthChecks;     // HealthCheckOptions
+    using Microsoft.Extensions.Diagnostics.HealthChecks;     // IHealthCheck, HealthCheckResult
+
     var builder = WebApplication.CreateBuilder(args);
     builder.Services.Configure<HostOptions>(o => o.ShutdownTimeout = TimeSpan.FromSeconds(25)); // below the pod's 40 s grace
     builder.Services.AddSingleton<DrainState>();
@@ -167,6 +170,10 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
         stopping = False
 
 
+    def price(fields: dict[bytes, bytes]) -> None:
+        ...   # the real work; must be idempotent, because an unacknowledged entry is redelivered
+
+
     signal.signal(signal.SIGTERM, lambda *_: setattr(Lifecycle, "stopping", True))
     r = redis.Redis.from_url(os.environ["REDIS_URL"])
 
@@ -174,7 +181,7 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
         batches = r.xreadgroup(GROUP, CONSUMER, {STREAM: ">"}, count=50, block=2000) or []
         for _, entries in batches:
             for entry_id, fields in entries:
-                price(fields)                      # the real work
+                price(fields)
                 r.xack(STREAM, GROUP, entry_id)    # ack after, never before
     # Exit cleanly inside the grace period; unacknowledged entries stay pending for XAUTOCLAIM by survivors.
     ```
@@ -183,7 +190,7 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
 
     ```bash
     # Virtual Machine Scale Set: rolling upgrade policy with surge, health gating and a pause between batches.
-    # Requires the Application Health extension (Flexible) or a load balancer health probe (Uniform).
+    # Flexible orchestration requires the Application Health extension; Uniform accepts it or a load balancer probe.
     az vmss update --resource-group rg-platform --name vmss-orders \
       --set upgradePolicy.mode=Rolling \
       --max-batch-instance-percent 20 --max-unhealthy-instance-percent 20 \
@@ -248,7 +255,7 @@ The price of rolling is coexistence. For minutes or hours, version N and N+1 bot
 
 ## Exam notes
 
-The Kubernetes exams (CKA, CKAD) test rolling updates directly: the `RollingUpdate` and `Recreate` strategies, `maxSurge` and `maxUnavailable` and their defaults, `kubectl rollout status`, `history`, `undo`, `pause` and `resume`, `revisionHistoryLimit`, `progressDeadlineSeconds`, and how a failing readiness probe stalls a rollout; KCNA asks the conceptual version. AZ-104 and AZ-305 cover VMSS upgrade policy modes (Automatic, Manual, Rolling) and the health probe or Application Health extension requirement; AZ-400 covers the rolling strategy in Azure Pipelines deployment jobs. On AWS, DVA-C02/C03 test Elastic Beanstalk's policies (All at once, Rolling, Rolling with additional batch, Immutable, Traffic splitting) and the CodeDeploy in-place configurations; DOP-C02 adds instance refresh with checkpoints and rollback, ECS deployment configuration and circuit breaker; SOA-C03 and SAA-C03 touch Auto Scaling group updates.
+The Kubernetes exams (CKA, CKAD) test rolling updates directly: the `RollingUpdate` and `Recreate` strategies, `maxSurge` and `maxUnavailable` and their defaults, `kubectl rollout status`, `history`, `undo`, `pause` and `resume`, `revisionHistoryLimit`, `progressDeadlineSeconds`, and how a failing readiness probe stalls a rollout; KCNA asks the conceptual version. AZ-104 and AZ-305 cover VMSS upgrade policy modes (Automatic, Manual, Rolling) and the health probe or Application Health extension requirement; AZ-400 and its successor AZ-401 list rolling deployments under minimising downtime and cover the rolling strategy in Azure Pipelines deployment jobs. On AWS, DVA-C02/C03 test Elastic Beanstalk's policies (All at once, Rolling, Rolling with additional batch, Immutable, Traffic splitting) and the CodeDeploy in-place configurations; DOP-C02 adds instance refresh with checkpoints and rollback, ECS deployment configuration and circuit breaker; SOA-C03 and SAA-C03 touch Auto Scaling group updates.
 
 Traps worth memorising: Beanstalk Rolling reduces capacity during the roll while Rolling with additional batch does not, and Immutable launches a separate Auto Scaling group; CodeDeploy's default EC2 configuration is `OneAtATime`, and `AllAtOnce` counts as success if even one instance deploys; a VMSS in Automatic mode may take down all instances at once; Kubernetes `Recreate` terminates every old pod before creating new ones; and `maxSurge` and `maxUnavailable` cannot both be zero.
 

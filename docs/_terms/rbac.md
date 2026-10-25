@@ -69,14 +69,16 @@ flowchart LR
 === "C#"
 
     ```csharp
-    // ASP.NET Core (.NET 9) with Microsoft Entra app roles. Entra emits a "roles" claim;
-    // tell the JWT handler to treat it as the role claim so IsInRole and [Authorize(Roles)] work.
+    // ASP.NET Core (.NET 9) with Microsoft Entra app roles. Entra emits a "roles" claim.
+    // Either keep the default inbound mapping (which renames "roles" to ClaimTypes.Role) or, as here,
+    // turn mapping off and name "roles" as the role claim; mixing the two makes every role check fail.
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", o =>
     {
         o.Authority = builder.Configuration["Auth:Authority"];
         o.Audience  = builder.Configuration["Auth:Audience"];
+        o.MapInboundClaims = false;
         o.TokenValidationParameters.RoleClaimType = "roles";
     });
 
@@ -115,7 +117,7 @@ flowchart LR
         try:
             return jwt.decode(token, options={"verify_signature": False})  # verify against the IdP JWKS in production
         except jwt.PyJWTError:
-            raise HTTPException(401)
+            raise HTTPException(401) from None
 
     def require_any_role(*allowed: str):
         def dep(c: dict = Depends(claims)) -> dict:
@@ -175,11 +177,11 @@ flowchart LR
       --assignee-object-id "$INGEST_MI_OBJECT_ID" --assignee-principal-type ServicePrincipal \
       --role "Storage Blob Data Contributor" \
       --scope "/subscriptions/$SUB/resourceGroups/rg-market/providers/Microsoft.Storage/storageAccounts/stmarket" \
-      --condition "((!(ActionMatches{'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write'})) OR (@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:name] StringEquals 'ticks'))" \
+      --condition "((!(ActionMatches{'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write'}) AND !(ActionMatches{'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/add/action'})) OR (@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:name] StringEquals 'ticks'))" \
       --condition-version "2.0"
     ```
 
-    Azure Resource Manager evaluates deny assignments first, then collects the principal's (transitive) group memberships and role assignments at or above the scope, computes `Actions - NotActions` and `DataActions - NotDataActions`, and finally evaluates any condition. The five fundamental roles are Owner, Contributor, Reader, Role Based Access Control Administrator and User Access Administrator; Azure roles govern Azure resources, while Microsoft Entra roles (Global Administrator, User Administrator) govern the directory, and the two do not overlap unless a Global Administrator explicitly elevates access.
+    The condition lets the identity read and delete across the account but create or overwrite blobs only in the `ticks` container; it must cover both `write` and `add/action`, because creating a blob can use either data action. Azure Resource Manager evaluates deny assignments first, then collects the principal's (transitive) group memberships and role assignments at or above the scope, computes `Actions - NotActions` and `DataActions - NotDataActions`, and finally evaluates any condition. The five fundamental roles are Owner, Contributor, Reader, Role Based Access Control Administrator and User Access Administrator; Azure roles govern Azure resources, while Microsoft Entra roles (Global Administrator, User Administrator) govern the directory, and the two do not overlap unless a Global Administrator explicitly elevates access.
 
 === "AWS"
 
@@ -209,7 +211,7 @@ flowchart LR
 ## Misconceptions
 
 - **"An AWS IAM role is an RBAC role."** It is an identity with temporary credentials that principals assume; AWS's own documentation says a job-function role in the RBAC sense is distinct from an IAM role. The RBAC role lives in the policies attached to it.
-- **"Groups are roles."** A group is a set of users; a role also binds permissions. Entra illustrates the difference with two claims: `groups` (tenant-wide membership, portable nowhere) and `roles` (app roles defined on the application, portable to every tenant that installs it).
+- **"Groups are roles."** A group is a set of users; a role also binds permissions. Entra illustrates the difference with two claims: `groups` (object IDs of directory groups, meaningful only inside one tenant and carrying no permissions of their own) and `roles` (app roles declared on the application, so they travel with it to every tenant that installs it and name what the app will let the holder do).
 - **"RBAC enforces least privilege."** It supports it; it cannot enforce it. Azure RBAC and Kubernetes RBAC are additive, so the broadest assignment anywhere above the resource is the effective permission.
 - **"Azure RBAC and Microsoft Entra roles are the same system."** Azure roles are enforced by Azure Resource Manager over resources at four scope levels; Entra roles manage the directory at tenant, administrative-unit or object scope. Global Administrator has no Azure resource access until elevated.
 - **"RBAC scales to any granularity."** Beyond a few hundred combinations you get role explosion; Azure caps assignments at 5,000 per subscription and 500 per management group, which is why both clouds push conditions and tags for the fine-grained tail.

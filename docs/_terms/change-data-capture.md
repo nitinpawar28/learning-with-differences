@@ -34,7 +34,7 @@ There are two families, and the difference is the whole point of the term:
 - **Query-based CDC** polls the tables. A job runs `SELECT ... WHERE updated_at > :last_seen` every few seconds, or compares snapshots, or reads a version column. It needs a trustworthy timestamp or version on every table, it cannot see a row that was deleted, it misses intermediate versions when a row changes twice between polls, and it loads the database with reads that mostly return nothing.
 - **Log-based CDC** reads the transaction log, the append-only record every durable database already keeps for crash recovery (PostgreSQL's [write-ahead log](write-ahead-log.md), SQL Server's transaction log, MySQL's binlog). The log contains every committed change, including deletes and every intermediate version, in commit order, without touching the tables or requiring schema changes.
 
-In PostgreSQL the mechanism is **logical decoding**: with `wal_level = logical`, the server can replay committed transactions from the WAL through an *output plugin* that turns storage-level records into row events; `pgoutput` is the built-in plugin. A consumer attaches to a **replication slot**, a server-side cursor that persists across restarts and retains the WAL the consumer has not yet confirmed. In normal operation a slot emits each change once, but after a crash it may rewind and resend recent changes, so consumers must tolerate duplicates. Only committed transactions appear, at commit time; DDL, sequence values and large objects are not decoded. The table's `REPLICA IDENTITY` decides whether updates and deletes carry the old row image.
+In PostgreSQL the mechanism is **logical decoding**: with `wal_level = logical`, the server can replay committed transactions from the WAL through an *output plugin* that turns storage-level records into row events; `pgoutput` is the built-in plugin. A consumer attaches to a **replication slot**, a server-side cursor that persists across restarts and retains the WAL the consumer has not yet confirmed. In normal operation a slot emits each change once, but after a crash it may rewind and resend recent changes, so consumers must tolerate duplicates. Only committed transactions appear, at commit time; DDL is not part of the stream, and PostgreSQL's logical replication does not carry sequence state or large objects either. The table's `REPLICA IDENTITY` decides whether updates and deletes carry the old row image.
 
 [Debezium](https://debezium.io/documentation/reference/stable/connectors/postgresql.html) is the common open-source consumer. It takes an initial snapshot, then streams from the slot, emitting one event per row change with `before`, `after`, `op` (`c`, `u`, `d`, or `r` for snapshot reads) and `source` metadata such as the log sequence number (LSN). It runs as a Kafka Connect source connector, as the standalone Debezium Server (which can write straight to Redis Streams, Kinesis, Event Hubs or Pub/Sub), or as an embedded engine. The delivery guarantee is [at-least-once](at-least-once-delivery.md): after a crash the connector replays from its last committed offset.
 
@@ -105,7 +105,7 @@ CDC matters to this stack in two places. First, a TimescaleDB [hypertable](hyper
     await conn.Open();
 
     var slot = new PgOutputReplicationSlot("orders_slot");   // created once, in SQL
-    var options = new PgOutputReplicationOptions("orders_pub", protocolVersion: 1);
+    var options = new PgOutputReplicationOptions("orders_pub", PgOutputProtocolVersion.V1);
 
     await foreach (var message in conn.StartReplication(slot, options, ct))
     {
@@ -113,7 +113,7 @@ CDC matters to this stack in two places. First, a TimescaleDB [hypertable](hyper
         {
             var values = new List<string?>();
             await foreach (var column in insert.NewRow)
-                values.Add(await column.Get<string>(ct));
+                values.Add(column.IsDBNull ? null : await column.Get<string>(ct));
             await publisher.PublishAsync(insert.Relation.RelationName, values, ct);
         }
         // Confirm progress so the server can recycle WAL behind us.
@@ -126,11 +126,15 @@ CDC matters to this stack in two places. First, a TimescaleDB [hypertable](hyper
     ```python
     # psycopg2 exposes the streaming replication protocol.
     import psycopg2
+    import psycopg2.errors
     from psycopg2.extras import LogicalReplicationConnection
 
     conn = psycopg2.connect(DSN, connection_factory=LogicalReplicationConnection)
     cur = conn.cursor()
-    cur.create_replication_slot("orders_slot", output_plugin="test_decoding")
+    try:
+        cur.create_replication_slot("orders_slot", output_plugin="test_decoding")
+    except psycopg2.errors.DuplicateObject:
+        pass                                        # slot survives restarts: resume from it
     cur.start_replication(slot_name="orders_slot", decode=True)
 
     def on_change(msg):
@@ -146,7 +150,7 @@ CDC matters to this stack in two places. First, a TimescaleDB [hypertable](hyper
     # Debezium Server: PostgreSQL -> Redis Streams, no Kafka involved.
     services:
       debezium:
-        image: debezium/server
+        image: quay.io/debezium/server:3.7         # Docker Hub stopped at 3.0; current images are on quay.io
         volumes: ["./conf:/debezium/config"]       # application.properties below
         depends_on: [postgres, redis]
     # conf/application.properties
@@ -163,7 +167,7 @@ CDC matters to this stack in two places. First, a TimescaleDB [hypertable](hyper
 
     - **Azure SQL Database CDC** uses the same `sys.sp_cdc_enable_db` / `sys.sp_cdc_enable_table` model as SQL Server, but a built-in scheduler replaces SQL Agent: capture runs every 20 seconds, cleanup hourly, with a three-day default retention. Any vCore tier qualifies; in the DTU model only S3 and above. Change rows carry `__$operation` (1 delete, 2 insert, 3 update before-image, 4 update after-image).
     - **Azure Cosmos DB change feed** is on by default. *Latest version* mode gives the most recent change per item and never shows deletes; *all versions and deletes* mode captures every change including deletes and TTL expirations but requires continuous backup. Order is guaranteed per partition key only, and the change feed processor gives at-least-once semantics with automatic checkpoints.
-    - **Azure Database for PostgreSQL flexible server** supports logical decoding (`wal_level = logical` plus a restart; `pgoutput`, `test_decoding` and `wal2json`) and names Debezium as a supported consumer. It auto-drops an unused slot when storage approaches its limit, and on PostgreSQL 17 synchronises failover slots to the standby.
+    - **Azure Database for PostgreSQL flexible server** supports logical decoding (`wal_level = logical` plus a restart; for example `pgoutput` or `wal2json`) and names Debezium as a consumer. When storage crosses its threshold it auto-drops an inactive logical slot rather than let the server go read-only, and from PostgreSQL 17 it can synchronise failover-enabled slots to the HA standby (`sync_replication_slots`, `hot_standby_feedback`).
 
 === "AWS"
 

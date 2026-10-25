@@ -119,6 +119,7 @@ What immutability does not remove is the need to manage the things that stay mut
     # state in Redis, logs to stdout, nothing written to the container filesystem.
     import logging
     import os
+    import socket
 
     import redis
     from fastapi import FastAPI
@@ -139,7 +140,7 @@ What immutability does not remove is the need to manage the things that stay mut
 
     @app.get("/version")
     def version() -> dict[str, str]:
-        return {"version": VERSION, "instance": os.uname().nodename}
+        return {"version": VERSION, "instance": socket.gethostname()}
     ```
 
 **Docker Compose, written immutably.** The image is pinned by digest rather than by a moving tag, the container filesystem is read-only, and the only durable state is a named volume owned by Redis.
@@ -186,11 +187,13 @@ volumes:
     aws imagebuilder start-image-pipeline-execution \
       --image-pipeline-arn arn:aws:imagebuilder:eu-west-1:123456789012:image-pipeline/api-golden
 
-    # 2. A new launch template version references the AMI. Running instances are untouched.
+    # 2. A new launch template version (here based on version 6) references the AMI.
+    #    Launch template versions are themselves immutable; running instances are untouched.
     aws ec2 create-launch-template-version --launch-template-name api \
-      --source-version '$Latest' --launch-template-data '{"ImageId":"ami-0123456789abcdef0"}'
+      --source-version 6 --launch-template-data '{"ImageId":"ami-0123456789abcdef0"}'
 
     # 3. Instance refresh replaces the fleet in a rolling fashion and can roll back on failure.
+    #    The group must point at $Latest (or pass --desired-configuration) to pick up version 7.
     aws autoscaling start-instance-refresh --auto-scaling-group-name asg-api \
       --preferences '{"MinHealthyPercentage":90,"MaxHealthyPercentage":110,"AutoRollback":true}'
 
@@ -208,7 +211,7 @@ volumes:
 
 ## Exam notes
 
-The Azure DevOps exam (AZ-400) treats immutable infrastructure as a deployment pattern alongside blue-green, canary and rings, and expects you to recognise that containers and VMSS image upgrades implement it; AZ-104 and AZ-305 touch the building blocks (Azure Compute Gallery, VMSS upgrade policies, Container Apps revisions). On the AWS side, DOP-C02 is the deep one: it distinguishes CodeDeploy in-place from blue/green, tests EC2 Image Builder and instance refresh, and names the Elastic Beanstalk "Immutable" deployment policy, which launches a full set of new instances in a separate Auto Scaling group rather than updating a batch. DVA-C02/C03 and SAA-C03 ask the Beanstalk policy and golden-AMI questions at a lighter level. The Kubernetes exams (CKAD, CKS) probe the runtime side: read-only root filesystems, pinning images by digest, and why a moving tag undermines reproducibility. CISSP frames all of this as configuration and change management.
+The Azure DevOps exam (AZ-400, retiring on 2027-02-01, and its successor AZ-401, which keeps the same deployment-strategy objectives) treats immutable infrastructure as a deployment pattern alongside blue-green, canary and rings, and expects you to recognise that containers and VMSS image upgrades implement it; AZ-104 and AZ-305 touch the building blocks (Azure Compute Gallery, VMSS upgrade policies, Container Apps revisions). On the AWS side, DOP-C02 is the deep one: its objectives explicitly contrast mutable with immutable deployment patterns, it distinguishes CodeDeploy in-place from blue/green, tests EC2 Image Builder and instance refresh, and names the Elastic Beanstalk "Immutable" deployment policy, which launches a full set of new instances in a temporary second Auto Scaling group rather than updating a batch. SAA-C03 lists immutable infrastructure as a named knowledge item under resilient architectures, and DVA-C02/C03 ask the Beanstalk policy and golden-AMI questions at a lighter level. The Kubernetes exams (CKAD, CKS) probe the runtime side: read-only root filesystems, pinning images by digest, and why a moving tag undermines reproducibility. CISSP frames all of this as configuration and change management.
 
 Typical traps: Beanstalk "Immutable" is not "Rolling with additional batch" (the latter still updates existing instances); CodeDeploy in-place deployments are mutable even though they are rolling; Kubernetes `imagePullPolicy` and tag reuse can make two "identical" pods run different code, which is why ECS resolves image tags to digests at deployment time so that every task in a service runs the same bytes.
 

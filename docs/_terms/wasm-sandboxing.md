@@ -26,17 +26,17 @@ sources:
 
 ## Explanation
 
-WebAssembly (Wasm) is a portable binary instruction format with a formal semantics, designed from the outset (Haas and colleagues, PLDI 2017) for safe, fast execution of untrusted code. Version 1.0 became a W3C Recommendation in December 2019; 2.0 is a Candidate Recommendation Draft (June 2025); 3.0 (September 2025) added 64-bit and multiple memories, garbage collection, typed references, tail calls, exception handling, relaxed SIMD and a deterministic profile. *Sandboxing* means using those guarantees to run untrusted code inside your own process, with the host deciding what it may touch.
+WebAssembly (Wasm) is a portable binary instruction format with a formal semantics, designed from the outset (Haas and colleagues, PLDI 2017) for safe, fast execution of untrusted code. Version 1.0 became a W3C Recommendation in December 2019; 2.0 was declared complete in December 2024 and, like later versions, is maintained in place as an "evergreen" W3C Candidate Recommendation Draft; 3.0 (September 2025) added 64-bit and multiple memories, garbage collection, typed references, tail calls, exception handling, relaxed SIMD and a deterministic profile. *Sandboxing* means using those guarantees to run untrusted code inside your own process, with the host deciding what it may touch.
 
 The virtual machine supplies half of the sandbox:
 
-- **Linear memory.** A module sees a flat array of bytes; every load and store is bounds-checked, mostly for free via guard pages (Wasmtime reserves a 2 GB guard region per memory by default). A pointer is only an offset into that array, so host memory is unaddressable.
+- **Linear memory.** A module sees a flat array of bytes; every load and store is bounds-checked, mostly for free via virtual memory (on 64-bit hosts Wasmtime by default reserves 4 GiB of address space plus a 32 MiB guard region per 32-bit memory, so an out-of-range access faults instead of needing an explicit check). A pointer is only an offset into that array, so host memory is unaddressable.
 - **Hidden control stack.** Return addresses and spilled registers are unreachable from the module, so stack smashing is impossible.
 - **Typed, structured control flow.** Branches target only valid labels, indirect calls are type-checked against a function table, and code is immutable, which removes return-oriented gadget chains.
 - **No system calls.** The only way out is an import the host linked; anything else traps.
 - **Traps.** An out-of-bounds access, bad indirect call or stack overflow terminates the instance at once instead of corrupting state.
 
-The host supplies the second half: capabilities and resource limits. The WebAssembly System Interface (WASI) is the standard host API, and it is capability-based: a module cannot open `/etc/passwd` by name; it can only use the directory handles and sockets the host *preopened* for it, so the default is nothing. WASI 0.1 (Preview 1, the `wasi_snapshot_preview1` ABI) is POSIX-flavoured and still widely deployed. WASI 0.2 (January 2024) rebuilt the interfaces on the **component model**, written in WIT as *worlds* such as `wasi:cli/command` and `wasi:http` covering files, sockets, clocks and random numbers. WASI 0.3.0 (June 2026) made asynchrony native to components (`async func`, `stream<T>`, `future<T>`), removed `wasi:io` and split `wasi:http` into `service` and `middleware` worlds; Wasmtime 46 and later enable it by default. Components are shared-nothing, language-neutral and *virtualisable*: another component can satisfy an import, so a tool's HTTP access can pass through a filtering component. Resource limits complete the picture: Wasmtime offers *fuel* (a deterministic instruction budget), *epoch interruption* (cheap wall-clock preemption), a stack-size cap and a resource limiter for memory growth.
+The host supplies the second half: capabilities and resource limits. The WebAssembly System Interface (WASI) is the standard host API, and it is capability-based: a module cannot open `/etc/passwd` by name; it can only use the directory handles and sockets the host *preopened* for it, so the default is nothing. WASI 0.1 (Preview 1, the `wasi_snapshot_preview1` ABI) is POSIX-flavoured and still widely deployed. WASI 0.2 (January 2024) rebuilt the interfaces on the **component model**, written in WIT as *worlds* such as `wasi:cli/command` and `wasi:http/proxy`, over interfaces for files, sockets, clocks and random numbers. WASI 0.3.0 (June 2026) made asynchrony native to components (`async func`, `stream<T>`, `future<T>`), removed `wasi:io` and replaced the `wasi:http/proxy` world with `service` and a new `middleware` world; Wasmtime 46 and later enable it by default. Components are shared-nothing, language-neutral and *virtualisable*: another component can satisfy an import, so a tool's HTTP access can pass through a filtering component. Resource limits complete the picture: Wasmtime offers *fuel* (a deterministic instruction budget), *epoch interruption* (cheap wall-clock preemption), a stack-size cap and a resource limiter for memory growth.
 
 Why it exists: plugins, user-defined functions and multi-tenant serverless need to run many small pieces of foreign code with isolation stronger than a thread and cheaper than a VM. Wasmtime reached 1.0 in September 2022, fuzzed, audited and in production at Shopify and Fastly. For this reader the case is agent tooling: MCP's security guidance says local MCP servers should run sandboxed with minimal privileges and explicit grants for directories and network. A tool compiled to Wasm receives exactly one input directory and one outbound host, plus a scoped [capability token](capability-based-authorization.md) for any service it calls, so a prompt-injected tool can neither read the orchestrator's secrets nor scan the network. On Kubernetes the modules run through containerd shims (runwasi, a containerd sub-project) selected by `RuntimeClass` and packaged by SpinKube (a CNCF sandbox project); Docker Desktop's Wasm integration is deprecated, and AKS retired its WASI node-pool preview in May 2025 in favour of SpinKube.
 
@@ -68,12 +68,12 @@ flowchart LR
 
 ## Examples
 
-Both examples run an untrusted tool compiled to `wasm32-wasi` with one visible directory, a fuel budget and a wall-clock deadline. Anything the module imports beyond WASI fails at instantiation.
+Both examples run an untrusted tool compiled as a WASI 0.1 core module (Rust target `wasm32-wasip1`, which replaced the old `wasm32-wasi` name) with one read-only directory, a fuel budget and a wall-clock deadline. Anything the module imports beyond WASI fails at instantiation.
 
 === "C#"
 
     ```csharp
-    using Wasmtime;   // NuGet package: Wasmtime (wasmtime-dotnet, a Bytecode Alliance project)
+    using Wasmtime;   // NuGet package: Wasmtime 48.x (wasmtime-dotnet, a Bytecode Alliance project)
 
     using var config = new Config()
         .WithFuelConsumption(true)           // deterministic instruction budget
@@ -87,12 +87,14 @@ Both examples run an untrusted tool compiled to `wasm32-wasi` with one visible d
 
     using var store = new Store(engine);
     store.SetWasiConfiguration(new WasiConfiguration()
-        .WithPreopenedDirectory("/srv/jobs/42/in", "/in")  // the only directory the tool can see
+        .WithPreopenedDirectory("/srv/jobs/42/in", "/in", mutable: false)  // the only directory the tool can see, read-only
         .WithEnvironmentVariable("JOB_ID", "42")
         .WithArgs("summarize", "/in/report.txt")
         .WithInheritedStandardOutput());
-    store.AddFuel(50_000_000);               // trap when exhausted
-    store.SetEpochDeadline(1);               // trap one epoch tick from now; a host timer advances the engine's epoch
+    store.Fuel = 50_000_000;                 // trap when exhausted
+    store.SetEpochDeadline(1);               // trap one epoch tick from now
+    using var ticker = new Timer(_ => engine.IncrementEpoch(), null,
+        TimeSpan.FromSeconds(5), Timeout.InfiniteTimeSpan);   // the tick: a 5-second wall-clock limit
 
     var instance = linker.Instantiate(store, module);
     try
@@ -109,6 +111,7 @@ Both examples run an untrusted tool compiled to `wasm32-wasi` with one visible d
 
     ```python
     # pip install wasmtime  (wasmtime-py, 64-bit Python 3.9+)
+    import threading
     from wasmtime import Config, Engine, Linker, Module, Store, WasiConfig, Trap
 
     config = Config()
@@ -131,13 +134,17 @@ Both examples run an untrusted tool compiled to `wasm32-wasi` with one visible d
     store.set_wasi(wasi)
     store.set_fuel(50_000_000)
     store.set_limits(memory_size=64 * 1024 * 1024)   # cap linear memory growth at 64 MiB
-    store.set_epoch_deadline(1)
+    store.set_epoch_deadline(1)                      # trap one epoch tick from now
+    ticker = threading.Timer(5.0, engine.increment_epoch)   # the tick: a 5-second wall-clock limit
+    ticker.start()
 
     instance = linker.instantiate(store, module)
     try:
         instance.exports(store)["_start"](store)
     except Trap as trap:                      # out of fuel, deadline, out-of-bounds, ...
         print(f"tool terminated: {trap}")
+    finally:
+        ticker.cancel()
     ```
 
 === "Azure"

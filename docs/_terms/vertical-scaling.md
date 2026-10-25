@@ -18,7 +18,7 @@ related: [hypertable, consumer-group, rolling-deployment]
 covers: []
 sources:
   - { title: "Autoscaling guidance", url: "https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling", publisher: "Azure Architecture Center" }
-  - { title: "Resize a virtual machine", url: "https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm", publisher: "Microsoft Learn" }
+  - { title: "Resize a virtual machine", url: "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm", publisher: "Microsoft Learn" }
   - { title: "Change the instance type for your Amazon EC2 instance", url: "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/change-instance-type-of-ebs-backed-instance.html", publisher: "AWS" }
   - { title: "How Aurora serverless works", url: "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html", publisher: "AWS" }
   - { title: "Resize CPU and memory resources assigned to containers", url: "https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/", publisher: "The Kubernetes Authors" }
@@ -34,7 +34,7 @@ The cost is disruption and a ceiling, and both depend on the service:
 
 - **Virtual machines.** Resizing an Azure VM restarts it, and if the new size is not on the VM's current hardware cluster it must be deallocated first, which releases dynamic IP addresses. On AWS you must stop an EBS-backed EC2 instance to change its type; it moves to new hardware and a non-Elastic public IPv4 address is replaced.
 - **Platform services.** An App Service plan's tier changes in seconds and affects every app on the plan. Azure SQL Database scales online by moving the engine to a larger host, then briefly drops open connections, so retry logic is mandatory. An Amazon RDS instance class change causes downtime, now or in the maintenance window, which Multi-AZ shortens to a failover.
-- **Serverless databases** remove the restart. Aurora Serverless v2 measures capacity in Aurora capacity units (ACUs) of roughly 2 GiB each, scales a writer or reader in steps as small as 0.5 ACU within a configured range (up to 256 ACUs for Aurora MySQL, 384 for Aurora PostgreSQL) while connections and transactions stay open, and can pause at zero. Azure SQL's serverless tier does the same.
+- **Serverless databases** remove the restart. Aurora Serverless v2 measures capacity in Aurora capacity units (ACUs) of roughly 2 GiB each, scales a writer or reader in steps as small as 0.5 ACU within a configured range (up to 256 ACUs for Aurora MySQL, 384 for Aurora PostgreSQL) while connections and transactions stay open, and can pause at zero. Azure SQL Database's serverless tier similarly autoscales vCores within a configured range and can auto-pause, although resuming from a pause takes a cold start.
 - **Containers.** Kubernetes in-place pod resize, introduced in 1.27 and stable since 1.35, changes a container's CPU and memory through the pod's `resize` subresource without recreating it; the Vertical Pod Autoscaler recommends requests from observed usage. Azure Container Apps has no dynamic vertical scaling: CPU and memory belong to the revision template, so a change means a new revision.
 
 The ceiling is the largest SKU the platform sells, and prices bend upward before it. A scaled-up instance is still one instance, a single point of failure whose restart is the service's restart, so the usual design scales stateless tiers out and reserves scaling up for what cannot be split.
@@ -95,18 +95,32 @@ For a .NET service, scaling up only pays if the process uses the box. Server gar
 === "Python"
 
     ```python
-    # sizing.py (Python 3.12, Linux). Read the limits the container was actually given,
-    # then size worker pools from them instead of from os.cpu_count(), which reports the host.
+    # sizing.py (Python 3.12, Linux, cgroup v2). Read the limits the container was actually given,
+    # then size worker pools from them. os.cpu_count() reports the host, and os.sched_getaffinity()
+    # reflects only a cpuset; a Kubernetes or Docker CPU limit is a CFS quota in cpu.max.
+    import math
     import os
     from pathlib import Path
 
+    CGROUP = Path("/sys/fs/cgroup")
+
 
     def granted_cores() -> int:
-        return len(os.sched_getaffinity(0))          # cgroup-aware, unlike os.cpu_count()
+        cores = len(os.sched_getaffinity(0))
+        try:
+            quota, period = (CGROUP / "cpu.max").read_text().split()   # e.g. "200000 100000" = 2 CPUs
+            if quota != "max":
+                cores = min(cores, math.ceil(int(quota) / int(period)))
+        except FileNotFoundError:
+            pass                                                         # no cgroup v2 CPU controller
+        return max(1, cores)
 
 
     def granted_memory_bytes() -> int | None:
-        raw = Path("/sys/fs/cgroup/memory.max").read_text().strip()   # cgroup v2; "max" means unlimited
+        try:
+            raw = (CGROUP / "memory.max").read_text().strip()           # "max" means unlimited
+        except FileNotFoundError:
+            return None
         return None if raw == "max" else int(raw)
 
 
@@ -191,7 +205,7 @@ For a .NET service, scaling up only pays if the process uses the box. Server gar
 
 AZ-900 and CLF-C02 test the definition and the contrast with scaling out. AZ-104 expects you to resize VMs and know when deallocation is required, to change App Service plan tiers and understand that the plan, not the app, is what scales, and to pick VM sizes by family; DP-300 covers Azure SQL service tiers, compute sizes and the serverless tier; AZ-305 asks you to choose scale up versus scale out per component. On AWS, SAA-C03 and SOA-C03 cover changing EC2 instance types (stop first, public IP change, Compute Optimizer recommendations), RDS instance class changes and the role of Multi-AZ in limiting downtime, storage scaling without downtime, and Aurora Serverless v2 as the elastic alternative; SAP-C03 adds right-sizing at fleet scale. CKA touches resource requests and limits and the autoscaler family; KCNA asks the conceptual difference between HPA and VPA.
 
-Traps: an EC2 instance type change requires a stopped instance and will replace a non-Elastic public IPv4 address; a Windows VM on Azure cannot be resized between sizes with and without a local temp disk; RDS allocated storage increases without downtime while class changes do not; Aurora Serverless v2 scales compute, not storage; and Container Apps has no vertical autoscaling, so the only answer there is a new revision or scaling out.
+Traps: an EC2 instance type change requires a stopped instance and will replace a non-Elastic public IPv4 address; a Windows VM on Azure cannot be resized between sizes with and without a local temp disk (Linux VMs can), and no VM can be resized from a SCSI-based size to a remote NVMe size in place; RDS allocated storage increases without downtime while class changes do not; Aurora Serverless v2 scales compute, not storage; and Container Apps has no vertical autoscaling, so the only answer there is a new revision or scaling out.
 
 ## Self-check
 
@@ -210,5 +224,5 @@ Traps: an EC2 instance type change requires a stopped instance and will replace 
 - [.NET Core and C# runtime](../messaging/runtime/dotnet-core-csharp.md) and [Async and threading in .NET](../messaging/runtime/async-threading.md) for using the cores you paid for.
 - [Bare metal, Linux and hypervisors](../devops/bare-metal-linux-hypervisors.md) for what a VM size actually maps to.
 - Neighbouring terms: [Horizontal Scaling](horizontal-scaling.md), [Table Partitioning](table-partitioning.md), [Backpressure](backpressure.md), [Hypertable](hypertable.md), [Consumer Group](consumer-group.md).
-- [Resize a VM](https://learn.microsoft.com/en-us/azure/virtual-machines/resize-vm), [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up), [Scale Azure SQL resources](https://learn.microsoft.com/en-us/azure/azure-sql/database/scale-resources), [Change an EC2 instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/change-instance-type-of-ebs-backed-instance.html), [RDS instance settings](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Settings.html) and [Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html): the disruption facts quoted above.
+- [Resize a VM](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/resize-vm), [Scale up an App Service plan](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up), [Scale Azure SQL resources](https://learn.microsoft.com/en-us/azure/azure-sql/database/scale-resources), [Change an EC2 instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/change-instance-type-of-ebs-backed-instance.html), [RDS instance settings](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Settings.html) and [Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html): the disruption facts quoted above.
 - [Kubernetes in-place pod resize](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/) and [.NET garbage collector settings](https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector) for DATAS and container heap limits.

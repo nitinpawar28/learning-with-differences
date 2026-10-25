@@ -58,7 +58,7 @@ flowchart LR
 
 **[Hydration](hydration.md).** Hydration happens once, at bootstrap: Angular walks the server-rendered DOM, matches it to the views it would have created and attaches listeners without re-creating nodes. From that moment the ordinary change detection loop takes over. Confusion arises because both "render the component tree", but hydration compares DOM structure (a mismatch is an error) whereas change detection compares binding values (a difference is simply patched). A template whose output differs between server and client breaks hydration; it would never trouble change detection.
 
-**[Server-Side Rendering](server-side-rendering.md).** On the server, Angular bootstraps the application, runs change detection until the application is stable (no pending HTTP requests or `PendingTasks`), serialises the DOM to a string and discards the application. There are no events to react to and no second tick. In the browser the same machinery runs repeatedly for the life of the page. Code that assumes repeated ticks, such as a polling loop registered in a constructor, must be guarded on the server or it keeps the render pending until the stability timeout.
+**[Server-Side Rendering](server-side-rendering.md).** On the server, Angular bootstraps the application, runs change detection until the application is stable (no pending HTTP requests or `PendingTasks`), serialises the DOM to a string and discards the application. There are no events to react to and no second tick. In the browser the same machinery runs repeatedly for the life of the page. Code that assumes repeated ticks, such as a polling loop registered in a constructor, must be kept off the server: under Zone.js its pending timer stops the application from ever becoming stable, so the request hangs (there is no server-side stability timeout); in a zoneless application only `PendingTasks` (which `HttpClient` uses) hold the render, but the timer keeps running in the Node process after the response has been sent.
 
 | Mechanism | Question it answers | Unit of work | When it runs |
 |---|---|---|---|
@@ -150,6 +150,7 @@ flowchart LR
     ```typescript
     // Zone pollution: a canvas animation loop must not cost a tick per frame.
     import { Component, ElementRef, NgZone, afterNextRender, inject } from '@angular/core';
+    import { drawSparkline } from './draw-sparkline';   // plain canvas drawing, no Angular state
 
     @Component({ selector: 'app-sparkline', template: '<canvas></canvas>' })
     export class Sparkline {
@@ -160,7 +161,8 @@ flowchart LR
         afterNextRender(() => {
           const canvas = this.host.nativeElement.querySelector('canvas')!;
           this.zone.runOutsideAngular(() => {
-            const frame = () => { paint(canvas); requestAnimationFrame(frame); };
+            const ctx = canvas.getContext('2d')!;
+            const frame = () => { drawSparkline(ctx); requestAnimationFrame(frame); };
             requestAnimationFrame(frame);
           });
         });
@@ -173,8 +175,11 @@ flowchart LR
 === "TypeScript (tests)"
 
     ```typescript
-    // TestBed is zoneless by default. Prefer awaiting stability over detectChanges().
+    // TestBed is zoneless by default, even when zone.js is loaded in the polyfills.
+    // Prefer awaiting stability over detectChanges().
     import { TestBed } from '@angular/core/testing';
+    import { Ticker } from './ticker';
+    import { TickFeed } from './tick-feed';
 
     it('renders the latest price', async () => {
       TestBed.configureTestingModule({
@@ -185,8 +190,9 @@ flowchart LR
       await fixture.whenStable();
       expect(fixture.nativeElement.textContent).toContain('100.00');
     });
-    // A test that changes a plain field and asserts on the DOM now throws
-    // ExpressionChangedAfterItHasBeenCheckedError instead of passing by luck.
+    // A test that changes a plain field without notifying Angular and then calls
+    // detectChanges() now throws ExpressionChangedAfterItHasBeenCheckedError
+    // instead of passing by luck.
     ```
 
 ## Misconceptions

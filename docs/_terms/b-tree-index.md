@@ -31,7 +31,7 @@ sources:
 
 A B-tree index is a balanced, multi-way search tree kept on disk pages, and the index every relational engine builds unless told otherwise. Bayer and McCreight described it in 1972 so that a search, an insert and a delete on a large ordered index each touch only a handful of pages. A root page holds separator keys and child pointers; internal pages repeat that one level down; leaf pages, all at the same depth, hold the real index entries in sorted order, each a key plus a row locator (a tuple identifier, or TID, in PostgreSQL; a row ID or the clustering key in SQL Server). A page is typically 8 kB and holds hundreds of keys, so a few levels cover billions of rows and a lookup costs about one page read per level, mostly cached.
 
-Nearly every implementation is really a B+ tree: entries live only in the leaves, internal pages carry only separators, and each level's pages are linked into a list, so a range scan is one descent and a walk along the leaf chain. PostgreSQL implements Lehman and Yao's B-link variant: every page also stores a right-link and a high key (an upper bound on the keys it may hold), so a reader that lands on a just-split page can detect it and step right without holding locks, letting writers and readers share the tree at high concurrency. Inserts fill a page, then split it (PostgreSQL leaves 10 percent free, `fillfactor = 90`, to absorb churn); a root split adds a level, recorded in the metapage at the start of the index.
+Nearly every implementation is really a B+ tree: entries live only in the leaves, internal pages carry only separators, and each level's pages are linked into a list, so a range scan is one descent and a walk along the leaf chain. PostgreSQL implements Lehman and Yao's B-link variant: every page also stores a right-link and a high key (an upper bound on the keys it may hold), so a reader that lands on a just-split page can detect it and step right. Readers therefore lock only one page at a time and never wait for a split to finish, which lets writers and readers share the tree at high concurrency. Inserts fill a page, then split it; a root split adds a level, recorded in the metapage at the start of the index. `fillfactor` (90 by default) only governs how full `CREATE INDEX` packs the leaves and how full a split of the rightmost leaf leaves the old page, so ever-increasing keys keep 10 percent headroom for later updates.
 
 That is why it is the default: it serves `=`, `<`, `<=`, `>=` and `>` and the constructs built from them (`BETWEEN`, `IN`, `IS NULL`), anchored prefix patterns such as `LIKE 'foo%'`, and `ORDER BY` without a sort step, on any type with a linear ordering. A unique B-tree enforces `PRIMARY KEY` and `UNIQUE`, which is what deduplicates an [idempotency key](idempotency-key.md) or a [transactional outbox](transactional-outbox.md). When the index holds every column a query needs, PostgreSQL can run an index-only scan, consulting the visibility map (a per-page bit saying all rows are visible to every transaction) instead of the heap; `INCLUDE` columns add payload to the leaf for that purpose without widening the key. PostgreSQL 13 added deduplication, storing a repeated key once with a posting list of TIDs, and PostgreSQL 14 added bottom-up deletion, removing entries for dead row versions before a page split; both exist because, under [MVCC](mvcc.md), each row version gets its own index entry.
 
@@ -108,7 +108,11 @@ CREATE INDEX CONCURRENTLY ix_orders_placed_at ON orders (placed_at);
         var orders = modelBuilder.Entity<Order>();
 
         // Composite key: seek on customer, ordered walk on placed_at, payload in the leaf.
+        // Declared here so the model matches the database; the scaffolded migration body
+        // is replaced by the hand-written concurrent build below.
         orders.HasIndex(o => new { o.CustomerId, o.PlacedAt })
+              .HasDatabaseName("ix_orders_customer_placed_at")
+              .IsDescending(false, true)
               .IncludeProperties(o => o.TotalAmount);
 
         // Unique B-tree doubling as the idempotency guard.
@@ -141,25 +145,24 @@ CREATE INDEX CONCURRENTLY ix_orders_placed_at ON orders (placed_at);
 
     # CREATE INDEX CONCURRENTLY refuses to run inside a transaction block,
     # so the connection is opened in autocommit mode.
-    conn = psycopg.connect("postgresql://app@localhost/shop", autocommit=True)
-    conn.execute("""
-        CREATE INDEX CONCURRENTLY IF NOT EXISTS ix_orders_customer_placed_at
-            ON orders (customer_id, placed_at DESC) INCLUDE (total_amount)
-    """)
+    with psycopg.connect("postgresql://app@localhost/shop", autocommit=True) as conn:
+        conn.execute("""
+            CREATE INDEX CONCURRENTLY IF NOT EXISTS ix_orders_customer_placed_at
+                ON orders (customer_id, placed_at DESC) INCLUDE (total_amount)
+        """)
 
-    # With the visibility map mostly set, expect "Index Only Scan" and no Sort node.
-    plan = conn.execute("""
-        EXPLAIN SELECT placed_at, total_amount FROM orders
-        WHERE customer_id = %s AND placed_at >= now() - interval '30 days'
-        ORDER BY placed_at DESC
-    """, (42,)).fetchall()
-    print("\n".join(line for (line,) in plan))
-    conn.close()
+        # With the visibility map mostly set, expect "Index Only Scan" and no Sort node.
+        plan = conn.execute("""
+            EXPLAIN SELECT placed_at, total_amount FROM orders
+            WHERE customer_id = %s AND placed_at >= now() - interval '30 days'
+            ORDER BY placed_at DESC
+        """, (42,)).fetchall()
+        print("\n".join(line for (line,) in plan))
     ```
 
 === "Azure"
 
-    Azure SQL Database, Azure SQL Managed Instance and SQL Server store every rowstore index as a B+ tree. The clustered index is the table (data pages at the leaf), a nonclustered index stores a row locator at the leaf (the row ID for a heap, the clustering key otherwise) plus any `INCLUDE` columns, and the design guide's rules follow from that: narrow, unique, static, ever-increasing clustering keys; included columns rather than wide keys; and columnstore rather than B-trees for analytical scans. Azure SQL's automatic tuning can create and drop nonclustered indexes from observed workload, which is convenient and worth reviewing before trusting.
+    Azure SQL Database, Azure SQL Managed Instance and SQL Server store every rowstore index as a B+ tree. The clustered index is the table (data pages at the leaf), a nonclustered index stores a row locator at the leaf (the row ID for a heap, the clustering key otherwise) plus any `INCLUDE` columns, and the design guide's rules follow from that: narrow, unique, static, ever-increasing clustering keys; included columns rather than wide keys; and columnstore rather than B-trees for analytical scans. Azure SQL Database's automatic tuning can create and drop nonclustered indexes from observed workload (both options are off by default, and Managed Instance only offers plan correction), which is convenient and worth reviewing before trusting.
 
     Azure Database for PostgreSQL flexible server is standard PostgreSQL: the index above works unchanged, and the `hypopg` extension in its catalogue lets you test a hypothetical index against `EXPLAIN` before paying to build it.
 
@@ -171,7 +174,7 @@ CREATE INDEX CONCURRENTLY ix_orders_placed_at ON orders (placed_at);
 
 ## Misconceptions
 
-- **"A B-tree is a binary tree."** Each node holds hundreds of keys, so the tree is wide and only a few levels deep; the "B" is for balanced or Bayer, not binary. A lookup in a billion-row index touches three or four pages, not thirty.
+- **"A B-tree is a binary tree."** Each node holds hundreds of keys, so the tree is wide and only a few levels deep; Bayer and McCreight never said what the "B" stands for (balanced, broad and Bayer have all been suggested), but it is not binary. A lookup in a billion-row index touches three or four pages, not thirty.
 - **"Index every column in the `WHERE` clause separately."** One composite index with the right leading column usually beats several single-column indexes, and a composite index serves prefixes of its column list only; `(customer_id, placed_at)` does nothing for a query that filters on `placed_at` alone.
 - **"If the index exists the planner must use it."** The planner estimates cost from statistics. A predicate that selects a large fraction of the table, a tiny table, or stale statistics after a bulk load will all send it to a sequential scan, and correctly so.
 - **"More indexes never hurt reads."** Every index is rewritten on every insert and on every update that touches its columns, and dead entries from MVCC versions accumulate until vacuum. Write amplification and bloat are read costs too, because they push working pages out of cache.
@@ -190,7 +193,7 @@ DP-300 is the exam that tests this directly: clustered versus nonclustered index
     The B-tree on `time` is paying one leaf write per tick for a capability nobody uses, because the queries never seek to a single timestamp. Replace it with a BRIN index on `time` (rows arrive in order, so correlation is high) or move the table to a TimescaleDB hypertable and rely on chunk exclusion, and keep a B-tree only on the selective path such as `(symbol, time)`.
 
 ??? question "After a month of heavy updates a B-tree index has tripled in size while the row count is flat. Why, and what do you do?"
-    Under MVCC every update that touches an indexed column, or that cannot fit on the same heap page, creates a new index entry while the old one stays until it is reclaimed. Bottom-up deletion and vacuum limit this, but a high update rate outruns them. Rebuild with `REINDEX CONCURRENTLY`, lower `fillfactor` on the index and the table so updates stay on the same page, and ask whether the volatile column needs to be indexed at all.
+    Under MVCC every update that touches an indexed column, or that cannot fit on the same heap page, creates a new index entry while the old one stays until it is reclaimed. Bottom-up deletion and vacuum limit this, but a high update rate outruns them. Rebuild with `REINDEX CONCURRENTLY`, lower the table's `fillfactor` so updates find room on the same heap page and qualify as heap-only tuple updates, and ask whether the volatile column needs to be indexed at all (updating an indexed column always rules out a heap-only update).
 
 ## Further reading
 

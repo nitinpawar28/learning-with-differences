@@ -32,7 +32,7 @@ Columnar storage lays a table out on disk one column at a time: every `price` va
 
 Mechanically, a columnar engine never writes a row on its own. It buffers a batch of rows, cuts the batch into one segment per column, encodes each segment with a compression scheme suited to that column's type, and stores the segments with small metadata such as each segment's minimum, maximum and null count. Vendors name the batch differently: a Parquet *row group* holds *column chunks*, a SQL Server *rowgroup* of up to 1,048,576 rows holds *column segments*, and TimescaleDB columnises rows in batches of up to 1,000 values per column. Because a segment holds values of one type from one domain, encodings such as dictionary (repeated strings become small integers), run-length (a value plus a repeat count), delta (differences between neighbours) and bit packing work far better than compressing a mixed row, usually with a general-purpose codec such as zstd or lz4 on top; SQL Server documents up to ten times compression, Tiger Data 90 to 98 percent reduction.
 
-Reading reverses the process. A query naming three of fifty columns opens three segments; Redshift's documentation uses a hundred-column table whose five-column query reads about five percent of the data. Before opening a segment the engine compares the predicate with the segment's min/max metadata and skips segments that cannot match, which SQL Server calls segment elimination; the survivors are processed in batches of thousands of values so the CPU can use vector instructions, SQL Server's *batch mode execution*.
+Reading reverses the process. A query naming three of fifty columns opens three segments; Redshift's documentation uses a hundred-column table whose five-column query reads about five percent of the data. Before opening a segment the engine compares the predicate with the segment's min/max metadata and skips segments that cannot match, which SQL Server calls segment elimination. The survivors are processed a batch of values at a time rather than row by row, so the CPU can use vector instructions; SQL Server calls this *batch mode execution* and documents a typical two- to four-fold speed-up from it.
 
 The design comes from the 2005 C-Store paper, which argued that most databases were *write-optimised* while analytics needed a *read-optimised* system, trading cheap CPU cycles for scarce disk bandwidth. C-Store also described the compromise every modern engine still makes: writes land in a small writeable row store and a *tuple mover* periodically migrates them into the read-optimised column store. SQL Server's deltastore and tuple-mover, and TimescaleDB's rowstore chunks and columnstore policy, are direct descendants.
 
@@ -77,21 +77,27 @@ flowchart LR
 === "SQL"
 
     ```sql
-    -- TimescaleDB 2.20+ (Community Edition): raw ticks arrive in the rowstore,
-    -- chunks older than 7 days are converted to the columnstore.
+    -- TimescaleDB 2.23+ (Community Edition): raw ticks arrive in the rowstore.
+    -- CREATE TABLE ... WITH enables the columnstore and schedules a default
+    -- columnstore policy that converts chunks one chunk interval old.
     CREATE TABLE ticks (
         time   TIMESTAMPTZ NOT NULL,
         symbol TEXT        NOT NULL,
         price  DOUBLE PRECISION,
         volume BIGINT
-    ) WITH (tsdb.hypertable, tsdb.partition_column = 'time');
+    ) WITH (
+        tsdb.hypertable,
+        tsdb.partition_column = 'time',
+        tsdb.segmentby = 'symbol',
+        tsdb.orderby   = 'time DESC');
 
-    ALTER TABLE ticks SET (
-        timescaledb.enable_columnstore,
-        timescaledb.segmentby = 'symbol',
-        timescaledb.orderby   = 'time DESC');
-
+    -- Replace the default policy: convert chunks once they are older than 7 days.
+    CALL remove_columnstore_policy('ticks', if_exists => true);
     CALL add_columnstore_policy('ticks', after => INTERVAL '7 days');
+
+    -- On an existing hypertable (2.18+) enable the columnstore explicitly instead:
+    -- ALTER TABLE ticks SET (timescaledb.enable_columnstore,
+    --     timescaledb.segmentby = 'symbol', timescaledb.orderby = 'time DESC');
 
     -- Convert one chunk by hand and compare sizes.
     CALL convert_to_columnstore('_timescaledb_internal._hyper_1_3_chunk');
@@ -154,7 +160,8 @@ flowchart LR
          "symbol": [r[1] for r in rows],
          "close": [r[2] for r in rows]}
     )
-    # One row group per file here; large files should use many row groups.
+    # pyarrow cuts row groups of at most 1,048,576 rows by default; each row group
+    # carries per-column min/max statistics that readers use to skip it.
     pq.write_table(table, "daily_closes.parquet", compression="zstd")
     ```
 
@@ -162,7 +169,7 @@ flowchart LR
 
     - **Azure SQL Database, Azure SQL Managed Instance, SQL Server and SQL database in Microsoft Fabric** implement columnar storage as *columnstore indexes*: a clustered columnstore index is the whole table in columnar form; a nonclustered columnstore index is a columnar copy of selected columns over a rowstore table, which is how "real-time operational analytics" runs analytics and OLTP on the same table. Rows arrive in the deltastore until a rowgroup is full, then the tuple-mover compresses them; ordered columnstore indexes improve segment elimination.
     - **Microsoft Fabric** lakehouses and warehouses store tables as Delta Lake files, which are Parquet underneath; **Azure Data Explorer** and Fabric Eventhouse store immutable extents whose records are physically arranged by column.
-    - **Azure Database for PostgreSQL flexible server** ships the TimescaleDB Apache 2 edition, so hypertables work but the columnstore does not; the managed Citus-based **Azure Cosmos DB for PostgreSQL** offered append-only `USING columnar` tables but is on a retirement path.
+    - **Azure Database for PostgreSQL flexible server** ships the TimescaleDB Apache 2 edition, so hypertables work but the columnstore does not; the managed Citus-based **Azure Cosmos DB for PostgreSQL** offered append-only `USING columnar` tables but is closed to new projects and retires on 31 March 2029.
 
 === "AWS"
 

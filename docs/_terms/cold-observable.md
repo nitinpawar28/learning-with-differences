@@ -30,7 +30,7 @@ Most creation functions are cold: `of`, `from`, `range`, `timer`, `interval`, `d
 
 Cold also means **unicast**: one execution serves one observer. That is the property that surprises people. A component that pipes `http.get('/api/quotes')` into two `async` pipes issues two HTTP requests; an `interval(1000)` subscribed twice runs two timers that drift apart; a cold observable wrapping `new WebSocket(url)` opens one socket per subscriber. The remedy is *multicasting*, routing one execution through a `Subject` so that all observers share it; `share()` and `shareReplay()` do this with reference counting, and that is the mechanism by which a cold observable becomes [hot](hot-observable.md). Conversely `defer(() => fetch(url))` makes an eager source cold by postponing its creation until subscription, which is how a promise-returning call becomes retryable.
 
-Laziness is a feature. A cold observable is a description of work, so it can be assembled, passed around, stored in a service and composed with operators long before anyone decides to run it, and it costs nothing until then. [Signals](angular-signals.md) use the same property in a different direction: `toSignal()` subscribes immediately, and a `resource()` loader re-runs when its parameters change, so the cold observable is executed by the framework at a well-defined moment instead of by a template at an accidental one. The data-infrastructure analogue is replay from a log: reading a Redis Stream with `XRANGE` from the first ID gives every reader the full history from the start (see [Redis Streams versus Kafka](../messaging/eventing/redis-streams-vs-kafka.md)), whereas Redis Pub/Sub, like a hot observable, delivers only what happens while you are listening.
+Laziness is a feature. A cold observable is a description of work, so it can be assembled, passed around, stored in a service and composed with operators long before anyone decides to run it, and it costs nothing until then. [Signals](angular-signals.md) use the same property in a different direction: `toSignal()` subscribes immediately, and an `rxResource()` stream is re-subscribed when its parameters change, so the cold observable is executed by the framework at a well-defined moment instead of by a template at an accidental one. The data-infrastructure analogue is replay from a log: reading a Redis Stream with `XRANGE` from the first ID gives every reader the full history from the start (see [Redis Streams versus Kafka](../messaging/eventing/redis-streams-vs-kafka.md)), whereas Redis Pub/Sub, like a hot observable, delivers only what happens while you are listening.
 
 ```mermaid
 sequenceDiagram
@@ -49,7 +49,7 @@ sequenceDiagram
 
 **[Hot Observable](hot-observable.md).** The single question is where the producer lives. Inside the subscribe logic: cold, created per subscriber, started on subscribe, stopped on unsubscribe, replayable from the start, retryable by re-subscribing. Outside it: hot, shared by all subscribers, emitting whether anyone listens or not, with late subscribers missing earlier values. The temperature is not changed by operators (`map`, `filter`, `switchMap` keep a cold source cold) but only by multicasting (`share`, `shareReplay`, `connectable`, a `Subject`). Choose cold when each consumer should get its own run (a request, a computation, a file) and hot when consumers must observe one shared source (a socket, a DOM event, an in-app bus). The frequent bug is the opposite of each: duplicated requests from a cold source bound twice, and missed messages from a hot source subscribed late.
 
-**[Angular Signals](angular-signals.md).** A cold observable is executed; a signal is read. The observable has subscriptions, teardown, completion and an error channel, and it may emit nothing for a long time or ever; the signal always holds a current value and has no notion of completion. The bridge is deliberate: `toSignal()` subscribes once and exposes the latest value, `resource()` subscribes (or awaits) again whenever its parameters change, and `toObservable()` turns a signal into a stream that coalesces intermediate writes. Keep requests, cancellation and retries in the observable; hand the view a signal.
+**[Angular Signals](angular-signals.md).** A cold observable is executed; a signal is read. The observable has subscriptions, teardown, completion and an error channel, and it may emit nothing for a long time or ever; the signal always holds a current value and has no notion of completion. The bridge is deliberate: `toSignal()` subscribes once and exposes the latest value, `rxResource()` subscribes to a fresh stream (and `resource()` awaits a fresh loader) whenever its parameters change, and `toObservable()` turns a signal into a stream that coalesces intermediate writes. Keep requests, cancellation and retries in the observable; hand the view a signal.
 
 | | Cold observable | Hot observable | Signal |
 |---|---|---|---|
@@ -132,9 +132,10 @@ sequenceDiagram
 
     IObservable<long> shared = ticks.Publish().RefCount();              // the Rx.NET share(): one loop for all
 
-    static async IAsyncEnumerable<Trade> ReadTrades(Stream stream)      // cold: re-runs per await foreach
+    static async IAsyncEnumerable<string> ReadLines(string path)        // cold: re-runs per await foreach
     {
-        await foreach (var line in ReadLinesAsync(stream)) yield return Trade.Parse(line);
+        using var reader = File.OpenText(path);                          // opened per enumeration
+        while (await reader.ReadLineAsync() is { } line) yield return line;
     }
     ```
 

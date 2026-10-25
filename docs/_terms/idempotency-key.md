@@ -47,7 +47,7 @@ sequenceDiagram
     A-->>C: 201 Created (stored response, no second order)
 ```
 
-On the HTTP side the convention is converging on the `Idempotency-Key` header. The IETF HTTPAPI working group's draft (version 08, October 2026, still an Internet-Draft) recommends a UUID or similarly random value, requires that a key never be reused with a different payload, and recommends `400` when a required key is missing, `409` while the original request is still being processed, and `422` when the key is reused with a different payload; servers may fingerprint the body to detect that last case and should publish how long keys are retained. Stripe's API, the model most teams copy, accepts the header on every `POST`, stores the first response (errors included) once the endpoint starts executing, replays it on retry, rejects reuse with different parameters, and prunes keys after 24 hours.
+On the HTTP side the convention is converging on the `Idempotency-Key` header. The IETF HTTPAPI working group's draft (version 08, October 2026, still an Internet-Draft) recommends a UUID or similarly random value, requires that a key never be reused with a different payload, and recommends `400` when a required key is missing, `409` while the original request is still being processed, and `422` when the key is reused with a different payload; servers may fingerprint the body to detect that last case and should publish how long keys are retained. Stripe's API, the model most teams copy, accepts keys of up to 255 characters on every v1 `POST`, stores the first response (`500` errors included) once the endpoint starts executing, replays it on retry, rejects reuse with different parameters, and may prune keys once they are 24 hours old (its newer v2 API instead retries failed work to completion).
 
 On the messaging side the same idea appears under other names. Azure Service Bus duplicate detection tracks the application-set `MessageId` for a configurable window (10 minutes by default, 20 seconds to 7 days) and silently drops a resend. SQS FIFO queues de-duplicate on `MessageDeduplicationId`, or a SHA-256 of the body with content-based deduplication, for five minutes. Kafka's idempotent producer attaches a broker-assigned producer id and per-partition sequence numbers so a retried batch is written once. Redis 8.6 added `XADD ... IDMP producer-id iid` so a producer that crashed before reading the reply can resend without creating a second stream entry. DynamoDB's `ClientRequestToken` makes `TransactWriteItems` idempotent for ten minutes; EC2's `ClientToken` does the same for `RunInstances`.
 
@@ -107,14 +107,25 @@ Two design points separate a working implementation from a hopeful one. First, r
         catch (DbUpdateException) { return Results.Problem(statusCode: 409, title: "In progress"); }
 
         await using var tx = await db.Database.BeginTransactionAsync(ct);
-        var payment = await payments.ChargeAsync(body, ct);    // writes the payment row via db
-        var record = await db.IdempotencyRecords.FindAsync([key], ct);
-        record!.StatusCode = 201;
-        record.ResponseBody = JsonSerializer.Serialize(payment);
-        await db.SaveChangesAsync(ct);
-        await tx.CommitAsync(ct);                              // payment and stored response commit together
-
-        return Results.Created($"/payments/{payment.Id}", payment);
+        try
+        {
+            var payment = await payments.ChargeAsync(body, ct);    // writes the payment row via db
+            var record = await db.IdempotencyRecords.FindAsync([key], ct);
+            record!.StatusCode = 201;
+            record.ResponseBody = JsonSerializer.Serialize(payment);
+            await db.SaveChangesAsync(ct);
+            await tx.CommitAsync(ct);                              // payment and stored response commit together
+            return Results.Created($"/payments/{payment.Id}", payment);
+        }
+        catch
+        {
+            await tx.RollbackAsync(CancellationToken.None);
+            db.ChangeTracker.Clear();
+            await db.IdempotencyRecords                            // release the reservation so a retry can run
+                .Where(r => r.Key == key && r.StatusCode == null)
+                .ExecuteDeleteAsync(CancellationToken.None);
+            throw;
+        }
     });
     ```
 
@@ -150,10 +161,17 @@ Two design points separate a working implementation from a hopeful one. First, r
                 conn.commit()
             except psycopg.errors.UniqueViolation:
                 raise HTTPException(409, "In progress")
-            with conn.transaction():
-                payment = charge(cur, body)                       # inserts the payment row
-                cur.execute("UPDATE idempotency SET status_code = 201, body = %s WHERE key = %s",
-                            (json.dumps(payment), idempotency_key))
+            try:
+                with conn.transaction():
+                    payment = charge(cur, body)                   # inserts the payment row
+                    cur.execute("UPDATE idempotency SET status_code = 201, body = %s WHERE key = %s",
+                                (json.dumps(payment), idempotency_key))
+            except Exception:
+                # release the reservation so a retry is not stuck on 409
+                cur.execute("DELETE FROM idempotency WHERE key = %s AND status_code IS NULL",
+                            (idempotency_key,))
+                conn.commit()
+                raise
             return payment
     ```
 

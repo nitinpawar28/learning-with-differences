@@ -38,7 +38,7 @@ The principle has three dimensions, and most violations come from forgetting one
 
 It applies to four kinds of subject. **People** get job-function roles, separate administrator accounts and JIT activation. **Workloads** get a [workload identity](workload-identity.md) with a narrowly scoped role instead of an [API key](api-key.md) that unlocks everything. **Processes** get kernel-level restrictions: a container that drops all Linux capabilities, runs as non-root with a read-only root filesystem, or a module running in a [Wasm sandbox](wasm-sandboxing.md) that can only touch the directories it was handed. **AI agents** get tool allow-lists and tokens scoped to the current step; the MCP authorization specification asks servers to advertise the minimal scopes an operation needs and clients to request only those, stepping up when a later operation demands more.
 
-Least privilege is also a *process*, because the right set of permissions is rarely known up front. Both big clouds now ship the loop as a product: AWS recommends starting from managed policies, observing actual use in CloudTrail, generating a fine-grained policy with IAM Access Analyzer, and removing unused roles, keys and permissions flagged by its unused-access findings; Azure recommends narrow scopes and groups, PIM-eligible rather than permanent assignments, access reviews, and conditions that filter a role assignment down to specific blobs or tags. Guardrails sit above the loop: AWS permissions boundaries and service control policies, and Azure deny assignments, cap what a delegated administrator can ever grant.
+Least privilege is also a *process*, because the right set of permissions is rarely known up front. Both big clouds now ship the loop as a product: AWS recommends starting from managed policies, observing actual use in CloudTrail, generating a fine-grained policy with IAM Access Analyzer, and removing unused roles, keys and permissions flagged by its unused-access findings; Azure recommends narrow scopes and groups, PIM-eligible rather than permanent assignments, access reviews, and conditions that filter a role assignment down to specific blobs or tags. Guardrails sit above the loop: AWS permissions boundaries and service control policies, and in Azure a role assignment condition on the Role Based Access Control Administrator role (limiting which roles and principal types a delegated administrator may assign) plus Azure Policy, cap what a delegated administrator can ever grant.
 
 In the reader's stack the principle shows up at every layer: a Redis Streams consumer whose ACL user may only `XREADGROUP` and `XACK` on its own stream, a TimescaleDB ingest role that may insert into one hypertable but not read customer tables, an Angular single-page app that asks the identity provider for the one scope the current screen needs, and a Docker Compose service with `cap_drop: [ALL]`, `read_only: true` and a non-root `user`. [Zero trust](zero-trust.md) depends on it directly: NIST SP 800-207 defines the paradigm around *least privilege per-request access decisions*, which is least privilege re-evaluated on every call rather than granted once at provisioning time.
 
@@ -78,11 +78,15 @@ flowchart LR
     ```csharp
     // ASP.NET Core (.NET 9): the API only accepts tokens scoped to what this endpoint does,
     // and connects to TimescaleDB as a role that can only read the reporting schema.
+    using Npgsql;
+
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddAuthentication().AddJwtBearer();     // Authority/Audience from configuration
+    builder.Services.AddAuthentication().AddJwtBearer(o => o.MapInboundClaims = false); // Authority/Audience from configuration
     builder.Services.AddAuthorizationBuilder()
-        .AddPolicy("reports.read", p => p.RequireAuthenticatedUser().RequireClaim("scope", "reports.read"));
+        .AddPolicy("reports.read", p => p.RequireAuthenticatedUser().RequireAssertion(ctx =>
+            // "scope" is one space-separated string, so RequireClaim("scope", "reports.read") would miss multi-scope tokens
+            ctx.User.FindFirst("scope")?.Value.Split(' ').Contains("reports.read") == true));
 
     // Connection string names a least-privilege login, not the owner:
     //   CREATE ROLE reports_reader LOGIN PASSWORD '...';
@@ -121,7 +125,7 @@ flowchart LR
             try:
                 claims = jwt.decode(token, options={"verify_signature": False})  # verify with your IdP's JWKS in production
             except jwt.PyJWTError:
-                raise HTTPException(401)
+                raise HTTPException(401) from None
             if required not in claims.get("scope", "").split():
                 raise HTTPException(403, f"scope {required} required")
             return claims
@@ -147,7 +151,7 @@ flowchart LR
         user: "10001:10001"                 # not root
         read_only: true                     # immutable root filesystem
         tmpfs: [/tmp]
-        cap_drop: [ALL]                     # Docker's default set is already limited; drop the rest
+        cap_drop: [ALL]                     # drop even Docker's default capability set
         security_opt:
           - no-new-privileges:true          # setuid binaries cannot escalate
     ```
@@ -180,7 +184,7 @@ flowchart LR
     }
     ```
 
-    Attach that as a customer managed policy to the workload's IAM role (temporary credentials, never long-term access keys), and set a permissions boundary when developers may create their own roles so the boundary caps whatever they grant. Then run the reduction loop: `aws accessanalyzer create-analyzer --type ACCOUNT_UNUSED_ACCESS` surfaces unused roles, keys, passwords and permissions; last-accessed information and Access Analyzer policy generation from CloudTrail produce the narrower policy; service control policies and resource control policies hold the organisation-wide ceiling.
+    Attach that as a customer managed policy to the workload's IAM role (temporary credentials, never long-term access keys), and set a permissions boundary when developers may create their own roles so the boundary caps whatever they grant. Then run the reduction loop: `aws accessanalyzer create-analyzer --analyzer-name unused-access --type ACCOUNT_UNUSED_ACCESS` surfaces unused roles, keys, passwords and permissions; last-accessed information and Access Analyzer policy generation from CloudTrail produce the narrower policy; service control policies and resource control policies hold the organisation-wide ceiling.
 
 ## Misconceptions
 
@@ -197,7 +201,7 @@ Every security exam in this library tests the principle, usually by hiding it in
 ## Self-check
 
 ??? question "A data-science team's role has had Contributor on the whole subscription for a year. They say they only touch two storage accounts and one AKS cluster. What is the least-privilege remediation, in order?"
-    First, observe rather than guess: review activity logs and Defender for Cloud recommendations to confirm which resources and operations the role actually used. Second, replace the subscription-scope Contributor assignment with job-function roles at the narrowest scope that matches that usage, for example Storage Blob Data Contributor on the two accounts and Azure Kubernetes Service Cluster User on the cluster, assigned to a group rather than individuals. Third, make anything administrative eligible in PIM with time-bound activation and an approval, and schedule an access review. Finally, remove the old assignment only after the new ones have been exercised, so the change does not become an outage.
+    First, observe rather than guess: review activity logs and Defender for Cloud recommendations to confirm which resources and operations the role actually used. Second, replace the subscription-scope Contributor assignment with job-function roles at the narrowest scope that matches that usage, for example Storage Blob Data Contributor on the two accounts and Azure Kubernetes Service Cluster User Role on the cluster (plus a Kubernetes or Azure RBAC for Kubernetes role for what they do inside it), assigned to a group rather than individuals. Third, make anything administrative eligible in PIM with time-bound activation and an approval, and schedule an access review. Finally, remove the old assignment only after the new ones have been exercised, so the change does not become an outage.
 
 ??? question "An AWS Lambda function assumes a role with AmazonS3FullAccess. It reads from one bucket and writes to one prefix in another. How do you get to least privilege without breaking it?"
     Keep the function running while you measure: use IAM Access Analyzer policy generation on the role's CloudTrail activity to produce a policy listing the actions and resources it actually used, then hand-check it against the design (GetObject on the source bucket, PutObject on the destination prefix, plus any KMS actions the buckets' encryption requires). Attach the generated customer managed policy, remove the AWS managed policy, and confirm with last-accessed data after a full business cycle that nothing else is needed. If other teams create roles in the account, add a permissions boundary so the ceiling stays fixed even if someone later edits the policy.

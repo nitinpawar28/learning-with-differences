@@ -27,13 +27,13 @@ sources:
 
 At-most-once is the guarantee you get when nobody waits for confirmation. The sender transmits and moves on; the broker, if there is one, considers the message settled the moment it hands it over; the consumer takes it and either succeeds or does not. Kafka's design documentation defines it as *messages may be lost but are never redelivered*. The absence of a retry loop is the whole definition: because nothing is ever re-sent, nothing can arrive twice, and because nothing is re-sent, anything that fails in flight is gone.
 
-Protocol specifications make the trade-off explicit. MQTT's QoS 0 is literally named "at most once delivery": a single `PUBLISH`, no acknowledgement, and the specification notes that message loss can occur. AMQP 1.0 describes the same thing in terms of settlement: if the sender settles a transfer before sending it, the result is an at-most-once guarantee. Every broker exposes a switch with this shape:
+Protocol specifications make the trade-off explicit. MQTT's QoS 0 is literally named "at most once delivery": a single `PUBLISH`, no response from the receiver and no retry by the sender, so the specification says the message arrives either once or not at all. AMQP 1.0 describes the same thing in terms of settlement: if the sender settles a transfer before sending it, the result is an at-most-once guarantee. Every broker exposes a switch with this shape:
 
 - **Redis Pub/Sub** is at-most-once by design: once the server pushes a message, it is never sent again, and a subscriber that is disconnected or errors loses it forever. Redis Streams exist for the cases where that is not acceptable.
 - **Redis Streams** offer the same choice per read: `XREADGROUP ... NOACK` skips the pending entries list, which is equivalent to acknowledging on read. The documentation reserves it for cases where occasional loss is acceptable.
 - **Azure Service Bus** receive-and-delete mode marks the message consumed as soon as it is put on the wire; if the transfer fails or the consumer crashes, the message is lost. Microsoft's own documentation calls this at-most-once processing, in contrast to peek-lock's at-least-once.
 - **Kafka** has no mode flag; the order of operations decides. Read, commit the offset, then process, and a crash after the commit loses the uncommitted work. Auto-commit with asynchronous processing drifts into the same territory.
-- **SQS** has no at-most-once receive mode, but deleting a message before processing it produces one; Lambda's asynchronous invocation retries twice by default, and setting its maximum retry attempts to zero yields at-most-once invocation.
+- **SQS** has no at-most-once receive mode, but deleting a message before processing it produces one. Lambda's asynchronous invocation retries a failed event twice by default; setting its maximum retry attempts to zero removes those retries, but AWS warns that its internal event queue can still hand the function the same event more than once, so even that is not a strict at-most-once guarantee.
 - **Plain transports**: UDP datagrams, StatsD metrics, a WebSocket push with no application-level ack, a Server-Sent Events stream with no replay are all at-most-once by construction.
 
 ```mermaid
@@ -76,7 +76,7 @@ The discipline is to choose it *on purpose* and only for messages whose loss is 
     // Redis Streams: NOACK = settled on read, nothing enters the pending list.
     var ticks = await db.StreamReadGroupAsync("prices", "dashboard", instanceId,
         StreamPosition.NewMessages, count: 500, noAck: true);
-    await hub.Clients.All.SendAsync("ticks", ticks.Select(Tick.From), ct);   // a crash here loses them
+    await hub.Clients.All.SendAsync("ticks", ticks.Select(e => Tick.From(e.Values)), ct);   // a crash here loses them
 
     // Service Bus: receive-and-delete settles on the wire; a crash loses the message.
     var receiver = client.CreateReceiver("telemetry", new ServiceBusReceiverOptions
@@ -115,14 +115,14 @@ The discipline is to choose it *on purpose* and only for messages whose loss is 
 
 === "Azure"
 
-    - **Service Bus**: receive-and-delete is the documented at-most-once mode; prefer it only for low-value or short-lived data, and note that AMQP presettled transfers on the send side are likewise fire-and-forget and unsupported for diagnostics.
+    - **Service Bus**: receive-and-delete is the documented at-most-once mode; prefer it only for low-value or short-lived data, and note that AMQP presettled transfers from a low-level client are likewise fire-and-forget: no outcome is reported, so there is no diagnostic data and Microsoft excludes that mode from Azure support.
     - **Event Hubs**: checkpointing before processing a batch gives at-most-once consumption; the service itself is at-least-once.
     - **Azure SignalR Service and Web PubSub**: a push to a client has no application acknowledgement, so delivery to the browser is at-most-once unless you build replay on top (for example, re-reading the stream from the last seen id on reconnect).
 
 === "AWS"
 
     - **SQS**: there is no at-most-once mode; deleting before processing emulates it, and a `maxReceiveCount` of 1 with a dead-letter queue is a sometimes-useful middle ground (one attempt, then parked).
-    - **Lambda asynchronous invocations**: set the maximum retry attempts to zero for at-most-once invocation; the event still lands in an on-failure destination if you configure one.
+    - **Lambda asynchronous invocations**: setting the maximum retry attempts to zero stops retries after a function error (the event still lands in an on-failure destination if you configure one), but the asynchronous queue itself can occasionally deliver an event twice, so handlers that must never repeat an effect still need an idempotency check.
     - **Kinesis**: checkpoint before processing for at-most-once; the Kinesis documentation otherwise assumes at-least-once with duplicates from producer and consumer retries.
 
 ## Misconceptions
@@ -135,7 +135,7 @@ The discipline is to choose it *on purpose* and only for messages whose loss is 
 
 ## Exam notes
 
-Exams rarely name at-most-once directly; they test whether you recognise it. AZ-204 asks what receive-and-delete does when a receiver crashes and when it is acceptable; AZ-305 and SAP-C03 present scenarios with low-value telemetry where the cheapest reliable-enough path is the answer. DVA-C02 and DVA-C03 expect you to know that SQS has no at-most-once mode and that Lambda asynchronous retries can be set to zero; DEA-C01 covers checkpoint placement in Kinesis consumers. The traps are reading "no duplicates" as exactly-once, using Pub/Sub or receive-and-delete for business messages, and not noticing that a commit-before-process consumer has quietly become at-most-once.
+Exams rarely name at-most-once directly; they test whether you recognise it. AZ-204 asks what receive-and-delete does when a receiver crashes and when it is acceptable; AZ-305 and SAP-C03 present scenarios with low-value telemetry where the cheapest reliable-enough path is the answer. DVA-C02 and DVA-C03 expect you to know that SQS has no at-most-once mode and that Lambda asynchronous retries can be set between zero and two (zero removes retries, not the occasional duplicate); DEA-C01 covers checkpoint placement in Kinesis consumers. The traps are reading "no duplicates" as exactly-once, using Pub/Sub or receive-and-delete for business messages, and not noticing that a commit-before-process consumer has quietly become at-most-once.
 
 ## Self-check
 

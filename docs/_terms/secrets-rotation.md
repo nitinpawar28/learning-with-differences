@@ -88,8 +88,13 @@ In the reader's stack, the TimescaleDB password, the Redis `AUTH` string, broker
         for (var attempt = 1; ; attempt++)
         {
             KeyVaultSecret pw = await secrets.GetSecretAsync("timescale-password", cancellationToken: ct);
-            var conn = new NpgsqlConnection(
-                $"Host=timescale;Database=market;Username=orders;Password={pw.Value};SSL Mode=VerifyFull");
+            var csb = new NpgsqlConnectionStringBuilder
+            {
+                Host = "timescale", Database = "market", Username = "orders",
+                Password = pw.Value,                                    // builder escapes ; and = safely
+                SslMode = SslMode.VerifyFull,
+            };
+            var conn = new NpgsqlConnection(csb.ConnectionString);
             try
             {
                 await conn.OpenAsync(ct);
@@ -104,7 +109,7 @@ In the reader's stack, the TimescaleDB password, the Redis `AUTH` string, broker
     }
     ```
 
-    The connection string is built per attempt from the latest version, so a rotation that completed between two calls is picked up on the retry. Keep the retry narrow (only the password error code) so a real outage still fails fast.
+    The connection string is built per attempt from the latest version (each distinct password gets its own Npgsql pool, so idle connections opened with the old one simply age out), so a rotation that completed between two calls is picked up on the retry. Keep the retry narrow (only the password error code) so a real outage still fails fast.
 
 === "Python"
 
@@ -177,7 +182,7 @@ In the reader's stack, the TimescaleDB password, the Redis `AUTH` string, broker
       --rotate-immediately
     ```
 
-    Pick the strategy first. *Single user* changes one user's password in place; it is the simplest and appropriate for most cases, with a short window in which a stale caller is refused and should retry. *Alternating users* clones the user on the first rotation and thereafter alternates passwords between `user` and `user_clone`, so both sets of credentials are valid after every rotation; it needs a separate superuser secret, and Amazon RDS Proxy does not support it. For Amazon RDS, Aurora, Redshift and DocumentDB there is *managed rotation* with no Lambda at all. Schedules use `rate()` or `cron()` expressions in UTC, never more often than every four hours, inside a window of at least one hour, and `AWSPENDING`, `AWSCURRENT` and `AWSPREVIOUS` labels track the versions.
+    Pick the strategy first. *Single user* changes one user's password in place; it is the simplest and appropriate for most cases, with a short window in which a stale caller is refused and should retry. *Alternating users* clones the user on the first rotation and thereafter alternates passwords between `user` and `user_clone`, so both sets of credentials are valid after every rotation; it needs a separate superuser secret, and Amazon RDS Proxy does not support it. For the master or admin user of Amazon RDS, Aurora, Redshift and DocumentDB there is *managed rotation* with no Lambda at all; application users still need a rotation function. Schedules use `rate()` or `cron()` expressions in UTC, never more often than every four hours, inside a window of at least one hour, and `AWSPENDING`, `AWSCURRENT` and `AWSPREVIOUS` labels track the versions.
 
 ## Misconceptions
 

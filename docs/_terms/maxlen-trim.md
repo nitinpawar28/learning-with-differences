@@ -33,7 +33,7 @@ A Redis Stream is an append-only log held in memory, and `XADD` is an O(1) appen
 - `MAXLEN threshold` evicts entries from the oldest end for as long as the stream is longer than the threshold, so the stream keeps its newest `threshold` entries.
 - `MINID threshold` (Redis 6.2 and later) evicts every entry whose ID is lower than the threshold and keeps the rest. Because stream IDs are `<milliseconds>-<sequence>`, a MINID of "now minus 24 hours" is a time-based retention policy, which Redis does not otherwise offer.
 
-Both strategies are *exact* by default (written `=`), meaning the stream ends up with precisely the minimum of its current length and the threshold, or precisely no IDs below the threshold. Exact trimming can be expensive, and the reason is the data structure. A stream is a radix tree whose leaves are *macro nodes*, each a packed node holding up to `stream-node-max-entries` entries (default 100) or `stream-node-max-bytes` bytes (default 4096), whichever limit is reached first. Removing a whole node is one deallocation; removing part of a node means rewriting it. The `~` operator asks for *approximate* trimming: Redis stops as soon as it would have to split a node, so the stream keeps *at least* the threshold and possibly a few tens of entries more; `MAXLEN ~ 1000` may leave 1000, 1010 or 1030 entries, never fewer than 1000. Approximate trimming is what you want in nearly every producer path. A second lever, `LIMIT count` (6.2 and later, only meaningful with `~`), caps how many entries one call may evict; when omitted, Redis uses 100 times the entries per macro node, and `LIMIT 0` removes the cap. `NOMKSTREAM` on `XADD` (6.2) stops an add from creating a stream that was trimmed or deleted away.
+Both strategies are *exact* by default (written `=`), meaning the stream ends up with precisely the minimum of its current length and the threshold, or precisely no IDs below the threshold. Exact trimming can be expensive, and the reason is the data structure. A stream is a radix tree whose leaves are *macro nodes*, each a packed node holding up to `stream-node-max-entries` entries (default 100) or `stream-node-max-bytes` bytes (default 4096), whichever limit is reached first. Removing a whole node is one deallocation; removing part of a node means marking entries deleted inside its packed listpack, which costs work per entry and frees no memory until the whole node goes. The `~` operator asks for *approximate* trimming: Redis stops as soon as it would have to split a node, so the stream keeps *at least* the threshold and possibly a few tens of entries more; `MAXLEN ~ 1000` may leave 1000, 1010 or 1030 entries, never fewer than 1000. Approximate trimming is what you want in nearly every producer path. A second lever, `LIMIT count` (6.2 and later, only meaningful with `~`), caps how many entries one call may evict; when omitted, Redis uses 100 times the entries per macro node, and `LIMIT 0` removes the cap. `NOMKSTREAM` on `XADD` (6.2) stops an add from creating a stream that was trimmed or deleted away.
 
 Trimming is where Redis Streams and consumer groups collide. A group's pending entries list (PEL) records which consumer was delivered which ID and awaits `XACK`; trimming does not consult it. Until Redis 8.2 the default was the only behaviour: entries vanish while their PEL references remain. Redis 8.2 added three modes on `XADD` and `XTRIM`: `KEEPREF` (the default, trims regardless of groups and keeps the dangling references), `DELREF` (trims and removes the references from every group's PEL) and `ACKED` (only trims entries that every group has read and acknowledged, still stopping at the MAXLEN limit if too many are referenced). A consumer that falls behind the trim horizon on `KEEPREF` gets no error; the entries are simply gone, which is why "my consumer skipped events" on a quiet weekend is usually a trimming story, not a delivery story. The library's [Redis Streams vs. Kafka](../messaging/eventing/redis-streams-vs-kafka.md) comparison treats this as the central operational difference from Kafka, whose retention is disk-backed and whose [log compaction](log-compaction.md) is key-aware.
 
@@ -45,7 +45,7 @@ flowchart LR
     direction LR
     n1["node 1: 100 entries"] --> n2["node 2: 100 entries"] --> n3["node 3: 100 entries"] --> n4["node 4: 37 entries (tail)"]
   end
-  exact["XTRIM MAXLEN 150: frees node 1, rewrites node 2, leaves exactly 150"]
+  exact["XTRIM MAXLEN 150: frees node 1, marks 87 entries deleted in node 2, leaves exactly 150"]
   approx["XTRIM MAXLEN ~ 150: frees node 1 only, leaves 237 (at least 150)"]
   stream --> exact
   stream --> approx
@@ -91,7 +91,7 @@ A market-data gateway publishes ticks to a per-symbol stream, keeps roughly the 
     var cutoff = DateTimeOffset.UtcNow.AddHours(-24).ToUnixTimeMilliseconds();
     long evicted = await db.StreamTrimByMinIdAsync("ticks:EURUSD", $"{cutoff}-0", useApproximateMaxLength: true);
 
-    // Exact trimming when you really need a hard number (rare; rewrites a macro node).
+    // Exact trimming when you really need a hard number (rare; edits a partially trimmed macro node).
     await db.StreamTrimAsync("ticks:EURUSD", maxLength: 1_000, useApproximateMaxLength: false);
     ```
 
@@ -120,7 +120,7 @@ A market-data gateway publishes ticks to a per-symbol stream, keeps roughly the 
 
 === "AWS"
 
-    Amazon ElastiCache and Amazon MemoryDB are compatible with Valkey and Redis OSS; MemoryDB adds Multi-AZ durability through a transactional log and is positioned as a primary database rather than a cache. Valkey forked from Redis 7.2, so the 6.2-era options (`MINID`, `LIMIT`, `NOMKSTREAM`) are present and the Redis 8.2 trim modes are not. A durable MemoryDB stream still needs trimming: durability means a trimmed stream survives failover, not that entries are kept.
+    Amazon ElastiCache and Amazon MemoryDB are compatible with Valkey and Redis OSS; MemoryDB adds Multi-AZ durability through a transactional log and is positioned as a primary database rather than a cache. Valkey forked from Redis 7.2.4, so the 6.2-era options (`MINID`, `LIMIT`, `NOMKSTREAM`) are present, but `XADD` and `XTRIM` do not take the Redis 8.2 `KEEPREF`/`DELREF`/`ACKED` modes. Valkey 9.2 (a release candidate in September 2026) adds those modes only on its new `XACKDEL` and `XDELEX` commands, so check the engine version before you depend on them. A durable MemoryDB stream still needs trimming: durability means a trimmed stream survives failover, not that entries are kept.
 
 ## Misconceptions
 
@@ -140,7 +140,7 @@ Trimming is a Redis operational detail rather than an exam objective, but the su
     The stream was trimmed past the group's position: the producer kept appending, Redis evicted the oldest entries, and the group's next-ID pointer now refers to entries that no longer exist. Options are to size MAXLEN from peak rate times the longest tolerated outage, to switch to MINID with a time window that covers weekends, to use the Redis 8.2 ACKED trim mode so unacknowledged entries are retained (accepting the memory risk), or to rehydrate the consumer from the durable history in TimescaleDB rather than from the stream.
 
 ??? question "You need the stream to hold exactly the last 10,000 entries for a compliance report. Which call do you use and what does it cost?"
-    `XTRIM key MAXLEN 10000` (or `MAXLEN = 10000`), the exact form, possibly followed by exact `XADD ... MAXLEN = 10000`. Exact trimming may rewrite a macro node on every call, so it is more expensive than `~`; if the report only runs hourly, trim approximately on the hot path and exactly once before the report.
+    `XTRIM key MAXLEN 10000` (or `MAXLEN = 10000`), the exact form, possibly followed by exact `XADD ... MAXLEN = 10000`. Exact trimming may have to delete entries one by one inside a macro node on every call, so it is more expensive than `~`; if the report only runs hourly, trim approximately on the hot path and exactly once before the report.
 
 ??? question "A housekeeping job runs XTRIM MINID ~ cutoff once a day and the first run after a long pause stalls Redis. How do you make it safe?"
     Add `LIMIT count` to bound how many entries each call evicts and loop until the return value is zero, or run the job more often so each run has less to remove. Approximate mode is required for LIMIT to apply. Because Redis executes commands on a single thread, a single unbounded exact trim of millions of entries blocks every client.

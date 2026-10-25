@@ -35,7 +35,7 @@ Physical facts: WAL lives in `pg_wal` as 16 MB segment files of 8 kB pages; posi
 
 The theory is ARIES (Mohan and colleagues, 1992): repeat history during redo, keep an LSN on every page so a record is applied at most once, and log compensation records during undo so recovery is itself restartable. SQL Server's transaction log is explicitly a write-ahead log with LSNs, virtual log files and truncation after a checkpoint or log backup. Redis's append-only file is a cousin: it appends commands after executing them and fsyncs every second by default.
 
-Because the WAL is a complete, ordered record of every change, it became the backbone of three more features. *Streaming replication* ships WAL to standbys, which replay it. *Point-in-time recovery* archives WAL so a base backup plus replay reaches any instant. *Logical decoding* reads the WAL through a *replication slot* and an output plugin such as `pgoutput` to emit row-level change events, which is how Debezium-style [change data capture](change-data-capture.md) works. A slot guarantees that the WAL and catalog rows it still needs are retained, but an abandoned slot therefore pins WAL forever, fills the disk and stops `VACUUM` from freezing. A slot emits each change once in normal operation but may resend after a crash, so consumers must be idempotent.
+Because the WAL is a complete, ordered record of every change, it became the backbone of three more features. *Streaming replication* ships WAL to standbys, which replay it. *Point-in-time recovery* archives WAL so a base backup plus replay reaches any instant. *Logical decoding* reads the WAL through a *replication slot* and an output plugin such as `pgoutput` to emit row-level change events, which is how Debezium-style [change data capture](change-data-capture.md) works. A slot guarantees that the WAL and catalog rows it still needs are retained, so an abandoned slot pins WAL indefinitely, fills the disk and holds back `VACUUM` cleanup and freezing of the system catalogs (and, for a physical slot with `hot_standby_feedback`, of every table). A slot emits each change once in normal operation but may resend after a crash, so consumers must be idempotent.
 
 In the reader's stack the WAL is what makes a .NET `SaveChangesAsync` durable, what the [transactional outbox](transactional-outbox.md) relies on, and what a CDC pipeline reads. Amazon Aurora takes the idea to its conclusion: the engine sends only log records to the storage service, which materialises pages from the log.
 
@@ -90,8 +90,10 @@ sequenceDiagram
     SELECT lsn, data FROM pg_logical_slot_peek_changes('audit_slot', NULL, NULL);
     SELECT pg_drop_replication_slot('audit_slot');  -- never leave an unused slot behind
 
-    -- How much WAL does a statement generate?
+    -- How much WAL does a statement generate? ANALYZE really runs the UPDATE.
+    BEGIN;
     EXPLAIN (ANALYZE, WAL) UPDATE orders SET total = total * 1.1 WHERE customer = 'acme';
+    ROLLBACK;
     ```
 
 === "C#"
@@ -106,13 +108,14 @@ sequenceDiagram
     // Create once; afterwards reuse with new PgOutputReplicationSlot("orders_slot").
     var slot = await conn.CreatePgOutputReplicationSlot("orders_slot");
 
-    await foreach (var message in conn.StartReplication(
-                       slot, new PgOutputReplicationOptions("orders_pub", 1), ct))
+    var options = new PgOutputReplicationOptions("orders_pub", PgOutputProtocolVersion.V1);
+    await foreach (var message in conn.StartReplication(slot, options, ct))
     {
         if (message is InsertMessage insert)
         {
+            // Read the values in order, before the next message arrives.
             await foreach (var value in insert.NewRow)
-                Console.Write($"{await value.Get<string>()} ");
+                Console.Write(value.IsDBNull ? "NULL " : $"{await value.Get<string>()} ");
             Console.WriteLine();
         }
 
@@ -144,12 +147,12 @@ sequenceDiagram
 
 === "Azure"
 
-    - **Azure Database for PostgreSQL flexible server**: set the `wal_level` server parameter to `logical` and restart, grant `ALTER ROLE ... WITH REPLICATION` to the consuming role, then use `pgoutput`, `wal2json`, `test_decoding` or the `pglogical` extension. The service documents the operational trap: unconsumed slots pile up WAL and raise wraparound risk, the server goes read-only at 95 percent storage, and it will drop an unused slot itself when storage runs critically low. On PostgreSQL 17 and later, slot synchronisation (`sync_replication_slots`, `hot_standby_feedback`) preserves logical slots across high-availability failover; earlier versions need the `pg_failover_slots` module.
+    - **Azure Database for PostgreSQL flexible server**: set the `wal_level` server parameter to `logical` and restart, grant `ALTER ROLE ... WITH REPLICATION` to the consuming role, then use `pgoutput`, `wal2json`, `test_decoding` or the `pglogical` extension. The service documents the operational trap: unconsumed slots pile up WAL and raise wraparound risk, the server goes read-only at 95 percent storage, and it will drop an unused slot itself when storage runs critically low. On PostgreSQL 17 and later, slot synchronisation (`sync_replication_slots`, `hot_standby_feedback`) preserves logical slots created with the failover option across high-availability failover; PostgreSQL 16 and earlier need the `pg_failover_slots` module.
     - **Azure SQL Database and SQL Server**: the transaction log is the WAL; log records must be on disk before the dirty page is flushed, checkpoints and log backups drive truncation, and automatic backups plus log backups give point-in-time restore.
 
 === "AWS"
 
-    - **Amazon RDS for PostgreSQL and Aurora PostgreSQL**: `wal_level` is not edited directly; the `rds.logical_replication` parameter in the parameter group turns logical decoding on, and the `rds_replication` role grants slot access. Aurora keeps the WAL records in Aurora storage, decodes with `pgoutput` by default and also supports `wal2json`, and adds a write-through cache for logical replication.
+    - **Amazon RDS for PostgreSQL and Aurora PostgreSQL**: `wal_level` is not edited directly; the `rds.logical_replication` parameter in the parameter group turns logical decoding on, and the `rds_replication` role grants slot access. Aurora keeps the WAL records in Aurora storage, supports the `pgoutput` and `wal2json` plugins, and adds a write-through cache that serves logical decoding from memory instead of storage.
     - **Amazon Aurora storage**: the engine sends only log records to the storage nodes, a write is durable when four of six nodes acknowledge, and the storage tier coalesces log records into data pages; the log-shipping design is why Aurora replicas and crash recovery do not replay WAL at the engine.
     - **AWS DMS** and similar CDC services read PostgreSQL sources through logical replication slots, with the same retention hazard if a task is paused.
 

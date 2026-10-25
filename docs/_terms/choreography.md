@@ -89,16 +89,17 @@ Inventory reacts to `OrderPlaced` and announces the outcome; payment reacts to t
 
     while (true)
     {
-        // StackExchange.Redis has no blocking reads, so poll with a short delay when idle.
+        // StackExchange.Redis does not expose XREADGROUP BLOCK (it would stall the shared connection), so poll with a short delay when idle.
         var entries = await db.StreamReadGroupAsync(inbox, group, consumer, StreamPosition.NewMessages, count: 10);
         foreach (var entry in entries)
         {
-            var evt = JsonSerializer.Deserialize<OrderPlaced>(entry["payload"].ToString())!;
+            // JsonSerializerOptions.Web: camelCase and case-insensitive, matching the Python producer's "orderId" fields.
+            var evt = JsonSerializer.Deserialize<OrderPlaced>(entry["payload"].ToString(), JsonSerializerOptions.Web)!;
             bool reserved = await TryReserveAsync(evt);   // idempotent on evt.OrderId: a redelivery must not reserve twice
 
             await db.StreamAddAsync("events:inventory", [
                 new NameValueEntry("type", reserved ? "StockReserved" : "StockReservationFailed"),
-                new NameValueEntry("payload", JsonSerializer.Serialize(new { evt.OrderId })),
+                new NameValueEntry("payload", JsonSerializer.Serialize(new { evt.OrderId }, JsonSerializerOptions.Web)),
             ], maxLength: 1_000_000, useApproximateMaxLength: true);
 
             await db.StreamAcknowledgeAsync(inbox, group, entry.Id);   // only after the local work and the outgoing event

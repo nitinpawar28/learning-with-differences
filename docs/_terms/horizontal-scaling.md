@@ -79,6 +79,7 @@ Two limits remain. New instances take time to provision and warm up, so autoscal
     // Program.cs (.NET 9). Packages: Microsoft.AspNetCore.DataProtection.StackExchangeRedis,
     // Microsoft.Extensions.Caching.StackExchangeRedis, Microsoft.Extensions.Caching.Hybrid,
     // Microsoft.AspNetCore.SignalR.StackExchangeRedis
+    using Microsoft.AspNetCore.SignalR;
     using StackExchange.Redis;
 
     var builder = WebApplication.CreateBuilder(args);
@@ -99,6 +100,8 @@ Two limits remain. New instances take time to provision and warm up, so autoscal
     var app = builder.Build();
     app.MapHub<PricesHub>("/hubs/prices");
     app.Run();
+
+    public sealed class PricesHub : Hub { }   // clients connect to whichever replica the balancer picks
 
     public sealed class TickConsumer(IConnectionMultiplexer redis) : BackgroundService
     {
@@ -152,7 +155,7 @@ Two limits remain. New instances take time to provision and warm up, so autoscal
 
 
     while True:
-        _, reclaimed, _ = r.xautoclaim(STREAM, GROUP, ME, min_idle_time=60_000, count=10)
+        reclaimed = r.xautoclaim(STREAM, GROUP, ME, min_idle_time=60_000, count=10)[1]   # [next_id, entries, deleted]
         fresh = r.xreadgroup(GROUP, ME, {STREAM: ">"}, count=100, block=2000) or []
         for entry_id, fields in reclaimed + [e for _, entries in fresh for e in entries]:
             price(fields)
@@ -238,7 +241,7 @@ Two limits remain. New instances take time to provision and warm up, so autoscal
 
 ## Exam notes
 
-Fundamentals exams (AZ-900, CLF-C02) test the vocabulary: scale out versus scale up, elasticity, and why horizontal scaling gives resilience. AZ-104 expects you to configure App Service plan scale-out and Azure Monitor autoscale rules for VM scale sets and plans, including minimum, maximum and default counts and the tier limits on instance counts; AZ-204 adds Container Apps scale rules and the App Service automatic scaling feature, and the rule that a plan should use only one of Azure Monitor autoscale or automatic scaling. AZ-305 pushes scale-unit and deployment-stamp design, externalised state and data partitioning. On AWS, SAA-C03 and SOA-C03 cover Auto Scaling groups (minimum, desired, maximum), launch templates, target tracking versus step versus scheduled policies, health checks, warm-up and cooldown, stateless design with ElastiCache for sessions, and Application Auto Scaling for ECS and DynamoDB; SAP-C03 extends this to multi-region stamps; DVA-C02/C03 focus on the application side. CKA and CKAD test the HPA: the `autoscaling/v2` API, resource and custom metrics, the need for Metrics Server, and the fact that a DaemonSet cannot be autoscaled horizontally.
+Fundamentals exams (AZ-900, CLF-C02) test the vocabulary: scale out versus scale up, elasticity, and why horizontal scaling gives resilience. AZ-104 expects you to configure App Service plan scale-out and Azure Monitor autoscale rules for VM scale sets and plans, including minimum, maximum and default counts and the tier limits on instance counts, plus the App Service automatic scaling feature and the rule that a plan uses either Azure Monitor autoscale or automatic scaling, not both, and sizing and scaling for Container Apps; AI-200, which replaced AZ-204, tests KEDA-driven scale rules in Container Apps. AZ-305 pushes scale-unit and deployment-stamp design, externalised state and data partitioning. On AWS, SAA-C03 (which lists "horizontal scaling and vertical scaling" as a knowledge item) and SOA-C03 cover Auto Scaling groups (minimum, desired, maximum), launch templates, target tracking versus step versus scheduled policies, health checks, warm-up and cooldown, stateless design with ElastiCache for sessions, and Application Auto Scaling for ECS and DynamoDB; SAP-C03 extends this to multi-region stamps; DVA-C02/C03 focus on the application side. CKA and CKAD test the HPA: the `autoscaling/v2` API, resource and custom metrics, the need for Metrics Server, and the fact that a DaemonSet cannot be autoscaled horizontally.
 
 Traps: Azure Monitor autoscale is plan-level and affects every app in the plan; scale-in needs every scale-in rule to hold while scale-out needs any one; HPA cannot target objects that cannot scale; an Auto Scaling group's desired capacity is managed by the scaling policy, so a template asserting it causes drift; and TimescaleDB, like most relational engines, scales writes vertically, so "add API replicas" is not an answer to a saturated database.
 

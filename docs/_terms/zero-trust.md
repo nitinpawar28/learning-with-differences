@@ -74,19 +74,26 @@ flowchart LR
     // ASP.NET Core (.NET 9) API acting as a per-request PEP: every call re-validates the token
     // for this audience, and a policy requires the exact scope. Sign-in itself was decided by the
     // identity provider's policy engine (for example Conditional Access).
+    using System.Security.Claims;
+    using Microsoft.AspNetCore.Authorization;
+
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", o =>
     {
         o.Authority = builder.Configuration["Auth:Authority"];       // the trusted issuer
         o.Audience  = builder.Configuration["Auth:Audience"];        // api://orders, never a token for another API
+        o.MapInboundClaims = false;                                  // keep "scp" as "scp" instead of a long URI claim type
+        o.TokenValidationParameters.NameClaimType    = "name";
         o.TokenValidationParameters.ValidateIssuer   = true;
         o.TokenValidationParameters.ValidateAudience = true;
         o.TokenValidationParameters.ValidateLifetime = true;
     });
 
     builder.Services.AddAuthorizationBuilder()
-        .AddPolicy("orders.write", p => p.RequireAuthenticatedUser().RequireClaim("scp", "orders.write"))
+        .AddPolicy("orders.write", p => p.RequireAuthenticatedUser().RequireAssertion(ctx =>
+            // "scp" is one space-separated string such as "orders.read orders.write"
+            ctx.User.FindFirst("scp")?.Value.Split(' ').Contains("orders.write") == true))
         .SetFallbackPolicy(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()); // deny by default
 
     var app = builder.Build();
@@ -111,7 +118,8 @@ flowchart LR
     from fastapi import Depends, FastAPI, HTTPException, Request
 
     ISSUER, AUDIENCE = "https://login.example.com/tenant/v2.0", "api://orders"
-    jwks = jwt.PyJWKClient(f"{ISSUER}/discovery/v2.0/keys")
+    JWKS_URI = "https://login.example.com/tenant/discovery/v2.0/keys"   # the jwks_uri from the issuer's OIDC discovery document
+    jwks = jwt.PyJWKClient(JWKS_URI)
 
     def principal(request: Request) -> dict:
         token = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
@@ -119,7 +127,7 @@ flowchart LR
             key = jwks.get_signing_key_from_jwt(token).key
             return jwt.decode(token, key, algorithms=["RS256"], audience=AUDIENCE, issuer=ISSUER)
         except jwt.PyJWTError as e:
-            raise HTTPException(401, str(e))
+            raise HTTPException(401, str(e)) from e
 
     def scope(required: str):
         def dep(claims: dict = Depends(principal)) -> dict:
@@ -137,7 +145,7 @@ flowchart LR
 
 === "Azure"
 
-    Microsoft Entra Conditional Access is the PDP for users and, in preview, for agent identities. A policy is an if-then rule over signals (user or group, application, device state, location, real-time risk from Entra ID Protection) that ends in a decision (block, or grant with controls such as MFA, authentication strength, a compliant or hybrid-joined device, an app protection policy). The Microsoft Graph representation, created here in report-only mode first:
+    Microsoft Entra Conditional Access is the PDP for users and, through Conditional Access for agents, for Microsoft Entra agent identities. A policy is an if-then rule over signals (user or group, application, device state, location, real-time risk from Entra ID Protection) that ends in a decision (block, or grant with controls such as MFA, authentication strength, a compliant or hybrid-joined device, an app protection policy). The Microsoft Graph representation, created here in report-only mode first:
 
     ```json
     {
@@ -152,18 +160,18 @@ flowchart LR
     }
     ```
 
-    Continuous access evaluation closes the gap between token issuance and policy change: CAE-aware services such as Exchange Online, SharePoint Online, Teams and Microsoft Graph receive critical events (account disabled, password reset, high user risk, admin revocation) and IP-location policy changes in near real time, and CAE sessions use long-lived tokens (up to 28 hours) precisely because revocation is event-driven rather than timer-driven. Microsoft Entra Private Access, part of Global Secure Access, is the VPN replacement for private applications: the client tunnels only the configured FQDNs and IP ranges through a private network connector, and each app is gated by Conditional Access.
+    Continuous access evaluation closes the gap between token issuance and policy change: Exchange Online, SharePoint Online and Teams subscribe to critical events (account deleted or disabled, password changed or reset, MFA enabled for the user, admin revocation of refresh tokens, high user risk) and enforce them in near real time, and those services plus Microsoft Graph enforce IP-based Conditional Access location policies inside the service. CAE sessions use long-lived tokens (up to 28 hours) precisely because revocation is event-driven rather than timer-driven. Microsoft Entra Private Access, part of Global Secure Access, is the VPN replacement for private applications: the Global Secure Access client tunnels only the configured FQDNs and IP ranges through Microsoft's service, a private network connector inside your network brokers the connection to the app, and each app is gated by Conditional Access.
 
 === "AWS"
 
-    AWS Verified Access provides VPN-less access to applications and evaluates *each* request against policy using identity data (IAM Identity Center or an OIDC provider) and device trust data from Jamf, CrowdStrike or JumpCloud. Policies are written in Cedar and attached to a Verified Access group, optionally refined per endpoint; each trust provider's claims appear in the policy context under the policy reference name you chose when configuring it:
+    AWS Verified Access provides VPN-less access to applications and evaluates *each* request against policy using identity data (IAM Identity Center or an OIDC provider) and device trust data from Jamf, CrowdStrike or JumpCloud. Policies are written in Cedar and attached to a Verified Access group, optionally refined per endpoint; each trust provider's claims appear in the policy context under the policy reference name you chose when configuring it (here `identity` for an OIDC user trust provider and `crwd` for CrowdStrike device trust):
 
     ```text
     permit(principal, action, resource)
     when {
         context.identity.email like "*@example.com" &&
         context.identity.groups.contains("traders") &&
-        context.crwd.assessment.overall >= 80
+        context has "crwd" && context.crwd.assessment.overall >= 80
     };
     ```
 
