@@ -391,7 +391,7 @@
    ],
    "existing_stub": "",
    "folder": "ai/agents/patterns",
-   "wave": "1",
+   "wave": "3",
    "merged_from": [
     "llm-workflow-patterns"
    ],

@@ -495,7 +495,7 @@
    ],
    "existing_stub": "devops/ci-cd-pipelines.md",
    "folder": "devops",
-   "wave": "1",
+   "wave": "6",
    "exists": true
   },
   {
@@ -513,7 +513,7 @@
    ],
    "existing_stub": "devops/bare-metal-linux-hypervisors.md",
    "folder": "devops",
-   "wave": "1",
+   "wave": "4",
    "exists": true
   },
   {
@@ -533,7 +533,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "6",
    "exists": false
   },
   {
@@ -578,7 +578,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "3",
    "exists": false
   },
   {
@@ -632,7 +632,7 @@
    "clusters": [],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "2b",
    "exists": false
   },
   {
@@ -672,7 +672,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "3",
    "exists": false
   },
   {
@@ -690,7 +690,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "3",
    "exists": false
   },
   {
@@ -707,7 +707,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "6",
    "exists": false
   },
   {
@@ -725,7 +725,7 @@
    ],
    "existing_stub": "",
    "folder": "devops",
-   "wave": "1",
+   "wave": "6",
    "exists": false
   },
   {
@@ -2349,7 +2349,7 @@
    "existing_stub": "",
    "folder": "devops",
    "gap_fill": true,
-   "wave": "1",
+   "wave": "3",
    "exists": false
   },
   {

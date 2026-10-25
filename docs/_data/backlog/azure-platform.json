@@ -2296,7 +2296,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2319,7 +2319,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2342,7 +2342,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2365,7 +2365,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2389,7 +2389,7 @@
    "exams": [
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2412,7 +2412,7 @@
    "exams": [
     "AI-200:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2437,7 +2437,7 @@
    "exams": [
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2462,7 +2462,7 @@
    "exams": [
     "AI-200:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2654,7 +2654,7 @@
    "exams": [
     "AI-200:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2677,7 +2677,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2702,7 +2702,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2727,7 +2727,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2752,7 +2752,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2778,7 +2778,7 @@
    "exams": [
     "AI-200:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2999,7 +2999,7 @@
    "exams": [
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3022,7 +3022,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3049,7 +3049,7 @@
     "SC-500:D3",
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3075,7 +3075,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3098,7 +3098,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3121,7 +3121,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3149,7 +3149,7 @@
     "AZ-104:D3",
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3912,7 +3912,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3936,7 +3936,7 @@
    "exams": [
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3991,7 +3991,7 @@
     "AI-200:D1",
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4017,7 +4017,7 @@
     "AZ-104:D3",
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4045,7 +4045,7 @@
     "AI-200:D1",
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4769,7 +4769,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4798,7 +4798,7 @@
     "AZ-305:D4",
     "SC-500:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -5058,7 +5058,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6733,7 +6733,7 @@
    "exams": [
     "AI-103:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6756,7 +6756,7 @@
    "exams": [
     "AI-200:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6779,7 +6779,7 @@
    "exams": [
     "AZ-305:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6805,7 +6805,7 @@
     "AI-200:D1",
     "AZ-400:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6828,7 +6828,7 @@
    "exams": [
     "AZ-104:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -7754,7 +7754,7 @@
     "AZ-104:D3",
     "AZ-400:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {

@@ -1706,7 +1706,7 @@
    ],
    "existing_stub": "",
    "folder": "architecture/reliability",
-   "wave": "1",
+   "wave": "2a",
    "merged_from": [
     "quotas-limits-and-capacity"
    ],

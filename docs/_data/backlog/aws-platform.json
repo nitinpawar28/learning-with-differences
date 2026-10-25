@@ -2244,7 +2244,7 @@
     "DOP-C02:D1",
     "CLOUDOPS-A:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2274,7 +2274,7 @@
     "DVA-C02:D3",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -2333,7 +2333,7 @@
     "SAP-C02:D4",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3155,7 +3155,7 @@
    ],
    "equivalent": "azure: Azure CNI with pod subnet or overlay (close)",
    "exams": [],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3419,7 +3419,7 @@
     "SAP-C02:D4",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -3964,7 +3964,7 @@
     "DVA-C02:D3",
     "DOP-C02:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4412,7 +4412,7 @@
     "SAA-C03:D4",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -4653,7 +4653,7 @@
    ],
    "equivalent": "azure: Application Gateway for Containers (close)",
    "exams": [],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6479,7 +6479,7 @@
     "SAA-C03:D2",
     "SAP-C02:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6503,7 +6503,7 @@
    "exams": [
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6528,7 +6528,7 @@
     "DOP-C02:D5",
     "DVA-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6552,7 +6552,7 @@
    "exams": [
     "DVA-C02:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6580,7 +6580,7 @@
     "SAP-C02:D4",
     "DVA-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6607,7 +6607,7 @@
     "DOP-C02:D3",
     "SAA-C03:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6634,7 +6634,7 @@
     "DOP-C02:D1",
     "DVA-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6660,7 +6660,7 @@
    "exams": [
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6685,7 +6685,7 @@
     "DVA-C02:D3",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6712,7 +6712,7 @@
     "DVA-C02:D2",
     "DOP-C02:D6"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6740,7 +6740,7 @@
     "DVA-C02:D2",
     "SCS-C03:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6766,7 +6766,7 @@
     "SCS-C03:D4",
     "DOP-C02:D6"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6794,7 +6794,7 @@
     "SAA-C03:D2",
     "SAP-C02:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6818,7 +6818,7 @@
    "exams": [
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6840,7 +6840,7 @@
    ],
    "equivalent": "azure: AKS GitOps with the Flux extension (partial)",
    "exams": [],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6867,7 +6867,7 @@
     "SAP-C02:D4",
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6894,7 +6894,7 @@
    "exams": [
     "SAP-C02:D1"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -6922,7 +6922,7 @@
     "SCS-C03:D4",
     "DVA-C02:D2"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -7020,7 +7020,7 @@
    "exams": [
     "SAA-C03:D4"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -7047,7 +7047,7 @@
     "SCS-C03:D4",
     "DOP-C02:D6"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
@@ -7873,7 +7873,7 @@
    "exams": [
     "DOP-C02:D3"
    ],
-   "wave": "1",
+   "wave": "2b",
    "written": false
   },
   {
