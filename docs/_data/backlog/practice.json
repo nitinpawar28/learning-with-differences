@@ -1,0 +1,3603 @@
+{
+ "section": "practice",
+ "source": "curriculum workflows wf_adef3fd4-7ee and wf_ffea7aee-d25 (practice layer)",
+ "generated": "2026-10-25",
+ "outlines": [],
+ "articles": [
+  {
+   "slug": "lab-one-workload-in-bicep-and-cloudformation-cdk",
+   "title": "Lab: One Workload in Bicep and in CloudFormation/CDK (C# and Python), with What-If vs Change Sets, Deployment Stacks vs Stack Policies and Drift",
+   "type": "how-to",
+   "level": "practitioner",
+   "scope": "Wave 2, owner compare. Builds the same workload (VNet/VPC, a storage account or S3 bucket, a Key Vault or KMS key, and an App Service or ECS service) three ways: Bicep, raw CloudFormation, and CDK in C# and Python. Exercises: interpret and modify templates and convert ARM to Bicep (AZ-104 3.1); preview changes with what-if vs change sets; protect resources with deployment stack deny settings vs stack policies and termination protection; deploy multi-account with StackSets and enforce cfn-guard, cfn-lint and cdk-nag (SCS-C03 6.2.1); introduce manual drift and detect it with CloudFormation drift detection vs what-if and stack re-deploys. Ends with a fidelity table.",
+   "exams": [
+    "AZ-104:D3",
+    "SCS-C03:D6",
+    "SAA-C03:D2"
+   ],
+   "clusters": [
+    "C",
+    "P"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "lab-backup-restore-and-failover-azure-vs-aws",
+   "title": "Lab: Back Up, Restore and Fail Over with Azure Backup and Site Recovery vs AWS Backup and Elastic Disaster Recovery",
+   "type": "how-to",
+   "level": "practitioner",
+   "scope": "Wave 2, owner compare. Azure tasks: create a Recovery Services vault and a Backup vault, define policies, back up and restore a VM and a blob container, configure Site Recovery for a VM, run a test failover and then a failover to the secondary Region, and read backup reports and alerts (AZ-104 5.2.1-5.2.7). AWS tasks: build AWS Backup plans and vaults with Vault Lock, restore EC2 and RDS, set up Elastic Disaster Recovery replication, run a drill and failback, and use an ARC zonal shift. The lab records measured RPO and RTO against the strategy chosen (SAA-C03 2.2.18) and ends with a cost comparison.",
+   "exams": [
+    "AZ-104:D5",
+    "SAA-C03:D2",
+    "AZ-305:D3",
+    "SAP-C03:D1"
+   ],
+   "clusters": [
+    "C",
+    "R"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "lab-cross-cloud-site-to-site-vpn-with-bgp-and-dns-forwarding",
+   "title": "Lab: Cross-Cloud Site-to-Site VPN with BGP between Azure VPN Gateway and AWS Site-to-Site VPN, with DNS Forwarding",
+   "type": "how-to",
+   "level": "expert",
+   "scope": "Wave 5 (an optional single-tunnel version fits wave 2), owner compare. Steps: deploy an active-active Azure VPN Gateway and an AWS virtual private gateway or Transit Gateway with two customer gateways, giving four IPsec tunnels. Configure custom IKE/IPsec policies, BGP ASNs and APIPA peer addresses, and route propagation. Verify failover by dropping a tunnel. Wire up bidirectional private DNS through Azure DNS Private Resolver inbound and outbound endpoints and Route 53 Resolver endpoints with forwarding rules. Harden with MACsec and Direct Connect or ExpressRoute alternatives, which are discussed, not built (SCS-C03 3.3.2). IaC is in Terraform with Bicep and CDK snippets. This is the clearest networking demonstration of the 'differences' approach.",
+   "exams": [
+    "AZ-305:D4",
+    "SAP-C03:D1",
+    "SCS-C03:D3",
+    "SC-500:D2"
+   ],
+   "clusters": [
+    "N",
+    "C"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "lab-entra-administration-vs-iam-identity-center",
+   "title": "Lab: Entra Administration (Users, Groups, Administrative Units, SSPR, B2B) vs IAM Identity Center",
+   "type": "how-to",
+   "level": "practitioner",
+   "scope": "Wave 2, owner azure-core. Entra tasks: create users and groups (assigned and dynamic), assign group-based licences, delegate with administrative units, configure SSPR, and invite and govern B2B guests (AZ-104 1.1.1-1.1.5). IAM Identity Center tasks: choose an identity source (built-in directory or Entra ID through SAML and SCIM), create users and groups, and assign permission sets to accounts. The lab contrasts the Entra directory plus Azure RBAC with Identity Center permission sets and accounts, and checks access end to end from both portals and both CLIs.",
+   "exams": [
+    "AZ-104:D1"
+   ],
+   "clusters": [
+    "C",
+    "S"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "lab-app-service-vs-ecs-express-mode",
+   "title": "Lab: App Service (Plans, Slots, Custom Domain and TLS, VNet Integration) vs ECS Express Mode and Elastic Beanstalk",
+   "type": "how-to",
+   "level": "practitioner",
+   "scope": "Wave 2, owner azure-core. App Service tasks: provision a plan and configure scaling, deploy a .NET 10 container and a FastAPI app with settings and Key Vault references, map a custom domain with a managed certificate, add VNet integration and a private endpoint, configure backup, and do a staged swap with deployment slots (AZ-104 3.4.1-3.4.8, AI-200 1.1.3). AWS tasks: the same app on ECS Express Mode (managed ALB, domain and TLS) and on Elastic Beanstalk with an environment URL swap. Ends with a fidelity table that links to compare/compute/app-service-vs-elastic-beanstalk-ecs-express-mode-and-amplify.",
+   "exams": [
+    "AZ-104:D3",
+    "AI-200:D1"
+   ],
+   "clusters": [
+    "C",
+    "D"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "lab-ship-an-agent-through-ci-cd-foundry-vs-agentcore",
+   "title": "Lab: Ship an Agent through CI/CD with Evaluation Gates, Version Pinning, Canary and Rollback on Foundry and AgentCore",
+   "type": "how-to",
+   "level": "expert",
+   "scope": "Wave 3, owner ai-agents. Setup: one agent with pinned model and prompt versions and IaC for both platforms (Bicep/azd for Foundry, CDK for AgentCore). Pipeline: GitHub Actions with OIDC, unit and regression tests, and automated evaluations as quality gates (AI-500 4.3.3). Release: DTAP environments, canary and blue/green release through Foundry agent versions vs AgentCore Runtime versions and endpoints, synthetic-workflow checks during model updates (AIP-C01 5.1.9), and rollback drills (AI-500 4.3.1-4.3.4, AI-103 1.2.4). It builds on agentops/agent-alm-and-cicd and evaluation-ops/genaiops-ci-cd.",
+   "exams": [
+    "AI-500:D4",
+    "AI-103:D1",
+    "AIP-C01:D5"
+   ],
+   "clusters": [
+    "A",
+    "P"
+   ],
+   "existing_stub": "",
+   "folder": "practice/labs",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "kata-trading-lakehouse-and-streaming-analytics",
+   "title": "Kata: A Lakehouse and Streaming Analytics Platform for Trading Data on Fabric or the AWS Analytics Stack",
+   "type": "case-study",
+   "level": "expert",
+   "scope": "Wave 5. Brief: ingest market ticks and order events at high frequency, and serve both real-time dashboards and historical backtests. Constraints: latency SLOs, retention and replay, PII in client orders, and cost caps. Candidates design on Fabric (Eventstreams, Eventhouse/KQL, OneLake with Delta, medallion lakehouse, Power BI) or on AWS (Kinesis Data Streams or MSK, Managed Service for Apache Flink, Data Firehose, S3 with Iceberg tables, Glue, Lake Formation, Athena, Quick). The design must cover format conversion from CSV to Parquet (SAA-C03 3.5.14) and governance. A reviewer's rubric and a sample answer are included, contrasting TimescaleDB-backed designs from data/time-series.",
+   "exams": [
+    "AZ-305:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [
+    "R",
+    "C"
+   ],
+   "existing_stub": "",
+   "folder": "practice/katas",
+   "gap_fill": true,
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "lab-sandbox-budgets-guardrails-and-reaper",
+   "title": "Lab sandbox on Azure and AWS: budgets, MFA, tags and an auto-reaper",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Stand up the safe, cheap sandboxes every later lab depends on, and feel the first big difference: Azure budgets alert while AWS budget actions can enforce. Builds: Azure: a dedicated lab subscription and resource-group convention, a budget with action group at 50/80/100% (actual and forecast), Azure Policy requiring the tags lwd-lab and expires-on plus allowed locations and allowed SKUs, and security defaults or MFA for the admin. AWS: root locked with MFA and an IAM Identity Center admin user, AWS Budgets with a budget action that attaches a deny policy, Cost Anomaly Detection, and a tag policy. Both: a nightly reaper (Azure Functions timer in C#; Lambda on EventBridge Scheduler in Python, each ported to the other language) that lists, then deletes, resources whose expires-on tag has passed, with dry-run as the default. Break it: deploy an untagged resource and watch the policy deny it on Azure but not on AWS.",
+   "exams": [
+    "CLF-C02:D4",
+    "CLF-C02:D2",
+    "SC-900:D2",
+    "AZ-104:D1"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (subscription scope)",
+    "CloudFormation",
+    "Terraform (both clouds)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/foundations/tagging-and-naming-strategy",
+    "cloud/foundations/landing-zones-and-guardrails",
+    "cloud/foundations/cloud-pricing-models-and-commitments",
+    "cloud/aws/cost/estimating-and-guarding-aws-spend",
+    "cloud/azure/cost/azure-budgets-cost-alerts-and-advisor",
+    "architecture/cost/cost-guardrails",
+    "cloud/aws/identity/human-access-to-aws",
+    "cloud/azure/identity/entra-authentication-methods-and-mfa",
+    "cloud/compare/cost/cost-management-and-pricing-models-azure-vs-aws",
+    "cloud/foundations/cloud-management-interfaces"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0. Budgets, Azure Policy, tag policies and Anomaly Detection are free. The first two action-enabled AWS budgets are free. The reaper fits inside the Functions and Lambda free grants. Guardrail: this lab IS the guardrail; set a $10/month budget per cloud. Teardown: none (it stays in place). Check that the reaper's dry-run log is empty after each later lab.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "static-angular-site-static-web-apps-vs-s3-cloudfront",
+   "title": "Host an Angular site: Azure Static Web Apps vs S3 + CloudFront",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Deploy the same Angular build and a tiny API. Contrast one managed product (Static Web Apps) with composing primitives (S3, CloudFront with OAC, Lambda). Builds: Angular build published to Azure Static Web Apps (Free plan) with a managed Functions API, and to a private S3 bucket behind CloudFront with Origin Access Control, plus a Lambda function URL or HTTP API routed through CloudFront. Custom domain and TLS on both. SPA fallback routing, cache headers and invalidation. The API: a C# minimal API and a Python FastAPI handler returning build metadata. Break it: make the S3 bucket public and see Block Public Access refuse it; remove the SPA fallback and see a 404 on deep links.",
+   "exams": [
+    "CLF-C02:D3",
+    "CLF-C02:D1",
+    "AZ-104:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "TypeScript"
+   ],
+   "related_articles": [
+    "cloud/aws/iac-devops/hosting-angular-on-aws",
+    "cloud/compare/storage-data/blob-storage-vs-s3",
+    "cloud/compare/networking/front-door-vs-cloudfront-and-global-accelerator",
+    "cloud/compare/compute/app-service-vs-elastic-beanstalk-ecs-express-mode-and-amplify",
+    "cloud/foundations/cloud-service-and-deployment-models",
+    "cloud/foundations/global-infrastructure-regions-zones-edge-sovereign",
+    "frontend/angular/angular-fundamentals"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0. The Static Web Apps Free plan, CloudFront's always-free 1 TB, S3 pennies and the Lambda free grant cover it. A Route 53 hosted zone costs $0.50/month, so use an existing domain or skip the custom domain. Teardown: delete the resource group; empty and delete the bucket, then delete the stack. A disabled CloudFront distribution must exist before it can be deleted.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "containerize-dotnet-and-python-services-acr-vs-ecr",
+   "title": "Containerize .NET and Python services and publish to ACR vs ECR",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Build small, non-root, scannable images of a C# and a Python service, then publish them to both registries and compare their authentication, scanning and retention. Builds: Multi-stage Dockerfiles: .NET 10 LTS chiseled image, plus the dotnet publish container target as an alternative; python-slim, plus a distroless variant. Both run non-root with a HEALTHCHECK, an SBOM (Syft) and Docker Compose for local runs. Push to ACR Basic, authenticating with Entra (az acr login, then token exchange), and to private ECR, authenticating with get-login-password and IAM. Scanning: ECR basic scanning vs ACR, which needs Defender for Containers (so use Trivy locally on both). Retention: ECR lifecycle policies vs ACR purge tasks. Break it: run as root under a restricted securityContext later in CKAD labs.",
+   "exams": [
+    "CKAD:D1",
+    "CLF-C02:D3",
+    "AI-200:D1"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (Docker)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "Dockerfile"
+   ],
+   "related_articles": [
+    "devops/docker-containerization",
+    "devops/oci-images-and-registries",
+    "cloud/azure/containers/azure-container-registry",
+    "cloud/aws/containers/amazon-ecr-registry-operations",
+    "cloud/aws/containers/containerizing-dotnet-workloads-on-aws",
+    "cloud/compare/containers/container-apps-aci-and-acr-vs-ecs-fargate-and-ecr",
+    "messaging/runtime/packaging-and-publishing-services",
+    "security/supply-chain/sbom-spdx-vs-cyclonedx"
+   ],
+   "deliverables": [],
+   "cost_note": "Under $1. ACR Basic is about $0.17/day, so delete it the same day or keep it for later labs. ECR is about $0.10/GB-month (500 MB/month free in the first year on legacy free-tier accounts). Teardown: delete the registry and repositories (force-delete the images). These images are reused in labs containers-in-production and observability-otel, so if you keep the registries, record that in the expires-on tag.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "ckad-workloads-configuration-and-security",
+   "title": "CKAD: workloads, probes, configuration and security contexts (kind, then AKS vs EKS)",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Practise CKAD tasks against the clock on a local cluster. Then rerun the same manifests on AKS and EKS to see what changes: secrets providers, storage classes and identity. Builds: kind cluster with Deployment, DaemonSet, Job and CronJob; init and native sidecar containers; emptyDir and PVC volumes; liveness, readiness and startup probes on a C# worker and a Python FastAPI service; ConfigMaps, Secrets, ServiceAccounts, securityContext (non-root, readOnlyRootFilesystem, dropped capabilities), requests and limits, ResourceQuota and LimitRange, and discovering CRDs. Cloud rerun: AKS Free tier with one node, using the Secrets Store CSI driver with the Key Vault provider; EKS (Auto Mode) using the AWS Secrets and Configuration Provider (ASCP). Timed drills: 20 tasks in 2 hours, using only kubectl and the documentation.",
+   "exams": [
+    "CKAD:D1",
+    "CKAD:D3",
+    "CKAD:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (kind)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Kubernetes YAML",
+    "Bicep (AKS)",
+    "CDK in C# (EKS)",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-workloads-and-pod-lifecycle",
+    "devops/kubernetes/configmaps-and-secrets",
+    "devops/kubernetes/scheduling-and-resource-management",
+    "devops/kubernetes/pod-security-standards-and-security-context",
+    "devops/kubernetes/kubernetes-storage",
+    "devops/kubernetes/kubernetes-authn-authz-rbac",
+    "devops/kubernetes/operators-and-crds",
+    "devops/kubernetes/kubernetes-troubleshooting",
+    "devops/kubernetes/kubectl-cheatsheet"
+   ],
+   "deliverables": [],
+   "cost_note": "Local: $0. Cloud rerun of 2 hours or less: the AKS Free-tier control plane is free and one small node is about $0.05/hr. EKS is $0.10/hr for the cluster plus nodes and the Auto Mode management fee, so about $0.50 in total. Guardrail: the expires-on tag set to the same day, and the reaper as a backstop. Teardown: kind delete cluster; delete the resource group (including the MC_ node resource group); cdk destroy, then check for orphaned load balancers, ENIs and EBS volumes.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "ckad-deployments-helm-kustomize-and-networking",
+   "title": "CKAD: rollouts, canary, Helm, Kustomize, Services and NetworkPolicies",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Practise deployment strategies, packaging and networking for CKAD. Then compare how AKS and EKS expose services and enforce network policy. Builds: Rolling update and rollback; blue/green and canary using labels and Service selectors; Helm install, upgrade and rollback of an existing chart; Kustomize base and overlays for dev and prod; ClusterIP, NodePort and LoadBalancer Services; Ingress and Gateway API HTTPRoute; default-deny NetworkPolicy, then allow rules; finding deprecated APIs (kubectl explain, pluto). Cloud contrast: AKS application routing or Application Gateway for Containers, with Azure CNI powered by Cilium, vs EKS with the AWS Load Balancer Controller (ALB) and VPC CNI network policy. The C# and Python services from the previous lab supply the v1/v2 canary traffic.",
+   "exams": [
+    "CKAD:D2",
+    "CKAD:D5",
+    "CKAD:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (kind)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Kubernetes YAML",
+    "Helm",
+    "Kustomize",
+    "Bicep",
+    "CDK in C#",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/kubernetes/helm-vs-kustomize",
+    "devops/kubernetes/services-ingress-and-gateway-api",
+    "devops/kubernetes/network-policies",
+    "devops/ci-cd/deployment-strategies",
+    "cloud/azure/containers/aks-ingress-and-gateway-api",
+    "cloud/aws/containers/container-deployment-strategies-ecs-eks",
+    "cloud/compare/containers/aks-vs-eks",
+    "devops/kubernetes/kubernetes-networking-and-cni"
+   ],
+   "deliverables": [],
+   "cost_note": "Local: $0. Cloud rerun of 2 hours or less: about $0.60, plus the load balancer (Azure Standard LB about $0.025/hr; ALB about $0.0225/hr plus LCU) and the AWS public IPv4 charge ($0.005/hr per address). Teardown: delete Ingress, Gateway and LoadBalancer Services BEFORE deleting the cluster, or the cloud load balancers are orphaned; then delete the cluster and check that no ELBs or public IPs remain.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "first-genai-app-foundry-vs-bedrock",
+   "title": "First generative AI app: Microsoft Foundry vs Amazon Bedrock",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Call a foundation model from C# and Python on both platforms with keyless authentication. Explore inference parameters, streaming, token accounting, structured output and basic content safety. Builds: A Microsoft Foundry project with a small model deployment, called through the Responses API using the OpenAI SDK with Entra ID (DefaultAzureCredential, no API keys). Amazon Bedrock called through the Converse and ConverseStream APIs with the AWS SDK for .NET and boto3, using IAM. Both: a console chat that streams, prints token usage and cost, enforces a JSON schema for structured output, and sweeps temperature and top_p over the same prompt. Default Foundry content filters vs a basic Bedrock guardrail. Break it: exceed max tokens; send a prompt the filter blocks; compare the error shapes.",
+   "exams": [
+    "AI-901:D2",
+    "AI-901:D1",
+    "AIF-C01:D2",
+    "AIF-C01:D3",
+    "AIF-C01:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (Foundry resource, project, deployment, role assignment)",
+    "CloudFormation (IAM role, Bedrock guardrail)",
+    "Terraform (azapi + aws)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/platforms/microsoft/foundry-quickstart-chat-and-agent-clients",
+    "ai/platforms/microsoft/microsoft-foundry-overview",
+    "ai/platforms/aws/amazon-bedrock-overview",
+    "ai/platforms/aws/bedrock-runtime-api-patterns",
+    "cloud/compare/ai-platforms/microsoft-foundry-vs-amazon-bedrock",
+    "ai/foundations/inference-parameters",
+    "ai/foundations/tokens-embeddings-context-windows",
+    "ai/foundations/responsible-ai-principles",
+    "ai/platforms/microsoft/foundry-guardrails",
+    "ai/platforms/aws/bedrock-guardrails"
+   ],
+   "deliverables": [],
+   "cost_note": "Under $1 of tokens with small models (for example gpt-5-mini on Foundry; Amazon Nova Lite or Claude Haiku on Bedrock). There is no fixed hourly cost. Guardrail: a $5 per-lab budget, a max-token cap in code, and quota limits on the Foundry deployment (TPM). Teardown: delete the Foundry resource group (purge the soft-deleted Foundry/AI Services resource so its name is freed); delete the stack. No Provisioned Throughput on Bedrock: it is hourly and expensive.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "prebuilt-ai-services-foundry-tools-vs-aws-ai-services",
+   "title": "Prebuilt AI services: Foundry Tools vs AWS AI services",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Solve the same vision, OCR, speech and language tasks with prebuilt services on both clouds. Then repeat them with a multimodal LLM to see where each approach wins. Builds: One sample set of images, scanned receipts, an audio clip and customer reviews. Azure: Foundry Tools (Vision image analysis and OCR, Speech-to-text, Language PII and sentiment, Translator). AWS: Rekognition, Textract, Transcribe, Comprehend and Translate. Then the same tasks with a multimodal model on Foundry and Bedrock. Score precision and recall on a 20-item labelled set (C# and Python harness), and record latency, cost per item and fidelity of the Azure-to-AWS mapping.",
+   "exams": [
+    "AI-901:D1",
+    "AI-901:D2",
+    "AIF-C01:D1",
+    "AIF-C01:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/platforms/microsoft/foundry-tools-prebuilt-ai-services",
+    "ai/platforms/aws/aws-ai-services-catalog",
+    "cloud/compare/ai-platforms/ai-content-and-document-services-foundry-tools-vs-aws-ai-services",
+    "cloud/azure/ai-services-overview/azure-ai-services-orientation",
+    "cloud/aws/ai-services-overview/aws-ai-services-orientation",
+    "ai/foundations/ai-workloads",
+    "ai/foundations/multimodal-and-generative-media-models",
+    "ai/foundations/ml-evaluation-metrics"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $2. Use F0 (free) tiers where offered and the AWS always-free or credit allowances; the sample set is kept small (about 20 items). Teardown: delete the resource group and purge the soft-deleted Cognitive Services accounts; delete the stack and the S3 sample bucket.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "security-and-compliance-first-look-defender-purview-vs-security-hub",
+   "title": "Security and compliance first look: Defender for Cloud and Purview vs Security Hub, Config and Artifact",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "See the security posture, identity and compliance tooling of each cloud on a deliberately weak sandbox, and map the SC-900 vocabulary to its AWS counterparts. Builds: Deploy a deliberately misconfigured storage account and bucket, plus an over-privileged identity. Azure: Defender for Cloud foundational CSPM (free), secure score, Microsoft cloud security benchmark recommendations, Entra sign-in and audit logs, and Purview Compliance Manager (with an M365 E5 trial or developer tenant). AWS: Security Hub with the AWS Foundational Security Best Practices standard, AWS Config, IAM Access Analyzer, AWS Artifact reports and Audit Manager. C# and Python scripts pull the secure score and the Security Hub findings into one CSV for comparison. Fix three findings and watch the score move.",
+   "exams": [
+    "SC-900:D1",
+    "SC-900:D3",
+    "SC-900:D4",
+    "CLF-C02:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/security-services/microsoft-defender-for-cloud",
+    "cloud/azure/security-services/microsoft-purview-orientation",
+    "cloud/aws/security-services/aws-security-services-map",
+    "cloud/aws/governance/governance-audit-services-compared",
+    "cloud/compare/security-services/defender-for-cloud-vs-security-hub-guardduty-inspector",
+    "cloud/compare/security-services/compliance-evidence-and-audit-azure-vs-aws",
+    "security/foundations/security-capability-landscape",
+    "cloud/foundations/shared-responsibility-model",
+    "security/foundations/cia-triad-aaa-non-repudiation"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $3. Defender foundational CSPM is free. Security Hub and Config offer 30-day trials, and Config is about $0.003 per configuration item recorded. Purview needs a trial tenant. Guardrail: do NOT enable paid Defender plans here. Teardown: disable Security Hub standards and the Config recorder (it keeps billing otherwise); delete the stacks and the resource group; let the M365 trial lapse.",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "vnet-vs-vpc-segmentation-and-connectivity",
+   "title": "VNet vs VPC: subnets, NSGs vs security groups and NACLs, peering and egress",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Build the same two-tier network on both clouds. Feel the differences: regional VNets vs AZ-bound subnets, NSGs (stateful, subnet or NIC) vs security groups (stateful, ENI) and NACLs (stateless), and default outbound behaviour. Builds: Two VNets peered, each with app and data subnets, NSGs plus ASGs, a UDR and a NAT gateway (private subnets are the default for new VNets, so explicit egress is needed). Two VPCs peered, each with public and private subnets across 2 AZs, security groups, NACLs, a NAT gateway and an S3 gateway endpoint. Remote admin through Azure Bastion Developer vs SSM Session Manager (no public IPs). A C# and Python probe service that reports which flows succeed. Troubleshoot with Network Watcher (IP flow verify, connection troubleshoot) vs Reachability Analyzer and VPC Flow Logs. Break it: block ephemeral ports in a NACL and see why stateless rules bite.",
+   "exams": [
+    "AZ-104:D4",
+    "SAA-C03:D1",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform (both, side by side)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/networking/vnet-vs-vpc",
+    "cloud/compare/networking/nsg-vs-security-groups-and-network-acls",
+    "cloud/azure/networking/vnets-subnets-and-ip-addressing",
+    "cloud/azure/networking/network-traffic-filtering-nsg-asg-firewall-avnm",
+    "cloud/azure/networking/routing-udr-route-server-and-outbound-connectivity",
+    "cloud/aws/networking/amazon-vpc-fundamentals",
+    "cloud/aws/networking/security-groups-vs-network-acls",
+    "cloud/aws/networking/vpc-internet-egress-options",
+    "cloud/aws/networking/vpc-to-vpc-connectivity-options",
+    "cloud/azure/networking/azure-bastion-and-secure-remote-administration",
+    "cloud/compare/networking/network-monitoring-and-troubleshooting-azure-vs-aws",
+    "cloud/foundations/cloud-networking-fundamentals"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $2 for a 3-hour session. NAT gateways are about $0.045/hr each on both clouds plus data, and are the main cost. Test VMs are B1s or t3.micro. Reachability Analyzer is $0.10 per analysis. Bastion Developer and Session Manager are free. Guardrail: a single NAT per cloud; same-day expires-on tag. Teardown: delete the resource group; delete the stack; check for leftover Elastic IPs (billed even when idle) and flow-log buckets.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "private-endpoint-vs-privatelink-with-private-dns",
+   "title": "Private access to PaaS: Private Endpoint vs VPC endpoints, with private DNS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Reach Storage, Key Vault, S3 and Secrets Manager without public endpoints. Learn why DNS is the hard part on both clouds. Builds: Azure: private endpoints for Blob and Key Vault, privatelink private DNS zones linked to the VNet, public network access disabled, and a contrast with service endpoints and a network security perimeter. AWS: an S3 gateway endpoint (route-table based, free) and a Secrets Manager interface endpoint (ENI based) with private DNS, endpoint policies, and a bucket policy restricted by aws:SourceVpce. A C# and Python client that runs inside and outside the network and shows how name resolution changes. Break it: unlink the private DNS zone and watch the client resolve the public IP and get refused.",
+   "exams": [
+    "AZ-104:D4",
+    "SAA-C03:D1",
+    "AI-200:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/networking/private-endpoint-vs-privatelink",
+    "cloud/azure/networking/private-endpoint-vs-service-endpoint-vs-network-security-perimeter",
+    "cloud/azure/networking/azure-dns-private-zones-and-private-resolver",
+    "cloud/aws/networking/vpc-endpoints-gateway-vs-interface",
+    "cloud/aws/networking/privatelink-vs-vpc-lattice",
+    "cloud/compare/networking/azure-dns-vs-route-53",
+    "security/network-security/private-connectivity-for-paas",
+    "cloud/azure/networking/private-link-dns-at-scale"
+   ],
+   "deliverables": [],
+   "cost_note": "Under $1. A private endpoint is about $0.01/hr. An interface endpoint is about $0.01/hr per AZ plus data. Gateway endpoints are free. Skip DNS Private Resolver (about $0.18/hr per endpoint); just read about it. Teardown: delete the resource group (Key Vault goes into soft delete, so purge it if purge protection is off); delete the stack and empty the bucket.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "workload-identity-managed-identity-vs-iam-roles",
+   "title": "Workload identity without secrets: managed identities vs IAM roles",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Make a containerized app reach storage, secrets and a queue with no stored credentials, and compare how each SDK credential chain finds its identity. Builds: Azure Container App with a user-assigned managed identity granted Storage Blob Data Reader, Key Vault Secrets User and Service Bus Data Sender. The C# app uses Azure.Identity (DefaultAzureCredential locally, ManagedIdentityCredential in production); the Python app uses azure-identity. AWS: an ECS Fargate task role allowed s3:GetObject, secretsmanager:GetSecretValue and sqs:SendMessage, reached through the default credential provider chain in the AWS SDK for .NET and boto3; the task execution role is kept separate from the task role. Break it: remove a role assignment and compare AuthorizationFailed with AccessDenied, RBAC propagation delay with immediate IAM effect, and cached tokens.",
+   "exams": [
+    "AZ-104:D1",
+    "SAA-C03:D1",
+    "AI-200:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/identity/workload-identity-managed-identities-vs-iam-roles",
+    "cloud/azure/identity/managed-identities-system-vs-user-assigned",
+    "cloud/azure/identity/choosing-a-workload-identity",
+    "cloud/aws/identity/workload-credentials-on-aws",
+    "cloud/aws/identity/aws-sts-and-role-assumption",
+    "cloud/azure/iac-devops/azure-sdk-and-identity-in-code",
+    "cloud/aws/containers/container-workload-identity-on-aws",
+    "security/iam/workload-identity"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0.50. The Container Apps consumption free grant covers the app; a 0.25 vCPU Fargate task is about $0.012/hr; the Service Bus Basic queue costs pennies. Teardown: delete the resource group and the stack. The user-assigned identity is deleted with the group, but check that no orphaned role assignments show as 'Identity not found'.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "authorization-vs-guardrails-rbac-and-policy-vs-iam-and-scp",
+   "title": "Grants vs guardrails: Azure RBAC and Azure Policy vs IAM policies, SCPs, RCPs and Config",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Separate 'who may do what' from 'what may never happen' on both clouds. This is the most important false-friend pair in the library. Builds: Azure: a custom RBAC role and assignments at management group, subscription and resource group scope; Azure Policy with deny, modify and deployIfNotExists effects plus exemptions; resource locks; a contrast with deny assignments. AWS: identity and resource policies, a permissions boundary for a delegated admin, an SCP and an RCP in a sandbox OU, and a Config rule with SSM Automation remediation. A C# and Python 'can X do Y?' tool that calls the Azure checkAccess / permissions API and IAM SimulatePrincipalPolicy, then explains which layer decided the answer. Break it: grant Owner or AdministratorAccess and show that the guardrail still blocks the action.",
+   "exams": [
+    "AZ-104:D1",
+    "SAA-C03:D1",
+    "SCS-C03:D6"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (management group and subscription scope)",
+    "CloudFormation StackSets",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/identity/authorization-azure-rbac-vs-aws-iam-policies",
+    "cloud/compare/governance/guardrails-azure-policy-vs-scps-rcps-and-config",
+    "cloud/azure/governance/policy-vs-rbac-vs-locks-vs-deny-assignments",
+    "cloud/azure/governance/azure-policy-deep-dive",
+    "cloud/azure/identity/azure-role-assignments-how-to",
+    "cloud/aws/identity/iam-policy-evaluation-logic",
+    "cloud/aws/identity/iam-policy-types-compared",
+    "cloud/aws/identity/permissions-boundaries-and-delegation",
+    "cloud/aws/governance/organization-policies-scp-rcp-declarative",
+    "cloud/aws/governance/aws-config-compliance",
+    "cloud/compare/false-friends-azure-aws"
+   ],
+   "deliverables": [],
+   "cost_note": "Under $1. RBAC, Policy, Organizations, SCPs and RCPs are free; Config rule evaluations are about $0.001 each. Guardrail: never attach a test SCP to the root or the management account; use a sandbox OU only. Teardown: remove policy assignments and exemptions, then delete the custom role; detach the SCP and RCP before deleting the OU; stop the Config recorder.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "vm-scale-sets-vs-ec2-auto-scaling-behind-load-balancers",
+   "title": "VM fleets: Virtual Machine Scale Sets vs EC2 Auto Scaling behind load balancers",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Run a zone-spread, self-healing VM tier on both clouds and compare health probes, scaling policies, instance metadata and patching. Builds: Azure: a Flexible-orchestration VMSS across 3 zones with cloud-init installing the C# API, a Standard Load Balancer health probe, CPU autoscale rules, Update Manager patching and IMDS. AWS: a launch template and ASG across 3 AZs with user data installing the Python API, an ALB target group, target-tracking scaling, SSM Patch Manager and IMDSv2 required. A load generator (C# and Python) drives scale-out. Break it: stop the app on one instance and compare how fast each platform replaces it, and why (an ELB health check must be enabled on the ASG; automatic instance repair must be enabled on the VMSS).",
+   "exams": [
+    "AZ-104:D3",
+    "AZ-104:D4",
+    "SAA-C03:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "Bash (cloud-init)"
+   ],
+   "related_articles": [
+    "cloud/compare/compute/azure-vms-and-scale-sets-vs-ec2-and-auto-scaling",
+    "cloud/azure/compute/deploying-vms-and-scale-sets",
+    "cloud/azure/compute/availability-sets-zones-and-scale-sets",
+    "cloud/aws/compute/ec2-auto-scaling",
+    "cloud/aws/compute/secure-ec2-access-and-imds",
+    "cloud/compare/networking/load-balancer-and-application-gateway-vs-elastic-load-balancing",
+    "cloud/aws/networking/elastic-load-balancing-compared",
+    "cloud/foundations/zonal-vs-zone-redundant-deployments",
+    "cloud/compare/compute/fleet-and-configuration-management-arc-and-update-manager-vs-systems-manager"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $2 for 3 hours. Two to four B1s or t3.micro instances, the Standard LB (about $0.025/hr) and the ALB (about $0.0225/hr plus LCU), plus the AWS public IPv4 charge. Guardrail: maximum instance count of 4 in both scaling policies; allowed-SKU policy from the sandbox lab. Teardown: delete the resource group; delete the stack; check for detached EBS volumes and unattached public IPs.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "object-storage-protection-lifecycle-valet-key-and-backup",
+   "title": "Object storage: redundancy, tiers, lifecycle, valet keys, immutability and backup",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Protect and age data in Blob Storage and S3, hand out time-limited access safely, and compare backup services for object data. Builds: Azure: a storage account with ZRS vs GZRS comparison, hot/cool/cold/archive tiers, a lifecycle policy, versioning, soft delete, a version-level immutability policy (unlocked), and Azure Backup vaulted backup for blobs. AWS: S3 storage classes including Intelligent-Tiering, lifecycle rules, versioning, Object Lock in governance mode, Cross-Region Replication, and AWS Backup for S3. Valet key in C# and Python: a user delegation SAS (signed with Entra, not the account key) vs a presigned URL, with expiry and least scope. Break it: delete an object and restore it on both; try to delete a locked version.",
+   "exams": [
+    "AZ-104:D2",
+    "AZ-104:D5",
+    "SAA-C03:D2",
+    "SAA-C03:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/storage-data/blob-storage-vs-s3",
+    "cloud/azure/storage-data/azure-storage-accounts-and-redundancy",
+    "cloud/azure/storage-data/blob-storage-tiers-lifecycle-and-data-protection",
+    "cloud/azure/storage-data/azure-storage-authorization-keys-sas-and-rbac",
+    "cloud/aws/storage-data/amazon-s3-storage-classes-and-lifecycle",
+    "cloud/aws/storage-data/amazon-s3-data-protection",
+    "cloud/aws/storage-data/aws-backup-and-data-resilience",
+    "cloud/compare/resilience-migration/backup-and-disaster-recovery-azure-vs-aws",
+    "architecture/patterns/valet-key-vs-claim-check",
+    "architecture/reliability/storage-redundancy-and-durability"
+   ],
+   "deliverables": [],
+   "cost_note": "Pennies of storage, but archive tiers carry early-deletion minimums (90 to 180 days), so use 1 KB test objects. Guardrail: NEVER use S3 Object Lock compliance mode or a LOCKED Azure immutability policy in a lab. Neither can be undone before retention ends, so the data and its bill stay until then. Use governance mode or an unlocked policy with 1-day retention. Teardown: delete the backup instances and recovery points first (vault soft delete can keep them for 14 days); empty the versioned buckets (delete all versions and delete markers), then delete the stacks and the resource group.",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "event-driven-ai-pipeline-functions-vs-lambda",
+   "title": "Event-driven AI pipeline: Event Grid, Functions and Service Bus vs EventBridge, Lambda and SQS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Build an upload-triggered pipeline that summarizes documents with an LLM, and compare triggers, retries, dead-lettering, ordering and idempotency. Builds: Azure: a Blob upload raises an Event Grid system topic event, which triggers a Functions (Flex Consumption) handler that enqueues to Service Bus (sessions, DLQ). A second function calls a Foundry model and stores the summary in Cosmos DB with an idempotency key. AWS: an S3 upload goes to EventBridge, then Lambda, then an SQS FIFO queue with a DLQ and redrive; a second Lambda calls Bedrock and stores the result in DynamoDB with a conditional write. Handlers in C# (isolated worker; Lambda .NET) and Python. Break it: poison messages, duplicate deliveries and throttled model calls; compare DLQ inspection and redrive on each.",
+   "exams": [
+    "AI-200:D3",
+    "SAA-C03:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "AWS SAM (CloudFormation)",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/serverless-integration/azure-functions-vs-aws-lambda",
+    "cloud/compare/messaging/service-bus-vs-sqs-sns-and-amazon-mq",
+    "cloud/compare/messaging/event-grid-vs-eventbridge",
+    "cloud/azure/serverless-integration/azure-functions-hosting-plans",
+    "cloud/azure/serverless-integration/azure-functions-triggers-bindings-and-deployment",
+    "cloud/azure/serverless-integration/azure-service-bus-in-depth",
+    "cloud/aws/serverless-integration/lambda-failure-handling-and-idempotency",
+    "cloud/aws/serverless-integration/amazon-sqs-and-sns-in-depth",
+    "cloud/aws/serverless-integration/amazon-eventbridge-in-depth",
+    "messaging/eventing/retries-and-dead-letter-queues",
+    "messaging/eventing/delivery-semantics",
+    "messaging/apis/api-idempotency"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1. Functions, Lambda, SQS, EventBridge and DynamoDB fit their free allowances; Cosmos DB free tier or serverless. Service Bus Standard (needed for sessions) is about $10/month, billed hourly, so delete it the same day. Model tokens cost cents. Guardrail: a concurrency cap on both functions and a model max-token cap, so a retry storm cannot run up token cost. Teardown: delete the resource group; sam delete; empty the bucket.",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "postgresql-ha-and-pgvector-flexible-server-vs-rds",
+   "title": "PostgreSQL for AI and HA: Azure Database for PostgreSQL flexible server vs Amazon RDS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Run the reader's own database engine on both managed services. Add pgvector search, then high availability and a read replica, and write failover-aware clients. Builds: Azure Database for PostgreSQL flexible server: allowlist pgvector (and TimescaleDB, noting that only the Apache-licensed edition is offered), Entra authentication, PITR restore, a read replica, and a short zone-redundant HA test on General Purpose. Amazon RDS for PostgreSQL: pgvector, IAM database authentication, Multi-AZ, a read replica and a snapshot restore. Difference to surface: TimescaleDB is not available on RDS or Aurora. Npgsql (multi-host, target_session_attrs) and psycopg clients with retry, plus a vector-similarity endpoint over embeddings from Foundry or Bedrock. Break it: force a failover mid-load and measure the client error window.",
+   "exams": [
+    "AI-200:D2",
+    "SAA-C03:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "SQL"
+   ],
+   "related_articles": [
+    "cloud/azure/storage-data/azure-database-for-postgresql-flexible-server",
+    "cloud/azure/storage-data/postgresql-for-ai-apps-vector-search",
+    "cloud/aws/storage-data/amazon-rds-vs-aurora",
+    "cloud/aws/storage-data/time-series-on-aws-for-timescaledb-users",
+    "cloud/compare/storage-data/azure-sql-and-azure-database-vs-rds-and-aurora",
+    "cloud/compare/storage-data/relational-high-availability-replicas-and-dr-azure-vs-aws",
+    "data/relational/read-replicas-and-failover-aware-clients",
+    "data/specialized-stores/vector-search-pgvector-and-redis",
+    "architecture/reliability/database-high-availability-and-dr",
+    "data/time-series/timescaledb-hypertables"
+   ],
+   "deliverables": [],
+   "cost_note": "About $2 to $4. Burstable B1ms and db.t4g.micro run for a few cents an hour (free-tier eligible on qualifying accounts). The HA step needs General Purpose on Azure (about $0.25/hr per node, doubled with the standby), so cap it at 1 hour. Multi-AZ and the replica double the RDS cost. Guardrail: stop or delete right after each step. Stopped servers restart automatically after 7 days on both clouds. Teardown: delete the replicas first, then the primaries; skip the final snapshot on RDS (or delete it); delete the resource group.",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "cosmos-db-for-ai-vs-dynamodb",
+   "title": "NoSQL for AI apps: Azure Cosmos DB for NoSQL vs Amazon DynamoDB",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Model chat history and agent memory in both stores. Compare partitioning, capacity units, consistency, change feeds and the vector-search gap. Builds: Cosmos DB for NoSQL: a hierarchical partition key (tenantId/userId), RU budgeting, session vs strong consistency, a change feed into an Azure Function, and native vector search (DiskANN index) for semantic recall. DynamoDB: single-table design with PK and SK, on-demand capacity, strongly consistent reads, DynamoDB Streams into Lambda. DynamoDB has no native vector index, so pair it with S3 Vectors or OpenSearch (an architectural difference worth recording). C# and Python repositories behind one interface; a hot-partition break-it test with throttling metrics on both.",
+   "exams": [
+    "AI-200:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/storage-data/cosmos-db-core-concepts",
+    "cloud/azure/storage-data/cosmos-db-for-ai-apps",
+    "cloud/aws/storage-data/dynamodb-data-modeling-for-developers",
+    "cloud/aws/storage-data/dynamodb-streams-global-tables-and-resilience",
+    "cloud/compare/storage-data/cosmos-db-vs-dynamodb-and-purpose-built-nosql",
+    "cloud/compare/storage-data/vector-stores-for-rag-and-agents-azure-vs-aws",
+    "cloud/azure/storage-data/vector-search-across-azure-data-services",
+    "data/specialized-stores/nosql-data-modelling",
+    "architecture/distributed-systems/consistency-models"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $1. The Cosmos DB free tier (1,000 RU/s and 25 GB, one account per subscription) or serverless; DynamoDB always-free 25 GB and on-demand pennies; S3 Vectors cents. Guardrail: a total throughput limit on the Cosmos account; on-demand maximum throughput on the DynamoDB table. Teardown: delete the resource group and the stack (also delete any PITR backups and global-table replicas you created).",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "redis-cache-semantic-cache-and-streams-managed-redis-vs-elasticache",
+   "title": "Redis for AI apps: Azure Managed Redis vs ElastiCache for Valkey",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Use Redis the way the reader's stack does (cache-aside and Redis Streams consumer groups) and the way AI apps do (a semantic cache over vector search), and compare the managed offerings. Builds: Azure Managed Redis (smallest SKU) with Entra authentication: cache-aside for an API, an LLM semantic cache using RediSearch vector indexes, and Redis Streams with consumer groups, XAUTOCLAIM recovery and a dead-letter stream. Amazon ElastiCache for Valkey with IAM authentication: the same code, Valkey vector search for the semantic cache (or MemoryDB, if durability is required), and the Streams workload. StackExchange.Redis (C#) and redis-py (Python). Measure cache hit rate, the similarity-threshold trade-off and the consumer lag after a killed consumer.",
+   "exams": [
+    "AI-200:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/serverless-integration/azure-managed-redis-caching",
+    "cloud/azure/serverless-integration/caching-on-azure-compared",
+    "cloud/aws/serverless-integration/in-memory-data-elasticache-memorydb",
+    "cloud/compare/storage-data/caching-azure-managed-redis-vs-elasticache-and-memorydb",
+    "data/specialized-stores/redis-data-structures-and-persistence",
+    "data/specialized-stores/caching-strategies",
+    "ai/evaluation-ops/caching-for-llm-apps",
+    "messaging/eventing/redis-streams-vs-kafka"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $3 for 3 hours. Neither service has a free tier: the smallest Azure Managed Redis SKU and a cache.t4g.micro node (about $0.016/hr) are billed hourly, and ElastiCache Serverless has a minimum data-storage charge. Check current prices before starting. Guardrail: same-day expires-on tag; run the Streams workload locally first in Docker Compose. Teardown: delete the cache resources (and the ElastiCache final snapshot, if one was taken).",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "containers-in-production-container-apps-vs-ecs-fargate",
+   "title": "Containers in production: Azure Container Apps vs Amazon ECS on Fargate",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Deploy the C# and Python images to serverless container platforms. Compare revisions vs task definitions, traffic splitting, event-driven scale and troubleshooting. Builds: Azure Container Apps: an environment, revisions with traffic splitting, KEDA scale-to-zero on Service Bus queue length, an ACR pull through managed identity, a Container Apps job, secrets from Key Vault references, and log streaming. Amazon ECS on Fargate: task definitions and services behind an ALB with blue/green deployment, Application Auto Scaling on SQS depth, an ECR pull through the task execution role, scheduled tasks, Secrets Manager injection and CloudWatch Logs. ECS Express Mode is deployed as the 'opinionated' contrast. Break it: a bad image tag, a failing readiness probe and a missing secret; diagnose each in Log Analytics vs CloudWatch.",
+   "exams": [
+    "AI-200:D1",
+    "SAA-C03:D2",
+    "AZ-104:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation (or CDK in C#)",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/containers/azure-container-apps",
+    "cloud/azure/containers/azure-app-hosting-decision-guide",
+    "cloud/azure/containers/deploy-and-troubleshoot-containers-on-azure",
+    "cloud/aws/containers/amazon-ecs-in-depth",
+    "cloud/aws/containers/container-platform-choices-on-aws",
+    "cloud/compare/containers/container-apps-aci-and-acr-vs-ecs-fargate-and-ecr",
+    "cloud/aws/containers/container-deployment-strategies-ecs-eks",
+    "cloud/compare/compute/app-service-vs-elastic-beanstalk-ecs-express-mode-and-amplify",
+    "messaging/runtime/background-work-and-graceful-shutdown"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $2. The Container Apps consumption free grant covers the Azure side. Fargate is about $0.012/hr per 0.25 vCPU task; the ALB is about $0.0225/hr plus LCU; there is a public IPv4 charge. Express Mode adds its own ALB. Guardrail: a maximum replica count of 3; the Log Analytics daily cap set to 0.5 GB. Teardown: delete the ECS services (desired count 0), then the stacks; delete the resource group; check for leftover target groups and log groups (set retention to 1 day).",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "observability-otel-app-insights-vs-cloudwatch",
+   "title": "Observability with OpenTelemetry: Application Insights and Azure Monitor vs CloudWatch and Application Signals",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Instrument the same services once with OpenTelemetry, send telemetry to each cloud's backend, and compare the query languages, alerting and the audit trail. Builds: C# (OpenTelemetry .NET with the Azure Monitor distro) and Python (azure-monitor-opentelemetry) sending to Application Insights. The same code exported through the ADOT collector or the CloudWatch OTLP endpoint to CloudWatch, X-Ray traces and Application Signals SLOs. Distributed traces across Service Bus and SQS hops; KQL queries vs CloudWatch Logs Insights queries for the same 5 questions; metric alerts with action groups vs alarms with SNS; a workbook vs a dashboard. The control-plane audit trail compared: Activity Log vs CloudTrail. Break it: inject latency and an error; find the root cause from telemetry alone.",
+   "exams": [
+    "AZ-104:D5",
+    "AI-200:D4",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "KQL"
+   ],
+   "related_articles": [
+    "cloud/azure/observability/application-insights-and-opentelemetry",
+    "cloud/azure/observability/azure-monitor-data-platform",
+    "cloud/azure/observability/kql-for-azure-engineers",
+    "cloud/azure/observability/azure-monitor-alerts-and-action-groups",
+    "cloud/aws/observability/tracing-on-aws-xray-adot-application-signals",
+    "cloud/aws/observability/cloudwatch-logs-and-logs-insights",
+    "cloud/aws/observability/cloudwatch-metrics-and-alarms",
+    "cloud/compare/observability/application-insights-vs-cloudwatch-application-signals-and-x-ray",
+    "cloud/compare/observability/azure-monitor-vs-cloudwatch-and-cloudtrail",
+    "devops/observability/opentelemetry-in-practice"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $2. Log Analytics includes free ingestion each month; set a 0.5 GB/day cap. The CloudWatch free tier covers 5 GB of logs; set log-group retention to 1 to 3 days. Application Signals is billed per signal, so sample at 10%. Teardown: delete the workspace or resource group and the stacks; delete orphaned log groups and alarms (alarms bill monthly).",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "rag-pipeline-ai-search-vs-bedrock-knowledge-bases",
+   "title": "RAG over this library: Azure AI Search and Foundry IQ vs Bedrock Knowledge Bases",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Ingest the library's own Markdown articles, retrieve with hybrid search and reranking, answer with citations, and compare managed RAG on both platforms. Builds: Azure: integrated vectorization of docs/ in Azure AI Search with chunking, embeddings and hybrid (BM25 plus vector) retrieval with the semantic ranker and metadata filters on area, level and wave; then the same index used as a Foundry IQ knowledge source for agentic retrieval. AWS: a Bedrock Knowledge Base over S3 with S3 Vectors as the vector store, chunking strategies, metadata filtering and Rerank, using RetrieveAndGenerate and Retrieve. C# and Python clients that return answers with article citations; a 30-question golden set reused in the evaluation lab. Break it: change the chunk size and watch recall move.",
+   "exams": [
+    "AI-103:D5",
+    "AI-103:D2",
+    "AIP-C01:D1",
+    "AIP-C01:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/applied/rag-end-to-end",
+    "ai/applied/document-ingestion-and-chunking",
+    "ai/applied/embeddings-and-vector-indexes",
+    "ai/applied/hybrid-search-and-reranking",
+    "ai/platforms/microsoft/foundry-iq-and-azure-ai-search",
+    "ai/platforms/aws/bedrock-knowledge-bases",
+    "cloud/compare/ai-platforms/azure-ai-search-vs-bedrock-knowledge-bases",
+    "ai/applied/hallucinations-and-grounding",
+    "ai/evaluation-ops/rag-index-operations"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $5. The AI Search Free tier (50 MB, limited semantic ranker queries) is enough for the library; the Basic tier is billed hourly, so delete it the same day if you use it. S3 Vectors and embeddings cost cents. Guardrail: do NOT choose OpenSearch Serverless as the Knowledge Base vector store. Its minimum capacity bills continuously, which is hundreds of dollars a month. Teardown: delete the search service, the KB, the data source, the vector bucket and the index; delete the resource group and the stacks.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "genai-evaluation-and-tracing-foundry-vs-bedrock",
+   "title": "GenAI evaluation and tracing: Foundry evaluations vs Bedrock Evaluations",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Turn 'it seems fine' into numbers: evaluate the RAG app for groundedness, relevance, retrieval quality and safety on both platforms, trace it with OpenTelemetry GenAI conventions, and gate CI on the scores. Builds: A golden dataset taken from the RAG lab. Foundry: built-in evaluators (groundedness, relevance, retrieval, coherence, content safety), cloud evaluation runs and tracing into Application Insights. Bedrock: a RAG evaluation job with an LLM-as-judge and a model evaluation job, traces into CloudWatch. Local, portable evaluators: Microsoft.Extensions.AI.Evaluation (C#) and an open-source Python framework. A GitHub Actions job that fails the build when groundedness drops below a threshold. Break it: deliberately degrade the retriever and confirm that the gate catches it.",
+   "exams": [
+    "AI-103:D1",
+    "AI-103:D2",
+    "AIP-C01:D5",
+    "AI-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform",
+    "GitHub Actions YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/evaluation-ops/genai-evaluation-fundamentals",
+    "ai/evaluation-ops/rag-evaluation",
+    "ai/evaluation-ops/llm-as-a-judge",
+    "ai/evaluation-ops/genai-quality-metrics",
+    "ai/platforms/microsoft/foundry-evaluation-and-observability",
+    "ai/platforms/aws/bedrock-evaluations",
+    "cloud/compare/ai-platforms/genaiops-evaluation-tracing-and-cost-foundry-vs-bedrock-and-agentcore",
+    "ai/evaluation-ops/genai-observability-opentelemetry",
+    "ai/evaluation-ops/genaiops-ci-cd"
+   ],
+   "deliverables": [],
+   "cost_note": "About $2 to $5, mostly judge-model tokens; Bedrock evaluation jobs bill the model inference they use. Guardrail: cap the dataset at 30 items for cloud runs, use a small judge model, and run the full evaluation only on main. Teardown: delete the evaluation output buckets and containers; reuse the RAG lab resource group and delete it when done.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "build-and-host-an-mcp-server-csharp-and-python",
+   "title": "Build and host an MCP server in C# and Python: Container Apps vs AgentCore Runtime",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Implement the MCP primitives end to end, over stdio and Streamable HTTP, then host the remote server on each cloud and front it with that cloud's gateway. Builds: An MCP server over the library's exam-objective files (docs/_study/exams): tools (list_objectives, find_articles_for_objective) with input and output schemas and structured results, resources (exam://{code}), prompts, progress notifications, and correct error handling (tool isError results vs JSON-RPC protocol errors). Built twice: the official C# SDK (ModelContextProtocol on ASP.NET Core) and the official Python SDK. Tested with MCP Inspector and a coding-agent client. Hosting: Azure Container Apps (or the Azure Functions MCP support) fronted by API Management's MCP server support, vs Amazon Bedrock AgentCore Runtime fronted by AgentCore Gateway. Break it: a slow tool (cancellation), an oversized result, and a schema mismatch.",
+   "exams": [
+    "MCPA:D1",
+    "MCPA:D2",
+    "MCPA:D3",
+    "MCPA:D5",
+    "AI-500:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation (or AgentCore starter toolkit with CDK)",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/protocols/what-is-mcp",
+    "ai/protocols/mcp-architecture-and-primitives",
+    "ai/protocols/mcp-transports",
+    "ai/protocols/mcp-tool-orchestration",
+    "ai/protocols/mcp-2026-07-28-what-changed",
+    "ai/protocols/mcp-cheatsheet",
+    "ai/agents/tool-use-and-function-calling",
+    "ai/platforms/aws/agentcore-runtime-and-harness",
+    "ai/platforms/microsoft/foundry-toolbox-and-tools"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $1. Local stdio is free; the Container Apps free grant covers hosting; AgentCore Runtime bills per second of active CPU and memory, so it costs cents. APIM: use the Consumption or a v2 tier and delete it the same day. Teardown: delete the resource group (APIM soft delete: purge it to free the name); delete the AgentCore runtime, the gateway and the stack.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "agent-and-mcp-identity-entra-agent-id-vs-agentcore-identity",
+   "title": "Secure the remote MCP server and its agent: Entra ID and Entra Agent ID vs AgentCore Identity and Policy",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Apply the MCP authorization model correctly, give the agent its own identity, and enforce per-tool permissions on both clouds. Builds: Turn the server from the previous lab into an OAuth 2.1 resource server: Protected Resource Metadata (RFC 9728), audience-bound tokens with resource indicators (RFC 8707), per-tool scopes, no token passthrough to downstream APIs, and authorization-server discovery. Azure: an Entra app registration for the server, an Entra Agent ID identity for the agent, delegated and on-behalf-of vs autonomous flows, and Conditional Access for agents. AWS: AgentCore Identity (inbound JWT authorizer, outbound credential providers in the token vault) and AgentCore Policy (Cedar) evaluated at AgentCore Gateway, with Cognito as the identity provider. C# and Python validation middleware. Break it: replay a token minted for a different resource; call a write tool with a read scope; confirm both are refused and logged.",
+   "exams": [
+    "MCPA:D4",
+    "AI-500:D4",
+    "AIP-C01:D3",
+    "SC-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (plus Microsoft Graph Bicep for app registrations)",
+    "CloudFormation",
+    "Terraform (azuread + aws)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/protocols/mcp-authorization",
+    "security/ai-security/mcp-security",
+    "ai/agents/agentops/agent-identity-and-authorization",
+    "cloud/azure/identity/agent-identities-with-entra-agent-id",
+    "ai/platforms/aws/agentcore-gateway-identity-policy",
+    "security/iam/oauth-2-and-2-1-fundamentals",
+    "security/iam/oauth-security-hardening",
+    "security/iam/non-human-identity-and-agent-delegation",
+    "security/ai-security/excessive-agency-and-agent-authorization"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $1. Entra app registrations and Cognito's free tier cost nothing; AgentCore Identity and Policy bill per request, which is cents. Some Entra Agent ID and Conditional Access features need Entra ID P1/P2 or Agent 365 licensing, so use a trial tenant. Teardown: delete the app registrations and agent identities (also clear them from the deleted-items list), the Cognito user pool, the gateway policies and the stacks.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "tool-using-agent-agent-framework-on-foundry-vs-strands-on-agentcore",
+   "title": "A tool-using agent: Microsoft Agent Framework on Foundry Agent Service vs Strands Agents on AgentCore",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Build the same study-assistant agent, with function tools, the MCP server and memory, on both platforms. Compare what the framework, the harness and the runtime each give you. Builds: Azure: a Microsoft Agent Framework agent (C# and Python) with function tools and the MCP tool, deployed as a Foundry Agent Service agent (prompt agent first, then a hosted agent), with Foundry memory and tracing. AWS: a Strands Agents (Python) agent with the same tools on AgentCore Runtime, with AgentCore Memory (short- and long-term) and observability. For C# on AWS, a hand-written Bedrock Converse tool-use loop, to make visible what a framework hides. Compare tool-call traces, retries, token use and the memory recall quality.",
+   "exams": [
+    "AI-103:D2",
+    "AIP-C01:D2",
+    "AI-500:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation (AgentCore starter toolkit)",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/agents/agent-loop",
+    "ai/agents/tool-use-and-function-calling",
+    "ai/agents/agent-memory-types",
+    "ai/agents/agent-harness-vs-framework-vs-runtime",
+    "ai/agents/frameworks/microsoft-agent-framework",
+    "ai/agents/frameworks/strands-agents",
+    "ai/agents/frameworks/agent-frameworks-compared",
+    "ai/platforms/microsoft/foundry-agent-service",
+    "ai/platforms/aws/bedrock-agentcore-overview",
+    "ai/platforms/aws/agentcore-memory",
+    "cloud/compare/ai-platforms/foundry-agent-service-vs-bedrock-agentcore"
+   ],
+   "deliverables": [],
+   "cost_note": "About $2 to $5: tokens, plus AgentCore Runtime and Memory consumption and Foundry hosted-agent compute while active. Guardrail: a maximum-turns limit per run (10), a max-token cap per call and a per-lab $10 budget. Teardown: delete the agents, the memory stores, the AgentCore runtimes and the stacks; delete the Foundry project resource group.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "multi-agent-orchestration-and-a2a",
+   "title": "Multi-agent orchestration and A2A across Foundry and AgentCore",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Implement the main multi-agent topologies with checkpoints and human approval, then make an agent on one cloud call an agent on the other over A2A. Builds: Microsoft Agent Framework workflows (sequential, concurrent, handoff and a manager-led pattern) with checkpointing and a human-in-the-loop approval step, in C# and Python, run on Foundry. Strands multi-agent patterns (agents-as-tools, swarm, graph) on AgentCore Runtime. One specialist agent is exposed through an A2A agent card on each side, and the orchestrator on the other cloud discovers and calls it with authenticated requests. Measure cost and latency per topology on the same task (write a study plan for an exam from the library index).",
+   "exams": [
+    "AI-500:D1",
+    "AI-500:D2",
+    "AIP-C01:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/agents/patterns/multi-agent-topologies",
+    "ai/agents/patterns/handoffs-vs-agents-as-tools",
+    "ai/agents/patterns/agentic-workflow-patterns",
+    "ai/platforms/microsoft/foundry-multi-agent-orchestration",
+    "ai/protocols/a2a-protocol",
+    "ai/protocols/cross-cloud-agent-interop",
+    "ai/agents/durable-agent-execution",
+    "ai/agents/human-in-the-loop-patterns",
+    "ai/agents/frameworks/langgraph"
+   ],
+   "deliverables": [],
+   "cost_note": "About $3 to $8; multi-agent runs multiply token use. Guardrail: a global token budget enforced in the orchestrator, plus loop detection (maximum handoffs 8). Teardown: as in the tool-using agent lab; also revoke the A2A client credentials.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "ai-gateway-token-limits-caching-and-model-routing",
+   "title": "AI gateway: API Management AI gateway vs an API Gateway-based gateway with Bedrock routing",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Put a governed front door in front of the models: token quotas per consumer, semantic caching, load balancing and fallback, and cost attribution. Contrast a policy-driven gateway with one you assemble. Builds: Azure API Management AI gateway: an LLM token-limit policy per subscription, token metrics emitted to Application Insights, a semantic cache backed by Azure Managed Redis, a backend pool across two Foundry deployments with a circuit breaker, and managed-identity authentication to Foundry. AWS: API Gateway with usage plans in front of a small gateway service (C# and Python on Lambda or ECS) that applies token quotas in DynamoDB, uses Bedrock cross-region inference profiles and intelligent prompt routing, prompt caching, and application inference profiles for cost tags. Load test both; compare 429 behaviour and cost attribution.",
+   "exams": [
+    "AIP-C01:D4",
+    "AI-103:D2",
+    "AI-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/platforms/ai-gateway-pattern",
+    "ai/evaluation-ops/genai-gateway-pattern",
+    "ai/platforms/model-routing-and-cascading",
+    "ai/evaluation-ops/model-routing-and-fallback",
+    "ai/evaluation-ops/genai-cost-optimization",
+    "ai/evaluation-ops/latency-throughput-and-capacity",
+    "cloud/azure/serverless-integration/azure-api-management",
+    "cloud/compare/serverless-integration/api-management-vs-api-gateway",
+    "security/ai-security/ai-gateway-security-control"
+   ],
+   "deliverables": [],
+   "cost_note": "About $3 to $6. APIM: check which AI-gateway policies each tier supports; a Basic v2 or Developer instance is billed hourly, so delete it the same day. Azure Managed Redis is billed hourly. API Gateway, Lambda and DynamoDB are pennies. The load test is capped at 2,000 small requests. Teardown: delete and purge APIM; delete the Redis instance, the resource groups and the stacks.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "guardrails-and-ai-red-teaming-foundry-vs-bedrock",
+   "title": "Guardrails and AI red teaming: Foundry guardrails and Prompt Shields vs Bedrock Guardrails",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Measure the attack success rate against the RAG app and agent, add layered guardrails on both platforms, and measure again. Builds: A baseline attack run with PyRIT (Python) and the Foundry AI Red Teaming Agent, plus a portable promptfoo suite: direct jailbreaks, indirect prompt injection planted in documents, PII extraction and off-topic abuse. Azure: Foundry guardrails with Prompt Shields (user and document attacks), groundedness detection, protected-material detection and custom blocklists. AWS: Bedrock Guardrails with prompt-attack filters, denied topics, sensitive-information redaction, contextual grounding and Automated Reasoning checks, applied through the standalone ApplyGuardrail API so non-Bedrock models are covered too. C# and Python middleware applies the input and output checks. Report the before and after attack success rate and the false-positive rate.",
+   "exams": [
+    "AIP-C01:D3",
+    "AI-103:D1",
+    "AI-500:D4",
+    "AIF-C01:D5"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/platforms/microsoft/foundry-guardrails",
+    "ai/platforms/aws/bedrock-guardrails",
+    "security/ai-security/llm-guardrails-architecture",
+    "security/ai-security/prompt-injection-and-jailbreaks",
+    "security/ai-security/ai-red-teaming",
+    "security/ai-security/owasp-agentic-top-10",
+    "security/ai-security/agent-data-exfiltration",
+    "security/ai-security/monitoring-attacks-on-ai-systems"
+   ],
+   "deliverables": [],
+   "cost_note": "About $3 to $8: attack-generation and target tokens, plus guardrail text units. Guardrail: cap the attack set at 200 prompts per run; red-team only your own deployments (the provider's acceptable-use and red-teaming terms apply). Teardown: delete the guardrail versions, the red-team result storage, and the resource groups and stacks.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "document-and-multimodal-extraction-content-understanding-vs-bedrock-data-automation",
+   "title": "Documents, vision, speech and text: Azure Content Understanding vs Bedrock Data Automation",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Cover the AI-103 non-chat workloads: extract fields from documents, understand images, audio and video, generate images with provenance, and analyse text. Choose between a prebuilt service and an LLM for each. Builds: Invoices and receipts processed with Azure Content Understanding analyzers (and Document Intelligence prebuilt models) vs Bedrock Data Automation blueprints (and Textract). Image and video understanding with multimodal models on both; image generation on Foundry vs Amazon Nova image models, with content credentials (C2PA) checked. Speech-to-text and text-to-speech with Azure Speech vs Transcribe and Polly. Sentiment, PII and summarization: the Language service vs Comprehend vs an LLM prompt. C# and Python pipelines write the results to JSON and score field-level accuracy on 15 labelled documents.",
+   "exams": [
+    "AI-103:D3",
+    "AI-103:D4",
+    "AI-103:D5",
+    "AIP-C01:D1"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "ai/applied/intelligent-document-processing",
+    "ai/applied/vision-and-generative-media-apps",
+    "ai/applied/speech-and-voice-applications",
+    "ai/applied/text-analysis-llm-vs-language-services",
+    "cloud/compare/ai-platforms/ai-content-and-document-services-foundry-tools-vs-aws-ai-services",
+    "ai/platforms/microsoft/foundry-tools-prebuilt-ai-services",
+    "ai/platforms/aws/aws-ai-services-catalog",
+    "security/ai-security/human-oversight-transparency-provenance"
+   ],
+   "deliverables": [],
+   "cost_note": "About $2 to $6. Per-page and per-image pricing, with free tiers where they exist. Image and video generation are the expensive items: cap at 5 images and 1 short video. Teardown: delete the analyzers, blueprints and projects, the sample buckets and containers, and the resource groups and stacks; purge the soft-deleted AI resources.",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "envelope-encryption-and-secrets-key-vault-vs-kms-secrets-manager",
+   "title": "Keys and secrets: Azure Key Vault vs AWS KMS and Secrets Manager",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Implement envelope encryption and secret rotation in code on both clouds. Compare the authorization models (Key Vault RBAC vs KMS key policies and grants) and the deletion semantics. Builds: Azure: a Key Vault using the RBAC permission model with purge protection, a key rotation policy, a customer-managed key for a storage account and for PostgreSQL flexible server, and secret rotation triggered by an Event Grid near-expiry event into a Function. AWS: a customer-managed KMS key with a key policy, grants and automatic rotation, SSE-KMS with S3 Bucket Keys, an RDS KMS key, and Secrets Manager rotation through a Lambda function, contrasted with Parameter Store. Envelope encryption: C# (Azure.Security.KeyVault.Keys plus AesGcm) and Python (AWS Encryption SDK, then cryptography plus KMS GenerateDataKey). Break it: remove key access and observe the impact on the dependent service.",
+   "exams": [
+    "SC-500:D1",
+    "SC-500:D2",
+    "SCS-C03:D5"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/compare/security-services/key-vault-vs-kms-secrets-manager-and-cloudhsm",
+    "cloud/azure/security-services/azure-key-vault-in-practice",
+    "cloud/azure/security-services/azure-key-vault-and-hsm-options",
+    "cloud/aws/security-services/aws-kms-in-depth",
+    "cloud/aws/security-services/secrets-manager-vs-parameter-store",
+    "cloud/aws/security-services/protecting-sensitive-data-in-application-code",
+    "security/cryptography/key-management-and-envelope-encryption",
+    "security/data-protection/encryption-at-rest-patterns",
+    "security/cryptography/secrets-management"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $2. KMS keys are $1/month, prorated; Secrets Manager is $0.40 per secret per month, prorated; Key Vault Standard is billed per operation; PostgreSQL B1ms costs cents. Guardrail: purge protection keeps the vault NAME reserved for its retention period (minimum 7 days), so set 7 and use unique names; KMS deletion is scheduled with a 7 to 30 day waiting period (choose 7). Teardown: schedule KMS key deletion, delete the secrets with a recovery window of 7 days (or force-delete), delete the stacks and the resource group.",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "threat-detection-hunting-and-automated-response",
+   "title": "Detect, hunt and respond: Defender for Cloud and Sentinel vs GuardDuty, Security Hub and EventBridge",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Generate realistic findings, investigate them, hunt across logs, and automate a containment step on both clouds. Builds: Azure: Defender for Cloud plans on trial (Servers, Storage, Containers, AI services threat protection), sample alerts, a Sentinel workspace onboarded to the Defender portal with the Azure Activity and Entra ID connectors, a KQL hunting query and an analytics rule, and a Logic Apps playbook that tags a resource and disables a user. AWS: GuardDuty (including Runtime and S3 protection) sample findings, Security Hub aggregation, an EventBridge rule that starts a Step Functions or Lambda remediation (quarantine security group, revoke role sessions), and hunting with Athena over CloudTrail (or CloudTrail Lake). Playbook code in C# and Python. Optional: Security Copilot prompts, if the tenant is entitled to it.",
+   "exams": [
+    "SC-500:D4",
+    "SC-500:D3",
+    "SCS-C03:D1",
+    "SCS-C03:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "KQL",
+    "SQL"
+   ],
+   "related_articles": [
+    "cloud/azure/security-services/microsoft-defender-for-cloud",
+    "cloud/azure/security-services/defender-for-cloud-workload-protection-plans",
+    "cloud/azure/security-services/microsoft-sentinel",
+    "cloud/azure/security-services/ingesting-data-into-microsoft-sentinel",
+    "cloud/azure/security-services/sentinel-and-defender-xdr-detections-and-automation",
+    "cloud/azure/security-services/protecting-ai-workloads-with-microsoft-security",
+    "cloud/aws/security-services/threat-detection-and-posture-services",
+    "cloud/aws/security-services/automated-security-response-on-aws",
+    "cloud/compare/security-services/defender-for-cloud-vs-security-hub-guardduty-inspector",
+    "cloud/compare/security-services/sentinel-vs-security-lake-and-siem-on-aws",
+    "security/detection-response/detection-engineering",
+    "security/detection-response/kql-and-sql-for-security-hunting"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $5 if done within the trials: the Defender plans' 30-day trials, the Sentinel free trial on a new workspace, and the GuardDuty and Security Hub 30-day trials. Guardrail: a calendar reminder for day 25 to disable everything; a Log Analytics daily cap of 1 GB; do not onboard real production subscriptions. Teardown: disable the Defender plans at subscription scope; offboard Sentinel and delete the workspace; disable GuardDuty and Security Hub (in every region you enabled); delete the stacks.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "storage-and-database-data-perimeter",
+   "title": "Data perimeter for storage and databases: Azure network security perimeter and Defender for Storage vs S3 policies, RCPs and Macie",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Lock data stores down by identity, network and organization on both clouds, and discover sensitive data in them. Builds: Azure: a storage account with shared-key access disabled, public network access off, a network security perimeter, Defender for Storage malware scanning on upload, Purview or Defender sensitive-data discovery, and PostgreSQL flexible server with Entra-only authentication and auditing. AWS: S3 Block Public Access at account level, a bucket policy using aws:PrincipalOrgID and aws:SourceVpce, a resource control policy enforcing the data perimeter, Macie automated sensitive-data discovery, and RDS with IAM authentication and log export. A C# and Python 'exfil tester' tries 6 access paths (anonymous, cross-tenant or cross-org, outside network, stolen SAS or presigned URL, and so on) and reports which controls stopped each.",
+   "exams": [
+    "SC-500:D2",
+    "SCS-C03:D5",
+    "SCS-C03:D6"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation StackSets",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/storage-data/securing-storage-accounts-network-and-threat-protection",
+    "cloud/azure/storage-data/securing-azure-sql",
+    "cloud/azure/storage-data/securing-azure-data-services-end-to-end",
+    "cloud/aws/governance/aws-data-perimeters",
+    "cloud/aws/storage-data/amazon-s3-access-and-performance",
+    "security/data-protection/securing-object-and-file-storage",
+    "security/data-protection/database-security",
+    "security/data-protection/data-security-posture-management",
+    "cloud/azure/networking/private-endpoint-vs-service-endpoint-vs-network-security-perimeter"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $4. Defender for Storage is billed per storage account per month (prorated) plus per GB scanned for malware, so use small test files. Macie automated discovery has a 30-day trial. Guardrail: test the RCP in a sandbox OU only. Teardown: disable Defender for Storage and Macie; detach the RCP; delete the stacks and the resource group.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "edge-and-egress-protection-waf-firewall-ddos",
+   "title": "Edge and egress protection: Application Gateway WAF and Azure Firewall vs AWS WAF and Network Firewall",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Block web attacks at the edge and uncontrolled egress from workloads. Compare the WAF rule models, firewall policy models and DDoS tiers, and understand what each costs per hour. Builds: Azure: Application Gateway WAF_v2 with the default managed rule set, bot protection and custom rate-limit rules in front of the API; Azure Firewall Basic with an FQDN allowlist, enforced by a UDR from the app subnet. AWS: AWS WAF on an ALB with AWS managed rule groups and rate-based rules; AWS Network Firewall with a domain allowlist on the NAT path. DDoS: compare the free platform protection on both (including Shield Standard) with DDoS Network Protection and Shield Advanced (read about them only). A C# and Python attack client sends SQL injection, XSS, path traversal and burst traffic, plus egress to allowed and denied domains, then reads the WAF and firewall logs.",
+   "exams": [
+    "SC-500:D2",
+    "SCS-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "KQL"
+   ],
+   "related_articles": [
+    "cloud/compare/networking/network-protection-azure-firewall-waf-ddos-vs-network-firewall-waf-shield",
+    "cloud/azure/networking/azure-waf-front-door-vs-application-gateway",
+    "cloud/azure/networking/azure-firewall-and-firewall-manager",
+    "cloud/azure/networking/azure-ddos-protection",
+    "cloud/aws/networking/network-security-services-compared",
+    "security/network-security/edge-protection-waf-ddos",
+    "security/network-security/egress-control-and-exfiltration",
+    "security/network-security/firewalls-l3-to-l7",
+    "security/appsec/injection-attacks"
+   ],
+   "deliverables": [],
+   "cost_note": "The most expensive lab per hour: about $1.5 to $2/hr combined. Application Gateway WAF_v2, Azure Firewall Basic and Network Firewall each bill several tenths of a dollar per hour plus data; AWS WAF is about $5 per web ACL per month, prorated, plus rules and requests. Guardrail: a 2-hour window, a budget alert at $10, and the reaper on. NEVER enable DDoS Network Protection (about $2,900/month) or Shield Advanced (a $3,000/month, 1-year commitment) in a lab. Teardown: delete the firewalls first (the largest hourly cost), then the gateways, the web ACLs and the stacks; confirm in the cost report the next day.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "privileged-access-pim-vs-identity-center-temporary-elevation",
+   "title": "Privileged access: Entra PIM and Conditional Access vs IAM Identity Center temporary elevation",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Remove standing admin access on both clouds, with just-in-time elevation, phishing-resistant MFA and break-glass accounts. Then prove the change with a script. Builds: Azure: PIM-eligible Entra roles and Azure resource roles with approval and justification, a Conditional Access authentication strength requiring passkeys for admins, two break-glass accounts excluded and monitored, and access reviews. AWS: IAM Identity Center permission sets with Entra ID as the external identity provider (SCIM provisioning), a temporary elevated access workflow (the open-source TEAM solution), centralized root access management for member accounts, passkey MFA and IAM Access Analyzer unused-access findings. A C# (Microsoft Graph) and Python (boto3) 'standing privilege report' run before and after.",
+   "exams": [
+    "SC-500:D1",
+    "SCS-C03:D4"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (Graph extension where supported)",
+    "CloudFormation",
+    "Terraform (azuread + aws)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/identity/pim-and-identity-governance",
+    "cloud/azure/identity/conditional-access-and-id-protection",
+    "cloud/aws/identity/aws-iam-identity-center",
+    "cloud/compare/identity/privileged-access-and-identity-governance-azure-vs-aws",
+    "cloud/compare/identity/human-identities-entra-vs-iam-identity-center-and-cognito",
+    "security/iam/privileged-access-management-and-jit",
+    "security/iam/passkeys-fido2-webauthn",
+    "cloud/aws/identity/least-privilege-and-access-troubleshooting"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $2. PIM and authentication strengths need Entra ID P2 (or Entra ID Governance), so use a trial in a lab tenant. Identity Center and Access Analyzer external-access findings are free; unused-access analysis is billed per IAM role or user per month. TEAM runs on Amplify and serverless, for pennies. Guardrail: test break-glass sign-in BEFORE enforcing the Conditional Access policy, using report-only mode first. Teardown: remove the TEAM stack and the unused-access analyzer; keep the break-glass pattern documented; let the trial lapse.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "cka-cluster-lifecycle-kubeadm-upgrade-and-etcd",
+   "title": "CKA: build a kubeadm cluster, upgrade it and back up and restore etcd (then compare AKS and EKS upgrades)",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Do the cluster-administrator work that managed services hide, then contrast it with the AKS and EKS upgrade and support models. Builds: A three-node kubeadm cluster on local VMs (Hyper-V or Multipass), or on three small cloud VMs: Azure B2s vs EC2 t3.small. containerd, a CNI (Calico or Cilium), kubeadm init and join, RBAC for a new user with a client certificate, certificate renewal, an etcd snapshot and restore, a control-plane and node minor upgrade with drain and uncordon, and node-maintenance scheduling (taints, tolerations, affinity). Managed contrast: AKS auto-upgrade channels and node OS upgrade channel vs EKS control-plane upgrade, managed node groups or Auto Mode, and EKS extended-support pricing. A C# (KubernetesClient) and Python (kubernetes client) 'pre-upgrade checker' that flags deprecated APIs and PodDisruptionBudgets that block a drain.",
+   "exams": [
+    "CKA:D1",
+    "CKA:D2",
+    "CKA:D5"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (VMs)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (VMs)",
+    "CloudFormation (EC2)",
+    "Terraform",
+    "kubeadm config YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "Bash"
+   ],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-architecture",
+    "devops/kubernetes/cluster-lifecycle-upgrades-and-etcd",
+    "devops/kubernetes/kubernetes-authn-authz-rbac",
+    "devops/kubernetes/scheduling-and-resource-management",
+    "devops/kubernetes/kubernetes-troubleshooting",
+    "devops/bare-metal-linux-hypervisors",
+    "cloud/azure/containers/aks-architecture-and-operating-model",
+    "cloud/aws/containers/amazon-eks-what-aws-adds",
+    "cloud/compare/containers/aks-vs-eks"
+   ],
+   "deliverables": [],
+   "cost_note": "Local: $0. Three cloud VMs for 4 hours: about $1 per cloud. Guardrail: shut the VMs down between sessions (deallocate on Azure; stop on EC2, though EBS keeps billing); expires-on tag. Note that an EKS cluster left on an out-of-standard-support version is charged extended-support rates automatically. Teardown: delete the VMs, disks and public IPs (resource group or stack); delete the local VMs.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "cka-networking-storage-and-troubleshooting-aks-vs-eks",
+   "title": "CKA: networking, storage, autoscaling and break-fix on AKS vs EKS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Practise CKA networking, storage and troubleshooting on managed clusters, where the CNI and CSI differences between AKS and EKS are most visible. Builds: AKS with Azure CNI Overlay powered by Cilium vs EKS with the VPC CNI and prefix delegation. CoreDNS debugging, Services and Gateway API, NetworkPolicies. StorageClasses on Azure Disk and Azure Files vs EBS and EFS CSI, with WaitForFirstConsumer and zone pinning. Autoscaling: HPA, the cluster autoscaler and node auto-provisioning on AKS vs Karpenter and EKS Auto Mode. 12 scripted break-fix scenarios: kubelet stopped, a broken CoreDNS ConfigMap, a pending PVC from a zone mismatch, IP exhaustion, a bad taint, a crashlooping init container, and others. C# and Python test pods probe DNS, service and storage paths.",
+   "exams": [
+    "CKA:D3",
+    "CKA:D4",
+    "CKA:D5"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CDK in C# (EKS)",
+    "Terraform",
+    "Kubernetes YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-networking-and-cni",
+    "devops/kubernetes/services-ingress-and-gateway-api",
+    "devops/kubernetes/kubernetes-storage",
+    "devops/kubernetes/kubernetes-autoscaling",
+    "devops/kubernetes/kubernetes-troubleshooting",
+    "devops/observability/kubernetes-monitoring-and-logging",
+    "cloud/azure/containers/aks-ingress-and-gateway-api",
+    "cloud/aws/containers/amazon-eks-what-aws-adds",
+    "cloud/compare/containers/aks-vs-eks"
+   ],
+   "deliverables": [],
+   "cost_note": "About $2 to $3 for 3 hours: 2 small nodes per cluster, the EKS $0.10/hr control plane, disks and volumes, and load balancers. Guardrail: maximum node count of 3 on the autoscalers; a same-day reaper. Teardown: delete PVCs with the Delete reclaim policy, then the LoadBalancer Services and Gateways, then the clusters; check for orphaned disks, EBS volumes and EFS mount targets.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "cks-cluster-system-hardening-and-runtime-security",
+   "title": "CKS: cluster and system hardening, admission policy and runtime detection on AKS vs EKS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Harden a cluster to CIS level and catch attacks at runtime, comparing the self-managed controls with what AKS and EKS add. Builds: On the kubeadm cluster: a kube-bench CIS scan and fixes, an API server audit policy, minimized RBAC, ServiceAccount token automount disabled, Pod Security Admission set to restricted, seccomp and AppArmor profiles, default-deny NetworkPolicies, immutable containers, a gVisor RuntimeClass for untrusted pods, and Falco rules. AKS: Entra ID RBAC with local accounts disabled, Azure Policy for AKS, workload identity, Defender for Containers. EKS: access entries, EKS Pod Identity, GuardDuty EKS Runtime Monitoring and Kyverno policies. Attack drills: a shell in a container, reading a ServiceAccount token, a pod with hostPath, IMDS access. The C# and Python services are rebuilt to run under the restricted profile.",
+   "exams": [
+    "CKS:D1",
+    "CKS:D2",
+    "CKS:D3",
+    "CKS:D4",
+    "CKS:D6"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (kubeadm)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CDK in C#",
+    "Terraform",
+    "Kubernetes YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-cluster-and-system-hardening",
+    "devops/kubernetes/kubernetes-runtime-security",
+    "devops/kubernetes/kubernetes-security-model",
+    "devops/kubernetes/pod-security-standards-and-security-context",
+    "devops/kubernetes/admission-control-and-policy-engines",
+    "devops/kubernetes/network-policies",
+    "devops/kubernetes/multi-tenancy-and-workload-isolation",
+    "devops/kubernetes/service-mesh-and-pod-to-pod-encryption",
+    "cloud/azure/containers/securing-aks"
+   ],
+   "deliverables": [],
+   "cost_note": "Local: $0. Managed clusters for 3 hours: about $2 to $3, plus the Defender for Containers and GuardDuty Runtime Monitoring trials. Teardown: disable the Defender for Containers plan and GuardDuty Runtime Monitoring (the latter deploys an EKS add-on and VPC endpoints); delete the clusters; delete the resource groups and stacks.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "cks-supply-chain-sign-sbom-and-verify",
+   "title": "CKS supply chain: SBOMs, scanning, signing and admission verification for ACR and AKS vs ECR and EKS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Build images with provenance, sign them, and make the clusters refuse anything unsigned or vulnerable. Compare Notation with Key Vault against Notation with AWS Signer. Builds: GitHub Actions builds the C# and Python images with a CycloneDX SBOM (Syft), a Trivy scan with a severity gate, and GitHub artifact attestations (SLSA provenance). Signing: cosign keyless (Sigstore) and Notation with the Azure Key Vault plugin pushed to ACR, vs Notation with AWS Signer pushed to ECR. Enforcement: Ratify or Kyverno verifyImages on AKS vs Kyverno on EKS, both requiring a valid signature, an attached SBOM and no critical CVEs. Dependency hygiene: NuGet lock files, central package management and package source mapping; pip hash-checking mode. Break it: deploy an unsigned image and an image whose digest was swapped after signing.",
+   "exams": [
+    "CKS:D5",
+    "SCS-C03:D3",
+    "SC-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform",
+    "GitHub Actions YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-supply-chain-security",
+    "security/supply-chain/sbom-spdx-vs-cyclonedx",
+    "security/supply-chain/artifact-signing-sigstore-vs-key-based",
+    "security/supply-chain/slsa-provenance-and-attestations",
+    "security/supply-chain/software-supply-chain-threats",
+    "security/supply-chain/dependency-hygiene-nuget-npm-pypi",
+    "security/supply-chain/vex-and-exploitability",
+    "cloud/aws/security-services/software-supply-chain-on-aws"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $3. AWS Signer is billed per signature (cents); Key Vault is billed per operation; GitHub Actions minutes are free for public repositories. Reuse the CKS clusters within the same session. Teardown: delete the signing profiles (revoke them first, if they were used in a shared registry), the Key Vault certificate, the registries and the clusters.",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "multi-region-failover-front-door-vs-route-53",
+   "title": "Multi-region active/passive failover with chaos testing: Front Door vs Route 53, and Chaos Studio vs FIS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Measure, rather than assume, the RTO and RPO of a two-region design on both clouds, and test it with fault injection. Builds: Azure: Front Door Standard with health probes and priority routing to Container Apps in two regions, PostgreSQL flexible server with a geo-replica (promoted during the test), and Blob GZRS. AWS: Route 53 failover records with health checks, or CloudFront origin failover, to ECS Fargate in two regions, an RDS cross-region read replica (promoted), and S3 CRR. Faults: Azure Chaos Studio experiments vs AWS FIS (stop tasks, network disruption, AZ power interruption scenario). A C# and Python synthetic probe measures RTO from the client's side and records the last committed write to measure RPO. Compare static stability: what still works when the control plane is degraded.",
+   "exams": [
+    "AZ-305:D3",
+    "AZ-305:D4",
+    "SAP-C03:D2",
+    "SAP-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "architecture/reliability/multi-az-multi-region-failover-topologies",
+    "architecture/reliability/rto-rpo-dr-strategies",
+    "architecture/reliability/chaos-engineering-resilience-testing",
+    "architecture/reliability/fault-isolation-blast-radius-static-stability",
+    "cloud/compare/networking/front-door-vs-cloudfront-and-global-accelerator",
+    "cloud/compare/networking/azure-dns-vs-route-53",
+    "cloud/compare/storage-data/relational-high-availability-replicas-and-dr-azure-vs-aws",
+    "cloud/compare/resilience-migration/backup-and-disaster-recovery-azure-vs-aws",
+    "cloud/aws/iac-devops/resilience-tooling-on-aws",
+    "devops/sre/chaos-engineering-and-game-days"
+   ],
+   "deliverables": [],
+   "cost_note": "About $4 to $8 for a 3 to 4 hour session. The Front Door Standard base fee is prorated hourly; there are two copies of compute, database and replica; Route 53 health checks are under $1/month; FIS is billed per action-minute. Guardrail: do NOT create Route 53 ARC routing-control clusters for this lab (they bill per hour continuously); Aurora Global Database is not needed. Teardown: delete the replicas, then the primaries, in both regions; delete both regional stacks and resource groups; delete the Front Door profile and the health checks.",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "landing-zone-in-a-sandbox-alz-vs-control-tower",
+   "title": "Landing zone in a sandbox: Azure Landing Zones (Azure Verified Modules) vs AWS Control Tower and Account Factory for Terraform",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Deploy a real enterprise landing zone in a throwaway tenant and organization, vend a workload subscription and a workload account into it, and compare the hierarchy, guardrails and vending models. Builds: Azure: the Azure Landing Zones platform deployed from Azure Verified Modules (Bicep accelerator or Terraform): the management group hierarchy, ALZ policy initiatives, a central Log Analytics workspace and a minimal connectivity hub, with the firewall, DDoS and gateways turned OFF. Subscription vending with a C# or Python function calling the subscription alias API. AWS: Control Tower with OUs, mandatory and elective controls (preventive SCPs, detective Config rules, proactive CloudFormation Hooks), and account vending with Account Factory for Terraform; a Python or C# vending request generator. Deploy the containers-in-production workload into each. Break it: try to deploy to a disallowed region from the vended subscription and account.",
+   "exams": [
+    "AZ-305:D1",
+    "SAP-C03:D1",
+    "SC-100:D3",
+    "SCS-C03:D6"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (Azure Verified Modules)",
+    "Terraform (ALZ + AFT)",
+    "CloudFormation (Control Tower customizations)"
+   ],
+   "languages": [
+    "C#",
+    "Python"
+   ],
+   "related_articles": [
+    "cloud/azure/governance/azure-landing-zones",
+    "cloud/aws/governance/aws-control-tower-and-landing-zones",
+    "cloud/compare/governance/landing-zones-azure-landing-zones-vs-control-tower",
+    "cloud/compare/governance/resource-hierarchy-management-groups-subscriptions-vs-organizations-accounts",
+    "cloud/aws/governance/aws-multi-account-strategy",
+    "cloud/azure/governance/azure-policy-as-code-at-scale",
+    "cloud/azure/governance/managing-azure-subscriptions",
+    "cloud/aws/governance/organization-guardrails-and-security-baseline",
+    "security/cloud-security/landing-zone-security-baseline",
+    "cloud/azure/governance/case-study-dotnet-workload-in-alz"
+   ],
+   "deliverables": [],
+   "cost_note": "About $5 to $20 for the week you keep it. Control Tower itself is free, but Config, CloudTrail and enrolled-account controls bill per account. On Azure, the ALZ defaults can enable expensive items: set the DDoS plan, Azure Firewall, VPN and ExpressRoute gateways and Defender plans to disabled before deploying (a DDoS plan alone is about $2,900/month). Use a dedicated Entra tenant and a dedicated AWS organization; never your real ones. Teardown: decommission the landing zone in Control Tower and close the vended accounts (closed accounts stay suspended for 90 days and count against closure quotas); delete the ALZ deployment stacks with deleteAll and remove the management groups.",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "migration-rehost-and-replatform-azure-migrate-vs-mgn",
+   "title": "Migrate a server workload: Azure Migrate vs AWS Application Migration Service and AWS Transform",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Discover, assess, rehost and then replatform a small 'on-prem' .NET and PostgreSQL workload on both clouds, and compare the tooling and the decision points of the 7Rs. Builds: Source: a local Hyper-V or VirtualBox VM (or a 'fake datacenter' VNet or VPC) running an ASP.NET app and PostgreSQL. Azure: Azure Migrate discovery and assessment (sizing, cost and readiness), server migration with replication and a test migration, and the Azure Database Migration Service for PostgreSQL. AWS: discovery with AWS Transform (or the Migration Evaluator), rehost with AWS Application Migration Service (replication, test and cutover launch), and AWS DMS Serverless for the database. Replatform: move the app into Container Apps vs ECS, using GitHub Copilot app modernization vs AWS Transform for .NET as the assisted path. A C# and Python cutover verifier checks row counts, checksums and endpoint health.",
+   "exams": [
+    "SAP-C03:D4",
+    "AZ-305:D4",
+    "AZ-305:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "local (Hyper-V or VirtualBox)",
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "SQL"
+   ],
+   "related_articles": [
+    "cloud/compare/resilience-migration/migration-azure-migrate-vs-aws-transform-and-mgn",
+    "cloud/azure/compute/azure-migrate-for-servers",
+    "architecture/migration/migration-strategies",
+    "architecture/migration/portfolio-discovery-and-assessment",
+    "architecture/migration/wave-planning-and-cutover",
+    "architecture/migration/data-and-database-migration",
+    "architecture/migration/modernization-pathways",
+    "cloud/aws/storage-data/moving-data-into-aws",
+    "cloud/azure/storage-data/moving-and-migrating-data-to-azure"
+   ],
+   "deliverables": [],
+   "cost_note": "About $5 to $10. MGN is free for 90 days per source server, but its replication servers, staging EBS and test instances bill hourly; Azure Migrate is free, but replication storage, snapshots and test VMs bill; DMS Serverless bills per capacity-unit hour. Guardrail: one source server, test migrations torn down immediately, and a 48-hour total window. Teardown: stop replication (MGN: mark as archived and disconnect; Azure: stop replication), delete the staging resources, DMS replications and the migration projects, then the resource groups and stacks.",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "focus-cost-exports-showback-and-optimization",
+   "title": "FinOps hands-on: FOCUS cost exports, showback and optimization on Azure and AWS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Get cost data from both clouds in one open schema (FOCUS), allocate it by tag, compute a unit cost, and act on rightsizing and commitment recommendations. Builds: Azure Cost Management FOCUS exports to a storage account; AWS Data Exports (FOCUS) to S3. Both loaded into one DuckDB model by a Python notebook and a C# console app. Tag-based showback per lab and per capstone, with untagged cost surfaced as a KPI; a unit-cost metric (cost per 1,000 API calls or per agent task) using telemetry from the observability lab. Optimization inputs: Azure Advisor vs AWS Compute Optimizer and Cost Optimization Hub recommendations, savings plan and reservation recommendations compared on both, and anomaly alerts. Output: a one-page monthly showback report.",
+   "exams": [
+    "SAP-C03:D3",
+    "AZ-305:D4",
+    "SAP-C03:D2"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "SQL"
+   ],
+   "related_articles": [
+    "architecture/cost/understanding-usage-and-cost-with-focus",
+    "architecture/cost/cost-allocation-showback-chargeback",
+    "architecture/cost/unit-economics-and-business-value",
+    "architecture/cost/usage-optimization",
+    "architecture/cost/commitment-discounts-and-rate-optimization",
+    "cloud/aws/cost/aws-cost-visibility-and-allocation",
+    "cloud/aws/cost/aws-rightsizing-and-cost-optimization",
+    "cloud/azure/cost/finops-tooling-on-azure",
+    "cloud/azure/cost/azure-cost-management-and-billing",
+    "cloud/compare/cost/cost-management-and-pricing-models-azure-vs-aws"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $1. The exports are free, storage costs pennies and DuckDB runs locally. Compute Optimizer's default recommendations are free. Guardrail: do NOT purchase any savings plan or reservation; read the recommendations only. Teardown: delete the export definitions (or keep them; they are useful), the export bucket and the storage container.",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "terraform-one-workload-two-clouds",
+   "title": "Terraform: one workload, two clouds, remote state, modules, tests and drift",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Cover the TA-004 objectives by deploying the same small workload (container app, storage, identity) to both clouds with Terraform, and learn where provider differences leak through the abstraction. Builds: Root modules per environment with reusable child modules for azurerm and azapi, and for aws. Remote state in Azure Storage (blob-lease locking) and in S3 (native lockfile locking; DynamoDB locking is deprecated). Workspaces vs a directory per environment. import blocks, moved and removed blocks, refresh-only plans for drift, terraform test with mocked providers, check blocks, variable validation, ephemeral values and write-only arguments for secrets, lifecycle rules, and HCP Terraform (free tier) with VCS-driven runs, compared with OpenTofu. The workload code is the C# and Python API from earlier labs; a Python script parses plan JSON to produce a cost and risk summary. Break it: manual console change, then detect and reconcile the drift.",
+   "exams": [
+    "TA-004:D1",
+    "TA-004:D2",
+    "TA-004:D3",
+    "TA-004:D4",
+    "TA-004:D5",
+    "TA-004:D6",
+    "TA-004:D7",
+    "TA-004:D8"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Terraform",
+    "OpenTofu (comparison)",
+    "Bicep and CloudFormation (equivalence check)"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "HCL"
+   ],
+   "related_articles": [
+    "devops/iac/iac-fundamentals",
+    "devops/iac/terraform-language-and-workflow",
+    "devops/iac/terraform-state-and-backends",
+    "devops/iac/terraform-modules-and-environments",
+    "devops/iac/terraform-vs-opentofu",
+    "devops/iac/hcp-terraform-and-iac-pipelines",
+    "cloud/compare/iac-devops/terraform-on-azure-vs-terraform-on-aws",
+    "cloud/aws/iac-devops/terraform-on-aws",
+    "cloud/compare/iac-devops/bicep-arm-vs-cloudformation-cdk"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0 to $1. The workload is small; the HCP Terraform free tier covers a sandbox organization; state buckets and containers cost pennies. Guardrail: state stored with versioning and encryption; no secrets in state (use ephemeral and write-only values). Teardown: terraform destroy in both environments, then delete the state buckets and containers last (empty all S3 object versions first).",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "policy-as-code-and-continuous-compliance-evidence",
+   "title": "Policy as code and continuous compliance evidence across Azure and AWS",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Shift guardrails left into CI and right into continuous monitoring, and produce audit evidence that an assessor could use, mapped to vendor-neutral control frameworks. Builds: CI: Checkov and Trivy config scans plus OPA and Conftest policies over Bicep (ARM JSON), CloudFormation and Terraform plan JSON, with HCP Terraform policy sets as the run-time gate. Runtime: an Azure Policy regulatory-compliance initiative (for example ISO 27001 or the CIS benchmark) vs AWS Config conformance packs and Security Hub standards; Audit Manager for evidence. A C# and Python evidence collector exports compliance state on a schedule to an immutable store (Blob with an unlocked immutability policy; S3 Object Lock in governance mode), with SHA-256 manifests and mapping to CSA Cloud Controls Matrix and ISO 27001 Annex A control IDs.",
+   "exams": [
+    "CCSK:D2",
+    "CCSK:D3",
+    "CCSP:D6",
+    "CISSP:D6",
+    "TA-004:D7"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep",
+    "CloudFormation",
+    "Terraform",
+    "Rego (OPA)"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "Rego"
+   ],
+   "related_articles": [
+    "devops/iac/policy-as-code-for-infrastructure",
+    "security/grc/compliance-as-code-and-audit-evidence",
+    "security/grc/control-frameworks-crosswalk",
+    "security/grc/cloud-audit-and-assurance",
+    "cloud/compare/security-services/compliance-evidence-and-audit-azure-vs-aws",
+    "security/cloud-security/preventive-vs-detective-guardrails",
+    "cloud/azure/iac-devops/testing-and-validating-iac",
+    "cloud/aws/governance/aws-config-compliance"
+   ],
+   "deliverables": [],
+   "cost_note": "About $1 to $3. Config conformance-pack evaluations and Audit Manager assessments bill per evaluation or resource; Azure Policy compliance is free. Guardrail: limit Config recording to the lab account and the resource types in scope. Teardown: delete the conformance packs and Audit Manager assessments, stop the Config recorder, remove the policy assignments; evidence stores with 1-day retention can then be emptied and deleted.",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "secretless-pipelines-oidc-github-actions-to-azure-and-aws",
+   "title": "Secretless delivery: GitHub Actions OIDC to Azure and AWS, with hardened workflows",
+   "type": "lab",
+   "level": "practitioner",
+   "folder": "practice/labs",
+   "scope": "Deploy to both clouds from CI with no stored cloud credentials. Scope the trust tightly, harden the workflow itself, and compare the Azure Pipelines model. Builds: GitHub Actions OIDC federation to an Entra workload identity (a federated credential bound to repository, environment and branch subject claims) and to an AWS IAM role (OIDC provider with sub and aud conditions). Least-privilege deploy roles; environment protection rules with required reviewers; deployment of a Bicep deployment stack and a CloudFormation change set (or CDK). Workflow hardening: actions pinned by commit SHA, a minimal permissions block, no pull_request_target with checkout of untrusted code, egress auditing on runners, Dependabot for actions, and secret scanning with push protection. Contrast: an Azure Pipelines workload-identity service connection. A C# and Python smoke-test step verifies the deployment through the same federated identity. Break it: a wildcard subject claim that lets a feature branch deploy to production.",
+   "exams": [
+    "CISSP:D8",
+    "CCSP:D4",
+    "CCSK:D10",
+    "TA-004:D8"
+   ],
+   "clusters": [],
+   "clouds": [
+    "azure",
+    "aws"
+   ],
+   "iac": [
+    "Bicep (deployment stacks)",
+    "CloudFormation (change sets) or CDK",
+    "Terraform",
+    "GitHub Actions YAML"
+   ],
+   "languages": [
+    "C#",
+    "Python",
+    "YAML"
+   ],
+   "related_articles": [
+    "devops/ci-cd/oidc-federation-from-ci-to-azure-and-aws",
+    "devops/ci-cd/github-actions-security-hardening",
+    "devops/ci-cd/github-actions-fundamentals",
+    "cloud/azure/identity/workload-identity-federation-on-azure",
+    "cloud/azure/iac-devops/pipeline-identity-and-secrets-for-azure",
+    "cloud/azure/iac-devops/deployment-stacks-vs-template-specs",
+    "cloud/aws/iac-devops/aws-cloudformation-in-depth",
+    "cloud/compare/iac-devops/delivery-pipelines-and-artifacts-azure-vs-aws",
+    "security/appsec/secrets-detection-and-hygiene",
+    "devops/ci-cd/deployment-strategies"
+   ],
+   "deliverables": [],
+   "cost_note": "About $0. GitHub-hosted runners are free for public repositories (private repositories have a monthly minute allowance); the deployed workload is the tiny API. Teardown: delete the federated credentials and the OIDC role (and the OIDC provider, if unused), the deployment stack (deleteAll) and the stack.",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "kata-shared-responsibility-for-a-clinic-booking-app",
+   "title": "Kata: service models and shared responsibility for a clinic booking app",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A 30-person physiotherapy clinic runs an Angular booking site, a .NET API and PostgreSQL on one ageing on-prem server. Patient data must stay in-country, the budget is $300/month, and nobody on staff is an operations engineer. Propose IaaS, PaaS and SaaS options on Azure and on AWS, and say who is responsible for what in each.",
+   "exams": [
+    "CLF-C02:D1",
+    "CLF-C02:D2",
+    "CLF-C02:D4",
+    "SC-900:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "cloud/foundations/shared-responsibility-model",
+    "cloud/foundations/cloud-service-and-deployment-models",
+    "cloud/foundations/cloud-benefits",
+    "cloud/foundations/cloud-pricing-models-and-commitments",
+    "cloud/foundations/global-infrastructure-regions-zones-edge-sovereign",
+    "security/foundations/cia-triad-aaa-non-repudiation",
+    "architecture/practice/architecture-decision-records"
+   ],
+   "deliverables": [
+    "Service-model decision table (IaaS vs PaaS vs SaaS per component) for both clouds",
+    "Shared-responsibility matrix per option (customer vs provider, per control area)",
+    "Two pricing-calculator estimates with stated assumptions",
+    "Region choice justified against data residency and availability-zone needs",
+    "One ADR choosing the option, with a 'what would change my mind' section",
+    "Self-assessment against the rubric; model answer revealed afterwards"
+   ],
+   "cost_note": "",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "kata-pick-the-right-ai-technique",
+   "title": "Kata: choose the right AI technique for five business problems",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A brokerage has five asks: flag suspicious trades, extract clauses from broker contracts, answer staff questions over policy PDFs, forecast weekly support volume, and moderate user-uploaded images. For each, choose rules, classic ML (and which task), a prebuilt AI service, prompting an LLM, RAG, fine-tuning or an agent. Then map the choice to Azure and AWS services, with a fidelity rating.",
+   "exams": [
+    "AIF-C01:D1",
+    "AIF-C01:D2",
+    "AIF-C01:D3",
+    "AIF-C01:D4",
+    "AI-901:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "ai/foundations/learning-paradigms-and-ml-tasks",
+    "ai/foundations/ai-workloads",
+    "ai/foundations/ml-evaluation-metrics",
+    "ai/foundations/responsible-ai-principles",
+    "ai/foundations/explainability-fairness-and-bias",
+    "ai/foundations/model-families-and-selection",
+    "ai/applied/customization-decision-framework",
+    "ai/agents/agents-vs-workflows",
+    "cloud/azure/ai-services-overview/azure-ai-services-orientation",
+    "cloud/aws/ai-services-overview/aws-ai-services-orientation"
+   ],
+   "deliverables": [
+    "Decision matrix with the chosen technique and the rejected alternatives per problem",
+    "Learning paradigm and ML task named per problem, with an evaluation metric and target",
+    "Responsible-AI risk notes (fairness, transparency, privacy, safety) and mitigations",
+    "Azure-to-AWS service map with fidelity ratings (exact, close, partial, none)",
+    "Short cost-and-effort comparison"
+   ],
+   "cost_note": "",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "kata-resilient-cost-aware-three-tier-on-both-clouds",
+   "title": "Kata: a resilient, cost-aware three-tier app on Azure and on AWS",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A B2B portal needs a 99.9% SLO, RPO of 15 minutes and RTO of 1 hour, EU-only data, and copes with 10x traffic at month-end, all within $1,500/month. Design it on Azure and on AWS (compute, load balancing, database HA, storage tiers, caching, backup, network segmentation). Then cut 30% of the cost without breaking the SLO.",
+   "exams": [
+    "SAA-C03:D2",
+    "SAA-C03:D3",
+    "SAA-C03:D4",
+    "AZ-104:D3",
+    "AZ-104:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/reliability/sla-slo-sli-error-budgets",
+    "architecture/reliability/rto-rpo-dr-strategies",
+    "architecture/reliability/failure-mode-analysis-and-health-modeling",
+    "cloud/azure/compute/compute-decision-guide-vms-containers-serverless",
+    "cloud/aws/compute/choosing-aws-compute",
+    "cloud/foundations/availability-scalability-elasticity-and-slas",
+    "cloud/aws/cost/aws-purchasing-models-savings-plans-ri-spot",
+    "cloud/azure/cost/azure-commitment-discounts-compared",
+    "cloud/compare/cost/cost-management-and-pricing-models-azure-vs-aws",
+    "cloud/compare/rosetta"
+   ],
+   "deliverables": [
+    "Architecture diagram per cloud",
+    "Composite SLA calculation and failure-mode table",
+    "Cost estimate per cloud before and after the 30% cut, including a commitment decision (savings plan vs reservation)",
+    "ADR for the compute platform choice",
+    "List of the exam-style trade-offs encountered, each mapped to an objective"
+   ],
+   "cost_note": "",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "kata-messaging-backbone-for-orders-and-market-events",
+   "title": "Kata: a messaging backbone for orders, market ticks and partner webhooks",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "Orders need ordered processing per account and exactly-once effects. Order events fan out to 5 consumers. Market ticks arrive at 50k/s and must be replayable for 7 days. Partners receive signed webhooks. Choose a service per flow from Service Bus, Event Grid, Event Hubs and Azure Managed Redis Streams on Azure, and SQS, SNS, EventBridge, Kinesis, MSK and ElastiCache on AWS. Design idempotency, dead-lettering and schema evolution.",
+   "exams": [
+    "AI-200:D3",
+    "SAA-C03:D2",
+    "SAA-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "cloud/azure/serverless-integration/azure-messaging-services-compared",
+    "cloud/aws/serverless-integration/choosing-aws-messaging-services",
+    "cloud/compare/messaging/service-bus-vs-sqs-sns-and-amazon-mq",
+    "cloud/compare/messaging/event-hubs-vs-kinesis-and-msk",
+    "architecture/patterns/messages-vs-events-vs-streams",
+    "messaging/eventing/queues-topics-and-streams",
+    "messaging/eventing/delivery-semantics",
+    "messaging/eventing/outbox-pattern",
+    "messaging/eventing/message-contracts-and-schema-evolution",
+    "messaging/apis/webhooks"
+   ],
+   "deliverables": [
+    "Flow-by-flow selection matrix with delivery semantics, ordering and retention",
+    "Sequence diagrams for outbox plus idempotent consumer",
+    "Schema-versioning and compatibility policy",
+    "Throughput and cost estimate per flow on both clouds",
+    "False-friend notes (Service Bus sessions vs SQS FIFO message groups; Event Grid vs EventBridge)"
+   ],
+   "cost_note": "",
+   "wave": "2b",
+   "exists": false
+  },
+  {
+   "slug": "kata-agentic-customer-service-design",
+   "title": "Kata: agentic customer service on Foundry or AgentCore",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "An insurer wants agents to handle claim status, policy questions and refunds up to $500 autonomously, with human approval above that, over chat and voice. Choose a topology (workflow, single agent with tools, or orchestrator with specialists), memory, human-in-the-loop points, the evaluation plan and the platform (Foundry Agent Service vs Bedrock AgentCore), and estimate the cost per conversation.",
+   "exams": [
+    "AI-500:D1",
+    "AI-500:D3",
+    "AIP-C01:D2",
+    "AIP-C01:D4",
+    "AI-103:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "ai/platforms/case-study-customer-service-agents",
+    "ai/agents/agents-vs-workflows",
+    "ai/agents/patterns/multi-agent-topologies",
+    "ai/agents/human-in-the-loop-patterns",
+    "ai/agents/context-engineering",
+    "ai/agents/voice-agents",
+    "ai/agents/agentops/agent-cost-model",
+    "ai/agents/agentops/agent-evaluation",
+    "ai/platforms/agent-platform-selection",
+    "cloud/compare/ai-platforms/foundry-agent-service-vs-bedrock-agentcore"
+   ],
+   "deliverables": [
+    "C4 container diagram",
+    "Agents-vs-workflows decision record",
+    "Tool catalog with input schemas, side effects and required scopes",
+    "Evaluation plan with task-success, groundedness and safety metrics and their thresholds",
+    "Cost model per 1,000 conversations on both platforms",
+    "Platform-selection ADR with a portability exit plan"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "kata-multitenant-rag-for-regulated-documents",
+   "title": "Kata: multitenant RAG for regulated legal documents",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A SaaS platform serves 200 law firms. Each firm's documents carry matter-level ACLs, some tenants require EU residency and others US, every answer must cite sources, and customer data must never train models. Design ingestion, the index tenancy model (index per tenant vs shared with filters), security trimming, residency, evaluation and cost per tenant on both clouds.",
+   "exams": [
+    "AIP-C01:D1",
+    "AIP-C01:D3",
+    "AI-103:D5",
+    "AI-200:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "ai/applied/multitenant-genai-architecture",
+    "ai/applied/advanced-rag-patterns",
+    "ai/applied/graphrag",
+    "security/ai-security/securing-rag-and-vector-stores",
+    "ai/platforms/ai-data-residency",
+    "architecture/patterns/multitenancy-tenancy-models",
+    "architecture/data-architecture/vector-stores-architecture",
+    "cloud/compare/storage-data/vector-stores-for-rag-and-agents-azure-vs-aws",
+    "ai/evaluation-ops/rag-evaluation"
+   ],
+   "deliverables": [
+    "Tenancy-model ADR (silo vs pool vs bridge for indexes and models)",
+    "Data-flow diagram with trust boundaries",
+    "Retrieval design: hybrid search, reranking and ACL filters",
+    "Residency map per cloud, including model inference location",
+    "RAG evaluation plan and the cost per tenant per month"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "kata-enterprise-mcp-tool-platform",
+   "title": "Kata: an enterprise MCP tool platform for 40 teams",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "Forty internal teams want to publish MCP servers for agents across Copilot Studio, Foundry and AgentCore. Design the registry, the gateway (API Management vs AgentCore Gateway), the authorization model and consent, versioning and deprecation, observability and audit, sandboxing for code-execution tools, and guidance on local (stdio) vs remote servers.",
+   "exams": [
+    "MCPA:D2",
+    "MCPA:D4",
+    "MCPA:D5",
+    "AI-500:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "ai/protocols/agent-and-tool-registries",
+    "ai/protocols/mcp-authorization",
+    "ai/protocols/mcp-extensions",
+    "ai/protocols/agent-protocol-layers",
+    "ai/protocols/agents-md-vs-agent-skills",
+    "security/ai-security/mcp-security",
+    "ai/agents/agentops/agent-governance-and-lifecycle",
+    "ai/agents/agentops/agent-sandboxes",
+    "ai/platforms/managed-agent-platform-anatomy"
+   ],
+   "deliverables": [
+    "Reference architecture diagram",
+    "Server onboarding checklist and minimum security bar",
+    "Authorization matrix (scopes per tool; user-delegated vs agent-autonomous)",
+    "Audit-log schema mapped to the MCPA auditability objectives",
+    "Gateway ADR",
+    "Abuse and failure scenarios with the mitigations for each"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "kata-zero-trust-identity-for-people-and-workloads",
+   "title": "Kata: Zero Trust identity for a hybrid workforce and its workloads",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "2,000 staff with on-prem AD, contractors, Microsoft 365, workloads on Azure and AWS, and CI pipelines that still use stored keys. Design the identity architecture: hybrid sync, Entra ID as the identity provider for IAM Identity Center, phishing-resistant MFA, PIM and just-in-time elevation, workload identity federation, break-glass, and an inventory of non-human identities.",
+   "exams": [
+    "SC-500:D1",
+    "SCS-C03:D4",
+    "SC-100:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/iam/identity-architecture-patterns",
+    "security/foundations/zero-trust-architecture",
+    "cloud/compare/identity/identity-model-entra-tenant-vs-aws-account-and-iam",
+    "cloud/compare/identity/human-identities-entra-vs-iam-identity-center-and-cognito",
+    "cloud/azure/identity/hybrid-identity-connect-sync-cloud-sync-and-domain-services",
+    "security/iam/sso-and-federation-saml-vs-oidc",
+    "security/iam/privileged-access-management-and-jit",
+    "security/iam/non-human-identity-and-agent-delegation",
+    "security/iam/account-recovery-and-credential-bootstrapping"
+   ],
+   "deliverables": [
+    "Identity architecture diagram across both clouds",
+    "Access-policy matrix (Conditional Access policies and permission sets)",
+    "Privileged-access model with break-glass procedure",
+    "Non-human identity inventory and lifecycle (including agents)",
+    "90-day plan to retire passwords and long-lived keys"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "kata-multi-tenant-kubernetes-platform",
+   "title": "Kata: a shared Kubernetes platform on AKS and EKS for 12 teams",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A platform team offers shared AKS and EKS clusters to 12 product teams; one team runs untrusted customer code. Design the tenancy model (namespaces, virtual clusters or dedicated clusters), RBAC, the admission policy catalog, network isolation, supply-chain gates, runtime detection, the sandboxing choice for untrusted code, and the upgrade strategy.",
+   "exams": [
+    "CKS:D1",
+    "CKS:D2",
+    "CKS:D4",
+    "CKA:D1",
+    "CKA:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "devops/kubernetes/multi-tenancy-and-workload-isolation",
+    "devops/kubernetes/admission-control-and-policy-engines",
+    "devops/kubernetes/kubernetes-cluster-and-system-hardening",
+    "devops/kubernetes/kubernetes-security-model",
+    "devops/kubernetes/cluster-lifecycle-upgrades-and-etcd",
+    "devops/platform-engineering-and-internal-developer-platforms",
+    "security/cloud-security/isolation-and-multi-tenancy",
+    "cloud/compare/containers/aks-vs-eks"
+   ],
+   "deliverables": [
+    "Tenancy decision record",
+    "Policy catalog (Kyverno or ValidatingAdmissionPolicy) mapped to Pod Security Standards and CIS controls",
+    "Network isolation design",
+    "Upgrade and rollback runbook for both clusters",
+    "Sandboxing ADR (gVisor vs Kata Containers vs separate node pools)"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "kata-mission-critical-multi-region-design",
+   "title": "Kata: a mission-critical payments API, active-active on each cloud",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A payments API needs 99.99% availability, RPO near zero for the ledger, RTO of 5 minutes and active-active operation in two regions, designed separately on Azure and on AWS. Use deployment stamps or cells, decide the data-consistency model, and quantify the cost of resilience.",
+   "exams": [
+    "AZ-305:D3",
+    "AZ-305:D4",
+    "SAP-C03:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/reliability/mission-critical-multi-region-case-study",
+    "architecture/patterns/cell-based-architecture-and-deployment-stamps",
+    "architecture/reliability/multi-region-vs-multi-cloud-resilience",
+    "architecture/reliability/fault-isolation-blast-radius-static-stability",
+    "architecture/reliability/failure-mode-analysis-and-health-modeling",
+    "architecture/distributed-systems/cap-vs-pacelc",
+    "architecture/well-architected/well-architected-pillar-trade-offs",
+    "cloud/compare/storage-data/relational-high-availability-replicas-and-dr-azure-vs-aws"
+   ],
+   "deliverables": [
+    "C4 container diagram per cloud",
+    "Health model and failure-mode analysis",
+    "Consistency ADR (synchronous vs asynchronous replication; PACELC reasoning)",
+    "Failover and failback runbook",
+    "Cost delta vs a single-region design",
+    "Reliability-pillar review against both Well-Architected frameworks"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "kata-migration-portfolio-and-wave-plan",
+   "title": "Kata: a datacenter exit in 14 months on Azure or AWS",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "180 VMs: Windows with .NET Framework, SQL Server, Linux Java and a VMware cluster, with the datacenter lease ending in 14 months. Apply the 7Rs, plan the waves, check landing-zone readiness, decide licensing (Azure Hybrid Benefit vs AWS licence-included or BYOL), migrate the databases, and plan cutover. Produce a business case for each cloud.",
+   "exams": [
+    "SAP-C03:D4",
+    "SAP-C03:D1",
+    "AZ-305:D4",
+    "AZ-305:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/migration/migration-strategies",
+    "architecture/migration/portfolio-discovery-and-assessment",
+    "architecture/migration/wave-planning-and-cutover",
+    "architecture/migration/vmware-estate-migration",
+    "architecture/migration/migration-target-platform-selection",
+    "architecture/migration/data-and-database-migration",
+    "architecture/cost/tco-and-cloud-business-case",
+    "architecture/cost/licensing-and-saas-cost-management",
+    "cloud/compare/resilience-migration/migration-azure-migrate-vs-aws-transform-and-mgn"
+   ],
+   "deliverables": [
+    "Portfolio disposition table (7Rs, with rationale)",
+    "Wave plan with dependencies and move groups",
+    "TCO and business case for both clouds",
+    "Risk register",
+    "Cutover runbook for one wave",
+    "Target-platform ADR"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "kata-security-architecture-for-a-regulated-fintech",
+   "title": "Kata: security architecture for a regulated fintech on Azure and AWS",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "An EU fintech in scope of DORA runs primarily on Azure, with analytics on AWS and growing use of AI agents. Design its security strategy using the Microsoft Cybersecurity Reference Architectures, the Microsoft cloud security benchmark and the Zero Trust Rapid Modernization Plan, cover security operations across both clouds, and plan for data protection, ransomware resilience and AI security.",
+   "exams": [
+    "SC-100:D1",
+    "SC-100:D2",
+    "SC-100:D3",
+    "SC-100:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/foundations/security-architecture-frameworks",
+    "security/cloud-security/using-security-reference-architectures",
+    "security/cloud-security/multi-cloud-security-architecture",
+    "security/cloud-security/cloud-security-architecture-review",
+    "security/data-protection/ransomware-resilience-strategy",
+    "security/detection-response/soc-operating-model-and-metrics",
+    "security/grc/dora-vs-nis2",
+    "cloud/compare/security-services/sentinel-vs-security-lake-and-siem-on-aws"
+   ],
+   "deliverables": [
+    "Security capability map and gap analysis",
+    "Prioritized 12-month roadmap",
+    "Reference architecture with controls placed per layer",
+    "SOC design (Sentinel with AWS data sources, or a Security Lake alternative)",
+    "Ransomware resiliency plan",
+    "Regulatory mapping (DORA, NIS2, GDPR)"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "kata-togaf-adm-for-a-multicloud-transformation",
+   "title": "Kata: apply the TOGAF ADM to a multicloud transformation",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A mid-size insurer wants to consolidate three policy-administration systems and adopt Azure and AWS under one architecture programme. First establish the context: why enterprise architecture, the Preliminary Phase, principles and the architecture repository. Then run the TOGAF ADM from Phase A to F, set up Phase G implementation governance, and handle a Phase H change request (a new regulation forcing data residency), with requirements management running throughout.",
+   "exams": [
+    "OGEA-101:D1",
+    "OGEA-101:D2",
+    "OGEA-101:D3",
+    "OGEA-101:D4",
+    "OGEA-101:D5",
+    "OGEA-101:D6",
+    "OGEA-102:D1",
+    "OGEA-102:D2",
+    "OGEA-102:D3",
+    "OGEA-102:D4",
+    "OGEA-102:D5",
+    "OGEA-102:D6",
+    "OGEA-102:D7",
+    "OGEA-102:D8"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/enterprise/togaf-adm",
+    "architecture/enterprise/togaf-adm-phases-a-to-d-in-practice",
+    "architecture/enterprise/togaf-adm-phases-e-to-h-in-practice",
+    "architecture/enterprise/togaf-adm-techniques",
+    "architecture/enterprise/togaf-architecture-content-and-repository",
+    "architecture/enterprise/business-capabilities-and-value-streams",
+    "architecture/enterprise/archimate-and-ea-tooling",
+    "architecture/enterprise/case-study-ea-led-multicloud-transformation",
+    "architecture/enterprise/enterprise-architecture-fundamentals",
+    "architecture/enterprise/togaf-standard-core-concepts",
+    "architecture/practice/architecture-governance-models"
+   ],
+   "deliverables": [
+    "Preliminary-phase outputs: architecture principles, tailored ADM and repository structure",
+    "Architecture Vision and Statement of Architecture Work",
+    "Stakeholder map with concerns and a communications plan",
+    "Business-capability map and value stream",
+    "Baseline and target architectures (business, data, application, technology) with gap analysis",
+    "Transition architectures and migration roadmap",
+    "Architecture contract and compliance review checklist",
+    "Phase H change-request assessment (simplification, incremental or re-architecting change)",
+    "Requirements repository with traceability from requirements to building blocks",
+    "ArchiMate views for key viewpoints"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "kata-architecture-description-for-the-library-engine",
+   "title": "Kata: an architecture description of this library's own build engine",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "Document the library's own build engine (the lwd Python package and the Zensical site build) as a software architect would for an iSAQB review. Cover quality goals (build time at 1,500+ pages, link integrity, reproducibility), constraints, decomposition, views, cross-cutting concepts and decisions, then run a lightweight ATAM-style evaluation.",
+   "exams": [
+    "CPSA-F:D1",
+    "CPSA-F:D2",
+    "CPSA-F:D3",
+    "CPSA-F:D4",
+    "CPSA-F:D5",
+    "CPSA-F:D6"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/practice/quality-attributes-and-scenarios",
+    "architecture/practice/stakeholders-requirements-and-constraints",
+    "architecture/practice/solution-strategy-and-decomposition",
+    "architecture/practice/views-viewpoints-and-architecture-description",
+    "architecture/practice/c4-model",
+    "architecture/practice/architecture-decision-records",
+    "architecture/practice/architecture-analysis-and-evaluation",
+    "architecture/practice/technical-debt",
+    "architecture/practice/case-study-software-architecture-description"
+   ],
+   "deliverables": [
+    "arc42 document (all 12 sections, concise)",
+    "Quality tree with at least 8 measurable quality scenarios",
+    "Context, building-block, runtime and deployment views",
+    "Three ADRs for decisions already made in the engine",
+    "Risks and technical-debt list",
+    "Evaluation report with sensitivity and trade-off points"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "kata-ai-governance-for-an-agent-rollout",
+   "title": "Kata: govern a bank's rollout of an employee agent and a customer-facing assistant",
+   "type": "kata",
+   "level": "practitioner",
+   "folder": "practice/katas",
+   "scope": "A bank is deploying an employee productivity agent (Copilot Studio and Microsoft 365 Copilot agents) and a customer-facing credit-decision explanation assistant on Amazon Bedrock. Classify both under the EU AI Act, establish an ISO/IEC 42001 AI management system aligned with the NIST AI RMF, assess the models and vendors, and define human oversight, monitoring and incident handling.",
+   "exams": [
+    "AIGP:D1",
+    "AIGP:D2",
+    "AIGP:D3",
+    "AIGP:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/ai-security/ai-governance-operating-model",
+    "security/ai-security/ai-governance-frameworks",
+    "security/ai-security/eu-ai-act-for-engineers",
+    "security/ai-security/ai-regulation-beyond-the-eu",
+    "security/ai-security/how-existing-laws-apply-to-ai",
+    "security/ai-security/governing-the-ai-lifecycle",
+    "security/ai-security/assessing-ai-vendors-models-licenses",
+    "security/ai-security/human-oversight-transparency-provenance",
+    "ai/agents/agentops/agent-governance-and-lifecycle"
+   ],
+   "deliverables": [
+    "AI use-case inventory and risk tiering",
+    "AI impact assessment for the credit assistant",
+    "AI policy set and RACI",
+    "Model and vendor due-diligence checklist (licences, data use, indemnities)",
+    "Post-deployment monitoring and AI incident plan",
+    "Mapping of obligations to controls and evidence"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "tm-remote-mcp-server",
+   "title": "Threat model: a remote MCP server with read, write and code-execution tools",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "A remote MCP server (Streamable HTTP, OAuth-protected) exposes glossary search (read), 'open a GitHub issue' (write) and a sandboxed Python execution tool. Clients include coding agents, VS Code and Foundry and AgentCore agents. Model the trust boundaries between host, client, server and downstream APIs, and the MCP-specific threats: tool-description poisoning, rug-pull updates, confused deputy, token passthrough, session hijacking, SSRF through metadata discovery, DNS rebinding against local servers, and excessive tool scope.",
+   "exams": [
+    "MCPA:D4",
+    "AI-500:D4",
+    "AIP-C01:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/ai-security/mcp-security",
+    "ai/protocols/mcp-authorization",
+    "ai/protocols/mcp-transports",
+    "security/ai-security/owasp-agentic-top-10",
+    "security/ai-security/sandboxing-agent-tools-and-code-execution",
+    "security/appsec/ssrf-and-server-side-attacks",
+    "security/threat-modeling/threat-modeling-fundamentals"
+   ],
+   "deliverables": [
+    "Data-flow diagram with trust boundaries",
+    "Threat table using STRIDE plus OWASP Top 10 for Agentic Applications IDs",
+    "Mitigations mapped to the MCP authorization specification and security best practices",
+    "Abuse cases turned into automated test cases",
+    "Residual-risk statement and an owner per risk"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "tm-rag-application",
+   "title": "Threat model: a RAG application over HR and finance documents",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "An internal assistant on Foundry (or Bedrock) answers questions over HR and finance documents, ingested nightly from SharePoint and S3. Threats include indirect prompt injection in documents, poisoning of the index, ACL bypass through retrieval, PII leakage in answers and logs, embedding inversion, unbounded consumption (cost denial of service) and model supply chain.",
+   "exams": [
+    "AIP-C01:D3",
+    "AI-103:D1",
+    "AIF-C01:D5",
+    "SC-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/ai-security/securing-rag-and-vector-stores",
+    "security/ai-security/ai-threat-landscape",
+    "security/ai-security/prompt-injection-and-jailbreaks",
+    "security/ai-security/poisoning-model-theft-ai-supply-chain",
+    "security/ai-security/secure-ai-reference-architecture",
+    "security/ai-security/llm-guardrails-architecture",
+    "ai/applied/rag-end-to-end",
+    "security/threat-modeling/threat-modeling-methods-compared"
+   ],
+   "deliverables": [
+    "Data-flow diagram covering ingestion and query paths",
+    "Threat table: STRIDE plus OWASP Top 10 for LLM Applications plus MITRE ATLAS techniques",
+    "Control mapping on both platforms (guardrails, filters, private networking, identity)",
+    "Red-team test plan",
+    "Detection signals and an alerting design"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "tm-multi-agent-system-with-a2a",
+   "title": "Threat model: a cross-cloud multi-agent system over A2A",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "An orchestrator agent on Foundry delegates to specialist agents on Foundry and on AgentCore over A2A, with shared long-term memory and MCP tools. Threats include agent impersonation, delegated-authority escalation, memory poisoning, goal hijacking, cascading hallucination, inter-agent message tampering, runaway loops and cost blow-ups, and missing human oversight.",
+   "exams": [
+    "AI-500:D4",
+    "AI-500:D1",
+    "AIP-C01:D3",
+    "MCPA:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/ai-security/securing-multi-agent-systems",
+    "ai/protocols/a2a-protocol",
+    "ai/agents/agentops/agent-failure-modes",
+    "security/ai-security/excessive-agency-and-agent-authorization",
+    "ai/agents/patterns/safeguarded-agent-execution",
+    "ai/agents/agent-memory-types",
+    "security/ai-security/owasp-agentic-top-10"
+   ],
+   "deliverables": [
+    "Agent-interaction diagram with identities and delegation chains",
+    "Threat table mapped to the OWASP Top 10 for Agentic Applications",
+    "Identity and delegation design (agent identities, scoped tokens)",
+    "Kill switch, budget and loop-limit controls",
+    "Evaluation and attack test cases for CI"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "tm-web-api-and-angular-spa",
+   "title": "Threat model: an ASP.NET Core API and Angular SPA",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "An Angular SPA and ASP.NET Core API using OIDC with Entra ID or Cognito, with file uploads and outbound webhooks, hosted behind Application Gateway or ALB. Decide between a backend-for-frontend and tokens in the browser; cover broken object-level authorization, injection, SSRF through webhooks, XSS and CSRF, and secrets handling.",
+   "exams": [
+    "SC-500:D3",
+    "SCS-C03:D3",
+    "CISSP:D8",
+    "CCSP:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/threat-modeling/how-to-threat-model-a-web-api",
+    "security/appsec/owasp-top-10-2025",
+    "security/appsec/owasp-api-security-top-10",
+    "security/appsec/owasp-top-10-vs-asvs-vs-cwe",
+    "security/appsec/xss-csrf-and-browser-security",
+    "frontend/angular/angular-security",
+    "messaging/apis/api-authentication-authorization",
+    "security/iam/oauth-grant-types-compared"
+   ],
+   "deliverables": [
+    "Data-flow diagram and a STRIDE-per-element table",
+    "ADR: backend-for-frontend vs tokens in the SPA",
+    "OWASP ASVS Level 2 mapped security test cases",
+    "Edge-control mapping (WAF, API Management, API Gateway) on both clouds",
+    "Prioritized security backlog"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tm-kubernetes-platform-and-supply-chain",
+   "title": "Threat model: a Kubernetes platform and its software supply chain",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "AKS and EKS clusters deployed by GitOps (Flux or Argo CD) from GitHub, with images in ACR and ECR. Threats include a compromised CI token, malicious or typosquatted dependencies, image tampering, container escape, overly broad RBAC, pod access to cloud instance metadata, Secrets in etcd, and admission-control bypass.",
+   "exams": [
+    "CKS:D5",
+    "CKS:D6",
+    "CKS:D2",
+    "SCS-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-security-model",
+    "devops/kubernetes/kubernetes-supply-chain-security",
+    "devops/kubernetes/kubernetes-runtime-security",
+    "security/supply-chain/software-supply-chain-threats",
+    "devops/ci-cd/gitops-argo-cd-vs-flux",
+    "security/threat-modeling/threat-modeling-cloud-native-systems",
+    "security/threat-modeling/attack-frameworks-attack-d3fend-kill-chain",
+    "cloud/aws/compute/secure-ec2-access-and-imds"
+   ],
+   "deliverables": [
+    "Data-flow diagram from commit to running pod",
+    "Attack tree for 'attacker gains cluster-admin'",
+    "Mapping to the Microsoft Threat Matrix for Kubernetes and MITRE ATT&CK Containers",
+    "Controls mapped to CIS benchmarks, Pod Security Standards and SLSA levels",
+    "Runtime detection rules (Falco, Defender for Containers, GuardDuty)"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tm-trading-platform",
+   "title": "Threat model: the reader's trading platform",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "The real stack: an Angular 20 SPA, .NET 9 APIs, a SignalR hub, Redis Streams, TimescaleDB, broker and exchange API integrations using API keys, and MCP servers that let agents analyse positions, all deployed today with Docker Compose and planned for Azure and AWS. Threats include broker key theft, order tampering and replay, SignalR access tokens leaking through query strings in logs, unauthenticated Redis, market-data spoofing, time-series integrity, hub denial of service, and an agent placing trades (excessive agency).",
+   "exams": [
+    "SC-100:D4",
+    "AZ-305:D1",
+    "SAP-C03:D2",
+    "SCS-C03:D5"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "messaging/realtime/signalr-websockets",
+    "messaging/eventing/redis-streams-vs-kafka",
+    "messaging/integration/broker-exchange-api-integrations",
+    "data/time-series/time-series-financial-schemas",
+    "security/data-protection/data-integrity-and-non-repudiation",
+    "security/iam/mtls-vs-api-keys",
+    "security/ai-security/excessive-agency-and-agent-authorization",
+    "security/threat-modeling/threat-modeling-methods-compared"
+   ],
+   "deliverables": [
+    "Data-flow diagram with trust boundaries for the current Compose deployment and for the cloud targets",
+    "STRIDE table plus PASTA-style business-impact scoring",
+    "Abuse cases (unauthorized order, position exfiltration through an agent)",
+    "Control mapping for the Azure and AWS designs",
+    "Non-repudiation and audit-trail design for orders",
+    "Prioritized backlog that feeds Capstone A"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "tm-multi-account-landing-zone",
+   "title": "Threat model: a multi-subscription and multi-account landing zone on Azure and AWS",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "An Azure Landing Zone (management groups, platform subscriptions, hub network) and an AWS organization under Control Tower (security, log archive and network accounts). Threats include management-account or Global Administrator compromise, guardrail bypass through exempt subscriptions or OUs, log tampering, cross-account role trust without external IDs (confused deputy), lateral movement through shared networks, abuse of Lighthouse or delegated administration, cryptomining, and policy drift.",
+   "exams": [
+    "SC-100:D3",
+    "SAP-C03:D1",
+    "SCS-C03:D6",
+    "AZ-305:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/cloud-security/landing-zone-security-baseline",
+    "security/cloud-security/preventive-vs-detective-guardrails",
+    "cloud/compare/governance/landing-zones-azure-landing-zones-vs-control-tower",
+    "cloud/azure/governance/azure-landing-zones",
+    "cloud/aws/governance/organization-guardrails-and-security-baseline",
+    "cloud/aws/governance/aws-data-perimeters",
+    "cloud/aws/networking/multi-account-network-patterns",
+    "cloud/azure/governance/multitenant-management-and-azure-lighthouse"
+   ],
+   "deliverables": [
+    "Boundary diagram for both clouds",
+    "Threat table and identity-graph attack paths",
+    "Guardrail mapping (preventive, detective, responsive) per threat",
+    "Break-glass and log-integrity design",
+    "Detection use cases with queries"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "tm-ci-cd-and-iac-pipeline",
+   "title": "Threat model: CI/CD and IaC pipelines deploying to both clouds",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "GitHub Actions, HCP Terraform and Azure Pipelines deploy to Azure and AWS using OIDC federation. Threats include poisoned pipeline execution, pull_request_target abuse, cache poisoning, hijacked third-party actions, wildcard OIDC subject claims, secrets in Terraform state, persistence on self-hosted runners, and unreviewed infrastructure changes.",
+   "exams": [
+    "CCSK:D10",
+    "CCSP:D4",
+    "CISSP:D8",
+    "TA-004:D6"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "devops/ci-cd/github-actions-security-hardening",
+    "devops/ci-cd/oidc-federation-from-ci-to-azure-and-aws",
+    "devops/ci-cd/runners-and-agents-at-scale",
+    "devops/iac/terraform-state-and-backends",
+    "security/supply-chain/slsa-provenance-and-attestations",
+    "security/appsec/secure-sdlc-frameworks",
+    "cloud/azure/iac-devops/azure-devops-organization-security"
+   ],
+   "deliverables": [
+    "Data-flow diagram of the delivery path",
+    "Threat table using STRIDE plus the OWASP Top 10 CI/CD Security Risks",
+    "Hardening checklist with an owner per item",
+    "Target SLSA level and the gap to reach it",
+    "Detection rules for pipeline abuse"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "tm-privacy-customer-data-platform",
+   "title": "Privacy threat model (LINDDUN): a customer-data analytics platform",
+   "type": "threat-model",
+   "level": "practitioner",
+   "folder": "practice/threat-models",
+   "scope": "A lakehouse (Microsoft Fabric or AWS analytics) holds customer PII, behavioural events and ML features, with a processor in another jurisdiction. Model privacy threats with LINDDUN (linking, identifying, non-repudiation, detecting, data disclosure, unawareness, non-compliance) alongside security threats with STRIDE, including cross-border transfers, retention and deletion, and tokenization.",
+   "exams": [
+    "CCSP:D2",
+    "CCSP:D6",
+    "CISSP:D2",
+    "CCSK:D9",
+    "AIGP:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/grc/gdpr-and-privacy-engineering",
+    "security/grc/cross-border-transfers-and-sovereign-cloud",
+    "security/data-protection/cloud-secure-data-lifecycle",
+    "security/data-protection/tokenization-masking-fpe",
+    "security/data-protection/data-retention-and-deletion",
+    "security/data-protection/privacy-enhancing-technologies",
+    "cloud/compare/storage-data/analytics-platforms-fabric-vs-aws-analytics",
+    "architecture/data-architecture/medallion-architecture"
+   ],
+   "deliverables": [
+    "Data-flow diagram labelled with data categories",
+    "LINDDUN threat table with mitigations",
+    "Outline of a data protection impact assessment (DPIA)",
+    "Data-lifecycle controls, including deletion by crypto-shredding",
+    "Analysis of the cross-border transfer mechanisms"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "tt-surprise-cloud-bill",
+   "title": "Tabletop: the surprise cloud bill",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "Monday 08:00. An AWS Cost Anomaly Detection alert reports $2,300 of spend in 3 days, and an Azure budget is at 300%. Injects: an untagged OpenSearch Serverless collection and two NAT gateways from a forgotten lab; a GPU endpoint nobody owns; an Azure resource in a subscription you did not know existed; finance asking for an explanation by noon. Practise triage by service and tag, containment and the guardrail fixes.",
+   "exams": [
+    "CLF-C02:D4",
+    "CLF-C02:D3",
+    "AZ-104:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/cost/cost-guardrails",
+    "architecture/cost/finops-fundamentals",
+    "architecture/cost/finops-for-ai-workloads",
+    "cloud/aws/cost/estimating-and-guarding-aws-spend",
+    "cloud/azure/cost/azure-budgets-cost-alerts-and-advisor",
+    "cloud/foundations/tagging-and-naming-strategy",
+    "cloud/aws/governance/service-quotas-and-trusted-advisor"
+   ],
+   "deliverables": [
+    "Incident timeline and decision log",
+    "Triage queries (Cost Explorer and Cost analysis by service, tag and resource)",
+    "Containment steps (budget actions, deletions, policies)",
+    "Draft support case requesting a billing adjustment",
+    "Root causes and guardrail improvements (reaper, allowed SKUs, SCP denying expensive services)"
+   ],
+   "cost_note": "",
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "tt-regional-outage-failover-decision",
+   "title": "Tabletop: fail over or wait during a regional outage",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "During market hours, the primary region first loses one availability zone, then shows control-plane degradation. Injects: a Service Health advisory vs an AWS Health event with different wording, DNS failover not triggering, database replica lag of 7 minutes, and the business demanding a status-page update. Decide whether to fail over or wait, and practise communication.",
+   "exams": [
+    "SAA-C03:D2",
+    "AZ-104:D5",
+    "AZ-305:D3",
+    "SAP-C03:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "architecture/reliability/outage-case-studies",
+    "architecture/reliability/multi-az-multi-region-failover-topologies",
+    "architecture/reliability/rto-rpo-dr-strategies",
+    "architecture/reliability/fault-isolation-blast-radius-static-stability",
+    "cloud/azure/observability/azure-service-health-and-resource-health",
+    "cloud/compare/observability/platform-health-quotas-and-advisory-services-azure-vs-aws",
+    "devops/sre/incident-management-and-postmortems"
+   ],
+   "deliverables": [
+    "Decision log with the fail-over-or-wait reasoning",
+    "Actual RTO and RPO vs targets",
+    "Communication drafts (internal and status page)",
+    "Runbook gaps found",
+    "Static-stability findings"
+   ],
+   "cost_note": "",
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "tt-prompt-injection-data-exfiltration",
+   "title": "Tabletop: data exfiltration through prompt injection in a research agent",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "A research agent with MCP tools (read email, search SharePoint and S3 documents, fetch web pages) summarizes a vendor PDF containing hidden instructions. The agent renders a markdown image whose URL carries encoded customer data to an attacker domain. Injects: a DLP alert, an egress log entry, a user report, the vendor denying involvement, and evidence that a downstream agent's long-term memory was poisoned.",
+   "exams": [
+    "AIP-C01:D3",
+    "AI-500:D4",
+    "MCPA:D4",
+    "AI-103:D1"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/ai-security/agent-data-exfiltration",
+    "security/ai-security/prompt-injection-and-jailbreaks",
+    "security/ai-security/monitoring-attacks-on-ai-systems",
+    "security/ai-security/owasp-agentic-top-10",
+    "security/ai-security/llm-guardrails-architecture",
+    "security/network-security/egress-control-and-exfiltration",
+    "ai/agents/agentops/agent-observability",
+    "ai/evaluation-ops/troubleshooting-genai-apps"
+   ],
+   "deliverables": [
+    "Incident timeline reconstructed from traces (OpenTelemetry GenAI spans; Foundry and AgentCore observability)",
+    "Containment actions (disable tools, revoke tokens, purge memory, block the domain)",
+    "Scoping of the exposed data and a notification assessment",
+    "Control improvements (egress allowlist, Prompt Shields and Bedrock Guardrails, tool scoping, human approval for send actions)",
+    "Detection rules for similar patterns"
+   ],
+   "cost_note": "",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "tt-leaked-credentials-in-a-public-repo",
+   "title": "Tabletop: cloud credentials leaked in a public repository",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "A developer pushes a .env file containing an AWS access key, an Entra service principal client secret and a broker API key to a public GitHub repository, after bypassing push protection. AWS attaches its compromised-key quarantine policy. Within 20 minutes GPU instances appear in 6 regions, and Entra shows sign-ins from an unknown IP address that added a new credential to another app.",
+   "exams": [
+    "SCS-C03:D2",
+    "SCS-C03:D4",
+    "SC-500:D1",
+    "SC-500:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/appsec/secrets-detection-and-hygiene",
+    "cloud/aws/security-services/incident-response-on-aws",
+    "security/detection-response/containing-and-eradicating-cloud-incidents",
+    "security/detection-response/incident-response-nist-800-61r3",
+    "security/detection-response/identity-threat-detection-and-response",
+    "cloud/azure/identity/app-registrations-service-principals-and-consent",
+    "devops/ci-cd/github-advanced-security"
+   ],
+   "deliverables": [
+    "Timeline and severity decision",
+    "Containment steps on both clouds (deactivate the key, revoke service principal credentials and sessions, rotate the broker key)",
+    "Investigation queries (CloudTrail with Athena; Entra audit logs with KQL)",
+    "Eradication checklist for persistence (new IAM users, roles, Lambda functions, app credentials, federation)",
+    "Lessons learned (OIDC instead of keys; push-protection policy)"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tt-cloud-account-takeover",
+   "title": "Tabletop: cloud admin account takeover through help-desk social engineering",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "An attacker persuades the help desk to reset MFA for a cloud administrator. Injects: a new federated identity provider added to Entra, a new IAM Identity Center permission set, CloudTrail disabled in one region, backup deletions starting, a Defender XDR incident and a GuardDuty finding, and an executive asking whether to 'pull the plug'.",
+   "exams": [
+    "SCS-C03:D2",
+    "SCS-C03:D4",
+    "SC-500:D1",
+    "SC-100:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/iam/identity-attacks-compared",
+    "security/iam/account-recovery-and-credential-bootstrapping",
+    "security/iam/session-management-and-continuous-access-evaluation",
+    "security/detection-response/identity-threat-detection-and-response",
+    "security/detection-response/cloud-forensics",
+    "cloud/azure/security-services/incident-response-in-the-defender-portal",
+    "cloud/aws/security-services/incident-response-on-aws",
+    "cloud/azure/identity/monitoring-microsoft-entra"
+   ],
+   "deliverables": [
+    "Identity containment playbook (revoke sessions, Continuous Access Evaluation, remove the rogue federation, use break-glass)",
+    "Organization-level response on AWS (move accounts to a quarantine OU with a deny-all SCP)",
+    "Evidence-collection plan and attack-path reconstruction",
+    "Plan to re-establish trust (admin re-proofing, credential rotation)",
+    "Control improvements for help-desk verification"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tt-ransomware-in-a-hybrid-estate",
+   "title": "Tabletop: ransomware across on-prem, Azure and AWS",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "Ransomware encrypts on-prem file servers and Arc-connected Azure VMs. The attacker tries to delete Azure Backup and AWS Backup recovery points and to re-encrypt S3 objects with customer-provided keys (SSE-C), then demands payment under threat of leaking data. Injects: soft delete and multi-user authorization blocking deletion, a vault lock in place on AWS, pressure from the cyber insurer, and legal counsel on the payment question.",
+   "exams": [
+    "SC-500:D4",
+    "SCS-C03:D2",
+    "SCS-C03:D5",
+    "CISSP:D7"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/data-protection/ransomware-resilience-strategy",
+    "security/data-protection/immutable-backups-ransomware-resilience",
+    "cloud/aws/storage-data/aws-backup-and-data-resilience",
+    "cloud/azure/storage-data/azure-backup-for-data-services",
+    "cloud/compare/resilience-migration/backup-and-disaster-recovery-azure-vs-aws",
+    "security/detection-response/endpoint-detection-and-response-operations",
+    "security/detection-response/incident-response-readiness-and-testing"
+   ],
+   "deliverables": [
+    "Decision log, including the pay or don't-pay considerations",
+    "Recovery order by business capability",
+    "Backup-integrity verification plan (clean-room restore)",
+    "Isolation and communications plan",
+    "Improvements (immutable vaults, logically air-gapped vaults, denying SSE-C)"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tt-poisoned-dependency-in-kubernetes",
+   "title": "Tabletop: a poisoned dependency reaches AKS and EKS",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "A compromised npm package in the Angular build and a typosquatted PyPI package in a Python service ship in images deployed to AKS and EKS. Falco and Defender for Containers raise a crypto-miner alert with outbound traffic to a command-and-control server. Injects: a search across SBOMs, a VEX question from a customer, a rebuild under pressure, and 'who approved this deploy?'.",
+   "exams": [
+    "CKS:D5",
+    "CKS:D6",
+    "SCS-C03:D1",
+    "SC-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/supply-chain/software-supply-chain-threats",
+    "security/supply-chain/dependency-hygiene-nuget-npm-pypi",
+    "security/supply-chain/sbom-spdx-vs-cyclonedx",
+    "security/supply-chain/vex-and-exploitability",
+    "devops/kubernetes/kubernetes-runtime-security",
+    "cloud/aws/security-services/software-supply-chain-on-aws",
+    "security/appsec/coordinated-vulnerability-disclosure"
+   ],
+   "deliverables": [
+    "Blast-radius analysis by querying the SBOMs",
+    "Containment steps (deny-all NetworkPolicy, scale to zero, admission rule blocking the digest)",
+    "Eradication and rebuild with provenance verification",
+    "Customer communication with a VEX statement",
+    "Improvements to dependency policy and admission gates"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "tt-personal-data-breach-notification",
+   "title": "Tabletop: a personal-data breach under GDPR, NIS2 and DORA clocks",
+   "type": "tabletop",
+   "level": "practitioner",
+   "folder": "practice/tabletops",
+   "scope": "A security researcher reports a misconfigured storage export containing about 120,000 EU customer records, including some health data; an analytics processor on AWS is involved. The company is an essential entity under NIS2 and a financial entity under DORA. Injects: the GDPR 72-hour clock, NIS2 early-warning timing, DORA major-incident classification and initial-notification deadlines, the researcher's publication deadline, and a press enquiry.",
+   "exams": [
+    "CCSP:D6",
+    "CISSP:D1",
+    "CCSK:D11",
+    "CCSK:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/grc/breach-notification-obligations",
+    "security/grc/dora-vs-nis2",
+    "security/grc/gdpr-and-privacy-engineering",
+    "security/grc/privacy-laws-compared",
+    "security/grc/cloud-provider-and-third-party-risk",
+    "security/grc/security-metrics-kris-board-reporting",
+    "security/detection-response/incident-response-nist-800-61r3",
+    "security/appsec/coordinated-vulnerability-disclosure"
+   ],
+   "deliverables": [
+    "Notification decision matrix across GDPR, NIS2 and DORA, with deadlines",
+    "Evidence and scoping log",
+    "Drafts: regulator notification, data-subject notice, response to the researcher",
+    "Processor and third-party coordination plan",
+    "Root cause and control improvements",
+    "Board briefing with key risk indicators"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  },
+  {
+   "slug": "capstone-a-trading-platform-on-azure-and-aws",
+   "title": "Capstone A: the trading platform on two clouds",
+   "type": "capstone",
+   "level": "practitioner",
+   "folder": "practice/capstones",
+   "scope": "Take the reader's real stack (.NET 9 services, an Angular 20 SPA, Redis Streams, TimescaleDB, a SignalR hub, Docker Compose and MCP servers for agent-assisted analysis) and design its production target on Azure AND on AWS. Every mapping decision carries a fidelity rating and an explicit difference. For example: Azure SignalR Service has no managed AWS equivalent, so the AWS design self-hosts SignalR with a Redis backplane or uses API Gateway WebSockets. TimescaleDB runs on Azure Database for PostgreSQL flexible server (Apache edition only) but is not offered on RDS or Aurora (choose Tiger Cloud on AWS, self-managed on EC2, or plain PostgreSQL). Redis Streams goes to Azure Managed Redis vs ElastiCache for Valkey or MemoryDB, or is re-platformed to Event Hubs vs Kinesis or MSK. Because .NET 9 and Angular 20 both reach end of support in November 2026, the design includes the upgrade to .NET 10 LTS and Angular 22 as a first-class decision. Optionally build a thin vertical slice (one service, the hub and one stream) on both clouds, reusing lab IaC.",
+   "exams": [
+    "AZ-305:D1",
+    "AZ-305:D2",
+    "AZ-305:D3",
+    "AZ-305:D4",
+    "SAP-C03:D1",
+    "SAP-C03:D2",
+    "SAP-C03:D3",
+    "SAP-C03:D4",
+    "SC-100:D4",
+    "CPSA-F:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "cloud/compare/running-one-system-across-azure-and-aws",
+    "cloud/aws/containers/reference-stack-to-aws-case-study",
+    "cloud/azure/governance/case-study-dotnet-workload-in-alz",
+    "architecture/practice/c4-model",
+    "architecture/practice/architecture-decision-records",
+    "architecture/well-architected/running-a-well-architected-review",
+    "architecture/well-architected/azure-well-architected-framework",
+    "architecture/well-architected/aws-well-architected-framework",
+    "architecture/cost/cost-aware-architecture",
+    "cloud/azure/serverless-integration/azure-signalr-service-vs-web-pubsub",
+    "cloud/aws/storage-data/time-series-on-aws-for-timescaledb-users",
+    "data/time-series/timescaledb-hypertables",
+    "messaging/eventing/redis-streams-vs-kafka",
+    "messaging/runtime/stack-upgrade-dotnet10-angular22",
+    "frontend/realtime/real-time-ui-streaming",
+    "messaging/integration/building-a-modular-monolith",
+    "cloud/compare/rosetta"
+   ],
+   "deliverables": [
+    "C4 context, container and component diagrams per cloud, kept as code (Structurizr DSL or Mermaid)",
+    "At least 12 ADRs: hosting (Container Apps vs AKS; ECS vs EKS), the real-time transport, stream technology, TimescaleDB placement, cache, identity, secrets, networking (hub-spoke vs Transit Gateway), observability, DR strategy, MCP server hosting, and the .NET 10 and Angular 22 upgrade",
+    "Compose-to-cloud mapping table with fidelity ratings",
+    "IaC skeletons: Bicep, CDK (C#) and shared Terraform modules",
+    "Cost model for three load scenarios on both clouds, with unit cost per 1,000 orders and per agent session, using FOCUS-style categories",
+    "Well-Architected reviews: the Azure Well-Architected Review assessment and the AWS Well-Architected Tool with the relevant lenses (Financial Services Industry, Generative AI), plus a prioritized improvement plan",
+    "SLOs, error budgets and the DR runbook (RTO and RPO per capability)",
+    "Security architecture taken from the trading-platform threat model, with controls placed per cloud",
+    "arc42 summary that links the above, plus a 15-minute recorded walkthrough as if presenting to an architecture board"
+   ],
+   "cost_note": "",
+   "wave": "5",
+   "exists": false
+  },
+  {
+   "slug": "capstone-b-glossary-mcp-server-and-agent",
+   "title": "Capstone B: an MCP server and agent over this library's glossary, threat-modeled and hardened",
+   "type": "capstone",
+   "level": "practitioner",
+   "folder": "practice/capstones",
+   "scope": "Build an MCP server over the library's own docs/glossary/exports/glossary.json, with tools search_terms, get_term, compare_terms (Azure vs AWS, with fidelity) and terms_for_exam_objective; glossary://term/{id} resources; and an 'explain the difference' prompt. Build it in C# (primary) with a Python port, served over stdio and Streamable HTTP. Then build a study agent that uses it to answer questions and generate quizzes, once with Microsoft Agent Framework on Foundry Agent Service and once with Strands Agents on AgentCore Runtime. Threat-model the whole system against the OWASP Top 10 for Agentic Applications, then harden it: capability-scoped authorization (per-tool OAuth scopes such as glossary.read and quiz.write, enforced at the server and at the gateway, with Cedar policies in AgentCore Policy and API Management policies on Azure); workload identity end to end (managed identity and Entra Agent ID vs IAM role and AgentCore Identity), with no stored secrets; and sandboxing (read-only non-root containers, default-deny egress, and Azure Container Apps dynamic sessions vs AgentCore Code Interpreter for any code-execution tool). Finish with a red-team suite in CI.",
+   "exams": [
+    "MCPA:D1",
+    "MCPA:D2",
+    "MCPA:D3",
+    "MCPA:D4",
+    "MCPA:D5",
+    "AI-500:D2",
+    "AI-500:D4",
+    "AIP-C01:D2",
+    "AIP-C01:D3",
+    "AI-103:D2",
+    "SC-500:D3"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "ai/protocols/mcp-architecture-and-primitives",
+    "ai/protocols/mcp-authorization",
+    "ai/protocols/mcp-transports",
+    "security/ai-security/mcp-security",
+    "security/ai-security/owasp-agentic-top-10",
+    "security/iam/capability-based-authz",
+    "security/iam/workload-identity",
+    "security/ai-security/sandboxing-agent-tools-and-code-execution",
+    "ai/agents/agentops/agent-sandboxes",
+    "ai/agents/agentops/agent-identity-and-authorization",
+    "ai/agents/agentops/agent-evaluation",
+    "ai/agents/agentops/agent-alm-and-cicd",
+    "ai/platforms/microsoft/foundry-hosted-agents",
+    "ai/platforms/aws/agentcore-runtime-and-harness",
+    "cloud/azure/identity/agent-identities-with-entra-agent-id",
+    "security/ai-security/ai-red-teaming"
+   ],
+   "deliverables": [
+    "MCP server in C# and Python, passing MCP Inspector checks and an automated contract-test suite",
+    "Agent on both platforms, plus a golden evaluation set (at least 50 questions) with groundedness and task-success scores",
+    "Threat model: DFD, a table mapped to the OWASP agentic risk IDs, and abuse cases",
+    "Authorization design: scope and capability matrix, token audience binding, consent UX, audit-log schema",
+    "Workload-identity design and IaC (Bicep, CloudFormation or CDK, Terraform) with zero secrets in configuration",
+    "Sandbox configuration and egress policy, with evidence from attempted escapes",
+    "Red-team and evaluation gates in GitHub Actions; before and after attack-success-rate report",
+    "Cost per 1,000 agent sessions on both platforms",
+    "Operations runbook: version pinning of tool descriptions, rollback, incident playbook (linked to the prompt-injection tabletop)"
+   ],
+   "cost_note": "",
+   "after": [
+    "tm-remote-mcp-server",
+    "tm-rag-application"
+   ],
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "capstone-c-hardened-kubernetes-platform-on-aks-and-eks",
+   "title": "Capstone C: a hardened, GitOps-managed Kubernetes platform on AKS and EKS",
+   "type": "capstone",
+   "level": "practitioner",
+   "folder": "practice/capstones",
+   "scope": "Build matching AKS and EKS platforms from IaC and run the trading API on both. Each platform gets: GitOps (the Flux extension on AKS vs Argo CD on EKS), Pod Security Admission set to restricted, an admission-policy catalog, signed-image enforcement, workload identity (AKS workload identity vs EKS Pod Identity), default-deny networking, runtime detection, CIS scan evidence, Velero backups, and a minor-version upgrade drill. Finish with a red-versus-blue exercise: run the attack scenarios from the CKS lab and show which control prevented or detected each.",
+   "exams": [
+    "CKA:D1",
+    "CKA:D3",
+    "CKA:D5",
+    "CKS:D1",
+    "CKS:D2",
+    "CKS:D4",
+    "CKS:D5",
+    "CKS:D6",
+    "SC-500:D3",
+    "SCS-C03:D3",
+    "CKAD:D2"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "devops/kubernetes/kubernetes-cluster-and-system-hardening",
+    "devops/kubernetes/kubernetes-supply-chain-security",
+    "devops/kubernetes/kubernetes-runtime-security",
+    "devops/kubernetes/admission-control-and-policy-engines",
+    "devops/kubernetes/cluster-lifecycle-upgrades-and-etcd",
+    "devops/ci-cd/gitops-argo-cd-vs-flux",
+    "cloud/azure/containers/securing-aks",
+    "cloud/aws/containers/amazon-eks-what-aws-adds",
+    "cloud/compare/containers/aks-vs-eks",
+    "cloud/aws/containers/container-workload-identity-on-aws"
+   ],
+   "deliverables": [
+    "IaC for both clusters (Bicep for AKS, CDK or Terraform for EKS)",
+    "GitOps repository with environment overlays and policy bundles",
+    "Evidence pack: kube-bench reports, policy-violation reports, signature-verification logs",
+    "Red-vs-blue report: each attack mapped to the control that prevented or detected it",
+    "Upgrade and restore drill logs with timings",
+    "Comparison write-up: what AKS and EKS each manage for you, with fidelity ratings"
+   ],
+   "cost_note": "",
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "capstone-d-security-and-ai-governance-program",
+   "title": "Capstone D: a vendor-neutral cloud security, privacy and AI governance programme",
+   "type": "capstone",
+   "level": "practitioner",
+   "folder": "practice/capstones",
+   "scope": "Act as the security architect and governance lead for the trading company from Capstone A. Build its security, privacy and AI governance programme, independent of any vendor: risk assessment, policy framework, control crosswalk (ISO/IEC 27001:2022, SOC 2, NIST CSF 2.0, CSA Cloud Controls Matrix), shared responsibility per provider, third-party risk for Azure, AWS and the brokers, business continuity and DR, privacy engineering under GDPR, an AI management system (ISO/IEC 42001, EU AI Act obligations) covering its agents and MCP servers, metrics and board reporting, and automated audit evidence reused from the policy-as-code lab.",
+   "exams": [
+    "CCSK:D1",
+    "CCSK:D2",
+    "CCSK:D3",
+    "CCSK:D4",
+    "CCSK:D5",
+    "CCSK:D6",
+    "CCSK:D7",
+    "CCSK:D8",
+    "CCSK:D9",
+    "CCSK:D10",
+    "CCSK:D11",
+    "CCSK:D12",
+    "CCSP:D1",
+    "CCSP:D2",
+    "CCSP:D3",
+    "CCSP:D5",
+    "CCSP:D6",
+    "CISSP:D1",
+    "CISSP:D2",
+    "CISSP:D3",
+    "CISSP:D4",
+    "CISSP:D5",
+    "CISSP:D6",
+    "CISSP:D7",
+    "AIGP:D3",
+    "AIGP:D4"
+   ],
+   "clusters": [],
+   "clouds": [],
+   "iac": [],
+   "languages": [],
+   "related_articles": [
+    "security/grc/risk-management-fundamentals",
+    "security/grc/security-policy-framework",
+    "security/grc/nist-csf-2",
+    "security/grc/iso-27001-vs-soc-2",
+    "security/grc/control-frameworks-crosswalk",
+    "security/grc/cloud-provider-and-third-party-risk",
+    "security/grc/product-and-cloud-assurance-schemes",
+    "security/grc/compliance-as-code-and-audit-evidence",
+    "security/grc/security-metrics-kris-board-reporting",
+    "security/grc/operational-controls-itil-iso-20000",
+    "security/cloud-security/shared-responsibility-in-depth",
+    "security/cloud-security/cloud-threat-landscape",
+    "security/foundations/systems-security-engineering-lifecycle",
+    "security/ai-security/ai-security-program",
+    "security/ai-security/ai-governance-operating-model",
+    "security/grc/eu-cyber-resilience-act"
+   ],
+   "deliverables": [
+    "Risk register with methodology (qualitative plus a FAIR-style estimate for the top 3 risks)",
+    "Policy hierarchy and three example policies (acceptable use of AI, cloud security, data retention)",
+    "Control crosswalk spreadsheet with evidence sources per control",
+    "Third-party and cloud-provider risk assessments using CSA CAIQ, SOC 2 reports and ISO certificates",
+    "BCP and DR plan and test schedule",
+    "AI system inventory, impact assessment and AI incident process",
+    "Security metrics, KRIs and a board report",
+    "Audit-readiness pack generated by the evidence pipeline"
+   ],
+   "cost_note": "",
+   "wave": "6",
+   "exists": false
+  }
+ ],
+ "terms": [],
+ "pairs": [],
+ "notes": "PURPOSE. Every article ends with a \"Check yourself\" section, placed after \"Performance Considerations\" and before \"Further Reading\". It turns reading into retrieval practice and tells the reader whether the page's differences actually landed. The questions are original. Never reproduce or paraphrase real exam items (all vendors' NDAs forbid it).\n\nHOW MANY, BY LEVEL. Foundation: 4-5 questions. Practitioner: 5-7. Expert: 6-8. By page type: a cheatsheet or reference page gets 3 quick-recall items plus 1 scenario; an ADR gets 3 questions (\"which constraint drove this?\", \"what would reverse it?\", \"which alternative fails which quality attribute?\"); a case study gets 4 (\"what would you do differently?\", \"which pattern was applied?\", one numeric estimate, one failure question).\n\nREQUIRED MIX (each article):\n(1) Difference questions, at least 2. They test the contrast the page teaches (\"X vs Y: which one is stateless?\", \"what changes when you move this from Azure to AWS?\"). These are the library's signature.\n(2) Scenario questions, at least 1 for practitioner and 2 for expert, in exam style: a short situation, 4 options, one best answer. Distractors come from real false friends and common mistakes, never from absurd options.\n(3) On cloud-compare pages: one mapping-fidelity question (\"Azure Policy deny maps to which AWS control, and with what fidelity: exact, close, partial or none?\").\n(4) On pages with code or IaC: one code-reading question (find the bug, predict the output, or pick the missing line) using the page's own C#, Python, Bicep, CloudFormation or Terraform snippet.\n(5) At most 1 pure-recall question per article. Allowed types: single-best-answer, multiple-response (\"choose 2\"), ordering (for example, policy-evaluation order or the incident-response lifecycle), and short numeric estimates (cost, SLA composition, RPO).\n\nANSWERS. Each question has a collapsible answer block (??? success \"Answer\") holding the correct option, a 1-3 sentence rationale, a one-line reason why EACH distractor is wrong, and a link to the section of the page (or a sibling page) that teaches it. A question must be answerable from the article plus the pages it links as prerequisites, with no outside knowledge.\n\nMETADATA AND EXAM MAPPING. Every question carries a stable id (<slug>-q<n>), exam refs at domain level (\"SAA-C03:D2\"; sub-objective, for example \"AI-200:D2.3\", where the article maps to one), level, type, and an as_of date. Across an article, the distribution of exam refs follows the weights of the objectives the article \"covers\". Questions are exported with the glossary build into a JSON question bank, so a study path or flashcard view can filter by exam, wave and level, and so the Capstone B agent can quiz from them.\n\nQUALITY GATES (enforced at fact-check time, like the glossary): no trick wording, double negatives or \"all of the above\"; product names and limits current as of the as_of date (for example Microsoft Foundry, Azure Managed Redis, Bedrock AgentCore, Entra Agent ID); every numeric answer cites its source in the article; questions about prices or limits that change are marked volatile and re-verified at every wave fact-check; a question whose answer has changed is fixed or retired, never left stale.\n\nPRACTICE ITEMS. Labs end with 5 reflection questions (at least 2 about Azure-AWS differences observed hands-on) and a \"break it\" debrief. Katas, threat models and tabletops are graded with a rubric (4 criteria, each scored 0-3) and a model answer you can reveal. Capstones use a review checklist instead of questions.\n\nCOUNTS AND COVERAGE. 45 labs, 15 katas, 9 threat models, 8 tabletops and 4 capstones, 81 items in all. I checked the plan with a script (C:\\Users\\nitin\\AppData\\Local\\Temp\\claude\\c--GIT-LearnWithDifferences\\504f2dfe-73b6-4f23-8df4-8d77feae46c2\\scratchpad\\validate_practice.py; draft JSON at ...\\scratchpad\\practice-blueprint.json).\n- All 691 related_articles values are folder/slug pairs from the index.\n- Every exam ref resolves to a real domain id in docs/_study/exams.\n- Every domain of every exam across the 6 waves is covered by at least one item.\n- Labs per wave: W1 8, W2 12, W3 9, W4 9, W5 4, W6 3. Waves 5 and 6 depend more on katas, threat models and capstones, because their exams are about design and governance.\n- The wave list says \"TOGAF\", but the exam files are OGEA-101 and OGEA-102, so those codes are used in the refs.\n\nPATHS AND FRONT MATTER. Items live at practice/labs/<slug>.md, practice/katas/<slug>.md, practice/threat-models/<slug>.md, practice/tabletops/<slug>.md and practice/capstones/<slug>.md. The slugs carry no folder prefix. The page-type list has no \"lab\" type, so I suggest type: how-to for labs, case-study for katas, threat models, tabletops and capstones, plus a practice_kind field (lab, kata, threat-model, tabletop, capstone) for the practice index. Each lab follows the template already promised in docs/practice/index.md: diagram, objective, IaC, C# and Python code, cost, budget alert, teardown, break-it, reflection.\n\nLAB CHAINS (do them in order). The sandbox lab comes first: its budgets, tags and auto-reaper are a precondition for every other lab. Then:\n- containerize, then containers-in-production, then observability, then landing-zone (deploys the same workload);\n- RAG, then evaluation, then guardrails;\n- MCP server, then MCP identity, then tool-using agent, then multi-agent, then Capstone B;\n- CKA labs, then CKS labs, then Capstone C;\n- trading-platform threat model, then Capstone A, then Capstone D.\n\nCOST POLICY (applies to all labs). Every resource is tagged lwd-lab=<slug> and expires-on=<date>. Each lab ships a teardown script per cloud, plus a \"verify zero\" step that queries for remaining tagged resources. The reaper is the backstop. The difference to teach: Azure budgets only alert (except on credit-limited subscriptions), while AWS budget actions can enforce.\nNever-enable list: DDoS Network Protection, Shield Advanced, Bedrock Provisioned Throughput, Route 53 ARC routing-control clusters, OpenSearch Serverless for lab-scale RAG, S3 Object Lock in compliance mode, locked Azure immutability policies.\nSince July 2025, new AWS accounts get the credit-based Free Tier (a free plan of up to 6 months) instead of 12 months of service-specific free usage. Write the cost notes against both models.\nThe prices quoted are approximate. Re-check them on the pricing pages when each lab is written, and record the date in the lab's as-of line.\n\nSTACK CURRENCY. .NET 9 (STS) and Angular 20 both reach end of support in November 2026, weeks after today (2026-10-25). Lab code therefore targets .NET 10 LTS and current Angular, while Capstone A starts from the reader's real .NET 9 and Angular 20 stack and makes the upgrade an explicit ADR (it links messaging/runtime/stack-upgrade-dotnet10-angular22).\n\nINDEX OBSERVATIONS FOR THE CURATOR. These slugs appear in two folders in the index; the practice items use the folder noted:\n- context-engineering: ai/agents and ai/applied (ai/agents used);\n- agent-evaluation: ai/agents/agentops and ai/evaluation-ops (agentops used);\n- amazon-cognito-user-pools-vs-identity-pools: cloud/aws/identity and cloud/aws/security-services;\n- caching-strategies: architecture/patterns and data/specialized-stores (data used);\n- secrets-management: security/cryptography and security/data-protection (cryptography used).\nConsider merging each pair or making one a redirect.\nSeveral index pages also have no practice item yet and could take a later \"bonus\" lab: Logic Apps and Durable Functions vs Step Functions, Event Hubs vs Kinesis and MSK hands-on, AVD vs WorkSpaces, and the IoT comparison.\n\nASSUMPTIONS TO VERIFY WHEN WRITING. Product details that change often:\n- the tier support for API Management's AI-gateway and MCP policies;\n- Entra Agent ID and Agent 365 licensing;\n- AgentCore Policy (Cedar) availability by region;\n- Valkey vector-search support on ElastiCache;\n- which TimescaleDB edition Azure PostgreSQL flexible server offers;\n- the minimum price of ElastiCache Serverless and Azure Managed Redis;\n- the availability of Security Copilot to E5 tenants.\nThese are flagged in the cost notes or the build steps. Re-check them at each wave fact-check, the same way the glossary was fact-checked."
+}

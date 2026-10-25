@@ -1,0 +1,291 @@
+{
+ "gaps": [
+  {
+   "area": "cloud/aws/iac-devops",
+   "section": "aws-platform",
+   "what": "aws-cdk-in-csharp-and-python (practitioner, w2): construct levels L1/L2/L3, CDK apps and stages, cdk-nag, assertion and snapshot tests, CDK Pipelines, how CDK maps to CloudFormation.",
+   "why": "CDK is part of the library's IaC promise, but CDK appears only inside two comparison and selection slugs. No article teaches it in C# or Python. Needed by SAA-C03:D2 (2.2.13), SCS-C03:D6 (6.2.1) and SAP-C03:D2 (2.1.1)."
+  },
+  {
+   "area": "devops/iac",
+   "section": "eng-platform",
+   "what": "terraform-sensitive-data-and-vault (practitioner, w6): sensitive variables and outputs, ephemeral values and write-only arguments, secrets in state, the HashiCorp Vault provider and dynamic secrets.",
+   "why": "TA-004:D4 (4.8) names Vault explicitly. Vault appears nowhere in the index."
+  },
+  {
+   "area": "devops/iac",
+   "section": "eng-platform",
+   "what": "terraform-import-refactoring-drift-and-testing (practitioner, w6): import blocks, moved/removed blocks, refresh-only plans, drift, custom conditions and check blocks, terraform test, and TF_LOG verbose logging.",
+   "why": "TA-004:D4 (4.7), D6 (6.4) and D7 (7.1–7.3) have no home. The existing state and modules slugs do not cover maintenance work, and the w6 Terraform lab promises tests and drift."
+  },
+  {
+   "area": "devops/kubernetes",
+   "section": "eng-platform",
+   "what": "kubeadm-install-and-ha-control-plane (practitioner, w4) plus kubernetes-extension-interfaces-cri-csi-cni (practitioner, w4), covering containerd, CRI-O and runc, CSI drivers and CNI plugins.",
+   "why": "CKA:D1 (1.2, 1.3, 1.5, 1.7) is only implied by cluster-lifecycle-upgrades-and-etcd and kubernetes-networking-and-cni. Container runtimes appear nowhere."
+  },
+  {
+   "area": "devops/kubernetes",
+   "section": "eng-platform",
+   "what": "cluster-dns-and-coredns (practitioner, w4): Service and Pod DNS records, CoreDNS Corefile, stub domains, ndots, DNS troubleshooting; contrast with AKS and EKS CoreDNS add-ons.",
+   "why": "CKA:D3 (3.6) and CKA:D5 (5.5) need it. The index has no CoreDNS or cluster-DNS article. The DNS articles there are all cloud DNS."
+  },
+  {
+   "area": "devops/kubernetes",
+   "section": "eng-platform",
+   "what": "kubernetes-api-versions-and-deprecations (foundation, w1): API groups and versions, the deprecation policy, kubectl convert, finding deprecated APIs before AKS and EKS upgrades.",
+   "why": "CKAD:D3 (3.1) is an explicit objective, and CKA:D1 (1.4) relies on it during upgrades. Nothing in the index covers it."
+  },
+  {
+   "area": "devops/kubernetes",
+   "section": "eng-platform",
+   "what": "kubernetes-native-blue-green-and-canary (practitioner, w1): label and selector switching, two Deployments behind one Service, Gateway API weighted routes, with Argo Rollouts and Flagger as an aside.",
+   "why": "CKAD:D2 (2.1) is in wave 1, but the only deployment-strategies article is the generic devops/ci-cd one in w6. The w1 CKAD rollouts lab has no concept article behind it."
+  },
+  {
+   "area": "devops",
+   "section": "eng-platform",
+   "what": "linux-for-container-and-cluster-engineers (practitioner, w1): namespaces, cgroups v2, capabilities, users and file permissions, systemd and the kubelet, journald, AppArmor and seccomp basics, contrasted with Windows for a .NET engineer.",
+   "why": "The reader comes from .NET and Windows. CKA:D1 (1.2) and CKS:D3 (3.1–3.4) need Linux host skills, and bare-metal-linux-hypervisors is about hypervisors, not administration."
+  },
+  {
+   "area": "cloud/aws (migration)",
+   "section": "aws-platform",
+   "what": "aws-migration-services (practitioner, w5): AWS Transform, Application Migration Service, DMS with DMS Schema Conversion, Application Discovery Service, DataSync, Transfer Family and Snow, with the current status of Migration Hub checked.",
+   "why": "azure-migrate-for-servers exists, but AWS has no provider article; it has only the compare article and moving-data-into-aws. Needed by SAP-C03:D4 (4.1–4.2), SAA-C03:D3 (3.3.6) and SAA-C03:D4 (4.3.14), and the w5 migration lab depends on it."
+  },
+  {
+   "area": "cloud/aws/storage-data or iac-devops",
+   "section": "aws-platform",
+   "what": "aws-elastic-disaster-recovery-and-application-recovery-controller (expert, w2): Elastic Disaster Recovery, ARC routing controls and zonal shift, Resilience Hub; mirror of azure-backup-vs-site-recovery.",
+   "why": "SAP-C03:D1 (1.3.2) and SCS-C03:D2 (2.1.3–2.1.4) name these services. aws-backup-and-data-resilience and resilience-tooling-on-aws do not plainly own DR orchestration, so there is no counterpart to Azure Site Recovery."
+  },
+  {
+   "area": "cloud/aws/compute",
+   "section": "aws-core",
+   "what": "aws-batch-hpc-and-emr (practitioner, w2): AWS Batch, ParallelCluster, EMR and EMR Serverless, Spot for batch. Add a compare row: Azure Batch vs AWS Batch and ParallelCluster.",
+   "why": "Azure has azure-batch-and-hpc-options, but AWS has no counterpart. Needed by SAA-C03:D3 (3.2.1, 3.5.12)."
+  },
+  {
+   "area": "cloud/aws/security-services",
+   "section": "aws-platform",
+   "what": "aws-centralized-security-logging (practitioner, w4): organization trail, log-archive account, Security Lake and OCSF, Athena and Logs Insights, cross-account CloudWatch, delegated administrators.",
+   "why": "SCS-C03:D1 (1.2.1–1.2.6) and SCS-C03:D6 (6.1.4) are not covered by any AWS-side article. Security Lake appears only in a compare slug."
+  },
+  {
+   "area": "cloud/aws/security-services",
+   "section": "aws-platform",
+   "what": "aws-edge-security-waf-shield-advanced-firewall-manager (practitioner, w4): managed rule groups, Bot Control, rate limits and geo rules, Shield Advanced response, Firewall Manager across an organization.",
+   "why": "SCS-C03:D3 (3.1.1–3.1.4) is a full task statement, and SAA-C03:D1 (1.2.9) and SAP-C03:D2 (2.3.9) also need it. Today only aws-core's network-security-services-compared covers it."
+  },
+  {
+   "area": "cloud/compare/security-services",
+   "section": "compare",
+   "what": "data-discovery-and-classification-purview-vs-macie-and-comprehend (practitioner, w4).",
+   "why": "Macie is missing from the whole index, yet the w4 data-perimeter lab uses it. Needed by SAA-C03:D1 (1.2.5), SCS-C03:D1 (1.1.4) and AIP-C01:D3 (3.2.2)."
+  },
+  {
+   "area": "architecture/data-architecture + cloud/compare/storage-data",
+   "section": "arch-systems",
+   "what": "data-governance-catalog-lineage-and-quality (practitioner, w5), vendor-neutral, plus a compare article: Purview Unified Catalog and Data Map vs SageMaker Catalog, Glue Data Catalog and Lake Formation.",
+   "why": "The index has no data governance, lineage or catalog content; its Purview articles cover only security and compliance. Needed by SC-900:D4 (4.3), AZ-305:D2 (2.3), AIP-C01:D3 (3.3.1–3.3.2) and AIGP:D3 (3.2.2)."
+  },
+  {
+   "area": "cloud/compare/governance",
+   "section": "compare",
+   "what": "data-perimeters-network-security-perimeter-vs-aws-data-perimeters (expert, w4): identity, resource and network perimeters on each cloud.",
+   "why": "The w4 lab 'Data perimeter for storage and databases' has no compare article. The Azure and AWS halves sit in different sections with nothing linking them."
+  },
+  {
+   "area": "cloud/compare/resilience-migration",
+   "section": "compare",
+   "what": "resilience-testing-chaos-studio-and-azure-load-testing-vs-fis-and-resilience-hub (practitioner, w5).",
+   "why": "The w5 failover lab contrasts Chaos Studio with FIS, but no compare article covers it. Needed by SCS-C03:D2 (2.1.3) and SAP-C03:D2 (2.2.8)."
+  },
+  {
+   "area": "cloud/compare",
+   "section": "compare",
+   "what": "support-plans-marketplaces-and-partner-programs-azure-vs-aws (foundation, w1): support tiers, Health, re:Post and Microsoft Q&A, Marketplace, partner networks, trust and safety reporting.",
+   "why": "CLF-C02:D4 (4.3) is a full task statement and CLF-C02:D2 (2.4.4) also needs it. The index has no support or marketplace content."
+  },
+  {
+   "area": "cloud/compare/security-services (w1)",
+   "section": "compare",
+   "what": "trust-portals-and-compliance-offerings-service-trust-portal-vs-aws-artifact (foundation, w1). Add Purview Compliance Manager to the Purview set, via a new purview-compliance-manager article in azure-platform.",
+   "why": "SC-900:D4 (4.1–4.2), CLF-C02:D2 (2.2.4) and SC-100:D2 (2.4.2). The only matching article is the w4 compliance-evidence compare, and Compliance Manager is missing."
+  },
+  {
+   "area": "cloud/azure/containers",
+   "section": "azure-platform",
+   "what": "hosting-angular-on-azure-static-web-apps (practitioner, w1): Static Web Apps, linked APIs, auth, custom domains, preview environments.",
+   "why": "aws-platform has hosting-angular-on-aws, but Azure has no counterpart, and the w1 lab 'Azure Static Web Apps vs S3 + CloudFront' has no Azure article."
+  },
+  {
+   "area": "ai/protocols",
+   "section": "ai-agents",
+   "what": "hosting-mcp-servers-azure-vs-aws (practitioner, w3): Azure Functions MCP extension, API Management exposing REST as MCP, Logic Apps as MCP tools, Container Apps; vs stateless MCP on Lambda, ECS, AgentCore Gateway and Runtime.",
+   "why": "AI-500:D2 (2.3.2) names Functions, Logic Apps and APIM, and AIP-C01:D2 (2.1.7) names Lambda and ECS. The w3 lab covers only Container Apps vs AgentCore Runtime."
+  },
+  {
+   "area": "ai/platforms (+ compare/ai-platforms)",
+   "section": "ai-agents",
+   "what": "model-deployment-types-and-capacity (practitioner, w3): Foundry Global, Data Zone and regional deployments, provisioned throughput units, batch, quotas and rate limits; vs Bedrock on-demand, cross-Region inference profiles, provisioned throughput, batch inference and service tiers.",
+   "why": "AI-103:D1 (1.2.2, 1.3.1) and AIP-C01:D1 (1.2.3), D2 (2.2.1) and D4 (4.1.3) test this directly. No slug owns capacity and deployment types."
+  },
+  {
+   "area": "ai/foundations or ai/applied",
+   "section": "ai-foundations",
+   "what": "open-weight-models-and-hugging-face (practitioner, w3): Hub, Transformers and PEFT, model licences, open models in the Foundry catalog, Bedrock Marketplace and SageMaker JumpStart.",
+   "why": "AI-500:D2 (2.4.7) names Hugging Face Transformers, and AIGP:D4 (4.1.2) contrasts proprietary and open source. Hugging Face appears nowhere."
+  },
+  {
+   "area": "ai/agents/frameworks",
+   "section": "ai-agents",
+   "what": "agent-developer-tooling (practitioner, w3): Foundry VS Code extension and AI Toolkit, azd AI templates, dev containers, local tracing; AgentCore starter toolkit and CLI; Strands local loop.",
+   "why": "AI-500:D1 (1.2.7) asks for SDLC developer tooling explicitly. Nothing in the index covers it."
+  },
+  {
+   "area": "devops (AI-assisted engineering)",
+   "section": "eng-platform",
+   "what": "ai-coding-agents-compared (practitioner, w3): GitHub Copilot agent mode and coding agent vs Amazon Q Developer and Kiro, with Claude Code as a neutral reference; fold the existing github-copilot-for-engineering-teams article into it or link to it.",
+   "why": "AIP-C01:D2 (2.5.4, 2.5.6) and SCS-C03:D3 (3.2.6) name Q Developer. The index covers only GitHub Copilot, so it has no cross-provider contrast."
+  },
+  {
+   "area": "security/ai-security",
+   "section": "sec-ops",
+   "what": "ai-impact-assessments-and-documentation (practitioner, w3): ISO/IEC 42005 impact assessment, DPIA, EU AI Act FRIA, model and system cards, post-market monitoring, AI incident reporting, deactivation and decommissioning policy.",
+   "why": "AIGP:D3 (3.1.2, 3.3.1, 3.3.6) and D4 (4.2.1, 4.3.4, 4.3.7) are heavily weighted. governing-the-ai-lifecycle is too broad to carry these artefacts."
+  },
+  {
+   "area": "security/grc",
+   "section": "sec-ops",
+   "what": "business-continuity-management-and-bia (practitioner, w6): BIA, BCP vs DRP, ISO 22301, crisis communications, exercises.",
+   "why": "CISSP:D1 (1.7) and D7 (7.13), CCSP:D3 (3.5) and SC-100:D1 (1.1.2). Architecture/reliability covers technical DR but not the BCM process."
+  },
+  {
+   "area": "security (assessment and testing)",
+   "section": "sec-ops",
+   "what": "security-assessment-and-testing-programme (practitioner, w6): vulnerability assessment vs penetration test vs red and purple team, breach and attack simulation, control testing, SOC 2 Type I vs Type II testing, reporting findings.",
+   "why": "CISSP:D6 is a whole domain, and CCSP:D4 (4.4) also needs it. Today only cloud-penetration-testing and ai-red-teaming exist."
+  },
+  {
+   "area": "security/grc",
+   "section": "sec-ops",
+   "what": "personnel-security-awareness-and-ethics (foundation, w6) and investigations-evidence-and-legal-hold (practitioner, w6).",
+   "why": "CISSP:D1 (1.1, 1.5, 1.8, 1.12) and D7 (7.1), and CCSP:D4 (4.1) and D5 (5.4–5.5). cloud-forensics does not cover investigation types, chain of custody or awareness programmes."
+  },
+  {
+   "area": "security/network-security",
+   "section": "sec-ops",
+   "what": "network-protocols-and-secure-components (foundation, w4): OSI and TCP/IP, secure protocol choices, 802.1X/NAC, WPA3 wireless, cellular and 5G, VoIP, CDN as a security component.",
+   "why": "CISSP:D4 (4.1–4.3) assumes this. cloud-networking-fundamentals is a cloud-level foundation and has no wireless or NAC content."
+  },
+  {
+   "area": "security (endpoint)",
+   "section": "sec-ops",
+   "what": "endpoint-and-mobile-device-security (practitioner, w4): UEM/MDM, baselines, app control, Windows LAPS, BYOD; plus an azure-platform orientation article on Intune and Defender for Endpoint.",
+   "why": "SC-100:D3 (3.2.2, 3.2.5, 3.2.6) and D4 (4.1.3), and CISSP:D4 (4.2). The index has EDR operations only and no Intune, mobile or LAPS content."
+  },
+  {
+   "area": "cloud/azure/security-services",
+   "section": "azure-platform",
+   "what": "microsoft-365-security-for-architects (practitioner, w4): Defender for Office 365, Defender for Cloud Apps, Secure Score, SharePoint oversharing controls, Microsoft 365 Copilot data-security controls.",
+   "why": "SC-100:D4 (4.1.1–4.1.5), SC-500:D3 (3.1.1) and SC-900:D3 (3.4). There is no Microsoft 365 security content, and casb-and-sspm is vendor-neutral."
+  },
+  {
+   "area": "security/iam",
+   "section": "sec-core",
+   "what": "active-directory-hardening-and-enterprise-access-model (expert, w4): AD DS tiering and attacks (Kerberoasting, DCSync), Defender for Identity, the enterprise access model, privileged access workstations.",
+   "why": "SC-100:D2 (2.2.7, 2.3.1, 2.3.3, 2.3.7). directory-services-ldap-kerberos covers the protocols, not hardening or PAW."
+  },
+  {
+   "area": "cloud/compare/security-services",
+   "section": "compare",
+   "what": "security-reference-architectures-mcra-mcsb-vs-aws-sra (expert, w5): MCRA, Microsoft cloud security benchmark, Zero Trust adoption framework vs AWS Security Reference Architecture.",
+   "why": "SC-100:D1 (1.2.1–1.2.4) names MCRA and MCSB, and SCS-C03:D6 (6.3.3) needs the AWS side. using-security-reference-architectures is generic."
+  },
+  {
+   "area": "architecture/well-architected",
+   "section": "arch-practice",
+   "what": "well-architected-for-ai-workloads (practitioner, w5): Azure Well-Architected AI workload guidance vs the AWS Well-Architected Generative AI and Machine Learning lenses.",
+   "why": "AIP-C01:D1 (1.1.3) names the GenAI Lens. Architects need a pillar-by-pillar view of AI systems, and no well-architected slug covers AI."
+  },
+  {
+   "area": "messaging/apis",
+   "section": "eng-backend",
+   "what": "openapi-api-first-and-contract-testing (practitioner, w2) and graphql-vs-rest-vs-grpc (practitioner, w2), covering AppSync, APIM GraphQL, HotChocolate and Strawberry.",
+   "why": "AIP-C01:D2 (2.5.2) asks for OpenAPI-first design, AZ-305:D4 (4.2.3) for API integration and SAA-C03:D2 (2.1.1) for AppSync. OpenAPI and GraphQL appear nowhere."
+  },
+  {
+   "area": "messaging/runtime",
+   "section": "eng-backend",
+   "what": "aspire-for-distributed-dotnet-and-python (practitioner, w2): AppHost orchestration, service defaults with OpenTelemetry, Python resources, publishing to Container Apps and to AWS.",
+   "why": "This is the reader's own stack (.NET 10 with Python services), and Aspire is the main local-development and deployment tool for distributed .NET apps. It is missing."
+  },
+  {
+   "area": "frontend",
+   "section": "eng-backend",
+   "what": "agent-ui-patterns-in-angular (practitioner, w3): streaming chat, AG-UI events, tool-approval and human-in-the-loop UI, generative UI, citations and provenance display.",
+   "why": "AI-500:D1 (1.1.6) on human-AI experience and D2 (2.4.2), and AIP-C01:D2 (2.4.2) on streaming. The Angular articles have no agent-facing UI work."
+  },
+  {
+   "area": "frontend",
+   "section": "eng-backend",
+   "what": "micro-frontends-and-module-federation (expert, w5).",
+   "why": "An architect leading Angular estates needs this frontend decomposition decision, and no article covers it."
+  },
+  {
+   "area": "practice/labs",
+   "section": "compare",
+   "what": "Lab (w2): one workload in Bicep and in CloudFormation/CDK (C# and Python), with what-if vs change sets, deployment stacks vs stack policies, and drift detection.",
+   "why": "IaC in three languages is part of the library's identity, but the only IaC lab is Terraform in w6. Needed by AZ-104:D3 (3.1) and SCS-C03:D6 (6.2.1)."
+  },
+  {
+   "area": "practice/labs",
+   "section": "compare",
+   "what": "Lab (w2): back up, restore and fail over with Azure Backup and Site Recovery vs AWS Backup and Elastic Disaster Recovery.",
+   "why": "AZ-104:D5 (5.2.1–5.2.7) is pure hands-on, and SAA-C03:D2 (2.2.18) also needs it. No lab covers backup or ASR."
+  },
+  {
+   "area": "practice/labs",
+   "section": "compare",
+   "what": "Lab (w2/w5): hybrid and cross-cloud site-to-site VPN with BGP between Azure VPN Gateway and AWS Site-to-Site VPN, including DNS forwarding.",
+   "why": "This is the most direct way to show the 'differences' approach in networking. Needed by AZ-305:D4 (4.4.2), SAP-C03:D1 (1.1.7) and SCS-C03:D3 (3.3.2)."
+  },
+  {
+   "area": "practice/labs",
+   "section": "azure-core",
+   "what": "Labs (w2): Entra administration (users, groups, administrative units, SSPR, B2B) vs IAM Identity Center; and App Service (plans, slots, custom domain and TLS, VNet integration) vs ECS Express Mode or Elastic Beanstalk.",
+   "why": "AZ-104:D1 (1.1) and AZ-104:D3 (3.4) have no lab."
+  },
+  {
+   "area": "practice/labs",
+   "section": "ai-agents",
+   "what": "Lab (w3): ship an agent through CI/CD, with evaluation quality gates, prompt and version pinning, canary rollout and rollback, on Foundry and on AgentCore.",
+   "why": "AI-500:D4 (4.3.1–4.3.4) and AI-103:D1 (1.2.4). The w3 labs build and evaluate agents but never release one."
+  },
+  {
+   "area": "practice/katas",
+   "section": "arch-systems",
+   "what": "Kata: a lakehouse and streaming analytics platform for trading data on Fabric or the AWS analytics stack.",
+   "why": "AZ-305:D2 (2.3) and SAA-C03:D3 (3.5) on data ingestion. None of the katas exercises data architecture."
+  }
+ ],
+ "structural_issues": [
+  "Five slugs appear twice. Each should have one owner, with a link from the other place. context-engineering (ai-agents vs ai-foundations): keep it in ai/applied. agent-evaluation (ai-agents practitioner vs ai-foundations expert): keep it in ai/agents/agentops and make the evaluation-ops version a link. amazon-cognito-user-pools-vs-identity-pools (aws-core identity vs aws-platform security-services): keep it in aws-core. secrets-management (sec-core cryptography vs sec-ops data-protection): keep it in sec-core. caching-strategies (arch-systems patterns vs eng-backend data/specialized-stores): keep the pattern in architecture and rename the data one redis-and-cache-implementation.",
+  "Topics duplicated under different slugs. Merge each cluster or give it a clear split: ai-gateway-pattern / genai-gateway-pattern / ai-gateway-security-control; model-routing-and-cascading / model-routing-and-fallback; tool-use-and-function-calling / structured-outputs-and-tool-calling; agentic-workflow-patterns / llm-workflow-patterns; sla-slo-sli-error-budgets (w2) / slis-slos-and-error-budgets (w6); chaos-engineering-resilience-testing / chaos-engineering-and-game-days; capacity-quotas-and-headroom / quotas-limits-and-capacity / capacity-planning-and-load-testing; retry-timeout-circuit-breaker-bulkhead / resilience-retries-circuit-breakers; leader-election-leases-fencing / distributed-locks-and-leases; long-running-operations-async-request-reply-durable-execution / durable-execution-workflows / durable-agent-execution; schema-evolution-and-compatibility / message-contracts-and-schema-evolution; risk-based-access-and-itdr / identity-threat-detection-and-response; physical-and-environmental-security / data-center-and-physical-security; privacy-enhancing-cryptography / privacy-enhancing-technologies; encryption-placement / encryption-at-rest-patterns; immutable-backups-ransomware-resilience / ransomware-resilience-strategy; microsoft-cloud-adoption-framework (arch-practice) / cloud-adoption-framework-for-azure (azure-core); azure-pipelines-yaml (eng-platform) / azure-pipelines-yaml-reference (azure-platform); runners-and-agents-at-scale / pipeline-agents-and-runners; github-advanced-security / configuring-ghazdo-and-defender-devops-security; five overlapping KQL and hunting articles across azure-platform, sec-ops and eng; five vector-store and vector-search articles across arch, ai, eng, azure and compare; six landing-zone and guardrail articles.",
+  "The orientation articles are triplicated. azure-ai-services-orientation (w1), foundry-tools-prebuilt-ai-services and microsoft-foundry-overview (w3) cover the same ground. So do aws-ai-services-orientation (w1), aws-ai-services-catalog and amazon-bedrock-overview (w3). Keep one orientation article per provider, tagged w1, and delete the single-article cloud/*/ai-services-overview domains.",
+  "The wave-1 exams depend on articles tagged w2 to w4. CKAD needs kubernetes-architecture (w4) and kubernetes-monitoring-and-logging (w6). AI-901 and AIF-C01 need llm-api-fundamentals, prompt-engineering, rag-end-to-end, customization-decision-framework, genai-evaluation-fundamentals, microsoft-foundry-overview, foundry-quickstart-chat-and-agent-clients, amazon-bedrock-overview, sagemaker-ai-for-genai, agentic-ai-fundamentals and ai-threat-landscape, all tagged w3. SC-900 needs entra-id-tenants (w2) plus microsoft-purview-orientation, microsoft-sentinel, microsoft-defender-xdr, authentication-factors-and-mfa and sso-and-federation (all w4). CLF-C02 needs every aws-core foundation article (w2), aws-security-services-map (w4) and estimating-and-guarding-aws-spend (w2). Three w1 labs (first GenAI app, prebuilt AI services, security first look) have no w1 articles behind them.",
+  "The wave-2 exams also depend on later waves. AI-200 4.1 needs azure-key-vault-in-practice (w4). SAA-C03:D1 needs aws-kms-in-depth, secrets-manager-vs-parameter-store and certificates-acm-and-private-ca (all w4). AI-200 2.1.2 needs consistency-models (w5). SAA-C03:D2 needs event-driven-architecture, caching-strategies, serverless-architecture and stateless-vs-stateful-services (all w5). AI-200 3.1.1 needs retries-and-dead-letter-queues and delivery-semantics (w5).",
+  "Concepts are scheduled after the products that use them. The vendor-neutral sec-core IAM and cryptography sets (OAuth, OIDC, JWT, envelope encryption, TLS) are w4, two waves after Entra app registrations, consent and KMS (w2). eng-backend messaging and data are w5, after Service Bus, SQS, Cosmos DB and DynamoDB (w2). devops iac, ci-cd, observability and sre are w6, after the w2 OpenTelemetry lab, azure-pipelines and pipeline OIDC articles, and IaC used from w1. iac-fundamentals as a foundation article in w6 is the clearest case.",
+  "Some level and wave tags contradict each other. cluster-lifecycle-upgrades-and-etcd is w1 but serves CKA (w4). admission-control-and-policy-engines is expert at w1, although CKAD needs only 'understand admission control'; split it into a w1 foundation article and a w4 Kyverno/VAP/Gatekeeper article. kubernetes-architecture is a foundation article but tagged w4. agent-evaluation is practitioner in one section and expert in the other.",
+  "The waves are badly unbalanced: w1 has 69 articles for five exams, w2 has 353, w3 171, w4 179, w5 145 and w6 58. Wave 2 is too big to finish as one unit. Split it into 2a (AZ-104 and SAA-C03 infrastructure) and 2b (AI-200 app platform and data), and move the foundation-level aws-core and azure-core articles into w1.",
+  "Several articles sit in the wrong place. The vendor-neutral cloud/foundations domain belongs to the azure-core section; move it to compare or treat it as neutral. Language and runtime articles (dotnet-csharp, python-for-csharp-engineers, aspnet-core-vs-fastapi, async-threading) and the whole apis domain sit under messaging/, which hurts navigation. Accept it and document it as 'messaging = backend services', or ask for a backend area. ai/evaluation-ops (25 articles) mixes classic MLOps, GenAIOps and platform concerns; move the gateway, routing and caching articles to ai/platforms.",
+  "Several provider articles lack a counterpart. AWS has none for azure-migrate-for-servers, azure-batch-and-hpc-options, azure-app-configuration-and-feature-flags (AWS AppConfig is named in AIP-C01 1.2.2) or Azure Arc (Systems Manager hybrid nodes). Azure has none for hosting-angular-on-aws, terraform-on-aws or sagemaker-ai-for-genai (Azure Machine Learning). Each of these breaks the 'map to the other provider' promise.",
+  "Two slugs are tied to versions that will date soon. stack-upgrade-dotnet10-angular22 will age in November 2026, when .NET 11 and Angular 23 are expected. mcp-2026-07-28-what-changed has the same problem. Use stable slugs such as dotnet-and-angular-upgrade-playbook and mcp-spec-changes, with dated sections inside.",
+  "The compare section has only 14 glossary terms for about 61 compare articles. The Rosetta and fidelity-rating promise needs paired, rated terms, such as 'Private Endpoint ~ interface VPC endpoint (high fidelity)', in the glossary so that compare pages can cross-link them.",
+  "The practice layer has wave mismatches. The Key Vault vs KMS lab is w4, but AI-200 and SAA-C03 need it in w2. No lab exercises IaC before w6. No lab covers AZ-104 identity, App Service or backup. Capstone B (w3) relies on the threat-model and AI-security articles, so schedule it after them."
+ ],
+ "sequencing_advice": "Step 0, before writing anything: resolve the 5 duplicate slugs and the duplicate clusters, merge the triplicated AI orientation articles, and re-tag the waves. Then write by exam slice. Within each wave the order is: vendor-neutral concept, then the Azure article, then the AWS article, then the cloud-compare article, then the lab, cheatsheet or reference. Keep 'rosetta' as a living skeleton from day one and add a row each time a compare article ships. Track coverage with exam refs (e.g. CKAD:D2), and call a wave exam-ready only when every objective of its exams maps to a finished article.\nWave 1, grown from 69 to about 130 articles: cloud/foundations; the foundation-level aws-core and azure-core articles (IAM, EC2, VPC, global infrastructure, Entra tenants, resource organization, cost); sec-core foundations plus authentication-vs-authorization, authentication-factors-and-mfa, sso-and-federation and cryptography-fundamentals; Microsoft security orientation (Purview, Sentinel, Defender XDR) and the new trust-portal and support compare articles; ai-foundations plus the foundation-level ai/applied, Foundry and Bedrock orientation and quickstart articles, agentic-ai-fundamentals and ai-threat-landscape; the full CKAD set, including kubernetes-architecture, monitoring and logging, deprecations, native canary and the Linux primer; docker, oci, iac-fundamentals, hosting-angular on both clouds.\nWave 2a (AZ-104, SAA-C03 infrastructure): identity, governance, networking, compute, storage, monitoring, backup and DR, the reliability set, plus the vendor-neutral prerequisites pulled forward: OAuth, OIDC, JWT, key-management and envelope encryption, secrets-management, the merged SLO article, observability-fundamentals and opentelemetry-in-practice, and the Terraform language basics. Wave 2b (AI-200, app platform): containers, serverless, messaging, data, the practitioner Key Vault, KMS, Secrets Manager and ACM articles (moved from w4), delivery-semantics, retries-and-DLQ, idempotency, outbox, consistency-models, caching, NoSQL modelling, basic vector search, Aspire, OpenAPI, and the CDK and Bicep IaC lab.\nWave 3: practitioner ai/applied, then protocols (MCP before the MCP-hosting and gateway articles), then platforms, then ai-security, then agentops. Write the labs in this order: RAG, then MCP server, then secure MCP, then agent, then multi-agent, then agent CI/CD. Capstone B comes last, after the MCP and RAG threat models.\nWave 4: sec-core IAM, crypto and appsec depth; sec-ops cloud security, detection and network; the AWS and Azure security services, including the new centralized logging and edge security articles; then CKA, then CKS, with kubeadm, CRI/CSI/CNI and CoreDNS before the CKA labs. Tabletops come after the IR articles, and Capstone C closes the wave.\nWave 5: arch-practice, then arch-systems patterns and distributed systems (whatever was not pulled forward), migration and FinOps, the Well-Architected AI article, the katas and Capstone A.\nWave 6: GRC (including BCM, assessment and testing, and personnel), TOGAF, CPSA-F refinements, the AIGP set (impact assessments), the TA-004 extras (Vault, import and refactoring, HCP Terraform, OpenTofu), then Capstone D.\nWithin each wave, write the hub article (the 'choosing' guide or decision guide) of each domain first, so that later articles have something to link to.",
+ "summary": "The blueprint is broad (975 planned articles) and covers most objectives in the wave exams. The main problems are sequencing and duplication rather than missing breadth. The biggest issue is wave tagging. The five wave-1 exams (CKAD, AI-901, SC-900, CLF-C02, AIF-C01) depend on articles tagged w2 to w4 (kubernetes-architecture, the Foundry and Bedrock orientations, prompt engineering, RAG, Entra, Purview, Sentinel, the aws-core foundations). Wave 2 (353 articles) depends on Key Vault, KMS, consistency and messaging concepts scheduled in w4 and w5. Throughout, vendor-neutral concepts (IAM, crypto, messaging, IaC, CI/CD, observability) are scheduled after the products that use them. The plan has 5 exact duplicate slugs (context-engineering, agent-evaluation, amazon-cognito-user-pools-vs-identity-pools, secrets-management, caching-strategies) and about 20 near-duplicate clusters, the largest being AI gateway and routing, SLOs, chaos engineering, CAF, Azure Pipelines, KQL hunting and vector search.\n\nConcrete content gaps:\n- **IaC and Kubernetes:** AWS CDK in C# and Python; Terraform Vault, import and refactoring, and testing (TA-004); kubeadm and HA, CRI/CSI/CNI, CoreDNS, API deprecations, Kubernetes-native canary and a Linux primer (CKA, CKAD, CKS).\n- **AWS counterparts:** migration services, Elastic Disaster Recovery and ARC, Batch/HPC/EMR, centralized security logging with Security Lake, and edge security with WAF, Shield Advanced and Firewall Manager.\n- **Compare articles:** Purview vs Macie, data catalogs, data perimeters, chaos and load testing, support plans and marketplaces, trust portals, and MCRA/MCSB vs AWS SRA.\n- **AI:** MCP hosting on Functions, APIM and Lambda; deployment types and capacity (PTU, cross-Region inference); Hugging Face and open models; agent developer tooling; Q Developer and Kiro vs Copilot; AI impact assessments (AIGP).\n- **Security:** BCM and BIA; a security assessment and testing programme; personnel, ethics and investigations; network protocols and wireless (CISSP); endpoint, mobile and Intune; Microsoft 365 security; AD DS hardening with the enterprise access model and PAW (SC-100).\n- **Architecture and engineering:** Well-Architected for AI; OpenAPI and GraphQL; Aspire; agent UI in Angular; micro-frontends; Static Web Apps.\n- **Practice:** labs for Bicep and CDK (w2), backup and ASR, a cross-cloud BGP VPN, AZ-104 identity and App Service, and agent CI/CD, plus a data-platform kata.\n\nThe fix is to resolve the duplicates and re-tag the waves first, grow w1 and split w2 into 2a and 2b, and then write concept, Azure, AWS, compare and lab in that order within each wave."
+}

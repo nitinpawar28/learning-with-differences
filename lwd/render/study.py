@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import calendar
+import re
 from datetime import date
 
 from lwd import derive
@@ -327,6 +328,12 @@ def render_integrity(lib: Library, diags: Diagnostics, outputs: OutputSet) -> No
     outputs.add(page, "".join(body))
 
 
+def _wave_key(wave: str) -> tuple:
+    """Order wave labels 1, 2a, 2b, 3 …; unnumbered labels last."""
+    m = re.match(r"(\d+)(.*)", wave)
+    return (0, int(m.group(1)), m.group(2)) if m else (1, 0, wave)
+
+
 def render_roadmap(lib: Library, outputs: OutputSet) -> None:
     page = "study/reports/roadmap.md"
     body = [front_matter({"title": "Content roadmap", "description": "Planned, stubbed, drafted and complete pages by section and wave.", "search": {"exclude": True}}, GENERATED)]
@@ -353,7 +360,7 @@ def render_roadmap(lib: Library, outputs: OutputSet) -> None:
         written = sum(1 for t in terms if str(t.get("slug", "")) in lib.terms)
         section_rows.append((section, len(arts), counts, len(terms), written))
     body.append("## By wave { #waves }\n\n| Wave | Backlog | Stub | Draft | Complete |\n|---|---|---|---|---|\n")
-    for w in sorted(by_wave, key=lambda x: (not x.isdigit(), int(x) if x.isdigit() else 0, x)):
+    for w in sorted(by_wave, key=_wave_key):
         k = by_wave[w]
         body.append(f"| {inline(w)} | {k['backlog']} | {k['stub']} | {k['draft']} | {k['complete']} |\n")
     body.append("\n## By section { #sections }\n\n| Section | Articles | Backlog | Stub | Draft | Complete | Terms written |\n|---|---|---|---|---|---|---|\n")

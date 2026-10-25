@@ -1,7 +1,7 @@
 {
  "section": "compare",
- "source": "curriculum-blueprint workflow wf_adef3fd4-7ee (revised)",
- "generated": "2026-10-24",
+ "source": "curriculum workflows wf_adef3fd4-7ee and wf_ffea7aee-d25 (revised)",
+ "generated": "2026-10-25",
  "outlines": [
   {
    "exam": "AZ-104",
@@ -741,12 +741,11 @@
  ],
  "articles": [
   {
-   "folder": "cloud/compare",
    "slug": "rosetta",
    "title": "The Azure–AWS Rosetta: every concept and service pair with fidelity",
    "type": "reference",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Master table of concept and service pairs grouped by capability, generated from one schema-validated dataset in which fidelity must be exact, close, partial or none and every row carries direction, status (GA, preview, retiring, closed to new customers, with dates) and a last-verified date. Explains the rubric with calibrated exact rows (Kubernetes API, PostgreSQL and MySQL engines, Terraform language, OCI images), asymmetric rows such as Key Vault vs KMS, and exam-vs-current-name callouts. Each row links to its deep article, both provider pages and the reference/ limits tables, so the reader can translate any service name and know how far to trust the translation.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D3",
@@ -770,17 +769,17 @@
     "A",
     "P"
    ],
-   "scope": "Master table of concept and service pairs grouped by capability, generated from one schema-validated dataset in which fidelity must be exact, close, partial or none and every row carries direction, status (GA, preview, retiring, closed to new customers, with dates) and a last-verified date. Explains the rubric with calibrated exact rows (Kubernetes API, PostgreSQL and MySQL engines, Terraform language, OCI images), asymmetric rows such as Key Vault vs KMS, and exam-vs-current-name callouts. Each row links to its deep article, both provider pages and the reference/ limits tables, so the reader can translate any service name and know how far to trust the translation.",
    "existing_stub": "",
+   "folder": "cloud/compare",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare",
    "slug": "azure-aws-mental-model-shifts",
    "title": "Thinking in AWS when you think in Azure (and back): the structural shifts",
    "type": "concept",
    "level": "foundation",
-   "wave": 2,
+   "scope": "Teaches the structural differences that change designs: tenant vs account boundary, resource groups vs no container, resource IDs vs ARNs and partitions, one Azure Policy engine vs split AWS controls, region-wide vs AZ-scoped subnets, implicit system routes vs explicit route tables, role assignments vs policy documents and resource policies, free inter-zone traffic on Azure vs billed cross-AZ traffic on AWS, and where each provider draws the shared responsibility line. Each shift comes with a side-by-side example. Afterwards the reader can predict where an Azure-trained design will break on AWS and vice versa.",
    "exams": [
     "AZ-900:D1",
     "AZ-900:D2",
@@ -796,17 +795,17 @@
     "C",
     "R"
    ],
-   "scope": "Teaches the structural differences that change designs: tenant vs account boundary, resource groups vs no container, resource IDs vs ARNs and partitions, one Azure Policy engine vs split AWS controls, region-wide vs AZ-scoped subnets, implicit system routes vs explicit route tables, role assignments vs policy documents and resource policies, free inter-zone traffic on Azure vs billed cross-AZ traffic on AWS, and where each provider draws the shared responsibility line. Each shift comes with a side-by-side example. Afterwards the reader can predict where an Azure-trained design will break on AWS and vice versa.",
    "existing_stub": "",
+   "folder": "cloud/compare",
+   "wave": "1",
    "exists": false
   },
   {
-   "folder": "cloud/compare",
    "slug": "false-friends-azure-aws",
    "title": "False friends: same name, different behaviour on Azure and AWS",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "A filtered view of the Rosetta dataset (rows flagged false friend): the two Gateway Load Balancers (Azure's is chained to public frontends and can't be a UDR next hop), NAT gateways (SKUs vs availability modes), Firewall Managers, NSGs vs security groups, resource groups vs AWS Resource Groups, backup vaults, zone numbering, savings plans, Event Grid vs EventBridge, DDoS Protection vs Shield, and 'global' load balancing. Each entry states the assumption, the real behaviour and the exam trap. Use it as a pre-exam and pre-design checklist.",
    "exams": [
     "AZ-104:D4",
     "SAA-C03:D1",
@@ -817,17 +816,17 @@
     "C",
     "N"
    ],
-   "scope": "A filtered view of the Rosetta dataset (rows flagged false friend): the two Gateway Load Balancers (Azure's is chained to public frontends and can't be a UDR next hop), NAT gateways (SKUs vs availability modes), Firewall Managers, NSGs vs security groups, resource groups vs AWS Resource Groups, backup vaults, zone numbering, savings plans, Event Grid vs EventBridge, DDoS Protection vs Shield, and 'global' load balancing. Each entry states the assumption, the real behaviour and the exam trap. Use it as a pre-exam and pre-design checklist.",
    "existing_stub": "",
+   "folder": "cloud/compare",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare",
    "slug": "well-architected-and-adoption-frameworks-azure-vs-aws",
    "title": "Azure Well-Architected and CAF vs AWS Well-Architected and AWS CAF",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Maps Azure Well-Architected's five pillars to AWS Well-Architected's six (Sustainability), compares review tooling (Azure Well-Architected Review and Advisor vs the AWS Well-Architected Tool, lenses and Trusted Advisor) and gives mapping tables between Microsoft CAF methodologies and AWS CAF perspectives. The frameworks themselves are taught in architecture/well-architected and the migration-strategy taxonomy in architecture/migration. Afterwards the reader can run a review on either cloud and translate findings between vocabularies.",
    "exams": [
     "CLF-C02:D1",
     "AZ-305:D4",
@@ -839,17 +838,17 @@
     "R",
     "X"
    ],
-   "scope": "Maps Azure Well-Architected's five pillars to AWS Well-Architected's six (Sustainability), compares review tooling (Azure Well-Architected Review and Advisor vs the AWS Well-Architected Tool, lenses and Trusted Advisor) and gives mapping tables between Microsoft CAF methodologies and AWS CAF perspectives. The frameworks themselves are taught in architecture/well-architected and the migration-strategy taxonomy in architecture/migration. Afterwards the reader can run a review on either cloud and translate findings between vocabularies.",
    "existing_stub": "",
+   "folder": "cloud/compare",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare",
    "slug": "running-one-system-across-azure-and-aws",
    "title": "Running one system across Azure and AWS: identity, interconnect, security, observability and egress",
    "type": "pattern",
    "level": "expert",
-   "wave": 2,
+   "scope": "Reference pattern for a workload or estate spanning both clouds: workload identity federation in both directions (Entra tokens to AssumeRoleWithWebIdentity; STS GetWebIdentityToken to an Entra federated credential), private interconnect options, unified posture and SIEM (Defender for Cloud's AWS connector, Sentinel's AWS connectors, Arc for EC2), OpenTelemetry-based observability, data replication and the egress bill. Uses the reader's .NET and Angular stack as the running example. Afterwards the reader can design, secure and cost a two-cloud deployment and record the trade-offs in an ADR.",
    "exams": [
     "AZ-305:D4",
     "SAP-C02:D1",
@@ -860,17 +859,17 @@
     "R",
     "S"
    ],
-   "scope": "Reference pattern for a workload or estate spanning both clouds: workload identity federation in both directions (Entra tokens to AssumeRoleWithWebIdentity; STS GetWebIdentityToken to an Entra federated credential), private interconnect options, unified posture and SIEM (Defender for Cloud's AWS connector, Sentinel's AWS connectors, Arc for EC2), OpenTelemetry-based observability, data replication and the egress bill. Uses the reader's .NET and Angular stack as the running example. Afterwards the reader can design, secure and cost a two-cloud deployment and record the trade-offs in an ADR.",
    "existing_stub": "",
+   "folder": "cloud/compare",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/global-infrastructure",
    "slug": "regions-zones-and-sovereign-clouds-azure-vs-aws",
    "title": "Regions, availability zones, partitions and sovereign clouds: Azure vs AWS",
    "type": "cloud-compare",
    "level": "foundation",
-   "wave": 2,
+   "scope": "Compares paired and nonpaired Azure regions with independent AWS Regions, logical-to-physical zone mapping on both (AZ IDs vs List Locations and Check Zone Peers), zone counts, zonal vs zone-redundant vs regional services, Azure's zone-by-zone update rollout, global services, and sovereign clouds and partitions (Azure Government and Azure operated by 21Vianet vs aws-us-gov and aws-cn). Includes the inter-zone data-transfer difference and a placement decision table. Afterwards the reader can choose regions and zone strategies and explain residency and blast-radius consequences on both clouds.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D3",
@@ -884,17 +883,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares paired and nonpaired Azure regions with independent AWS Regions, logical-to-physical zone mapping on both (AZ IDs vs List Locations and Check Zone Peers), zone counts, zonal vs zone-redundant vs regional services, Azure's zone-by-zone update rollout, global services, and sovereign clouds and partitions (Azure Government and Azure operated by 21Vianet vs aws-us-gov and aws-cn). Includes the inter-zone data-transfer difference and a placement decision table. Afterwards the reader can choose regions and zone strategies and explain residency and blast-radius consequences on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/global-infrastructure",
+   "wave": "1",
    "exists": false
   },
   {
-   "folder": "cloud/compare/global-infrastructure",
    "slug": "hybrid-and-edge-platforms-azure-vs-aws",
    "title": "Hybrid and edge platforms: Azure Arc, Azure Local, AKS Arc and Extended Zones vs Outposts, EKS Anywhere, EKS Hybrid Nodes, ECS Anywhere, Local Zones and Wavelength",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure Arc (servers, Kubernetes, data services), Azure Local, AKS enabled by Azure Arc and Extended Zones with Outposts, EKS Anywhere, EKS Hybrid Nodes, ECS Anywhere, Systems Manager hybrid nodes, Local Zones and Wavelength. Contrasts the ownership model (customer hardware managed from Azure vs AWS-owned racks) and how policy, identity and monitoring extend to each. Afterwards the reader can pick a hybrid or edge platform and govern it from either cloud.",
    "exams": [
     "AZ-900:D3",
     "SAA-C03:D4",
@@ -907,17 +906,17 @@
     "R",
     "S"
    ],
-   "scope": "Compares Azure Arc (servers, Kubernetes, data services), Azure Local, AKS enabled by Azure Arc and Extended Zones with Outposts, EKS Anywhere, EKS Hybrid Nodes, ECS Anywhere, Systems Manager hybrid nodes, Local Zones and Wavelength. Contrasts the ownership model (customer hardware managed from Azure vs AWS-owned racks) and how policy, identity and monitoring extend to each. Afterwards the reader can pick a hybrid or edge platform and govern it from either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/global-infrastructure",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "identity-model-entra-tenant-vs-aws-account-and-iam",
    "title": "Identity model: Microsoft Entra tenant vs AWS account, Organization and IAM",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts the Entra tenant (a directory that owns many subscriptions) with the AWS account and the Organization with its single IAM Identity Center instance; principal types (users, groups, service principals vs IAM users, groups, roles, STS sessions); Global Administrator vs root user and centralized root access; and resource IDs vs ARNs and partitions. Includes C# and Python credential-chain samples (DefaultAzureCredential vs the AWS SDK default chain). Afterwards the reader can design break-glass, admin and directory topology on both clouds.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D2",
@@ -936,17 +935,17 @@
     "S",
     "X"
    ],
-   "scope": "Contrasts the Entra tenant (a directory that owns many subscriptions) with the AWS account and the Organization with its single IAM Identity Center instance; principal types (users, groups, service principals vs IAM users, groups, roles, STS sessions); Global Administrator vs root user and centralized root access; and resource IDs vs ARNs and partitions. Includes C# and Python credential-chain samples (DefaultAzureCredential vs the AWS SDK default chain). Afterwards the reader can design break-glass, admin and directory topology on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "authorization-azure-rbac-vs-aws-iam-policies",
    "title": "Authorization: Azure RBAC role assignments vs AWS IAM policy evaluation",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Explains scoped role assignments with inheritance, Actions and DataActions, and deny assignments (platform-created in GA, customer-managed in private preview) against identity policies, resource-based policies, permissions boundaries, session policies, SCPs and RCPs with the full AWS evaluation logic. Covers where Azure keeps data-plane permissions on resources (ADLS ACLs, SAS rules, legacy Key Vault access policies), ABAC on both, cross-account vs cross-subscription access, and effective-access tools (Check access vs policy simulator and Access Analyzer). Afterwards the reader can write least-privilege grants on either cloud and debug an access-denied.",
    "exams": [
     "AZ-104:D1",
     "AZ-305:D1",
@@ -963,17 +962,17 @@
     "S",
     "X"
    ],
-   "scope": "Explains scoped role assignments with inheritance, Actions and DataActions, and deny assignments (platform-created in GA, customer-managed in private preview) against identity policies, resource-based policies, permissions boundaries, session policies, SCPs and RCPs with the full AWS evaluation logic. Covers where Azure keeps data-plane permissions on resources (ADLS ACLs, SAS rules, legacy Key Vault access policies), ABAC on both, cross-account vs cross-subscription access, and effective-access tools (Check access vs policy simulator and Access Analyzer). Afterwards the reader can write least-privilege grants on either cloud and debug an access-denied.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "workload-identity-managed-identities-vs-iam-roles",
    "title": "Workload identity: managed identities and federation vs IAM roles, Pod Identity and OIDC",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares system- and user-assigned managed identities with instance profiles and execution or task roles, service principals with secrets vs IAM users with access keys, Entra Workload ID with EKS Pod Identity and IRSA, and federated identity credentials with IAM OIDC providers for GitHub Actions and Azure Pipelines. Covers cross-cloud federation in both directions, including IAM outbound identity federation (STS GetWebIdentityToken). Shows C# and Python token acquisition plus Bicep, CloudFormation and Terraform wiring, linking to security/workload-identity rather than repeating it.",
    "exams": [
     "AZ-305:D1",
     "SAA-C03:D1",
@@ -994,17 +993,17 @@
     "X",
     "P"
    ],
-   "scope": "Compares system- and user-assigned managed identities with instance profiles and execution or task roles, service principals with secrets vs IAM users with access keys, Entra Workload ID with EKS Pod Identity and IRSA, and federated identity credentials with IAM OIDC providers for GitHub Actions and Azure Pipelines. Covers cross-cloud federation in both directions, including IAM outbound identity federation (STS GetWebIdentityToken). Shows C# and Python token acquisition plus Bicep, CloudFormation and Terraform wiring, linking to security/workload-identity rather than repeating it.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "human-identities-entra-vs-iam-identity-center-and-cognito",
    "title": "Human identities: Entra ID vs IAM Identity Center (workforce) and External ID vs Cognito (customers)",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Workforce half: Entra ID SSO, Conditional Access, ID Protection, Microsoft-enforced MFA, SSPR and B2B guests vs IAM Identity Center permission sets, IAM condition keys and cross-account roles, with the recommended pattern of Entra ID as the external IdP for Identity Center via SAML and SCIM. Customer half: Microsoft Entra External ID (and legacy Azure AD B2C, closed to new customers) vs Cognito user pools and identity pools. Afterwards the reader can design SSO for engineers across both clouds and pick a CIAM service for an app.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D1",
@@ -1025,17 +1024,17 @@
     "X",
     "D"
    ],
-   "scope": "Workforce half: Entra ID SSO, Conditional Access, ID Protection, Microsoft-enforced MFA, SSPR and B2B guests vs IAM Identity Center permission sets, IAM condition keys and cross-account roles, with the recommended pattern of Entra ID as the external IdP for Identity Center via SAML and SCIM. Customer half: Microsoft Entra External ID (and legacy Azure AD B2C, closed to new customers) vs Cognito user pools and identity pools. Afterwards the reader can design SSO for engineers across both clouds and pick a CIAM service for an app.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "directory-services-and-hybrid-identity-azure-vs-aws",
    "title": "Directory services and hybrid identity: Entra Connect, Cloud Sync and Entra Domain Services vs AWS Managed Microsoft AD, AD Connector, Simple AD and Identity Center AD sync",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Entra Connect Sync and Cloud Sync (password hash sync, pass-through authentication) with Identity Center sync through AD Connector, AWS Managed Microsoft AD or SCIM, and Entra Domain Services and AD DS on VMs with AWS Managed Microsoft AD, AD Connector and Simple AD, including forest trusts. Afterwards the reader can connect an on-premises Active Directory to either cloud and choose a managed domain for lift-and-shift Windows workloads.",
    "exams": [
     "AZ-900:D2",
     "AZ-305:D1",
@@ -1049,17 +1048,17 @@
     "R",
     "S"
    ],
-   "scope": "Compares Entra Connect Sync and Cloud Sync (password hash sync, pass-through authentication) with Identity Center sync through AD Connector, AWS Managed Microsoft AD or SCIM, and Entra Domain Services and AD DS on VMs with AWS Managed Microsoft AD, AD Connector and Simple AD, including forest trusts. Afterwards the reader can connect an on-premises Active Directory to either cloud and choose a managed domain for lift-and-shift Windows workloads.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "privileged-access-and-identity-governance-azure-vs-aws",
    "title": "Privileged access and identity governance: PIM, access reviews, entitlement management and CIEM vs IAM Identity Center, IAM Access Analyzer and partner just-in-time access",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 2,
+   "scope": "Contrasts PIM for Entra roles, Azure roles and groups, access reviews, entitlement management and Defender CSPM permissions management (CIEM) with IAM Identity Center permission sets, IAM Access Analyzer unused, external and internal access findings, and partner or TEAM-based temporary elevated access, since AWS has no first-party just-in-time access. Covers emergency-access accounts and least-privilege audits on both. Afterwards the reader can design privileged access and recertification for a two-cloud estate.",
    "exams": [
     "AZ-305:D1",
     "SAP-C02:D3",
@@ -1073,17 +1072,17 @@
     "S",
     "X"
    ],
-   "scope": "Contrasts PIM for Entra roles, Azure roles and groups, access reviews, entitlement management and Defender CSPM permissions management (CIEM) with IAM Identity Center permission sets, IAM Access Analyzer unused, external and internal access findings, and partner or TEAM-based temporary elevated access, since AWS has no first-party just-in-time access. Covers emergency-access accounts and least-privilege audits on both. Afterwards the reader can design privileged access and recertification for a two-cloud estate.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/identity",
    "slug": "application-authorization-entra-app-registrations-vs-cognito-and-verified-permissions",
    "title": "Application authorization: Entra app registrations, app roles and scopes vs Cognito resource servers, API Gateway and ALB authorizers, and Amazon Verified Permissions",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Entra app registrations, enterprise apps, app roles, scopes and consent with Cognito resource servers and scopes, API Gateway JWT and Lambda authorizers, ALB authentication, and Amazon Verified Permissions (Cedar), which has no Azure counterpart. Shows the same ASP.NET Core and Python API protected on both, linking to security/iam for OAuth and OIDC and to security/capability-based-authz. Afterwards the reader can secure APIs and SPAs with either provider's identity stack.",
    "exams": [
     "DVA-C02:D2",
     "SC-300:D3",
@@ -1095,17 +1094,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares Entra app registrations, enterprise apps, app roles, scopes and consent with Cognito resource servers and scopes, API Gateway JWT and Lambda authorizers, ALB authentication, and Amazon Verified Permissions (Cedar), which has no Azure counterpart. Shows the same ASP.NET Core and Python API protected on both, linking to security/iam for OAuth and OIDC and to security/capability-based-authz. Afterwards the reader can secure APIs and SPAs with either provider's identity stack.",
    "existing_stub": "",
+   "folder": "cloud/compare/identity",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/governance",
    "slug": "resource-hierarchy-management-groups-subscriptions-vs-organizations-accounts",
    "title": "Resource hierarchy: management groups, subscriptions and resource groups vs Organizations, OUs and accounts",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Maps tenant root group, management groups, subscriptions and resource groups to organization root, OUs and accounts, including nesting limits, the missing resource-group concept on AWS, blast radius, quotas, tagging strategy (tag inheritance vs tag policies and cost allocation tags) and billing linkage. Gives reference hierarchies for the same enterprise on both clouds. Afterwards the reader can propose an account or subscription structure and justify it.",
    "exams": [
     "AZ-900:D2",
     "AZ-900:D3",
@@ -1119,17 +1118,17 @@
     "C",
     "R"
    ],
-   "scope": "Maps tenant root group, management groups, subscriptions and resource groups to organization root, OUs and accounts, including nesting limits, the missing resource-group concept on AWS, blast radius, quotas, tagging strategy (tag inheritance vs tag policies and cost allocation tags) and billing linkage. Gives reference hierarchies for the same enterprise on both clouds. Afterwards the reader can propose an account or subscription structure and justify it.",
    "existing_stub": "",
+   "folder": "cloud/compare/governance",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/governance",
    "slug": "guardrails-azure-policy-vs-scps-rcps-and-config",
    "title": "Guardrails: Azure Policy vs SCPs, RCPs, declarative policies, AWS Config and CloudFormation Hooks",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts Azure Policy's single engine (deny, denyAction, audit, modify, deployIfNotExists, exemptions, initiatives) with AWS's split into preventive (SCPs, RCPs, declarative policies), proactive (CloudFormation Hooks), detective (Config rules, conformance packs) and remediation (Systems Manager Automation) controls, noting that RCPs have no Azure counterpart. Also covers resource locks vs deletion protection, inheritance semantics (additive vs intersection), and Resource Graph vs Config queries and Resource Explorer. Afterwards the reader can implement the same control set on both clouds.",
    "exams": [
     "AZ-900:D3",
     "AZ-104:D1",
@@ -1151,17 +1150,17 @@
     "X",
     "P"
    ],
-   "scope": "Contrasts Azure Policy's single engine (deny, denyAction, audit, modify, deployIfNotExists, exemptions, initiatives) with AWS's split into preventive (SCPs, RCPs, declarative policies), proactive (CloudFormation Hooks), detective (Config rules, conformance packs) and remediation (Systems Manager Automation) controls, noting that RCPs have no Azure counterpart. Also covers resource locks vs deletion protection, inheritance semantics (additive vs intersection), and Resource Graph vs Config queries and Resource Explorer. Afterwards the reader can implement the same control set on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/governance",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/governance",
    "slug": "landing-zones-azure-landing-zones-vs-control-tower",
    "title": "Landing zones: Azure landing zones vs AWS Control Tower and Landing Zone Accelerator",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 2,
+   "scope": "Compares the ALZ conceptual architecture, platform vs application landing zones, the ALZ Bicep and Terraform accelerator with Azure Verified Modules and subscription vending with Control Tower (landing zone 4.0, controls-dedicated option, Account Factory and AFT) and the Landing Zone Accelerator on AWS. Covers the Azure Blueprints retirement (2027-01-31) and the path to deployment stacks and template specs. Afterwards the reader can stand up or assess a landing zone on either cloud and map controls between them.",
    "exams": [
     "AZ-305:D1",
     "SAA-C03:D1",
@@ -1178,17 +1177,17 @@
     "X",
     "P"
    ],
-   "scope": "Compares the ALZ conceptual architecture, platform vs application landing zones, the ALZ Bicep and Terraform accelerator with Azure Verified Modules and subscription vending with Control Tower (landing zone 4.0, controls-dedicated option, Account Factory and AFT) and the Landing Zone Accelerator on AWS. Covers the Azure Blueprints retirement (2027-01-31) and the path to deployment stacks and template specs. Afterwards the reader can stand up or assess a landing zone on either cloud and map controls between them.",
    "existing_stub": "",
+   "folder": "cloud/compare/governance",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/governance",
    "slug": "resource-sharing-and-delegation-ram-vs-azure-cross-subscription",
    "title": "Resource sharing and delegation: AWS RAM, VPC sharing and delegated administrators vs Azure cross-subscription RBAC, Lighthouse and shared hub networks",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Explains AWS RAM shares, VPC sharing, delegated administrator accounts and cross-account roles against Azure's cross-subscription role assignments in one tenant, Azure Lighthouse for cross-tenant delegation, Compute Gallery sharing and shared hub networks. Shows why Azure has no shared-subnet model (a NIC must be in its VNet's subscription) and how that changes network topology. Afterwards the reader can design central networking and security-tooling administration on both clouds.",
    "exams": [
     "SAA-C03:D1",
     "SAP-C02:D1",
@@ -1198,17 +1197,17 @@
     "C",
     "R"
    ],
-   "scope": "Explains AWS RAM shares, VPC sharing, delegated administrator accounts and cross-account roles against Azure's cross-subscription role assignments in one tenant, Azure Lighthouse for cross-tenant delegation, Compute Gallery sharing and shared hub networks. Shows why Azure has no shared-subnet model (a NIC must be in its VNet's subscription) and how that changes network topology. Afterwards the reader can design central networking and security-tooling administration on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/governance",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "vnet-vs-vpc",
    "title": "Azure VNet vs Amazon VPC: address space, subnets, routing and egress",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Covers region-wide vs AZ-scoped subnets, implicit system routes and UDRs vs explicit route tables and internet gateways, default outbound access and private-by-default subnets vs the default VPC, NAT Gateway Standard and StandardV2 vs zonal and regional AWS NAT gateways, public IPs and prefixes vs Elastic IPs and IPAM pools, subnet delegation and IPv6. Includes Bicep, CloudFormation and Terraform for the same three-tier network. Afterwards the reader can build equivalent networks and predict egress behaviour.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D3",
@@ -1226,17 +1225,17 @@
     "N",
     "R"
    ],
-   "scope": "Covers region-wide vs AZ-scoped subnets, implicit system routes and UDRs vs explicit route tables and internet gateways, default outbound access and private-by-default subnets vs the default VPC, NAT Gateway Standard and StandardV2 vs zonal and regional AWS NAT gateways, public IPs and prefixes vs Elastic IPs and IPAM pools, subnet delegation and IPv6. Includes Bicep, CloudFormation and Terraform for the same three-tier network. Afterwards the reader can build equivalent networks and predict egress behaviour.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "nsg-vs-security-groups-and-network-acls",
    "title": "NSGs and ASGs vs security groups and network ACLs",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts stateful NSGs with prioritised allow and deny rules on subnets or NICs against stateful allow-only security groups on ENIs and stateless network ACLs, ASGs vs security-group references, service tags vs managed prefix lists, and Virtual Network Manager security admin rules vs Firewall Manager security-group policies. Shows how to evaluate effective rules on each; flow logs are in the network-monitoring article. Afterwards the reader can segment workloads and troubleshoot blocked traffic on both clouds.",
    "exams": [
     "AZ-104:D4",
     "SAA-C03:D1",
@@ -1252,17 +1251,17 @@
     "R",
     "S"
    ],
-   "scope": "Contrasts stateful NSGs with prioritised allow and deny rules on subnets or NICs against stateful allow-only security groups on ENIs and stateless network ACLs, ASGs vs security-group references, service tags vs managed prefix lists, and Virtual Network Manager security admin rules vs Firewall Manager security-group policies. Shows how to evaluate effective rules on each; flow logs are in the network-monitoring article. Afterwards the reader can segment workloads and troubleshoot blocked traffic on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "private-endpoint-vs-privatelink",
    "title": "Private Endpoint and service endpoints vs AWS PrivateLink and gateway endpoints",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Explains per-resource private endpoints vs per-service interface endpoints, service endpoints and policies vs gateway endpoints, Private Link service vs endpoint services, private DNS integration (privatelink zones vs endpoint-managed private DNS), and Network Security Perimeter vs AWS data-perimeter policies. Includes hybrid DNS resolution for private PaaS. Afterwards the reader can design private-only PaaS access and avoid the classic DNS failures.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D4",
@@ -1281,17 +1280,17 @@
     "R",
     "S"
    ],
-   "scope": "Explains per-resource private endpoints vs per-service interface endpoints, service endpoints and policies vs gateway endpoints, Private Link service vs endpoint services, private DNS integration (privatelink zones vs endpoint-managed private DNS), and Network Security Perimeter vs AWS data-perimeter policies. Includes hybrid DNS resolution for private PaaS. Afterwards the reader can design private-only PaaS access and avoid the classic DNS failures.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "hub-and-spoke-virtual-wan-vs-transit-gateway",
    "title": "Hub-and-spoke and transit: VNet peering, Virtual WAN, Virtual Network Manager and Route Server vs VPC peering, Transit Gateway, Cloud WAN and VPC Route Server",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 2,
+   "scope": "Covers non-transitive peering on both clouds (Azure can transit through a hub NVA with UDRs; AWS drops such traffic), gateway transit, customer-managed hubs and Virtual Network Manager connectivity vs Virtual WAN hubs and routing intent, Transit Gateway route tables and appliance mode, Cloud WAN segments, Azure Route Server vs VPC Route Server, and the two Gateway Load Balancers' different insertion models. Includes cost-of-transit comparisons. Afterwards the reader can design multi-VNet and multi-VPC topologies with inspection on either cloud.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D3",
@@ -1309,17 +1308,17 @@
     "R",
     "S"
    ],
-   "scope": "Covers non-transitive peering on both clouds (Azure can transit through a hub NVA with UDRs; AWS drops such traffic), gateway transit, customer-managed hubs and Virtual Network Manager connectivity vs Virtual WAN hubs and routing intent, Transit Gateway route tables and appliance mode, Cloud WAN segments, Azure Route Server vs VPC Route Server, and the two Gateway Load Balancers' different insertion models. Includes cost-of-transit comparisons. Afterwards the reader can design multi-VNet and multi-VPC topologies with inspection on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "expressroute-vs-direct-connect-and-vpn",
    "title": "Hybrid and cross-cloud connectivity: ExpressRoute and VPN Gateway vs Direct Connect, Site-to-Site VPN and Client VPN",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 2,
+   "scope": "Compares ExpressRoute circuits, private and Microsoft peering, gateways, Global Reach, FastPath, ExpressRoute Direct and encryption with Direct Connect connections, private, public and transit virtual interfaces, Direct Connect gateways, SiteLink and MACsec, plus site-to-site and point-to-site VPN vs Site-to-Site VPN and Client VPN and their resiliency models. Ends with Azure-to-AWS links: VPN between gateways, colocation or partner fabrics, and AWS Interconnect - multicloud, whose Azure integration is in preview. Afterwards the reader can design resilient hybrid and cross-cloud links.",
    "exams": [
     "AZ-900:D2",
     "AZ-305:D4",
@@ -1339,17 +1338,17 @@
     "R",
     "S"
    ],
-   "scope": "Compares ExpressRoute circuits, private and Microsoft peering, gateways, Global Reach, FastPath, ExpressRoute Direct and encryption with Direct Connect connections, private, public and transit virtual interfaces, Direct Connect gateways, SiteLink and MACsec, plus site-to-site and point-to-site VPN vs Site-to-Site VPN and Client VPN and their resiliency models. Ends with Azure-to-AWS links: VPN between gateways, colocation or partner fabrics, and AWS Interconnect - multicloud, whose Azure integration is in preview. Afterwards the reader can design resilient hybrid and cross-cloud links.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "azure-dns-vs-route-53",
    "title": "Azure DNS, Private Resolver and Traffic Manager vs Amazon Route 53",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Covers public and private zones, alias records, auto-registration, DNS Private Resolver forwarding rulesets vs Route 53 Resolver endpoints and rules shared through RAM, DNS resolver policy vs Resolver DNS Firewall, and Traffic Manager profiles vs Route 53 routing policies and health checks. Shows hybrid DNS for both clouds with on-premises. Afterwards the reader can design name resolution and DNS-based failover on each cloud.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D4",
@@ -1368,17 +1367,17 @@
     "N",
     "R"
    ],
-   "scope": "Covers public and private zones, alias records, auto-registration, DNS Private Resolver forwarding rulesets vs Route 53 Resolver endpoints and rules shared through RAM, DNS resolver policy vs Resolver DNS Firewall, and Traffic Manager profiles vs Route 53 routing policies and health checks. Shows hybrid DNS for both clouds with on-premises. Afterwards the reader can design name resolution and DNS-based failover on each cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "load-balancer-and-application-gateway-vs-elastic-load-balancing",
    "title": "Azure Load Balancer and Application Gateway vs NLB, ALB and Gateway Load Balancer",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares L4 Azure Load Balancer (HA ports, outbound rules) with NLB, L7 Application Gateway v2 and WAF_v2 with ALB, Application Gateway for Containers with the AWS Load Balancer Controller, and the two Gateway Load Balancers. Covers health probes, TLS, autoscaling and pricing units, and links to the global tier in the edge article. Afterwards the reader can pick and configure the right regional load balancer on either cloud.",
    "exams": [
     "AZ-104:D4",
     "AZ-305:D4",
@@ -1394,17 +1393,17 @@
     "N",
     "R"
    ],
-   "scope": "Compares L4 Azure Load Balancer (HA ports, outbound rules) with NLB, L7 Application Gateway v2 and WAF_v2 with ALB, Application Gateway for Containers with the AWS Load Balancer Controller, and the two Gateway Load Balancers. Covers health probes, TLS, autoscaling and pricing units, and links to the global tier in the edge article. Afterwards the reader can pick and configure the right regional load balancer on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "front-door-vs-cloudfront-and-global-accelerator",
    "title": "Global edge: Azure Front Door and the global load balancer vs CloudFront and Global Accelerator",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts Front Door Standard/Premium (CDN, global L7 routing, WAF, Private Link origins, rules engine) with CloudFront (caching, VPC origins, CloudFront Functions and Lambda@Edge, which Azure can't match), and Global Accelerator with the Azure Load Balancer global tier (formerly cross-region load balancer; the AZ-700 outline still says cross-region). Flags the Front Door (classic) retirement on 2027-03-31 and gives a global-routing decision table with Traffic Manager and Route 53. Afterwards the reader can design global entry points with private origins on both clouds.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1420,17 +1419,17 @@
     "N",
     "R"
    ],
-   "scope": "Contrasts Front Door Standard/Premium (CDN, global L7 routing, WAF, Private Link origins, rules engine) with CloudFront (caching, VPC origins, CloudFront Functions and Lambda@Edge, which Azure can't match), and Global Accelerator with the Azure Load Balancer global tier (formerly cross-region load balancer; the AZ-700 outline still says cross-region). Flags the Front Door (classic) retirement on 2027-03-31 and gives a global-routing decision table with Traffic Manager and Route 53. Afterwards the reader can design global entry points with private origins on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "network-protection-azure-firewall-waf-ddos-vs-network-firewall-waf-shield",
    "title": "Network protection: Azure Firewall, WAF and DDoS Protection vs AWS Network Firewall, AWS WAF and Shield",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure Firewall tiers (IDPS, TLS inspection) and secured virtual hubs with AWS Network Firewall, both Firewall Managers, Azure WAF on Front Door and Application Gateway with AWS WAF web ACLs, and DDoS Protection with Shield Standard and Advanced. Shows centralised-inspection designs on both and links to security/network-security for vendor-neutral concepts. Afterwards the reader can place and configure network protection consistently across both clouds.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D1",
@@ -1449,17 +1448,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares Azure Firewall tiers (IDPS, TLS inspection) and secured virtual hubs with AWS Network Firewall, both Firewall Managers, Azure WAF on Front Door and Application Gateway with AWS WAF web ACLs, and DDoS Protection with Shield Standard and Advanced. Shows centralised-inspection designs on both and links to security/network-security for vendor-neutral concepts. Afterwards the reader can place and configure network protection consistently across both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "network-monitoring-and-troubleshooting-azure-vs-aws",
    "title": "Network monitoring and troubleshooting: Network Watcher, Connection monitor, VNet flow logs, Traffic Analytics and VNet TAP vs Reachability Analyzer, Network Access Analyzer, VPC Flow Logs, Traffic Mirroring and CloudWatch network monitors",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Network Watcher (IP flow verify, next hop, effective security rules, connection troubleshoot), Connection monitor, VNet flow logs with Traffic Analytics and virtual network TAP (preview) with VPC Reachability Analyzer, Network Access Analyzer, VPC Flow Logs, Traffic Mirroring, and CloudWatch Network Synthetic Monitor and Network Flow Monitor. Separates configuration analysis from active probing on each. Afterwards the reader can troubleshoot connectivity and investigate flows on either cloud.",
    "exams": [
     "AZ-104:D4",
     "AZ-104:D5",
@@ -1476,17 +1475,17 @@
     "R",
     "S"
    ],
-   "scope": "Compares Network Watcher (IP flow verify, next hop, effective security rules, connection troubleshoot), Connection monitor, VNet flow logs with Traffic Analytics and virtual network TAP (preview) with VPC Reachability Analyzer, Network Access Analyzer, VPC Flow Logs, Traffic Mirroring, and CloudWatch Network Synthetic Monitor and Network Flow Monitor. Separates configuration analysis from active probing on each. Afterwards the reader can troubleshoot connectivity and investigate flows on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/networking",
    "slug": "zero-trust-private-access-entra-global-secure-access-vs-verified-access",
    "title": "Zero-trust access to private apps: Microsoft Entra Private Access, Internet Access and application proxy vs AWS Verified Access and Client VPN",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Global Secure Access (Microsoft Entra Private Access and Internet Access) and Entra application proxy with AWS Verified Access and Client VPN for reaching private apps without broad network access. Covers identity and device signals, connectors vs Verified Access endpoints and policies, and the lack of an AWS secure web gateway. Afterwards the reader can replace VPN-based access to private apps on either cloud.",
    "exams": [
     "AZ-305:D1",
     "SAA-C03:D1",
@@ -1501,17 +1500,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares Global Secure Access (Microsoft Entra Private Access and Internet Access) and Entra application proxy with AWS Verified Access and Client VPN for reaching private apps without broad network access. Covers identity and device signals, connectors vs Verified Access endpoints and policies, and the lack of an AWS secure web gateway. Afterwards the reader can replace VPN-based access to private apps on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/networking",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/compute",
    "slug": "azure-vms-and-scale-sets-vs-ec2-and-auto-scaling",
    "title": "Azure VMs, Virtual Machine Scale Sets and Compute Fleet vs EC2, Auto Scaling and EC2 Fleet",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Covers sizes vs instance types, images (Compute Gallery and VM Image Builder vs AMIs and EC2 Image Builder), availability sets, proximity placement groups and zones vs placement groups, Spot, Dedicated Hosts, hibernation, scale sets and Compute Fleet vs Auto Scaling groups and EC2 Fleet, Trusted Launch vs NitroTPM, disk encryption, and moving VMs. Closes with specialised compute: Batch, CycleCloud vs ParallelCluster, and Azure VMware Solution vs VMware Cloud on AWS and Amazon EVS. Afterwards the reader can design equivalent VM estates.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D3",
@@ -1529,17 +1528,17 @@
     "R",
     "S"
    ],
-   "scope": "Covers sizes vs instance types, images (Compute Gallery and VM Image Builder vs AMIs and EC2 Image Builder), availability sets, proximity placement groups and zones vs placement groups, Spot, Dedicated Hosts, hibernation, scale sets and Compute Fleet vs Auto Scaling groups and EC2 Fleet, Trusted Launch vs NitroTPM, disk encryption, and moving VMs. Closes with specialised compute: Batch, CycleCloud vs ParallelCluster, and Azure VMware Solution vs VMware Cloud on AWS and Amazon EVS. Afterwards the reader can design equivalent VM estates.",
    "existing_stub": "",
+   "folder": "cloud/compare/compute",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/compute",
    "slug": "fleet-and-configuration-management-arc-and-update-manager-vs-systems-manager",
    "title": "Fleet and configuration management: Azure Arc, Update Manager, Machine Configuration, Automation and Run Command vs AWS Systems Manager",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure Arc-enabled servers, Update Manager, Machine Configuration, Automation runbooks and State Configuration, Run Command, Change Tracking and Inventory, and Bastion and JIT access with Systems Manager hybrid activations, Patch Manager, State Manager, Automation, Run Command, Inventory and Session Manager. Notes that Systems Manager Incident Manager is closed to new customers. Afterwards the reader can patch, configure and operate the same mixed fleet from either cloud.",
    "exams": [
     "SAP-C02:D2",
     "SAP-C02:D3",
@@ -1556,17 +1555,17 @@
     "P",
     "S"
    ],
-   "scope": "Compares Azure Arc-enabled servers, Update Manager, Machine Configuration, Automation runbooks and State Configuration, Run Command, Change Tracking and Inventory, and Bastion and JIT access with Systems Manager hybrid activations, Patch Manager, State Manager, Automation, Run Command, Inventory and Session Manager. Notes that Systems Manager Incident Manager is closed to new customers. Afterwards the reader can patch, configure and operate the same mixed fleet from either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/compute",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/compute",
    "slug": "app-service-vs-elastic-beanstalk-ecs-express-mode-and-amplify",
    "title": "Azure App Service and Static Web Apps vs Elastic Beanstalk, ECS Express Mode and Amplify Hosting",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares App Service plans, deployment slots, Easy Auth, VNet integration, certificates, custom domains and backups with Elastic Beanstalk environments and URL swaps, ECS Express Mode (the recommended path now that App Runner is closed to new customers) and Amplify Hosting vs Static Web Apps. Focuses on hosting a .NET API plus Angular front end on each. Afterwards the reader can map an App Service estate to AWS and back.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D3",
@@ -1583,17 +1582,17 @@
     "D",
     "S"
    ],
-   "scope": "Compares App Service plans, deployment slots, Easy Auth, VNet integration, certificates, custom domains and backups with Elastic Beanstalk environments and URL swaps, ECS Express Mode (the recommended path now that App Runner is closed to new customers) and Amplify Hosting vs Static Web Apps. Focuses on hosting a .NET API plus Angular front end on each. Afterwards the reader can map an App Service estate to AWS and back.",
    "existing_stub": "",
+   "folder": "cloud/compare/compute",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/compute",
    "slug": "end-user-computing-avd-and-windows-365-vs-workspaces",
    "title": "End-user computing: Azure Virtual Desktop and Windows 365 vs Amazon WorkSpaces and Amazon WorkSpaces Applications",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure Virtual Desktop host pools, multi-session Windows and RemoteApp, and Windows 365 Cloud PCs with Amazon WorkSpaces Personal and Pools and Amazon WorkSpaces Applications (formerly Amazon AppStream 2.0). Covers identity, networking, image management and pricing models. Afterwards the reader can choose a virtual desktop or app-streaming service on either cloud.",
    "exams": [
     "AZ-900:D2",
     "SAP-C02:D2"
@@ -1602,17 +1601,17 @@
     "F",
     "R"
    ],
-   "scope": "Compares Azure Virtual Desktop host pools, multi-session Windows and RemoteApp, and Windows 365 Cloud PCs with Amazon WorkSpaces Personal and Pools and Amazon WorkSpaces Applications (formerly Amazon AppStream 2.0). Covers identity, networking, image management and pricing models. Afterwards the reader can choose a virtual desktop or app-streaming service on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/compute",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/containers",
    "slug": "aks-vs-eks",
    "title": "AKS vs EKS: control plane, nodes, networking, identity and add-ons",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Covers pricing tiers and support windows (AKS LTS vs EKS extended support), AKS Automatic vs EKS Auto Mode, node autoprovisioning vs Karpenter, node pools vs node groups, CNIs (Azure CNI Overlay and Cilium vs VPC CNI), Application Gateway for Containers vs the Load Balancer Controller, Workload ID vs Pod Identity, the Istio add-on vs life after App Mesh, Fleet Manager, and Defender for Containers vs GuardDuty and Inspector. Kubernetes core concepts stay in devops/kubernetes. Afterwards the reader can run the same workload on either cluster with equivalent security.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1627,17 +1626,17 @@
     "D",
     "S"
    ],
-   "scope": "Covers pricing tiers and support windows (AKS LTS vs EKS extended support), AKS Automatic vs EKS Auto Mode, node autoprovisioning vs Karpenter, node pools vs node groups, CNIs (Azure CNI Overlay and Cilium vs VPC CNI), Application Gateway for Containers vs the Load Balancer Controller, Workload ID vs Pod Identity, the Istio add-on vs life after App Mesh, Fleet Manager, and Defender for Containers vs GuardDuty and Inspector. Kubernetes core concepts stay in devops/kubernetes. Afterwards the reader can run the same workload on either cluster with equivalent security.",
    "existing_stub": "",
+   "folder": "cloud/compare/containers",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/containers",
    "slug": "container-apps-aci-and-acr-vs-ecs-fargate-and-ecr",
    "title": "Azure Container Apps, ACI and Container Registry vs Amazon ECS on Fargate, ECS Express Mode, App Runner and ECR",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts Container Apps (KEDA scaling, revisions, Dapr, jobs, scale-to-zero, serverless GPUs) with ECS services on Fargate, ECS Express Mode and Service Connect, App Runner's closed-to-new-customers status, and ACI container groups vs Fargate tasks. Also covers registries: ACR tiers, artifact cache, geo-replication and ACR Tasks vs ECR pull-through cache, replication and CodeBuild. Afterwards the reader can choose a serverless container platform and registry on each cloud and port between them.",
    "exams": [
     "AZ-104:D3",
     "AZ-305:D4",
@@ -1654,17 +1653,17 @@
     "K",
     "S"
    ],
-   "scope": "Contrasts Container Apps (KEDA scaling, revisions, Dapr, jobs, scale-to-zero, serverless GPUs) with ECS services on Fargate, ECS Express Mode and Service Connect, App Runner's closed-to-new-customers status, and ACI container groups vs Fargate tasks. Also covers registries: ACR tiers, artifact cache, geo-replication and ACR Tasks vs ECR pull-through cache, replication and CodeBuild. Afterwards the reader can choose a serverless container platform and registry on each cloud and port between them.",
    "existing_stub": "",
+   "folder": "cloud/compare/containers",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/serverless-integration",
    "slug": "azure-functions-vs-aws-lambda",
    "title": "Azure Functions vs AWS Lambda",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares hosting plans (Flex Consumption, Premium, Dedicated, Container Apps, and legacy Linux Consumption retiring 2028-09-30) with Lambda on-demand, provisioned concurrency, SnapStart and Managed Instances; triggers and bindings vs event source mappings; timeouts, memory and cold starts, VNet access and the .NET isolated worker vs the Lambda .NET runtime. Includes the same function in C# and Python on both. Afterwards the reader can port functions and pick the right plan.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1681,17 +1680,17 @@
     "R",
     "S"
    ],
-   "scope": "Compares hosting plans (Flex Consumption, Premium, Dedicated, Container Apps, and legacy Linux Consumption retiring 2028-09-30) with Lambda on-demand, provisioned concurrency, SnapStart and Managed Instances; triggers and bindings vs event source mappings; timeouts, memory and cold starts, VNet access and the .NET isolated worker vs the Lambda .NET runtime. Includes the same function in C# and Python on both. Afterwards the reader can port functions and pick the right plan.",
    "existing_stub": "",
+   "folder": "cloud/compare/serverless-integration",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/serverless-integration",
    "slug": "logic-apps-and-durable-functions-vs-step-functions",
    "title": "Logic Apps and Durable Functions vs AWS Step Functions and Lambda durable functions",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Contrasts connector-centric Logic Apps (Consumption, Standard) and code-first Durable Functions (including Durable Task Scheduler) with Step Functions Standard and Express workflows and Lambda durable functions, which now have SDKs for C#, Python, Java, Go, JavaScript and TypeScript and run for up to a year. Covers human-approval patterns, agentic orchestration, error handling, long waits and cost models. Afterwards the reader can choose an orchestration style and translate workflows between clouds.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1708,17 +1707,17 @@
     "A",
     "S"
    ],
-   "scope": "Contrasts connector-centric Logic Apps (Consumption, Standard) and code-first Durable Functions (including Durable Task Scheduler) with Step Functions Standard and Express workflows and Lambda durable functions, which now have SDKs for C#, Python, Java, Go, JavaScript and TypeScript and run for up to a year. Covers human-approval patterns, agentic orchestration, error handling, long waits and cost models. Afterwards the reader can choose an orchestration style and translate workflows between clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/serverless-integration",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/serverless-integration",
    "slug": "api-management-vs-api-gateway",
    "title": "Azure API Management vs Amazon API Gateway, including real-time and AI gateways",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares APIM tiers, policies, products, workspaces, developer portal, self-hosted gateway and AI gateway with API Gateway REST, HTTP and WebSocket APIs, usage plans and throttling, authorizers and mapping templates, and with AgentCore Gateway for MCP tools. Also covers managed real-time options (SignalR Service and Web PubSub vs API Gateway WebSocket APIs and AppSync Events), linking to messaging/signalr-websockets. Afterwards the reader can design a governed API layer on both clouds.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1737,17 +1736,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares APIM tiers, policies, products, workspaces, developer portal, self-hosted gateway and AI gateway with API Gateway REST, HTTP and WebSocket APIs, usage plans and throttling, authorizers and mapping templates, and with AgentCore Gateway for MCP tools. Also covers managed real-time options (SignalR Service and Web PubSub vs API Gateway WebSocket APIs and AppSync Events), linking to messaging/signalr-websockets. Afterwards the reader can design a governed API layer on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/serverless-integration",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/serverless-integration",
    "slug": "saas-integration-and-notifications-azure-vs-aws",
    "title": "SaaS integration and notifications: Logic Apps connectors, Data Factory, API Management GraphQL, Communication Services and Notification Hubs vs AppFlow, EventBridge API destinations, AppSync, SES and End User Messaging",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Logic Apps connectors and HTTP actions, Data Factory, API Management GraphQL and Data API builder, Communication Services Email and Notification Hubs with Amazon AppFlow, EventBridge API destinations, AWS AppSync, Amazon SES, SNS mobile push and AWS End User Messaging. Afterwards the reader can integrate SaaS systems, GraphQL APIs and notifications on either cloud.",
    "exams": [
     "AZ-305:D2",
     "SAA-C03:D2",
@@ -1757,17 +1756,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares Logic Apps connectors and HTTP actions, Data Factory, API Management GraphQL and Data API builder, Communication Services Email and Notification Hubs with Amazon AppFlow, EventBridge API destinations, AWS AppSync, Amazon SES, SNS mobile push and AWS End User Messaging. Afterwards the reader can integrate SaaS systems, GraphQL APIs and notifications on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/serverless-integration",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/messaging",
    "slug": "service-bus-vs-sqs-sns-and-amazon-mq",
    "title": "Azure Service Bus and Queue Storage vs Amazon SQS, SNS and Amazon MQ",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Maps queues, topics and subscriptions, sessions, duplicate detection, scheduled delivery, transactions and dead-lettering to SQS standard and FIFO, SNS fan-out, delay queues and redrive, plus Queue Storage vs SQS and Amazon MQ for protocol compatibility. Includes C# and Python producer and consumer samples on both; size and throughput limits live in reference/. Links to messaging/delivery-semantics and messaging/outbox-pattern.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1780,17 +1779,17 @@
     "C",
     "R"
    ],
-   "scope": "Maps queues, topics and subscriptions, sessions, duplicate detection, scheduled delivery, transactions and dead-lettering to SQS standard and FIFO, SNS fan-out, delay queues and redrive, plus Queue Storage vs SQS and Amazon MQ for protocol compatibility. Includes C# and Python producer and consumer samples on both; size and throughput limits live in reference/. Links to messaging/delivery-semantics and messaging/outbox-pattern.",
    "existing_stub": "",
+   "folder": "cloud/compare/messaging",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/messaging",
    "slug": "event-grid-vs-eventbridge",
    "title": "Azure Event Grid vs Amazon EventBridge",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares system and custom topics, namespaces with pull delivery and the MQTT broker, filters and retries with EventBridge default and custom buses, rules and patterns, archive and replay, schema registry, Pipes, Scheduler and cross-account event buses. Shows the same event-driven flow, including automated remediation, on both. Afterwards the reader can design event routing and know which features have no counterpart.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -1806,17 +1805,17 @@
     "R",
     "P"
    ],
-   "scope": "Compares system and custom topics, namespaces with pull delivery and the MQTT broker, filters and retries with EventBridge default and custom buses, rules and patterns, archive and replay, schema registry, Pipes, Scheduler and cross-account event buses. Shows the same event-driven flow, including automated remediation, on both. Afterwards the reader can design event routing and know which features have no counterpart.",
    "existing_stub": "",
+   "folder": "cloud/compare/messaging",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/messaging",
    "slug": "event-hubs-vs-kinesis-and-msk",
    "title": "Azure Event Hubs and Stream Analytics vs Kinesis, MSK, Data Firehose and Managed Flink",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares partitions and throughput or processing units with shards and on-demand mode, the Event Hubs Kafka endpoint with Amazon MSK, Capture with Data Firehose, Stream Analytics with Managed Service for Apache Flink, Fabric Real-Time Intelligence with composed AWS streaming, and the two schema registries. Links to messaging/redis-streams-vs-kafka. Afterwards the reader can choose and size a streaming backbone on either cloud.",
    "exams": [
     "AZ-305:D2",
     "AZ-305:D4",
@@ -1829,34 +1828,34 @@
     "C",
     "R"
    ],
-   "scope": "Compares partitions and throughput or processing units with shards and on-demand mode, the Event Hubs Kafka endpoint with Amazon MSK, Capture with Data Firehose, Stream Analytics with Managed Service for Apache Flink, Fabric Real-Time Intelligence with composed AWS streaming, and the two schema registries. Links to messaging/redis-streams-vs-kafka. Afterwards the reader can choose and size a streaming backbone on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/messaging",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/messaging",
    "slug": "iot-and-device-messaging-azure-vs-aws",
    "title": "IoT and device messaging: IoT Hub, Event Grid MQTT broker, IoT Edge, DPS and Defender for IoT vs AWS IoT Core, Greengrass, IoT Device Management and Device Defender",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares IoT Hub, Device Provisioning Service, IoT Edge, the Event Grid MQTT broker and Defender for IoT with AWS IoT Core, fleet provisioning, Greengrass, IoT Device Management and Device Defender, with status callouts for discontinued IoT services on both clouds. Afterwards the reader can design device connectivity and fleet management on either cloud.",
    "exams": [
     "SAP-C02:D2"
    ],
    "clusters": [
     "R"
    ],
-   "scope": "Compares IoT Hub, Device Provisioning Service, IoT Edge, the Event Grid MQTT broker and Defender for IoT with AWS IoT Core, fleet provisioning, Greengrass, IoT Device Management and Device Defender, with status callouts for discontinued IoT services on both clouds. Afterwards the reader can design device connectivity and fleet management on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/messaging",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "blob-storage-vs-s3",
    "title": "Azure Blob Storage vs Amazon S3",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Covers storage accounts vs buckets, redundancy (LRS/ZRS/GRS/GZRS vs S3 classes and replication), tiers including smart tier vs Intelligent-Tiering and the Archive tier's redundancy limits, versioning and soft delete vs delete markers and MFA Delete, immutability vs Object Lock, SAS and stored access policies vs presigned URLs, shared keys, encryption options, network rules vs bucket policies, Block Public Access, Requester Pays and Access Points (no Azure counterpart), ADLS hierarchical namespace and malware scanning. Afterwards the reader can configure equivalent, secure object storage on both clouds.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D3",
@@ -1874,17 +1873,17 @@
     "R",
     "S"
    ],
-   "scope": "Covers storage accounts vs buckets, redundancy (LRS/ZRS/GRS/GZRS vs S3 classes and replication), tiers including smart tier vs Intelligent-Tiering and the Archive tier's redundancy limits, versioning and soft delete vs delete markers and MFA Delete, immutability vs Object Lock, SAS and stored access policies vs presigned URLs, shared keys, encryption options, network rules vs bucket policies, Block Public Access, Requester Pays and Access Points (no Azure counterpart), ADLS hierarchical namespace and malware scanning. Afterwards the reader can configure equivalent, secure object storage on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "disks-and-file-storage-azure-vs-ebs-efs-fsx",
    "title": "Managed disks, Elastic SAN, Azure Files and NetApp Files vs EBS, EFS and FSx",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares managed disk types (Premium SSD v2, Ultra, ZRS disks, shared disks) and Elastic SAN with EBS volume types and Multi-Attach, Azure Files SMB and NFS with identity-based access against FSx for Windows File Server and EFS, Azure NetApp Files vs FSx for NetApp ONTAP, Managed Lustre vs FSx for Lustre, and FSx for OpenZFS, which has no Azure counterpart. Afterwards the reader can pick block and file storage for performance and cost on each cloud.",
    "exams": [
     "AZ-104:D2",
     "AZ-104:D3",
@@ -1897,17 +1896,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares managed disk types (Premium SSD v2, Ultra, ZRS disks, shared disks) and Elastic SAN with EBS volume types and Multi-Attach, Azure Files SMB and NFS with identity-based access against FSx for Windows File Server and EFS, Azure NetApp Files vs FSx for NetApp ONTAP, Managed Lustre vs FSx for Lustre, and FSx for OpenZFS, which has no Azure counterpart. Afterwards the reader can pick block and file storage for performance and cost on each cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "hybrid-storage-and-data-transfer-azure-vs-aws",
    "title": "Hybrid storage and data transfer: Azure File Sync, Blob SFTP, Storage Mover, Data Box and AzCopy vs Storage Gateway, Transfer Family, DataSync, S3 Transfer Acceleration, Snowball Edge and Data Transfer Terminal",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure File Sync, Blob SFTP and NFS, Storage Mover, Data Box, AzCopy and Storage Explorer with Storage Gateway (S3 File, Volume and Tape Gateway), Transfer Family, DataSync, S3 Transfer Acceleration, Snowball Edge (closed to new customers) and Data Transfer Terminal. Afterwards the reader can choose online, offline and hybrid transfer paths for a migration or ongoing sync on either cloud.",
    "exams": [
     "AZ-900:D2",
     "AZ-104:D2",
@@ -1921,17 +1920,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares Azure File Sync, Blob SFTP and NFS, Storage Mover, Data Box, AzCopy and Storage Explorer with Storage Gateway (S3 File, Volume and Tape Gateway), Transfer Family, DataSync, S3 Transfer Acceleration, Snowball Edge (closed to new customers) and Data Transfer Terminal. Afterwards the reader can choose online, offline and hybrid transfer paths for a migration or ongoing sync on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "cosmos-db-vs-dynamodb-and-purpose-built-nosql",
    "title": "Azure Cosmos DB vs Amazon DynamoDB, and the purpose-built NoSQL map",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Deep comparison of RU/s vs capacity units, partitioning, consistency levels vs strong or eventual reads and MREC or MRSC global tables, change feed vs Streams, serverless vs on-demand, and the integrated cache vs DAX. A second part maps Cosmos DB's other APIs, Table Storage and Azure DocumentDB to Amazon DocumentDB, Keyspaces and Neptune, and Azure Data Explorer to Timestream. Includes C# and Python data-access samples; vector search is in the vector-stores article.",
    "exams": [
     "AZ-305:D2",
     "AZ-305:D3",
@@ -1946,17 +1945,17 @@
     "C",
     "R"
    ],
-   "scope": "Deep comparison of RU/s vs capacity units, partitioning, consistency levels vs strong or eventual reads and MREC or MRSC global tables, change feed vs Streams, serverless vs on-demand, and the integrated cache vs DAX. A second part maps Cosmos DB's other APIs, Table Storage and Azure DocumentDB to Amazon DocumentDB, Keyspaces and Neptune, and Azure Data Explorer to Timestream. Includes C# and Python data-access samples; vector search is in the vector-stores article.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "azure-sql-and-azure-database-vs-rds-and-aurora",
    "title": "Azure SQL and Azure Database for PostgreSQL/MySQL vs Amazon RDS and Aurora",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure SQL Database (Hyperscale, serverless, elastic pools), SQL Managed Instance and SQL Server on VMs with RDS for SQL Server, RDS Custom and SQL Server on EC2; Azure Database for PostgreSQL and MySQL flexible server, elastic clusters and HorizonDB (preview) with RDS and Aurora, Limitless Database and Aurora DSQL; and Oracle Database@Azure vs Oracle Database@AWS. Includes engine-exact rows and database security settings, and links to data/relational-databases. Afterwards the reader can choose relational platforms across clouds.",
    "exams": [
     "AZ-305:D2",
     "SAA-C03:D3",
@@ -1972,17 +1971,17 @@
     "D",
     "S"
    ],
-   "scope": "Compares Azure SQL Database (Hyperscale, serverless, elastic pools), SQL Managed Instance and SQL Server on VMs with RDS for SQL Server, RDS Custom and SQL Server on EC2; Azure Database for PostgreSQL and MySQL flexible server, elastic clusters and HorizonDB (preview) with RDS and Aurora, Limitless Database and Aurora DSQL; and Oracle Database@Azure vs Oracle Database@AWS. Includes engine-exact rows and database security settings, and links to data/relational-databases. Afterwards the reader can choose relational platforms across clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "relational-high-availability-replicas-and-dr-azure-vs-aws",
    "title": "Relational high availability, replicas and DR: zone-redundant Azure SQL, failover groups, geo-replicas and PITR vs RDS Multi-AZ, read replicas, Aurora Global Database, RDS Proxy and snapshots",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares zone-redundant Azure SQL, failover groups, active geo-replication, read scale-out and named replicas, point-in-time restore and long-term retention with RDS Multi-AZ deployments and DB clusters, read replicas, Aurora Replicas and Global Database, RDS Proxy (vs PgBouncer on flexible server) and snapshots. Includes RPO and RTO per option and failover drills on both. Afterwards the reader can meet a relational availability and recovery target on either cloud.",
    "exams": [
     "AZ-305:D3",
     "SAA-C03:D2",
@@ -1996,17 +1995,17 @@
     "R",
     "P"
    ],
-   "scope": "Compares zone-redundant Azure SQL, failover groups, active geo-replication, read scale-out and named replicas, point-in-time restore and long-term retention with RDS Multi-AZ deployments and DB clusters, read replicas, Aurora Replicas and Global Database, RDS Proxy (vs PgBouncer on flexible server) and snapshots. Includes RPO and RTO per option and failover drills on both. Afterwards the reader can meet a relational availability and recovery target on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "caching-azure-managed-redis-vs-elasticache-and-memorydb",
    "title": "Caching: Azure Managed Redis vs Amazon ElastiCache and MemoryDB",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Azure Managed Redis tiers (and the Azure Cache for Redis retirement) with ElastiCache for Valkey, Redis OSS and Memcached (node-based and serverless) and MemoryDB as a durable store, plus API and edge caching options. Covers clustering, persistence, geo-replication and vector search. Afterwards the reader can migrate a Redis workload between clouds.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D2",
@@ -2021,17 +2020,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares Azure Managed Redis tiers (and the Azure Cache for Redis retirement) with ElastiCache for Valkey, Redis OSS and Memcached (node-based and serverless) and MemoryDB as a durable store, plus API and edge caching options. Covers clustering, persistence, geo-replication and vector search. Afterwards the reader can migrate a Redis workload between clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "vector-stores-for-rag-and-agents-azure-vs-aws",
    "title": "Vector stores for RAG and agents: Cosmos DB, PostgreSQL pgvector, Azure Managed Redis and AI Search vs OpenSearch, Aurora and RDS pgvector, MemoryDB, ElastiCache, DocumentDB and S3 Vectors",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares where embeddings live: Cosmos DB for NoSQL vector search, pgvector on Azure Database for PostgreSQL, Azure Managed Redis vector indexing and Azure AI Search vs OpenSearch Service, pgvector on Aurora and RDS, MemoryDB and ElastiCache vector search, DocumentDB and S3 Vectors. Covers index types, filtering, hybrid search, cost and when to use a database vs a search engine, with C# and Python samples. Afterwards the reader can pick and tune a vector store for RAG or agent memory on either cloud.",
    "exams": [
     "AI-200:D2",
     "AIP-C01:D1",
@@ -2041,17 +2040,17 @@
     "D",
     "A"
    ],
-   "scope": "Compares where embeddings live: Cosmos DB for NoSQL vector search, pgvector on Azure Database for PostgreSQL, Azure Managed Redis vector indexing and Azure AI Search vs OpenSearch Service, pgvector on Aurora and RDS, MemoryDB and ElastiCache vector search, DocumentDB and S3 Vectors. Covers index types, filtering, hybrid search, cost and when to use a database vs a search engine, with C# and Python samples. Afterwards the reader can pick and tune a vector store for RAG or agent memory on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/storage-data",
    "slug": "analytics-platforms-fabric-vs-aws-analytics",
    "title": "Analytics platforms: Microsoft Fabric, Synapse and Databricks vs Redshift, Glue, EMR, Athena and Amazon Quick Sight",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Maps Fabric's SaaS capacity model on OneLake to AWS's composed lakehouse (S3, Lake Formation, Glue Data Catalog), warehouses (Fabric Warehouse and Synapse vs Redshift), integration (Data Factory vs Glue and MWAA), Spark (Databricks vs EMR), serverless SQL vs Athena, BI (Power BI vs Amazon Quick Sight, now a feature of Amazon Quick) and catalogs (Purview vs SageMaker Catalog). Lakehouse and data-mesh design stay in architecture/data-architecture. Afterwards the reader can map a data platform design between clouds.",
    "exams": [
     "AZ-305:D2",
     "SAA-C03:D3",
@@ -2063,17 +2062,17 @@
     "R",
     "A"
    ],
-   "scope": "Maps Fabric's SaaS capacity model on OneLake to AWS's composed lakehouse (S3, Lake Formation, Glue Data Catalog), warehouses (Fabric Warehouse and Synapse vs Redshift), integration (Data Factory vs Glue and MWAA), Spark (Databricks vs EMR), serverless SQL vs Athena, BI (Power BI vs Amazon Quick Sight, now a feature of Amazon Quick) and catalogs (Purview vs SageMaker Catalog). Lakehouse and data-mesh design stay in architecture/data-architecture. Afterwards the reader can map a data platform design between clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/observability",
    "slug": "azure-monitor-vs-cloudwatch-and-cloudtrail",
    "title": "Azure Monitor, Log Analytics and the activity log vs CloudWatch and CloudTrail",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares metrics, Log Analytics workspaces and KQL with CloudWatch metrics, log groups and Logs Insights; Azure Monitor Agent and data collection rules vs the CloudWatch agent; diagnostic settings vs service-vended logs and subscription filters; alerts, action groups and alert processing rules vs alarms, composite alarms and SNS; log plans and costs; and activity log and Entra logs vs CloudTrail trails, data events and organization trails. Afterwards the reader can design central logging, alerting and audit on both clouds.",
    "exams": [
     "AZ-900:D3",
     "AZ-104:D5",
@@ -2100,17 +2099,17 @@
     "D",
     "P"
    ],
-   "scope": "Compares metrics, Log Analytics workspaces and KQL with CloudWatch metrics, log groups and Logs Insights; Azure Monitor Agent and data collection rules vs the CloudWatch agent; diagnostic settings vs service-vended logs and subscription filters; alerts, action groups and alert processing rules vs alarms, composite alarms and SNS; log plans and costs; and activity log and Entra logs vs CloudTrail trails, data events and organization trails. Afterwards the reader can design central logging, alerting and audit on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/observability",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/observability",
    "slug": "application-insights-vs-cloudwatch-application-signals-and-x-ray",
    "title": "Application Insights vs CloudWatch Application Signals and AWS X-Ray",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares APM features (application maps, SLOs, availability tests vs Synthetics, browser SDK vs RUM), the Azure Monitor OpenTelemetry Distro vs ADOT, X-Ray SDK end of support (2027-02-25), and managed Prometheus and Grafana on both. Includes the same OpenTelemetry-instrumented C# and Python service exporting to each backend; OpenTelemetry concepts stay in devops/observability. Afterwards the reader can instrument once and observe on either cloud.",
    "exams": [
     "AZ-305:D1",
     "SAA-C03:D2",
@@ -2126,17 +2125,17 @@
     "R",
     "P"
    ],
-   "scope": "Compares APM features (application maps, SLOs, availability tests vs Synthetics, browser SDK vs RUM), the Azure Monitor OpenTelemetry Distro vs ADOT, X-Ray SDK end of support (2027-02-25), and managed Prometheus and Grafana on both. Includes the same OpenTelemetry-instrumented C# and Python service exporting to each backend; OpenTelemetry concepts stay in devops/observability. Afterwards the reader can instrument once and observe on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/observability",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/observability",
    "slug": "platform-health-quotas-and-advisory-services-azure-vs-aws",
    "title": "Platform health, quotas and advisory services: Service Health, Resource Health, Advisor and quotas vs AWS Health Dashboard, Trusted Advisor, Service Quotas and Compute Optimizer",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares Service Health and Resource Health with the AWS Health Dashboard and its organization view, Azure quotas with Service Quotas and quota templates, and Azure Advisor with Trusted Advisor (whose full checks depend on the Support plan) and Compute Optimizer. Covers alerting on provider events and raising quotas in a DR region ahead of time. Afterwards the reader can watch platform health and limits proactively on both clouds.",
    "exams": [
     "AZ-900:D3",
     "CLF-C02:D4",
@@ -2150,17 +2149,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares Service Health and Resource Health with the AWS Health Dashboard and its organization view, Azure quotas with Service Quotas and quota templates, and Azure Advisor with Trusted Advisor (whose full checks depend on the Support plan) and Compute Optimizer. Covers alerting on provider events and raising quotas in a DR region ahead of time. Afterwards the reader can watch platform health and limits proactively on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/observability",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/security-services",
    "slug": "defender-for-cloud-vs-security-hub-guardduty-inspector",
    "title": "Microsoft Defender for Cloud vs AWS Security Hub, GuardDuty, Inspector and Macie",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 4,
+   "scope": "Maps Defender CSPM (attack paths, CIEM, sensitive data discovery), the workload protection plans (Servers, Containers, Storage, databases, Resource Manager) and EASM to the new Security Hub with exposure findings, Security Hub CSPM, GuardDuty protections, Inspector and Macie. An expert-depth section covers Defender for Cloud's AWS connector and multicloud posture from Azure. Afterwards the reader can build an equivalent posture and threat-detection stack on either cloud.",
    "exams": [
     "CLF-C02:D2",
     "SAA-C03:D1",
@@ -2179,17 +2178,17 @@
     "S",
     "X"
    ],
-   "scope": "Maps Defender CSPM (attack paths, CIEM, sensitive data discovery), the workload protection plans (Servers, Containers, Storage, databases, Resource Manager) and EASM to the new Security Hub with exposure findings, Security Hub CSPM, GuardDuty protections, Inspector and Macie. An expert-depth section covers Defender for Cloud's AWS connector and multicloud posture from Azure. Afterwards the reader can build an equivalent posture and threat-detection stack on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "wave": "4",
    "exists": false
   },
   {
-   "folder": "cloud/compare/security-services",
    "slug": "sentinel-vs-security-lake-and-siem-on-aws",
    "title": "Microsoft Sentinel vs Amazon Security Lake, Detective and SIEM options on AWS",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 4,
+   "scope": "Contrasts Sentinel (SIEM, data lake, analytics rules, hunting, automation rules and playbooks, Defender portal) with Security Lake's OCSF data lake plus OpenSearch security analytics, Athena or partner SIEMs, Amazon Detective and AWS response automation. Covers ingesting AWS logs into Sentinel and Sentinel leaving the Azure portal after 2027-03-31. Afterwards the reader can choose a SIEM and investigation architecture for an estate spanning both clouds.",
    "exams": [
     "SAP-C02:D1",
     "SC-100:D2",
@@ -2205,17 +2204,17 @@
     "S",
     "X"
    ],
-   "scope": "Contrasts Sentinel (SIEM, data lake, analytics rules, hunting, automation rules and playbooks, Defender portal) with Security Lake's OCSF data lake plus OpenSearch security analytics, Athena or partner SIEMs, Amazon Detective and AWS response automation. Covers ingesting AWS logs into Sentinel and Sentinel leaving the Azure portal after 2027-03-31. Afterwards the reader can choose a SIEM and investigation architecture for an estate spanning both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "wave": "4",
    "exists": false
   },
   {
-   "folder": "cloud/compare/security-services",
    "slug": "key-vault-vs-kms-secrets-manager-and-cloudhsm",
    "title": "Azure Key Vault, Managed HSM, Cloud HSM and App Configuration vs KMS, Secrets Manager, ACM, Private CA, CloudHSM and AppConfig",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 4,
+   "scope": "Compares Key Vault keys, secrets and certificates (RBAC data plane, rotation policies), Managed HSM, Cloud HSM (IaaS-only), Payment HSM and Dedicated HSM's end of support with KMS key policies, grants and envelope encryption, Secrets Manager rotation, ACM and Private CA, CloudHSM and Payment Cryptography; then App Configuration vs AppConfig and Parameter Store. Includes C# and Python secret retrieval and customer-managed-key IaC; key-management theory stays in security/cryptography.",
    "exams": [
     "AZ-305:D1",
     "AZ-305:D4",
@@ -2237,17 +2236,17 @@
     "X",
     "P"
    ],
-   "scope": "Compares Key Vault keys, secrets and certificates (RBAC data plane, rotation policies), Managed HSM, Cloud HSM (IaaS-only), Payment HSM and Dedicated HSM's end of support with KMS key policies, grants and envelope encryption, Secrets Manager rotation, ACM and Private CA, CloudHSM and Payment Cryptography; then App Configuration vs AppConfig and Parameter Store. Includes C# and Python secret retrieval and customer-managed-key IaC; key-management theory stays in security/cryptography.",
    "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/security-services",
    "slug": "compliance-evidence-and-audit-azure-vs-aws",
    "title": "Compliance evidence and audit: Defender for Cloud regulatory compliance, Purview Compliance Manager and Service Trust Portal vs Security Hub CSPM standards, AWS Audit Manager and AWS Artifact",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 4,
+   "scope": "Compares Defender for Cloud regulatory compliance standards, Purview Compliance Manager and the Service Trust Portal with Security Hub CSPM standards, AWS Audit Manager, AWS Config conformance packs and AWS Artifact. Shows how to gather evidence for one framework (for example ISO 27001) on both. Afterwards the reader can run continuous compliance and answer an auditor on either cloud.",
    "exams": [
     "CLF-C02:D2",
     "SAA-C03:D1",
@@ -2264,17 +2263,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares Defender for Cloud regulatory compliance standards, Purview Compliance Manager and the Service Trust Portal with Security Hub CSPM standards, AWS Audit Manager, AWS Config conformance packs and AWS Artifact. Shows how to gather evidence for one framework (for example ISO 27001) on both. Afterwards the reader can run continuous compliance and answer an auditor on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "wave": "4",
    "exists": false
   },
   {
-   "folder": "cloud/compare/security-services",
    "slug": "confidential-computing-and-hardware-roots-of-trust-azure-vs-aws",
    "title": "Confidential computing and hardware roots of trust: Azure confidential VMs, containers and GPUs and Trusted Launch vs EC2 AMD SEV-SNP, Nitro Enclaves, NitroTPM and the Nitro System",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 4,
+   "scope": "Compares Azure confidential VMs (AMD SEV-SNP, Intel TDX), confidential containers and GPUs, Trusted Launch and Microsoft Azure Attestation with EC2 AMD SEV-SNP instances, Nitro Enclaves with KMS attestation, NitroTPM and the Nitro System's operator-access model. Afterwards the reader can choose a hardware-backed isolation option and explain its threat model on either cloud.",
    "exams": [
     "SC-100:D4",
     "SC-500:D3",
@@ -2284,17 +2283,17 @@
     "S",
     "X"
    ],
-   "scope": "Compares Azure confidential VMs (AMD SEV-SNP, Intel TDX), confidential containers and GPUs, Trusted Launch and Microsoft Azure Attestation with EC2 AMD SEV-SNP instances, Nitro Enclaves with KMS attestation, NitroTPM and the Nitro System's operator-access model. Afterwards the reader can choose a hardware-backed isolation option and explain its threat model on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "wave": "4",
    "exists": false
   },
   {
-   "folder": "cloud/compare/iac-devops",
    "slug": "bicep-arm-vs-cloudformation-cdk",
    "title": "Bicep and ARM vs CloudFormation and CDK",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares the Bicep DSL and ARM deployments (scopes, what-if, deployment stacks, template specs, deployment scripts, Azure Verified Modules, export and decompile, PSRule and the linter) with CloudFormation stacks, change sets, StackSets, modules, custom resources, Hooks, drift detection, the IaC generator, cfn-lint and Guard, and the CDK in C# and Python. Shows the same storage-plus-function stack in Bicep, CloudFormation YAML and CDK. Afterwards the reader can author and govern native IaC on both clouds.",
    "exams": [
     "AZ-900:D3",
     "AZ-104:D3",
@@ -2312,17 +2311,17 @@
     "D",
     "P"
    ],
-   "scope": "Compares the Bicep DSL and ARM deployments (scopes, what-if, deployment stacks, template specs, deployment scripts, Azure Verified Modules, export and decompile, PSRule and the linter) with CloudFormation stacks, change sets, StackSets, modules, custom resources, Hooks, drift detection, the IaC generator, cfn-lint and Guard, and the CDK in C# and Python. Shows the same storage-plus-function stack in Bicep, CloudFormation YAML and CDK. Afterwards the reader can author and govern native IaC on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/iac-devops",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/iac-devops",
    "slug": "terraform-on-azure-vs-terraform-on-aws",
    "title": "Terraform on Azure vs Terraform on AWS: providers, state, auth, modules and import",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares azurerm and azapi with aws and awscc providers, state backends and locking (blob lease vs S3 native lockfile), OIDC authentication from GitHub Actions, Azure Pipelines and HCP Terraform dynamic credentials, module ecosystems (AVM vs community and AWS modules), import and drift on each provider, and landing-zone modules (ALZ Terraform vs AFT). The Terraform language itself is exact across clouds and taught in devops/iac. Afterwards the reader can run one Terraform codebase strategy across both clouds.",
    "exams": [
     "TF-A:D1",
     "TF-A:D2",
@@ -2343,17 +2342,17 @@
     "P",
     "R"
    ],
-   "scope": "Compares azurerm and azapi with aws and awscc providers, state backends and locking (blob lease vs S3 native lockfile), OIDC authentication from GitHub Actions, Azure Pipelines and HCP Terraform dynamic credentials, module ecosystems (AVM vs community and AWS modules), import and drift on each provider, and landing-zone modules (ALZ Terraform vs AFT). The Terraform language itself is exact across clouds and taught in devops/iac. Afterwards the reader can run one Terraform codebase strategy across both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/iac-devops",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/iac-devops",
    "slug": "delivery-pipelines-and-artifacts-azure-vs-aws",
    "title": "Delivery pipelines and artifacts: Azure Pipelines, GitHub Actions, environments, slots and Azure Artifacts vs CodePipeline, CodeBuild, CodeDeploy, CodeArtifact and CodeCommit",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Maps Azure DevOps and GitHub (Boards, Repos, Pipelines, environments with checks and approvals, Artifacts, slots and feature flags) to CodePipeline, CodeBuild, CodeDeploy deployment configurations, CodeArtifact and CodeCommit, noting that AWS has no work-tracking service and that Proton reached end of support. Covers blue/green, canary, rolling and ring deployments on both. Afterwards the reader can build an equivalent delivery pipeline on either cloud or deploy to both from one pipeline.",
    "exams": [
     "AZ-400:D1",
     "AZ-400:D2",
@@ -2371,17 +2370,17 @@
     "R",
     "C"
    ],
-   "scope": "Maps Azure DevOps and GitHub (Boards, Repos, Pipelines, environments with checks and approvals, Artifacts, slots and feature flags) to CodePipeline, CodeBuild, CodeDeploy deployment configurations, CodeArtifact and CodeCommit, noting that AWS has no work-tracking service and that Proton reached end of support. Covers blue/green, canary, rolling and ring deployments on both. Afterwards the reader can build an equivalent delivery pipeline on either cloud or deploy to both from one pipeline.",
    "existing_stub": "",
+   "folder": "cloud/compare/iac-devops",
+   "wave": "2b",
    "exists": false
   },
   {
-   "folder": "cloud/compare/cost",
    "slug": "cost-management-and-pricing-models-azure-vs-aws",
    "title": "Microsoft Cost Management and Azure pricing vs AWS Billing, Cost Explorer and Savings Plans",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Compares cost analysis, budgets, anomaly alerts, exports (FOCUS, CUR 2.0), allocation rules vs Cost Categories, tagging, pricing calculators, billing hierarchies and support plans; then reservations and exchanges, savings plans (including AWS Database Savings Plans), Spot, Hybrid Benefit vs BYOL, Dev/Test pricing, and Advisor vs Compute Optimizer and Cost Optimization Hub. FinOps practice stays in architecture/cost. Afterwards the reader can build a cost-visibility and commitment strategy on both clouds.",
    "exams": [
     "AZ-900:D1",
     "AZ-900:D3",
@@ -2398,17 +2397,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares cost analysis, budgets, anomaly alerts, exports (FOCUS, CUR 2.0), allocation rules vs Cost Categories, tagging, pricing calculators, billing hierarchies and support plans; then reservations and exchanges, savings plans (including AWS Database Savings Plans), Spot, Hybrid Benefit vs BYOL, Dev/Test pricing, and Advisor vs Compute Optimizer and Cost Optimization Hub. FinOps practice stays in architecture/cost. Afterwards the reader can build a cost-visibility and commitment strategy on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/cost",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/cost",
    "slug": "data-transfer-and-network-cost-azure-vs-aws",
    "title": "Data transfer and network cost: egress, inter-zone, peering, NAT, private endpoints, hubs and CDN offload",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 2,
+   "scope": "Explains where each cloud bills data movement: internet egress, inter-zone traffic (free on Azure, billed per GB each way on AWS), cross-region, VNet vs VPC peering, NAT gateway processing, private endpoints vs interface endpoints, Virtual WAN vs Transit Gateway, and CDN offload. Works the same three-tier and multi-region designs on both. Afterwards the reader can estimate and reduce network cost on either cloud.",
    "exams": [
     "AZ-305:D4",
     "SAA-C03:D4",
@@ -2419,17 +2418,17 @@
     "C",
     "R"
    ],
-   "scope": "Explains where each cloud bills data movement: internet egress, inter-zone traffic (free on Azure, billed per GB each way on AWS), cross-region, VNet vs VPC peering, NAT gateway processing, private endpoints vs interface endpoints, Virtual WAN vs Transit Gateway, and CDN offload. Works the same three-tier and multi-region designs on both. Afterwards the reader can estimate and reduce network cost on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/cost",
+   "wave": "2a",
    "exists": false
   },
   {
-   "folder": "cloud/compare/resilience-migration",
    "slug": "backup-and-disaster-recovery-azure-vs-aws",
    "title": "Backup and disaster recovery: Azure Backup and Site Recovery vs AWS Backup, Elastic Disaster Recovery and Application Recovery Controller",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 5,
+   "scope": "Compares Recovery Services and Backup vaults, immutable (locked) vaults and multi-user authorization with Resource Guard against AWS Backup vaults, Vault Lock, logically air-gapped vaults with multi-party approval and cross-account copies; Business Continuity Center vs Backup Audit Manager; Site Recovery vs Elastic Disaster Recovery; and failover tooling (ASR recovery plans with Front Door or Traffic Manager vs Amazon Application Recovery Controller with zonal shift and Region switch). Only the Chaos Studio vs FIS mapping is here. Afterwards the reader can implement the same RPO and RTO targets on each cloud.",
    "exams": [
     "AZ-104:D5",
     "AZ-305:D3",
@@ -2451,17 +2450,17 @@
     "X",
     "P"
    ],
-   "scope": "Compares Recovery Services and Backup vaults, immutable (locked) vaults and multi-user authorization with Resource Guard against AWS Backup vaults, Vault Lock, logically air-gapped vaults with multi-party approval and cross-account copies; Business Continuity Center vs Backup Audit Manager; Site Recovery vs Elastic Disaster Recovery; and failover tooling (ASR recovery plans with Front Door or Traffic Manager vs Amazon Application Recovery Controller with zonal shift and Region switch). Only the Chaos Studio vs FIS mapping is here. Afterwards the reader can implement the same RPO and RTO targets on each cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/resilience-migration",
+   "wave": "4",
    "exists": false
   },
   {
-   "folder": "cloud/compare/resilience-migration",
    "slug": "migration-azure-migrate-vs-aws-transform-and-mgn",
    "title": "Migration tooling: Azure Migrate vs AWS Transform, Application Migration Service and DMS",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 5,
+   "scope": "Compares discovery and assessment (Azure Migrate and its business case vs AWS Transform, with Migration Hub and Application Discovery Service closed to new customers), server rehosting (Azure Migrate vs MGN), database migration (Azure DMS and SSMA vs AWS DMS and Schema Conversion), .NET modernisation (GitHub Copilot modernization vs AWS Transform for .NET) and VMware moves. Maps CAF's eight strategies to the 7 Rs and covers cloud-to-cloud migration in both directions; data transfer is in the hybrid-storage article. Afterwards the reader can plan a migration onto either cloud.",
    "exams": [
     "AZ-900:D2",
     "CLF-C02:D1",
@@ -2475,17 +2474,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares discovery and assessment (Azure Migrate and its business case vs AWS Transform, with Migration Hub and Application Discovery Service closed to new customers), server rehosting (Azure Migrate vs MGN), database migration (Azure DMS and SSMA vs AWS DMS and Schema Conversion), .NET modernisation (GitHub Copilot modernization vs AWS Transform for .NET) and VMware moves. Maps CAF's eight strategies to the 7 Rs and covers cloud-to-cloud migration in both directions; data transfer is in the hybrid-storage article. Afterwards the reader can plan a migration onto either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/resilience-migration",
+   "wave": "5",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "microsoft-foundry-vs-amazon-bedrock",
    "title": "Microsoft Foundry vs Amazon Bedrock: models, deployments, guardrails and evaluation",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 3,
+   "scope": "Compares the Foundry resource and projects, Foundry Models (including Azure OpenAI), deployment types (Global, Data Zone), PTUs and batch with Bedrock's model catalog, cross-Region inference, Provisioned Throughput and batch inference; fine-tuning vs model customization; and guardrails (Content Safety and Foundry guardrails vs Bedrock Guardrails) and evaluations. Includes C# and Python model calls on both; guardrail concepts live in security/ai-security.",
    "exams": [
     "AI-901:D1",
     "AI-901:D2",
@@ -2507,17 +2506,17 @@
     "C",
     "R"
    ],
-   "scope": "Compares the Foundry resource and projects, Foundry Models (including Azure OpenAI), deployment types (Global, Data Zone), PTUs and batch with Bedrock's model catalog, cross-Region inference, Provisioned Throughput and batch inference; fine-tuning vs model customization; and guardrails (Content Safety and Foundry guardrails vs Bedrock Guardrails) and evaluations. Includes C# and Python model calls on both; guardrail concepts live in security/ai-security.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "ai-content-and-document-services-foundry-tools-vs-aws-ai-services",
    "title": "AI content and document services: Foundry Tools vs Rekognition, Transcribe, Polly, Comprehend, Translate, Lex, Textract and Bedrock Data Automation",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 3,
+   "scope": "Maps Foundry Tools (Vision, Face, Speech, Language, Translator, Document Intelligence, Content Understanding) and conversational language understanding to Rekognition, Transcribe, Polly, Comprehend, Translate, Textract, Bedrock Data Automation and Lex, with status notes for Personalizer (retired 2026-08-25) and Kendra (closed to new customers). Shows when a multimodal model replaces a task-specific service. Afterwards the reader can choose vision, speech, language and document services on either cloud.",
    "exams": [
     "AI-901:D2",
     "AIF-C01:D1",
@@ -2533,17 +2532,17 @@
     "C",
     "R"
    ],
-   "scope": "Maps Foundry Tools (Vision, Face, Speech, Language, Translator, Document Intelligence, Content Understanding) and conversational language understanding to Rekognition, Transcribe, Polly, Comprehend, Translate, Textract, Bedrock Data Automation and Lex, with status notes for Personalizer (retired 2026-08-25) and Kendra (closed to new customers). Shows when a multimodal model replaces a task-specific service. Afterwards the reader can choose vision, speech, language and document services on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "foundry-agent-service-vs-bedrock-agentcore",
    "title": "Foundry Agent Service vs Amazon Bedrock AgentCore (and Bedrock Agents)",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 3,
+   "scope": "Contrasts Foundry prompt, voice-based (preview) and hosted agents, toolboxes, memory, MCP and A2A with AgentCore's modular Harness, Runtime, Gateway, Memory, Identity, Code Interpreter, Browser, Observability, Evaluations, Optimization, Policy, Registry and Payments, plus classic Bedrock Agents. Covers agent identity (Entra Agent ID vs AgentCore Identity), SDKs (Microsoft Agent Framework vs Strands Agents) and governance controls, linking to security/ai-security. Afterwards the reader can deploy the same agent on both and map its controls.",
    "exams": [
     "AI-103:D2",
     "AIP-C01:D2",
@@ -2558,17 +2557,17 @@
     "S",
     "X"
    ],
-   "scope": "Contrasts Foundry prompt, voice-based (preview) and hosted agents, toolboxes, memory, MCP and A2A with AgentCore's modular Harness, Runtime, Gateway, Memory, Identity, Code Interpreter, Browser, Observability, Evaluations, Optimization, Policy, Registry and Payments, plus classic Bedrock Agents. Covers agent identity (Entra Agent ID vs AgentCore Identity), SDKs (Microsoft Agent Framework vs Strands Agents) and governance controls, linking to security/ai-security. Afterwards the reader can deploy the same agent on both and map its controls.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "azure-ai-search-vs-bedrock-knowledge-bases",
    "title": "Azure AI Search and Foundry IQ vs Bedrock Knowledge Bases, OpenSearch, S3 Vectors and Kendra",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 3,
+   "scope": "Explains why the pair is asymmetric: Azure AI Search is a search engine (indexers, skillsets, hybrid and vector queries, agentic retrieval) with Foundry IQ knowledge bases on top, while Bedrock Knowledge Bases is managed RAG over a chosen vector store (OpenSearch Serverless, S3 Vectors, Aurora PostgreSQL and others), and Kendra is closed to new customers. Covers chunking, permission trimming, relevance tuning and cost. Afterwards the reader can build equivalent grounded retrieval on both clouds.",
    "exams": [
     "AI-103:D1",
     "AI-103:D5",
@@ -2578,17 +2577,17 @@
    "clusters": [
     "A"
    ],
-   "scope": "Explains why the pair is asymmetric: Azure AI Search is a search engine (indexers, skillsets, hybrid and vector queries, agentic retrieval) with Foundry IQ knowledge bases on top, while Bedrock Knowledge Bases is managed RAG over a chosen vector store (OpenSearch Serverless, S3 Vectors, Aurora PostgreSQL and others), and Kendra is closed to new customers. Covers chunking, permission trimming, relevance tuning and cost. Afterwards the reader can build equivalent grounded retrieval on both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "azure-machine-learning-vs-sagemaker-ai",
    "title": "Azure Machine Learning vs Amazon SageMaker AI",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 3,
+   "scope": "Compares workspaces and registries, compute, MLflow tracking, AutoML, pipelines, managed online and batch endpoints, model monitoring, MLOps with GitHub Actions, responsible-AI tooling (Responsible AI dashboard vs Clarify) and large-scale training (SageMaker HyperPod) on both platforms, and when Foundry or Bedrock is the better starting point. Afterwards the reader can map an ML lifecycle between clouds.",
    "exams": [
     "AI-300:D1",
     "AI-300:D2",
@@ -2604,17 +2603,17 @@
     "F",
     "C"
    ],
-   "scope": "Compares workspaces and registries, compute, MLflow tracking, AutoML, pipelines, managed online and batch endpoints, model monitoring, MLOps with GitHub Actions, responsible-AI tooling (Responsible AI dashboard vs Clarify) and large-scale training (SageMaker HyperPod) on both platforms, and when Foundry or Bedrock is the better starting point. Afterwards the reader can map an ML lifecycle between clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "genaiops-evaluation-tracing-and-cost-foundry-vs-bedrock-and-agentcore",
    "title": "GenAIOps: evaluation, tracing, prompt management, fine-tuning, provisioned capacity and cost control in Foundry vs Bedrock and AgentCore",
    "type": "cloud-compare",
    "level": "expert",
-   "wave": 3,
+   "scope": "Compares how generative AI apps and agents are operated: evaluation datasets and evaluators, tracing (Application Insights vs CloudWatch and AgentCore Observability), prompt and agent versioning, fine-tuning lifecycle, provisioned capacity and batch, token and cost monitoring, and RAG tuning in Foundry vs Bedrock and AgentCore. Afterwards the reader can set up evaluation, observability and cost control for the same agent on either cloud.",
    "exams": [
     "AI-300:D3",
     "AI-300:D4",
@@ -2626,153 +2625,182 @@
    "clusters": [
     "A"
    ],
-   "scope": "Compares how generative AI apps and agents are operated: evaluation datasets and evaluators, tracing (Application Insights vs CloudWatch and AgentCore Observability), prompt and agent versioning, fine-tuning lifecycle, provisioned capacity and batch, token and cost monitoring, and RAG tuning in Foundry vs Bedrock and AgentCore. Afterwards the reader can set up evaluation, observability and cost control for the same agent on either cloud.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
    "exists": false
   },
   {
-   "folder": "cloud/compare/ai-platforms",
    "slug": "ai-assistants-and-saas-agent-builders-azure-vs-aws",
    "title": "AI assistants and SaaS agent builders: GitHub Copilot, Microsoft 365 Copilot and Copilot Studio vs Amazon Q Developer, Kiro and Amazon Quick",
    "type": "cloud-compare",
    "level": "practitioner",
-   "wave": 3,
+   "scope": "Compares GitHub Copilot, Microsoft 365 Copilot and Copilot Studio with Amazon Q Developer, Kiro and Amazon Quick (agents, Flows, Automate, Index, Research and Quick Sight). Covers data grounding, extensibility through MCP, admin controls and licensing. Afterwards the reader can choose AI assistants and business agent builders for a team working across both clouds.",
    "exams": [],
    "clusters": [
     "A"
    ],
-   "scope": "Compares GitHub Copilot, Microsoft 365 Copilot and Copilot Studio with Amazon Q Developer, Kiro and Amazon Quick (agents, Flows, Automate, Index, Research and Quick Sight). Covers data grounding, extensibility through MCP, admin controls and licensing. Afterwards the reader can choose AI assistants and business agent builders for a team working across both clouds.",
    "existing_stub": "",
+   "folder": "cloud/compare/ai-platforms",
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "support-plans-marketplaces-and-partner-programs-azure-vs-aws",
+   "title": "Support Plans, Marketplaces and Partner Programs: Azure vs AWS",
+   "type": "cloud-compare",
+   "level": "foundation",
+   "scope": "Wave 1. Compares AWS and Azure support and ecosystems. AWS support now runs Basic, Business Support+, Enterprise Support and Unified Operations. Developer and Business Support have not been sold since 2025-12-02 and end on 2027-01-01, and Enterprise On-Ramp has been retired. Azure offers Basic, Developer, Standard, Professional Direct and Microsoft Unified. Health tooling pairs the AWS Health Dashboard and Health API with Azure Service Health and Resource Health, and Trusted Advisor with Azure Advisor. Self-help pairs AWS re:Post, the Knowledge Center and Prescriptive Guidance with Microsoft Q&A and Microsoft Learn. Expert help pairs AWS Professional Services and solutions architects with Microsoft Industry Solutions and FastTrack. Abuse reporting goes to the AWS Trust & Safety team on one side and Microsoft's abuse reporting and MSRC on the other. Partner programs are the AWS Partner Network and the Microsoft AI Cloud Partner Program. Marketplaces are AWS Marketplace (private offers, entitlements, procurement governance, third-party security products) and Microsoft Marketplace, including commitment burn-down. Fidelity ratings are given for each row.",
+   "exams": [
+    "CLF-C02:D4",
+    "CLF-C02:D2"
+   ],
+   "clusters": [
+    "F",
+    "C"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare",
+   "gap_fill": true,
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "data-discovery-and-classification-purview-vs-macie-and-comprehend",
+   "title": "Sensitive Data Discovery and Classification: Purview vs Macie and Comprehend",
+   "type": "cloud-compare",
+   "level": "practitioner",
+   "scope": "Wave 4. Purview side: sensitive information types, trainable classifiers, exact data match, auto-labelling, Data Map scans of Azure and Amazon S3 sources, and DSPM. Macie side: automated sensitive data discovery and targeted discovery jobs, managed and custom data identifiers, allow lists, and findings sent to Security Hub and EventBridge. Amazon Comprehend PII detection (DetectPiiEntities, ContainsPiiEntities) covers text in pipelines, and Bedrock Guardrails sensitive-information filters cover model traffic (AIP-C01 3.2.2). The main difference is that Purview labels travel with the content across M365 and endpoints, while Macie only inspects S3 and labels nothing (fidelity partial). Azure AI Language PII detection vs Comprehend is rated close. The article supports the w4 data-perimeter lab.",
+   "exams": [
+    "SAA-C03:D1",
+    "SCS-C03:D1",
+    "AIP-C01:D3",
+    "AIF-C01:D5",
+    "SC-900:D4"
+   ],
+   "clusters": [
+    "S",
+    "C",
+    "A"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "gap_fill": true,
+   "wave": "3",
+   "exists": false
+  },
+  {
+   "slug": "trust-portals-and-compliance-offerings-service-trust-portal-vs-aws-artifact",
+   "title": "Trust Portals and Compliance Offerings: Service Trust Portal and Compliance Manager vs AWS Artifact",
+   "type": "cloud-compare",
+   "level": "foundation",
+   "scope": "Wave 1. Covers where each provider publishes its compliance evidence. Microsoft side: the Service Trust Portal (audit reports, compliance offerings documentation, data protection resources), Microsoft's privacy principles, and Purview Compliance Manager with compliance score. AWS side: AWS Artifact (reports, agreements such as the BAA, third-party ISV reports), the AWS compliance programs pages and AWS Customer Compliance Guides. The article states that AWS Audit Manager closed to new customers on 2026-04-30, with Config conformance packs and Security Hub standards as the alternatives, so Compliance Manager has no live AWS counterpart (fidelity partial). It is the w1 foundation that the w4 compliance-evidence-and-audit-azure-vs-aws builds on.",
+   "exams": [
+    "SC-900:D4",
+    "CLF-C02:D2",
+    "SC-100:D2"
+   ],
+   "clusters": [
+    "F",
+    "S",
+    "X"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "gap_fill": true,
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "security-reference-architectures-mcra-mcsb-vs-aws-sra",
+   "title": "Security Reference Architectures: MCRA, Microsoft Cloud Security Benchmark and Zero Trust Adoption Framework vs AWS SRA",
+   "type": "cloud-compare",
+   "level": "expert",
+   "scope": "Wave 5. Microsoft side: the Microsoft Cybersecurity Reference Architectures (capability maps and Zero Trust RaMP), the Microsoft cloud security benchmark (v1 as the Defender for Cloud default initiative; v2 still in preview, with an AI security domain and more than 420 policy-based measurements), the Zero Trust adoption framework business scenarios, and the CAF Secure methodology. AWS side: the AWS Security Reference Architecture (OU and account layout with Security Tooling and Log Archive accounts, service placement, code examples), the AWS Security Maturity Model, the Foundational Security Best Practices standard, and Well-Architected Security pillar reviews in the WA Tool (SCS-C03 6.3.3). It includes a crosswalk to CIS and to the vendor-neutral using-security-reference-architectures, and covers designing AI solutions against MCSB (SC-100 1.2.3).",
+   "exams": [
+    "SC-100:D1",
+    "SCS-C03:D6"
+   ],
+   "clusters": [
+    "S",
+    "X",
+    "R"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/security-services",
+   "gap_fill": true,
+   "wave": "4",
+   "exists": false
+  },
+  {
+   "slug": "data-catalogs-purview-unified-catalog-vs-sagemaker-catalog-glue-and-lake-formation",
+   "title": "Data Catalogs and Governance: Purview Unified Catalog and Data Map vs SageMaker Catalog, Glue Data Catalog and Lake Formation",
+   "type": "cloud-compare",
+   "level": "practitioner",
+   "scope": "Wave 5. Microsoft side: Purview Data Map (scans, classifications, lineage from Data Factory and Fabric), Purview Unified Catalog (governance domains, data products, glossary terms, OKRs, data quality rules and scores, access requests) and the Fabric OneLake catalog. AWS side: the Glue Data Catalog (technical metastore, crawlers), Lake Formation (LF-tag permissions, cross-account sharing) and SageMaker Catalog in SageMaker Unified Studio, built on DataZone (business catalog, data products, subscription workflows, OpenLineage lineage, data quality). The article gives fidelity ratings, notes that AWS has no single product that does what Data Map does, and shows how each feeds AI traceability (AIP-C01 3.3.1-3.3.2).",
+   "exams": [
+    "AZ-305:D2",
+    "AIP-C01:D3",
+    "SAA-C03:D3",
+    "SC-900:D4",
+    "AIF-C01:D5"
+   ],
+   "clusters": [
+    "C",
+    "R",
+    "A"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/storage-data",
+   "gap_fill": true,
+   "wave": "1",
+   "exists": false
+  },
+  {
+   "slug": "data-perimeters-network-security-perimeter-vs-aws-data-perimeters",
+   "title": "Data Perimeters: Azure Network Security Perimeter, Private Endpoints and Policy vs AWS Identity, Resource and Network Perimeters",
+   "type": "cloud-compare",
+   "level": "expert",
+   "scope": "Wave 4. AWS side: the data perimeter model with three perimeters. The identity perimeter uses SCPs and RCPs with aws:PrincipalOrgID. The resource perimeter uses aws:ResourceOrgID and aws:ResourceAccount. The network perimeter uses aws:SourceVpc, aws:SourceVpce and aws:VpcSourceIp, plus VPC endpoint policies, with service-principal exceptions. Azure side: Network Security Perimeter (learning vs enforced mode, inbound and outbound access rules, supported PaaS resources), private endpoints with public network access disabled, storage resource-instance rules and trusted-service exceptions, Azure Policy deny effects, and Conditional Access for the identity side. The article includes a control-by-control matrix rated partial, plus the failure modes and break-glass access on each side.",
+   "exams": [
+    "SCS-C03:D4",
+    "SCS-C03:D5",
+    "SC-500:D2",
+    "SC-100:D3"
+   ],
+   "clusters": [
+    "S",
+    "C",
+    "N"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/governance",
+   "gap_fill": true,
+   "wave": "2a",
+   "exists": false
+  },
+  {
+   "slug": "resilience-testing-chaos-studio-and-azure-load-testing-vs-fis-and-resilience-hub",
+   "title": "Resilience Testing: Chaos Studio and Azure Load Testing vs AWS FIS and Resilience Hub",
+   "type": "cloud-compare",
+   "level": "practitioner",
+   "scope": "Wave 5. Chaos Studio: service-direct vs agent-based faults, targets and capabilities, experiment steps and branches, and managed identity permissions. AWS FIS: experiment templates, stop conditions tied to CloudWatch alarms, and the scenario library, such as AZ power interruption and cross-Region connectivity. Resilience Hub: resiliency policies, assessments and recommended FIS experiments (rated partial; Azure has no counterpart beyond the WAF reliability assessment). Load testing: Azure Load Testing (JMeter and Locust, fail criteria, CI integration) vs the Distributed Load Testing on AWS solution (rated partial). ARC zonal shift practice runs are also covered. It ties into incident-response plan testing (SCS-C03 2.1.3) and DR testing (SAP-C03 2.2.8), and links to devops/sre/chaos-engineering-and-game-days.",
+   "exams": [
+    "SCS-C03:D2",
+    "SAP-C03:D2"
+   ],
+   "clusters": [
+    "R",
+    "C"
+   ],
+   "existing_stub": "",
+   "folder": "cloud/compare/resilience-migration",
+   "gap_fill": true,
+   "wave": "4",
    "exists": false
   }
  ],
  "terms": [
-  {
-   "slug": "fidelity-rating",
-   "term": "Fidelity rating",
-   "definition": "A four-level judgement (exact, close, partial, none) of how faithfully a service or concept on one cloud reproduces the behaviour, scope and guarantees of its counterpart on the other, stated for a direction of translation.",
-   "aliases": [
-    "mapping fidelity"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "cloud-comparison",
-   "level": "foundation",
-   "core": true,
-   "differs_from": [
-    "feature parity",
-    "service equivalence",
-    "asymmetric-mapping"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "false-friend",
-   "term": "False friend (cloud services)",
-   "definition": "A pair of identically or similarly named services on Azure and AWS whose behaviour differs enough that assuming equivalence causes design or exam errors, such as the two Gateway Load Balancers, whose insertion models differ, or the two Firewall Managers, which manage different things.",
-   "aliases": [
-    "false cognate"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "cloud-comparison",
-   "level": "practitioner",
-   "core": true,
-   "differs_from": [
-    "fidelity-rating",
-    "confusable-pair"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "cloud-service-rosetta",
-   "term": "Cloud service Rosetta",
-   "definition": "A curated, machine-readable mapping of concepts and services between clouds that records, for each pair, the closest counterpart, its fidelity rating and direction, its lifecycle status and the key behavioural difference.",
-   "aliases": [
-    "cross-cloud service map",
-    "service mapping table"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "cloud-comparison",
-   "level": "foundation",
-   "core": false,
-   "differs_from": [
-    "fidelity-rating",
-    "false-friend"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "asymmetric-mapping",
-   "term": "Asymmetric mapping",
-   "definition": "A cross-cloud mapping whose fidelity differs by direction, for example Azure Key Vault maps only partially to AWS because it splits into KMS, Secrets Manager and ACM, while AWS KMS maps closely to Key Vault keys.",
-   "aliases": [
-    "direction-dependent mapping"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "cloud-comparison",
-   "level": "practitioner",
-   "core": false,
-   "differs_from": [
-    "fidelity-rating",
-    "false-friend"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "confusable-pair",
-   "term": "Confusable pair",
-   "definition": "Two services from the same provider that are commonly mistaken for each other, such as Event Grid and Event Hubs or SQS and SNS, documented on the owning provider pages rather than in the cross-cloud Rosetta.",
-   "aliases": [
-    "same-provider confusable"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "cloud-comparison",
-   "level": "foundation",
-   "core": false,
-   "differs_from": [
-    "false-friend",
-    "cloud-service-rosetta"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 1,
-   "written": false
-  },
   {
    "slug": "account-vending",
    "term": "Account vending",
@@ -2799,7 +2827,192 @@
     "AZ-305:D1",
     "SAP-C02:D1"
    ],
-   "wave": 2,
+   "wave": "2a",
+   "written": false
+  },
+  {
+   "slug": "asymmetric-mapping",
+   "term": "Asymmetric mapping",
+   "definition": "A cross-cloud mapping whose fidelity differs by direction, for example Azure Key Vault maps only partially to AWS because it splits into KMS, Secrets Manager and ACM, while AWS KMS maps closely to Key Vault keys.",
+   "aliases": [
+    "direction-dependent mapping"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "cloud-comparison",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "fidelity-rating",
+    "false-friend"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "1",
+   "written": false
+  },
+  {
+   "slug": "availability-zone-id",
+   "term": "Availability Zone ID",
+   "definition": "AWS's account-independent identifier for a physical Availability Zone (for example use1-az1), unlike the AZ name such as us-east-1a, which AWS maps to physical zones separately for each account.",
+   "aliases": [
+    "AZ ID"
+   ],
+   "cloud": "aws",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "global-infrastructure",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "availability zone name",
+    "logical zone number"
+   ],
+   "equivalent": "azure: physical zone names returned per subscription by the List Locations (availabilityZoneMappings) and Check Zone Peers APIs (close)",
+   "exams": [
+    "SAA-C03:D2",
+    "SAP-C02:D1",
+    "ANS-C01:D1"
+   ],
+   "wave": "1",
+   "written": false
+  },
+  {
+   "slug": "azure-resource-id",
+   "term": "Azure resource ID",
+   "definition": "The hierarchical path that uniquely identifies an Azure resource, in the form /subscriptions/{id}/resourceGroups/{rg}/providers/{namespace}/{type}/{name}, which also serves as the scope string for role and policy assignments.",
+   "aliases": [
+    "ARM resource ID"
+   ],
+   "cloud": "azure",
+   "tracks": [
+    "cloud",
+    "security"
+   ],
+   "domain": "identity",
+   "domain_raw": "identity",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "amazon-resource-name"
+   ],
+   "equivalent": "aws: Amazon Resource Name (close)",
+   "exams": [
+    "AZ-104:D1",
+    "AZ-305:D1"
+   ],
+   "wave": "2a",
+   "written": false
+  },
+  {
+   "slug": "cloud-portability",
+   "term": "Cloud portability",
+   "definition": "The effort needed to move a workload from one provider to another without redesigning it, traded off against the productivity of provider-native managed services; a fidelity rating is in effect a portability estimate for one service pair.",
+   "aliases": [
+    "workload portability"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "migration",
+   "domain_raw": "cloud-strategy",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "multicloud",
+    "cloud-agnostic",
+    "vendor lock-in"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "5",
+   "written": false
+  },
+  {
+   "slug": "cloud-service-rosetta",
+   "term": "Cloud service Rosetta",
+   "definition": "A curated, machine-readable mapping of concepts and services between clouds that records, for each pair, the closest counterpart, its fidelity rating and direction, its lifecycle status and the key behavioural difference.",
+   "aliases": [
+    "cross-cloud service map",
+    "service mapping table"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "cloud-comparison",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "fidelity-rating",
+    "false-friend"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "1",
+   "written": false
+  },
+  {
+   "slug": "cloud-to-cloud-migration",
+   "term": "Cloud-to-cloud migration",
+   "definition": "Moving workloads from one public cloud provider to another, for example AWS to Azure with Azure Migrate or Azure to AWS with AWS Application Migration Service, which adds identity remapping, egress cost and service translation to the usual migration work.",
+   "aliases": [
+    "cross-cloud migration"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "migration",
+   "domain_raw": "migration",
+   "level": "practitioner",
+   "core": false,
+   "differs_from": [
+    "cloud migration",
+    "multicloud"
+   ],
+   "equivalent": "",
+   "exams": [
+    "AZ-305:D4",
+    "SAP-C02:D4"
+   ],
+   "wave": "5",
+   "written": false
+  },
+  {
+   "slug": "confusable-pair",
+   "term": "Confusable pair",
+   "definition": "Two services from the same provider that are commonly mistaken for each other, such as Event Grid and Event Hubs or SQS and SNS, documented on the owning provider pages rather than in the cross-cloud Rosetta.",
+   "aliases": [
+    "same-provider confusable"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "cloud-comparison",
+   "level": "foundation",
+   "core": false,
+   "differs_from": [
+    "false-friend",
+    "cloud-service-rosetta"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "1",
    "written": false
   },
   {
@@ -2829,176 +3042,7 @@
     "AZ-700:D2",
     "ANS-C01:D1"
    ],
-   "wave": 2,
-   "written": false
-  },
-  {
-   "slug": "aws-partition",
-   "term": "AWS partition",
-   "definition": "An isolated group of AWS Regions with its own IAM instance and ARN prefix (aws, aws-cn, aws-us-gov); IAM credentials and cross-Region features such as S3 Cross-Region Replication don't work across partitions.",
-   "aliases": [
-    "partition"
-   ],
-   "cloud": "aws",
-   "tracks": [
-    "cloud",
-    "security"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "global-infrastructure",
-   "level": "practitioner",
-   "core": false,
-   "differs_from": [
-    "AWS Region",
-    "AWS account",
-    "Azure Government"
-   ],
-   "equivalent": "azure: sovereign and national clouds such as Azure Government and Azure operated by 21Vianet, each with separate Entra and Resource Manager endpoints (close)",
-   "exams": [
-    "SAP-C02:D1"
-   ],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "availability-zone-id",
-   "term": "Availability Zone ID",
-   "definition": "AWS's account-independent identifier for a physical Availability Zone (for example use1-az1), unlike the AZ name such as us-east-1a, which AWS maps to physical zones separately for each account.",
-   "aliases": [
-    "AZ ID"
-   ],
-   "cloud": "aws",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "cloud-foundations",
-   "domain_raw": "global-infrastructure",
-   "level": "practitioner",
-   "core": true,
-   "differs_from": [
-    "availability zone name",
-    "logical zone number"
-   ],
-   "equivalent": "azure: physical zone names returned per subscription by the List Locations (availabilityZoneMappings) and Check Zone Peers APIs (close)",
-   "exams": [
-    "SAA-C03:D2",
-    "SAP-C02:D1",
-    "ANS-C01:D1"
-   ],
-   "wave": 1,
-   "written": false
-  },
-  {
-   "slug": "azure-resource-id",
-   "term": "Azure resource ID",
-   "definition": "The hierarchical path that uniquely identifies an Azure resource, in the form /subscriptions/{id}/resourceGroups/{rg}/providers/{namespace}/{type}/{name}, which also serves as the scope string for role and policy assignments.",
-   "aliases": [
-    "ARM resource ID"
-   ],
-   "cloud": "azure",
-   "tracks": [
-    "cloud",
-    "security"
-   ],
-   "domain": "identity",
-   "domain_raw": "identity",
-   "level": "foundation",
-   "core": true,
-   "differs_from": [
-    "amazon-resource-name"
-   ],
-   "equivalent": "aws: Amazon Resource Name (close)",
-   "exams": [
-    "AZ-104:D1",
-    "AZ-305:D1"
-   ],
-   "wave": 2,
-   "written": false
-  },
-  {
-   "slug": "cloud-portability",
-   "term": "Cloud portability",
-   "definition": "The effort needed to move a workload from one provider to another without redesigning it, traded off against the productivity of provider-native managed services; a fidelity rating is in effect a portability estimate for one service pair.",
-   "aliases": [
-    "workload portability"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "migration",
-   "domain_raw": "cloud-strategy",
-   "level": "practitioner",
-   "core": false,
-   "differs_from": [
-    "multicloud",
-    "cloud-agnostic",
-    "vendor lock-in"
-   ],
-   "equivalent": "",
-   "exams": [],
-   "wave": 5,
-   "written": false
-  },
-  {
-   "slug": "data-transfer-charge",
-   "term": "Data transfer charge",
-   "definition": "A per-GB fee a provider bills when data crosses a zone, region, peering link, NAT gateway, endpoint or the provider's network edge; Azure doesn't charge for transfer between availability zones in a region, while AWS bills most cross-AZ traffic in each direction.",
-   "aliases": [
-    "egress charge",
-    "bandwidth charge"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "finops",
-   "domain_raw": "cost",
-   "level": "practitioner",
-   "core": true,
-   "differs_from": [
-    "data processing charge",
-    "egress fee"
-   ],
-   "equivalent": "",
-   "exams": [
-    "SAA-C03:D4",
-    "SAP-C02:D2",
-    "SAP-C02:D3",
-    "CLF-C02:D4"
-   ],
-   "wave": 5,
-   "written": false
-  },
-  {
-   "slug": "cloud-to-cloud-migration",
-   "term": "Cloud-to-cloud migration",
-   "definition": "Moving workloads from one public cloud provider to another, for example AWS to Azure with Azure Migrate or Azure to AWS with AWS Application Migration Service, which adds identity remapping, egress cost and service translation to the usual migration work.",
-   "aliases": [
-    "cross-cloud migration"
-   ],
-   "cloud": "neutral",
-   "tracks": [
-    "cloud",
-    "architect"
-   ],
-   "domain": "migration",
-   "domain_raw": "migration",
-   "level": "practitioner",
-   "core": false,
-   "differs_from": [
-    "cloud migration",
-    "multicloud"
-   ],
-   "equivalent": "",
-   "exams": [
-    "AZ-305:D4",
-    "SAP-C02:D4"
-   ],
-   "wave": 5,
+   "wave": "2a",
    "written": false
   },
   {
@@ -3025,9 +3069,61 @@
    "equivalent": "",
    "exams": [
     "SAP-C02:D1",
+    "SCS-C03:D5",
     "SCS-C03:D6"
    ],
-   "wave": 1,
+   "wave": "1",
+   "written": false
+  },
+  {
+   "slug": "false-friend",
+   "term": "False friend (cloud services)",
+   "definition": "A pair of identically or similarly named services on Azure and AWS whose behaviour differs enough that assuming equivalence causes design or exam errors, such as the two Gateway Load Balancers, whose insertion models differ, or the two Firewall Managers, which manage different things.",
+   "aliases": [
+    "false cognate"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "cloud-comparison",
+   "level": "practitioner",
+   "core": true,
+   "differs_from": [
+    "fidelity-rating",
+    "confusable-pair"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "1",
+   "written": false
+  },
+  {
+   "slug": "fidelity-rating",
+   "term": "Fidelity rating",
+   "definition": "A four-level judgement (exact, close, partial, none) of how faithfully a service or concept on one cloud reproduces the behaviour, scope and guarantees of its counterpart on the other, stated for a direction of translation.",
+   "aliases": [
+    "mapping fidelity"
+   ],
+   "cloud": "neutral",
+   "tracks": [
+    "cloud",
+    "architect"
+   ],
+   "domain": "cloud-foundations",
+   "domain_raw": "cloud-comparison",
+   "level": "foundation",
+   "core": true,
+   "differs_from": [
+    "feature parity",
+    "service equivalence",
+    "asymmetric-mapping"
+   ],
+   "equivalent": "",
+   "exams": [],
+   "wave": "1",
    "written": false
   }
  ],
@@ -5695,7 +5791,450 @@
    "b": "Amazon Q Developer and Kiro",
    "fidelity": "partial",
    "difference": "All are AI coding assistants with agent modes in the IDE and CLI; Kiro is a spec-driven agentic IDE and Q Developer adds AWS console and transformation features (check current status of both)."
+  },
+  {
+   "a": "CDK L1 construct",
+   "b": "CDK L2 construct",
+   "fidelity": "n/a",
+   "difference": "An L1 (Cfn*) construct maps one-to-one to a CloudFormation resource with no defaults. An L2 adds secure defaults, helper methods such as grantRead, and can create several resources."
+  },
+  {
+   "a": "CDK snapshot test",
+   "b": "CDK fine-grained assertion",
+   "fidelity": "n/a",
+   "difference": "A snapshot test fails on any template change, which catches drift but is noisy. An assertion checks only the properties you care about, so refactoring does not break it."
+  },
+  {
+   "a": "Bicep what-if",
+   "b": "CloudFormation change set",
+   "fidelity": "close",
+   "difference": "Both preview changes before deployment. A change set is a stored object that you review and then run. What-if is a read-only preview with some noise for properties the resource provider sets."
+  },
+  {
+   "a": "Deployment stack deny settings",
+   "b": "CloudFormation stack policy",
+   "fidelity": "partial",
+   "difference": "Deny settings block changes and deletes from any client except named principals. A stack policy only guards resources during CloudFormation stack updates, and direct API changes bypass it."
+  },
+  {
+   "a": "Terraform sensitive value",
+   "b": "Terraform ephemeral value",
+   "fidelity": "n/a",
+   "difference": "A sensitive value is only hidden from output and still lands in state and plan files. An ephemeral value is never persisted at all."
+  },
+  {
+   "a": "HashiCorp Vault dynamic secret",
+   "b": "AWS Secrets Manager rotation",
+   "fidelity": "partial",
+   "difference": "Vault issues a fresh credential per consumer with a lease and revokes it on expiry. Secrets Manager rotates one shared secret on a schedule, which consumers then re-read."
+  },
+  {
+   "a": "Terraform moved block",
+   "b": "terraform state mv",
+   "fidelity": "n/a",
+   "difference": "A moved block is declarative and reviewed in a plan, and it applies in every workspace that uses the code. state mv is an imperative one-off edit to one state file."
+  },
+  {
+   "a": "Terraform check block",
+   "b": "Terraform postcondition",
+   "fidelity": "n/a",
+   "difference": "A failed check block only warns and does not stop the run. A failed postcondition fails the plan or apply for that resource."
+  },
+  {
+   "a": "Stacked etcd topology",
+   "b": "External etcd topology",
+   "fidelity": "n/a",
+   "difference": "Stacked runs etcd on the control-plane nodes, so it needs fewer machines but losing a node removes both members. External puts etcd on its own hosts, which isolates failures at the cost of more nodes."
+  },
+  {
+   "a": "containerd",
+   "b": "CRI-O",
+   "fidelity": "n/a",
+   "difference": "containerd is a general-purpose runtime used by Docker, AKS and EKS, with a CRI plugin. CRI-O implements only the Kubernetes CRI and tracks Kubernetes releases."
+  },
+  {
+   "a": "runc",
+   "b": "gVisor (runsc)",
+   "fidelity": "n/a",
+   "difference": "runc runs containers directly on the host kernel. gVisor intercepts system calls in a user-space kernel, which gives stronger isolation at some performance cost. Pods select it through RuntimeClass."
+  },
+  {
+   "a": "dnsPolicy ClusterFirst",
+   "b": "dnsPolicy Default",
+   "fidelity": "n/a",
+   "difference": "ClusterFirst sends queries to CoreDNS with the cluster search domains. Default inherits the node's resolv.conf, so cluster Service names do not resolve."
+  },
+  {
+   "a": "AKS coredns-custom ConfigMap",
+   "b": "EKS CoreDNS add-on configuration",
+   "fidelity": "close",
+   "difference": "AKS keeps the base Corefile managed and merges your server blocks from coredns-custom. EKS manages CoreDNS as an add-on with configuration values and lets you edit its Corefile."
+  },
+  {
+   "a": "Deprecated Kubernetes API",
+   "b": "Removed Kubernetes API",
+   "fidelity": "n/a",
+   "difference": "A deprecated API is still served and returns warnings. A removed API is rejected by the API server, so manifests and Helm charts break on upgrade."
+  },
+  {
+   "a": "Blue/green with a Service selector switch",
+   "b": "Canary with Gateway API weights",
+   "fidelity": "n/a",
+   "difference": "Blue/green moves all traffic at once and rolls back instantly by flipping the selector. A weighted HTTPRoute moves a percentage of traffic independently of replica counts."
+  },
+  {
+   "a": "AppArmor",
+   "b": "SELinux",
+   "fidelity": "n/a",
+   "difference": "AppArmor confines programs by file path with per-program profiles. SELinux enforces policy on security labels attached to every subject and object."
+  },
+  {
+   "a": "Linux capabilities",
+   "b": "Windows privileges",
+   "fidelity": "partial",
+   "difference": "Both split administrator power into grantable rights, such as CAP_NET_ADMIN and SeDebugPrivilege. Capabilities are per-process sets that a container drops at start. Windows privileges attach to the token and are managed through user rights assignment."
+  },
+  {
+   "a": "systemd unit",
+   "b": "Windows service",
+   "fidelity": "close",
+   "difference": "Both supervise long-running daemons with restart policies. systemd also places each unit in a cgroup and orders units by dependencies, and logs go to journald rather than Event Log."
+  },
+  {
+   "a": "AWS Application Migration Service",
+   "b": "Azure Migrate server migration",
+   "fidelity": "close",
+   "difference": "Both replicate servers continuously and run test and cutover launches. MGN replicates block-level from an agent into a staging subnet. Azure Migrate offers agentless VMware replication as well as agent-based replication."
+  },
+  {
+   "a": "AWS DMS with DMS Schema Conversion",
+   "b": "Azure Database Migration Service",
+   "fidelity": "partial",
+   "difference": "DMS covers many heterogeneous engine pairs, with managed schema conversion and CDC. Azure DMS focuses on moving SQL Server, PostgreSQL and MySQL into Azure targets and has no general schema converter."
+  },
+  {
+   "a": "AWS Elastic Disaster Recovery",
+   "b": "Azure Site Recovery",
+   "fidelity": "close",
+   "difference": "Both replicate servers for failover and failback. Site Recovery adds orchestrated recovery plans. DRS relies on launch settings plus ARC Region switch for orchestration, and covers AWS-to-AWS for EC2 only."
+  },
+  {
+   "a": "ARC Region switch plan",
+   "b": "Site Recovery recovery plan",
+   "fidelity": "partial",
+   "difference": "A Region switch plan orchestrates steps across services and accounts for any multi-Region app. An ASR recovery plan orders VM failover groups with scripts and runbooks."
+  },
+  {
+   "a": "ARC zonal shift",
+   "b": "Azure zone-redundant services",
+   "fidelity": "partial",
+   "difference": "AWS gives an explicit, temporary control to drain one AZ, with optional autoshift by AWS. Azure has no equivalent single control; zone-redundant services and load balancer probes take traffic away from an impaired zone automatically."
+  },
+  {
+   "a": "Azure Batch",
+   "b": "AWS Batch",
+   "fidelity": "close",
+   "difference": "Both schedule jobs on managed pools or compute environments. Azure Batch tasks can run on VMs without containers. AWS Batch is container-only and can also use Fargate and EKS."
+  },
+  {
+   "a": "Azure CycleCloud",
+   "b": "AWS ParallelCluster",
+   "fidelity": "close",
+   "difference": "Both deploy and autoscale self-managed Slurm or other schedulers. CycleCloud is a server application with a web UI. ParallelCluster is a CLI driven by YAML, and AWS PCS adds a fully managed Slurm option."
+  },
+  {
+   "a": "CloudTrail organization trail",
+   "b": "Azure Activity Log diagnostic settings applied by Policy",
+   "fidelity": "partial",
+   "difference": "One organization trail captures management events for every account automatically. Azure needs a diagnostic setting per subscription, usually enforced with DeployIfNotExists policy, to centralise Activity Logs."
+  },
+  {
+   "a": "AWS WAF Bot Control",
+   "b": "Azure WAF Bot Manager rule set",
+   "fidelity": "close",
+   "difference": "Both classify good, bad and unknown bots. AWS Bot Control has a targeted level with browser interrogation and ML. Azure's rule set relies mainly on Microsoft threat intelligence signatures."
+  },
+  {
+   "a": "AWS Shield Advanced",
+   "b": "Azure DDoS Network Protection",
+   "fidelity": "close",
+   "difference": "Both add adaptive mitigation, telemetry, rapid-response access and cost protection. Shield Advanced also covers CloudFront, Global Accelerator and Route 53, and gives WAF at no extra charge on protected resources."
+  },
+  {
+   "a": "AWS Firewall Manager",
+   "b": "Azure Firewall Manager",
+   "fidelity": "partial",
+   "difference": "AWS Firewall Manager enforces WAF, Shield Advanced, security group, Network Firewall and DNS Firewall policies across an organization. Azure Firewall Manager centralises Azure Firewall and WAF policies, while NSGs are governed through Azure Policy or AVNM."
+  },
+  {
+   "a": "Amazon Macie",
+   "b": "Purview data classification and auto-labelling",
+   "fidelity": "partial",
+   "difference": "Macie finds sensitive data in S3 and reports findings without labelling objects. Purview classifies across M365, endpoints and data sources, including S3 scans, and applies persistent sensitivity labels."
+  },
+  {
+   "a": "Amazon Comprehend PII detection",
+   "b": "Azure AI Language PII detection",
+   "fidelity": "close",
+   "difference": "Both are text APIs that locate or redact PII entities. Entity types, language coverage and redaction options differ."
+  },
+  {
+   "a": "Purview Unified Catalog",
+   "b": "Amazon SageMaker Catalog",
+   "fidelity": "close",
+   "difference": "Both offer governed business catalogs with data products, glossaries, quality and access requests. Purview spans multicloud and SaaS sources. SageMaker Catalog centres on AWS analytics and ML assets in Unified Studio."
+  },
+  {
+   "a": "Purview Data Map",
+   "b": "AWS Glue Data Catalog",
+   "fidelity": "partial",
+   "difference": "Data Map scans and classifies many source types and draws lineage across them. Glue Data Catalog is a technical Hive-compatible metastore for AWS analytics engines, with crawlers."
+  },
+  {
+   "a": "Azure Network Security Perimeter",
+   "b": "AWS data perimeter (RCPs, SCPs and VPC endpoint policies)",
+   "fidelity": "partial",
+   "difference": "NSP draws a logical network boundary around PaaS resources with access rules. AWS builds identity, resource and network perimeters from organization policies and condition keys, not a single resource."
+  },
+  {
+   "a": "Azure Chaos Studio",
+   "b": "AWS Fault Injection Service",
+   "fidelity": "close",
+   "difference": "Both run controlled fault experiments with permissions per target. FIS has a scenario library, including AZ power interruption, and stop conditions bound to CloudWatch alarms."
+  },
+  {
+   "a": "Azure Load Testing",
+   "b": "Distributed Load Testing on AWS",
+   "fidelity": "partial",
+   "difference": "Azure Load Testing is a managed service with JMeter and Locust, pass/fail criteria and CI tasks. AWS offers a deployable reference solution rather than a first-party managed load-test service."
+  },
+  {
+   "a": "Service Trust Portal",
+   "b": "AWS Artifact",
+   "fidelity": "close",
+   "difference": "Both give self-service access to audit reports. Artifact also handles accepting legal agreements such as the BAA. The Trust Portal adds compliance guides and privacy resources."
+  },
+  {
+   "a": "Purview Compliance Manager",
+   "b": "AWS Audit Manager",
+   "fidelity": "partial",
+   "difference": "Compliance Manager scores improvement actions against regulatory templates. Audit Manager collected evidence into assessments, but it closed to new customers on 2026-04-30, and AWS points to Config conformance packs."
+  },
+  {
+   "a": "AWS Health Dashboard",
+   "b": "Azure Service Health",
+   "fidelity": "close",
+   "difference": "Both show provider incidents, planned maintenance and the resources affected, with alerts. AWS exposes them through the Health API and EventBridge, and Azure through Activity Log alerts."
+  },
+  {
+   "a": "AWS re:Post",
+   "b": "Microsoft Q&A",
+   "fidelity": "close",
+   "difference": "Both are moderated community Q&A sites with vendor experts. re:Post also hosts the Knowledge Center articles."
+  },
+  {
+   "a": "AWS Partner Network",
+   "b": "Microsoft AI Cloud Partner Program",
+   "fidelity": "close",
+   "difference": "Both tier partners by skills and customer success. AWS uses competencies and validations, and Microsoft uses solutions-partner designations and specialisations."
+  },
+  {
+   "a": "Azure Static Web Apps",
+   "b": "AWS Amplify Hosting",
+   "fidelity": "close",
+   "difference": "Both build from Git with PR previews and custom domains. SWA bundles built-in auth and a Functions API. Amplify Hosting also serves SSR frameworks and leaves auth to Cognito."
+  },
+  {
+   "a": "API Management exposing REST as MCP",
+   "b": "AgentCore Gateway",
+   "fidelity": "close",
+   "difference": "Both turn existing APIs into governed MCP tools. AgentCore Gateway also targets Lambda and Smithy models and offers semantic tool search. APIM applies its general gateway policies and products."
+  },
+  {
+   "a": "Azure Functions MCP extension",
+   "b": "Stateless MCP server on AWS Lambda",
+   "fidelity": "partial",
+   "difference": "Functions provides MCP triggers that handle the protocol for you. On Lambda you run an MCP SDK or adapter and must keep the server stateless yourself."
+  },
+  {
+   "a": "Foundry provisioned throughput (PTU)",
+   "b": "Bedrock Provisioned Throughput",
+   "fidelity": "close",
+   "difference": "Both reserve model capacity. PTUs are fungible across supported models, with hourly or reserved billing and spillover. Bedrock model units are bought per model, are required for most custom models, and sit alongside the Reserved service tier."
+  },
+  {
+   "a": "Foundry Data Zone deployment",
+   "b": "Bedrock geographic cross-Region inference profile",
+   "fidelity": "close",
+   "difference": "Both route requests within a geography (US or EU) for capacity while keeping data in that zone. The Foundry choice is a deployment type, while Bedrock uses an inference profile ID in the call."
+  },
+  {
+   "a": "Open-weight model",
+   "b": "Open-source model",
+   "fidelity": "n/a",
+   "difference": "Open weights let you download and run the parameters under the licence's terms. Open source in the OSI sense also requires the training code and data information and freedoms without use restrictions."
+  },
+  {
+   "a": "Foundry Toolkit for VS Code",
+   "b": "AgentCore starter toolkit",
+   "fidelity": "partial",
+   "difference": "Foundry Toolkit is an IDE extension with playgrounds, tracing and evaluation. The AgentCore starter toolkit is a CLI that packages and deploys agents to AgentCore Runtime."
+  },
+  {
+   "a": "Copilot coding agent",
+   "b": "Kiro spec-driven agent",
+   "fidelity": "partial",
+   "difference": "The Copilot coding agent works asynchronously on GitHub Actions runners and returns a PR. Kiro works in its IDE and CLI, starting from reviewed requirements, design and tasks specs."
+  },
+  {
+   "a": "DPIA",
+   "b": "FRIA",
+   "fidelity": "n/a",
+   "difference": "A DPIA under GDPR assesses risks to personal data and the people it describes. A FRIA under the AI Act assesses a high-risk AI system's impact on fundamental rights, whether or not personal data is involved."
+  },
+  {
+   "a": "Model card",
+   "b": "System card",
+   "fidelity": "n/a",
+   "difference": "A model card documents one model's training, evaluation and limits. A system card documents the deployed system around it, including safeguards, tools and intended use."
+  },
+  {
+   "a": "Business continuity plan",
+   "b": "Disaster recovery plan",
+   "fidelity": "n/a",
+   "difference": "A BCP keeps business activities running, covering people, sites, suppliers and communications. A DRP restores IT systems and data, and is one input to the BCP."
+  },
+  {
+   "a": "Recovery time objective",
+   "b": "Maximum tolerable downtime",
+   "fidelity": "n/a",
+   "difference": "MTD is the business limit beyond which harm becomes unacceptable. RTO is the recovery target chosen below it, leaving time to verify and resume."
+  },
+  {
+   "a": "Vulnerability assessment",
+   "b": "Penetration test",
+   "fidelity": "n/a",
+   "difference": "A vulnerability assessment finds and ranks known weaknesses broadly without exploiting them. A penetration test exploits selected weaknesses to prove impact within agreed rules of engagement."
+  },
+  {
+   "a": "Red team",
+   "b": "Purple team",
+   "fidelity": "n/a",
+   "difference": "A red team covertly emulates an adversary to test detection and response. A purple team runs techniques openly with defenders to tune detections together."
+  },
+  {
+   "a": "SOC 2 Type I",
+   "b": "SOC 2 Type II",
+   "fidelity": "n/a",
+   "difference": "Type I reports whether controls are suitably designed at a point in time. Type II also tests that they operated effectively over a period, usually 6 to 12 months."
+  },
+  {
+   "a": "Administrative investigation",
+   "b": "Criminal investigation",
+   "fidelity": "n/a",
+   "difference": "Administrative investigations are internal policy matters with a low standard of proof. Criminal investigations involve law enforcement, require proof beyond reasonable doubt, and need strict evidence handling."
+  },
+  {
+   "a": "WPA3-Personal",
+   "b": "WPA3-Enterprise",
+   "fidelity": "n/a",
+   "difference": "Personal mode uses a shared passphrase protected by SAE. Enterprise mode authenticates each user or device through 802.1X and RADIUS, optionally with 192-bit suites."
+  },
+  {
+   "a": "Mobile device management",
+   "b": "Mobile application management",
+   "fidelity": "n/a",
+   "difference": "MDM enrols and controls the whole device. MAM protects only corporate data inside managed apps, which suits personal BYOD devices."
+  },
+  {
+   "a": "Kerberoasting",
+   "b": "AS-REP roasting",
+   "fidelity": "n/a",
+   "difference": "Kerberoasting requests service tickets for accounts with SPNs and cracks them, and any domain user can do it. AS-REP roasting targets accounts without Kerberos pre-authentication and needs no ticket request."
+  },
+  {
+   "a": "DCSync",
+   "b": "Golden ticket",
+   "fidelity": "n/a",
+   "difference": "DCSync steals password hashes by abusing replication rights. A golden ticket uses a stolen krbtgt hash, often obtained through DCSync, to forge TGTs for any identity."
+  },
+  {
+   "a": "Microsoft cloud security benchmark",
+   "b": "AWS Foundational Security Best Practices standard",
+   "fidelity": "close",
+   "difference": "Both are provider control baselines evaluated automatically, by Defender for Cloud and Security Hub respectively. MCSB maps to multicloud controls and other frameworks, and v2 (preview) adds AI controls."
+  },
+  {
+   "a": "MCRA",
+   "b": "AWS Security Reference Architecture",
+   "fidelity": "partial",
+   "difference": "MCRA maps capabilities and Zero Trust across the whole Microsoft and hybrid estate. AWS SRA prescribes account structure and service placement inside an AWS organization, with code."
+  },
+  {
+   "a": "Azure Well-Architected AI workload guidance",
+   "b": "AWS Generative AI Lens",
+   "fidelity": "close",
+   "difference": "Both apply the pillars to AI workloads. AWS ships the guidance as a lens you can review in the WA Tool, and Azure ships it as workload guidance plus assessments."
+  },
+  {
+   "a": "Consumer-driven contract test",
+   "b": "Schema-based contract test",
+   "fidelity": "n/a",
+   "difference": "A consumer-driven test verifies only the interactions consumers actually use. A schema-based test fuzzes or validates the provider against its whole OpenAPI document."
+  },
+  {
+   "a": "AWS AppSync",
+   "b": "API Management GraphQL",
+   "fidelity": "partial",
+   "difference": "AppSync is a managed GraphQL server with resolvers, subscriptions and merged APIs. APIM proxies a GraphQL back end or synthesises one with resolvers, and its strength is gateway policy."
+  },
+  {
+   "a": "Aspire AppHost",
+   "b": "Docker Compose",
+   "fidelity": "n/a",
+   "difference": "Compose declares containers in YAML. The AppHost is code that models projects, containers and cloud resources with typed references, and can publish to Compose, Kubernetes or Container Apps."
+  },
+  {
+   "a": "Module Federation",
+   "b": "Native Federation",
+   "fidelity": "n/a",
+   "difference": "Module Federation depends on bundler runtime support such as webpack or Rspack. Native Federation uses browser import maps and ES modules, so it works with Angular's esbuild builder."
+  },
+  {
+   "a": "App Service deployment slot swap",
+   "b": "Elastic Beanstalk environment URL swap",
+   "fidelity": "close",
+   "difference": "A slot swap warms up and exchanges hostnames within one plan, with sticky settings. Beanstalk swaps CNAMEs between two complete environments."
+  },
+  {
+   "a": "Entra groups with Azure RBAC",
+   "b": "IAM Identity Center permission sets",
+   "fidelity": "partial",
+   "difference": "Azure assigns roles to groups at any scope in the resource hierarchy. Identity Center provisions a permission set into each account as an IAM role that users assume."
+  },
+  {
+   "a": "Azure active-active VPN Gateway",
+   "b": "AWS Site-to-Site VPN connection",
+   "fidelity": "close",
+   "difference": "Each AWS VPN connection always has two tunnels on AWS-managed endpoints. Azure active-active gives two gateway instances, so a fully redundant cross-cloud link uses four tunnels with BGP over APIPA addresses."
+  },
+  {
+   "a": "Azure DNS Private Resolver",
+   "b": "Route 53 Resolver endpoints",
+   "fidelity": "close",
+   "difference": "Both provide inbound and outbound endpoints with forwarding rulesets for hybrid DNS. Azure links rulesets to VNets, and AWS shares rules through RAM and associates them with VPCs."
+  },
+  {
+   "a": "Foundry agent versions",
+   "b": "AgentCore Runtime versions and endpoints",
+   "fidelity": "close",
+   "difference": "Both keep immutable agent versions. AgentCore endpoints point to a version and are re-pointed for canary or rollback. Foundry uses versioned agents and deployments, with traffic routed by the calling application or gateway."
   }
  ],
- "notes": "COUNTS: 74 articles in 16 folders (the 51 from the draft plus the critique's 23). About 420 cross-cloud pairs. Every pair is rated exact, close or partial, or is rated none when one side is '(no ... equivalent)'. There are 5 calibrated exact rows. The draft's proposed merges are dropped, so its articles keep separate exam alignment.\n\nDATASET (build dependency): one machine-readable Rosetta dataset generates the Rosetta, the false-friends view and the matrix embedded in each article.\n- Fields per row: a, b, fidelity, difference, direction (both by default; a-to-b or b-to-a when the difference text says the rating depends on direction), status (GA, preview, retiring or closed-to-new-customers, with a date; taken from the names and text in these rows), last_verified (2026-10-24 for all rows except those marked verify), capability (the subsection folder), article (slug), exams and false_friend.\n- Schema validation: fidelity must be exact, close, partial or none, and a '(no ... equivalent)' side forces none.\n- Convention: a is the Azure side and b is the AWS side.\n- The roughly 30 same-provider rows the draft rated n/a now go in a separate confusables dataset, rendered on provider pages (see MOVED).\n\nCORRECTIONS CHECKED AGAINST PRIMARY DOCS (2026-10-24):\n- Zone mapping and counts: the Learn availability-zones page confirms List Locations and Check Zone Peers, free inter-zone transfer, zone-by-zone updates, and four zones in East US 2.\n- NAT gateways: Learn confirms the StandardV2 SKU, and AWS docs confirm the regional NAT gateway behaviour.\n- Global load balancer: Learn confirms the 'global load balancer' name, 22 participating regions, public-only backends and no outbound rules.\n- Gateway Load Balancer: Learn confirms chaining only to a public frontend or IP and no UDR next hop.\n- Deny assignments: Learn confirms that customer-managed deny assignments are in private preview.\n- Lambda durable functions: AWS docs confirm the JS, TS, Python, Java, Go and C# SDKs and the one-year limit.\n- Amazon Quick: AWS docs say Amazon Quick evolved from QuickSight and Quick Sight is now a feature within it. 'Formerly Amazon Quick Suite' therefore applies to Amazon Quick, not to Quick Sight.\n- Default outbound access (partly rejected): the critique wanted the API-version wording dropped. The default-outbound-access page says private subnets are the default for 'the API released after March 31, 2026', that the portal already defaults to them and that older API versions (for example Terraform pinned to an older version) keep the old behaviour. The NAT overview's shorter wording is a simplification, so the row keeps the precise wording and maps to the default VPC (partial).\n\nSTATUS CONFIRMED in AWS and Microsoft docs on 2026-10-24:\n- App Mesh: end of support 2026-09-30, replaced by ECS Service Connect.\n- AWS Proton: end of support 2026-10-07.\n- Closed to new customers: AWS Application Discovery Service (use AWS Transform), Systems Manager Incident Manager, and Amazon Kendra (use Bedrock Knowledge Bases).\n- Still available: Amazon Personalize and AWS Wavelength.\n- Azure AI Personalizer retired on 2026-08-25. This corrects the critique's 2026-10-01 date; no new resources could be created after 2023-09-20.\n- Blob smart tier is GA in public regions on ZRS, GZRS and RA-GZRS accounts, does not use the Archive tier, and is in preview in Azure Government and 21Vianet.\n- Archive tier: LRS, GRS and RA-GRS accounts only, up to 15 hours to rehydrate.\n- Azure Compute Fleet: GA. Launch mode and multi-region are in preview.\n- WorkSpaces Applications is the current name of AppStream 2.0.\n- IAM outbound identity federation exists: STS GetWebIdentityToken, which must be enabled per account.\n- AWS Interconnect - multicloud lists Microsoft Azure as preview.\n- Foundry Agent Service has prompt, voice-based (preview) and hosted agents, plus toolboxes, A2A v1.0 GA and the agent optimizer (preview).\n- Entra Agent ID is available to all Entra customers; its security features need Microsoft Agent 365.\n- Current AgentCore modules: Harness, Runtime, Memory, Gateway, Identity, Code Interpreter, Browser, Observability, Payments, Evaluations, Optimization, Policy and Registry.\n- The AWS partitions whitepaper lists only aws, aws-cn and aws-us-gov.\n\nSTILL UNVERIFIED (verify before writing; the web-search budget was exhausted, so only direct fetches were possible):\n- AWS European Sovereign Cloud: availability and partition name.\n- The Azure-side name of the Interconnect partnership.\n- Any Azure carrier-edge or edge-compute offering.\n- GA status of Foundry memory and browser automation.\n- Whether Timestream for LiveAnalytics is still open to new customers.\n- Azure Storage Discovery GA.\n- Amazon Q Developer and Kiro status.\n- Retired or discontinued IoT services on both clouds (for example IoT Events, IoT Analytics and IoT Central).\n- Amazon CodeCatalyst status.\n- QLDB end of support.\n- The full list of services covered by Database Savings Plans.\n\nMOVED:\n- moved to cloud/azure/networking: NSG vs Azure Firewall; service endpoint vs private endpoint; Load Balancer vs Application Gateway; Front Door vs Traffic Manager.\n- moved to cloud/azure/serverless-integration: Event Grid vs Event Hubs; Service Bus vs Event Grid.\n- moved to cloud/azure/governance and cloud/azure/identity: Azure Policy vs RBAC; Entra roles vs Azure roles; system- vs user-assigned managed identity.\n- moved to cloud/azure/compute and cloud/azure/containers: availability set vs zone; Container Apps vs AKS.\n- moved to cloud/azure/observability: activity log vs resource logs.\n- moved to cloud/azure/storage-data: Recovery Services vault vs Backup vault.\n- moved to ai/platforms: Foundry vs Azure Machine Learning.\n- moved to cloud/aws/networking: security group vs NACL; gateway vs interface endpoint; VPC peering vs Transit Gateway; ALB vs NLB; CloudFront vs Global Accelerator.\n- moved to cloud/aws/serverless-integration: SQS vs SNS; SNS vs EventBridge; Kinesis Data Streams vs Firehose; Step Functions Standard vs Express.\n- moved to cloud/aws/identity and cloud/aws/governance: SCP vs permissions boundary; SCP vs RCP; identity- vs resource-based policy; Config vs CloudTrail.\n- moved to cloud/aws/security-services: GuardDuty vs Inspector; Security Hub vs Security Hub CSPM; Secrets Manager vs Parameter Store.\n- moved to reference/: the Service Bus vs SQS message-size row and the block blob vs S3 object-size row.\n- moved to architecture/well-architected: CAF methodology walkthrough and the depth of the AWS CAF perspectives.\n- moved to architecture/migration: depth of the migration-strategy taxonomy.\n- moved to devops/sre: chaos engineering practice.\n- moved to architecture/data-architecture: lakehouse, medallion and data-mesh design.\n- moved to cloud/foundations: four vendor-neutral glossary terms, with corrected definitions:\n  - transitive-routing: forwarding between two networks through a third. Azure can do this through a hub NVA or Azure Firewall with UDRs and shares gateways through gateway transit; AWS drops peered traffic not addressed to the peer CIDR, so transit needs Transit Gateway or Cloud WAN.\n  - hierarchical-policy-inheritance: Azure Policy and RBAC assignments are additive down the tree. SCPs and RCPs intersect: an action must be allowed at every level, and a deny at any level applies.\n  - zone-redundant-deployment: spreading instances or replicas across zones, with synchronous replication where the resource holds state.\n  - global-service: the draft definition is kept.\n- Kept here, not moved: false-friends-azure-aws, retyped as cloud-compare and generated from the dataset.\n\nOUTLINE NOTES:\n- MLA-C01 domains come from the current guide, labelled MLA-C02. The CloudOps guide is labelled SOA-C03. Both codes are passed to the verification step.\n- SC-500 shows no 'skills measured as of' date.\n- TF-A publishes no weights. All eight objectives are cited on the Terraform article, but only where the providers differ; the language depth is in devops/iac.\n- Known weight conflicts: AI-200 D2 (30–35% vs 25–30%) and SC-300 D2.\n- Cluster E (TOGAF-F, TOGAF-P, CPSA-F, FINOPS-CP) is dropped from cloud/compare: the finops.org outline returned 403 and no other E outline was fetched. architecture/cost and architecture/enterprise should cite them.\n- K tags (aks-vs-eks, container-apps, workload-identity) are based on content, because devops/kubernetes owns the CNCF outlines.\n- The ai-assistants article has no refs because the AB-100 and GH-300 outlines weren't fetched; ai/platforms and the P-cluster owners should add them.\n- AZ-700 D3 still says 'cross-region load balancers', and SAP-C02 and SAA-C03 still list closed services. Every article uses one standard callout: 'On the exam you may still see X; in practice use Y.'\n\nCROSS-SECTION DEPENDENCIES:\n- Provider folders own service depth; each compare article links to both sides.\n- security/ owns zero trust, OAuth and OIDC, SIEM and CNAPP concepts, key-management theory, the confidential-computing threat model and data-perimeter (coordinate the term), and links to the existing security/workload-identity and security/capability-based-authz pages.\n- security/ai-security owns guardrails and OWASP and ATLAS material.\n- ai/platforms owns Foundry, Bedrock, AgentCore and SageMaker AI depth, and confirms ownership of the assistants article.\n- ai/protocols owns MCP and A2A.\n- devops/ owns Kubernetes, the Terraform language, CI/CD, GitOps, OpenTelemetry and SRE.\n- architecture/ owns DR strategies, Well-Architected and CAF as frameworks, FinOps and data architecture.\n- reference/ owns CLI equivalents and limits.\n- cloud/foundations owns the neutral terms multicloud and service-quota; dedupe at merge.\n- cloud/aws/governance and cloud/aws/networking co-own aws-partition and vpc-sharing.\n- Existing pages to link: messaging/{delivery-semantics, outbox-pattern, event-driven-vs-request-response, redis-streams-vs-kafka, signalr-websockets}, data/relational-databases, frontend/real-time-ui-streaming, devops/{docker-containerization, ci-cd-pipelines}.\n- No cloud/ stubs exist in the repository, so every existing_stub is empty.\n- Candidate capstone for practice/capstones: port the reader's .NET and Angular trading stack from Azure to AWS, using the running-one-system pattern."
+ "notes": "COUNTS: 74 articles in 16 folders (the 51 from the draft plus the critique's 23). About 420 cross-cloud pairs. Every pair is rated exact, close or partial, or is rated none when one side is '(no ... equivalent)'. There are 5 calibrated exact rows. The draft's proposed merges are dropped, so its articles keep separate exam alignment.\n\nDATASET (build dependency): one machine-readable Rosetta dataset generates the Rosetta, the false-friends view and the matrix embedded in each article.\n- Fields per row: a, b, fidelity, difference, direction (both by default; a-to-b or b-to-a when the difference text says the rating depends on direction), status (GA, preview, retiring or closed-to-new-customers, with a date; taken from the names and text in these rows), last_verified (2026-10-24 for all rows except those marked verify), capability (the subsection folder), article (slug), exams and false_friend.\n- Schema validation: fidelity must be exact, close, partial or none, and a '(no ... equivalent)' side forces none.\n- Convention: a is the Azure side and b is the AWS side.\n- The roughly 30 same-provider rows the draft rated n/a now go in a separate confusables dataset, rendered on provider pages (see MOVED).\n\nCORRECTIONS CHECKED AGAINST PRIMARY DOCS (2026-10-24):\n- Zone mapping and counts: the Learn availability-zones page confirms List Locations and Check Zone Peers, free inter-zone transfer, zone-by-zone updates, and four zones in East US 2.\n- NAT gateways: Learn confirms the StandardV2 SKU, and AWS docs confirm the regional NAT gateway behaviour.\n- Global load balancer: Learn confirms the 'global load balancer' name, 22 participating regions, public-only backends and no outbound rules.\n- Gateway Load Balancer: Learn confirms chaining only to a public frontend or IP and no UDR next hop.\n- Deny assignments: Learn confirms that customer-managed deny assignments are in private preview.\n- Lambda durable functions: AWS docs confirm the JS, TS, Python, Java, Go and C# SDKs and the one-year limit.\n- Amazon Quick: AWS docs say Amazon Quick evolved from QuickSight and Quick Sight is now a feature within it. 'Formerly Amazon Quick Suite' therefore applies to Amazon Quick, not to Quick Sight.\n- Default outbound access (partly rejected): the critique wanted the API-version wording dropped. The default-outbound-access page says private subnets are the default for 'the API released after March 31, 2026', that the portal already defaults to them and that older API versions (for example Terraform pinned to an older version) keep the old behaviour. The NAT overview's shorter wording is a simplification, so the row keeps the precise wording and maps to the default VPC (partial).\n\nSTATUS CONFIRMED in AWS and Microsoft docs on 2026-10-24:\n- App Mesh: end of support 2026-09-30, replaced by ECS Service Connect.\n- AWS Proton: end of support 2026-10-07.\n- Closed to new customers: AWS Application Discovery Service (use AWS Transform), Systems Manager Incident Manager, and Amazon Kendra (use Bedrock Knowledge Bases).\n- Still available: Amazon Personalize and AWS Wavelength.\n- Azure AI Personalizer retired on 2026-08-25. This corrects the critique's 2026-10-01 date; no new resources could be created after 2023-09-20.\n- Blob smart tier is GA in public regions on ZRS, GZRS and RA-GZRS accounts, does not use the Archive tier, and is in preview in Azure Government and 21Vianet.\n- Archive tier: LRS, GRS and RA-GRS accounts only, up to 15 hours to rehydrate.\n- Azure Compute Fleet: GA. Launch mode and multi-region are in preview.\n- WorkSpaces Applications is the current name of AppStream 2.0.\n- IAM outbound identity federation exists: STS GetWebIdentityToken, which must be enabled per account.\n- AWS Interconnect - multicloud lists Microsoft Azure as preview.\n- Foundry Agent Service has prompt, voice-based (preview) and hosted agents, plus toolboxes, A2A v1.0 GA and the agent optimizer (preview).\n- Entra Agent ID is available to all Entra customers; its security features need Microsoft Agent 365.\n- Current AgentCore modules: Harness, Runtime, Memory, Gateway, Identity, Code Interpreter, Browser, Observability, Payments, Evaluations, Optimization, Policy and Registry.\n- The AWS partitions whitepaper lists only aws, aws-cn and aws-us-gov.\n\nSTILL UNVERIFIED (verify before writing; the web-search budget was exhausted, so only direct fetches were possible):\n- AWS European Sovereign Cloud: availability and partition name.\n- The Azure-side name of the Interconnect partnership.\n- Any Azure carrier-edge or edge-compute offering.\n- GA status of Foundry memory and browser automation.\n- Whether Timestream for LiveAnalytics is still open to new customers.\n- Azure Storage Discovery GA.\n- Amazon Q Developer and Kiro status.\n- Retired or discontinued IoT services on both clouds (for example IoT Events, IoT Analytics and IoT Central).\n- Amazon CodeCatalyst status.\n- QLDB end of support.\n- The full list of services covered by Database Savings Plans.\n\nMOVED:\n- moved to cloud/azure/networking: NSG vs Azure Firewall; service endpoint vs private endpoint; Load Balancer vs Application Gateway; Front Door vs Traffic Manager.\n- moved to cloud/azure/serverless-integration: Event Grid vs Event Hubs; Service Bus vs Event Grid.\n- moved to cloud/azure/governance and cloud/azure/identity: Azure Policy vs RBAC; Entra roles vs Azure roles; system- vs user-assigned managed identity.\n- moved to cloud/azure/compute and cloud/azure/containers: availability set vs zone; Container Apps vs AKS.\n- moved to cloud/azure/observability: activity log vs resource logs.\n- moved to cloud/azure/storage-data: Recovery Services vault vs Backup vault.\n- moved to ai/platforms: Foundry vs Azure Machine Learning.\n- moved to cloud/aws/networking: security group vs NACL; gateway vs interface endpoint; VPC peering vs Transit Gateway; ALB vs NLB; CloudFront vs Global Accelerator.\n- moved to cloud/aws/serverless-integration: SQS vs SNS; SNS vs EventBridge; Kinesis Data Streams vs Firehose; Step Functions Standard vs Express.\n- moved to cloud/aws/identity and cloud/aws/governance: SCP vs permissions boundary; SCP vs RCP; identity- vs resource-based policy; Config vs CloudTrail.\n- moved to cloud/aws/security-services: GuardDuty vs Inspector; Security Hub vs Security Hub CSPM; Secrets Manager vs Parameter Store.\n- moved to reference/: the Service Bus vs SQS message-size row and the block blob vs S3 object-size row.\n- moved to architecture/well-architected: CAF methodology walkthrough and the depth of the AWS CAF perspectives.\n- moved to architecture/migration: depth of the migration-strategy taxonomy.\n- moved to devops/sre: chaos engineering practice.\n- moved to architecture/data-architecture: lakehouse, medallion and data-mesh design.\n- moved to cloud/foundations: four vendor-neutral glossary terms, with corrected definitions:\n  - transitive-routing: forwarding between two networks through a third. Azure can do this through a hub NVA or Azure Firewall with UDRs and shares gateways through gateway transit; AWS drops peered traffic not addressed to the peer CIDR, so transit needs Transit Gateway or Cloud WAN.\n  - hierarchical-policy-inheritance: Azure Policy and RBAC assignments are additive down the tree. SCPs and RCPs intersect: an action must be allowed at every level, and a deny at any level applies.\n  - zone-redundant-deployment: spreading instances or replicas across zones, with synchronous replication where the resource holds state.\n  - global-service: the draft definition is kept.\n- Kept here, not moved: false-friends-azure-aws, retyped as cloud-compare and generated from the dataset.\n\nOUTLINE NOTES:\n- MLA-C01 domains come from the current guide, labelled MLA-C02. The CloudOps guide is labelled SOA-C03. Both codes are passed to the verification step.\n- SC-500 shows no 'skills measured as of' date.\n- TF-A publishes no weights. All eight objectives are cited on the Terraform article, but only where the providers differ; the language depth is in devops/iac.\n- Known weight conflicts: AI-200 D2 (30–35% vs 25–30%) and SC-300 D2.\n- Cluster E (TOGAF-F, TOGAF-P, CPSA-F, FINOPS-CP) is dropped from cloud/compare: the finops.org outline returned 403 and no other E outline was fetched. architecture/cost and architecture/enterprise should cite them.\n- K tags (aks-vs-eks, container-apps, workload-identity) are based on content, because devops/kubernetes owns the CNCF outlines.\n- The ai-assistants article has no refs because the AB-100 and GH-300 outlines weren't fetched; ai/platforms and the P-cluster owners should add them.\n- AZ-700 D3 still says 'cross-region load balancers', and SAP-C02 and SAA-C03 still list closed services. Every article uses one standard callout: 'On the exam you may still see X; in practice use Y.'\n\nCROSS-SECTION DEPENDENCIES:\n- Provider folders own service depth; each compare article links to both sides.\n- security/ owns zero trust, OAuth and OIDC, SIEM and CNAPP concepts, key-management theory, the confidential-computing threat model and data-perimeter (coordinate the term), and links to the existing security/workload-identity and security/capability-based-authz pages.\n- security/ai-security owns guardrails and OWASP and ATLAS material.\n- ai/platforms owns Foundry, Bedrock, AgentCore and SageMaker AI depth, and confirms ownership of the assistants article.\n- ai/protocols owns MCP and A2A.\n- devops/ owns Kubernetes, the Terraform language, CI/CD, GitOps, OpenTelemetry and SRE.\n- architecture/ owns DR strategies, Well-Architected and CAF as frameworks, FinOps and data architecture.\n- reference/ owns CLI equivalents and limits.\n- cloud/foundations owns the neutral terms multicloud and service-quota; dedupe at merge.\n- cloud/aws/governance and cloud/aws/networking co-own aws-partition and vpc-sharing.\n- Existing pages to link: messaging/{delivery-semantics, outbox-pattern, event-driven-vs-request-response, redis-streams-vs-kafka, signalr-websockets}, data/relational-databases, frontend/real-time-ui-streaming, devops/{docker-containerization, ci-cd-pipelines}.\n- No cloud/ stubs exist in the repository, so every existing_stub is empty.\n- Candidate capstone for practice/capstones: port the reader's .NET and Angular trading stack from Azure to AWS, using the running-one-system pattern.",
+ "open_clusters": [
+  "five overlapping KQL and hunting articles (azure-platform, sec-ops, eng)",
+  "five vector-store and vector-search articles (arch, ai, eng, azure, compare)",
+  "six landing-zone and guardrail articles"
+ ]
 }

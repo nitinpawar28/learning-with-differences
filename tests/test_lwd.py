@@ -249,6 +249,12 @@ class ScanTests(unittest.TestCase):
         self.assertEqual(qs[0].line, 10)
 
 
+class RoadmapTests(unittest.TestCase):
+    def test_wave_labels_sort_by_number_then_suffix(self) -> None:
+        from lwd.render.study import _wave_key
+        self.assertEqual(sorted(["6", "2b", "?", "10", "1", "2a", "3"], key=_wave_key), ["1", "2a", "2b", "3", "6", "10", "?"])
+
+
 class PipelineTests(FixtureCase):
     def test_clean_run_and_outputs(self) -> None:
         run = self.run_pipeline()
